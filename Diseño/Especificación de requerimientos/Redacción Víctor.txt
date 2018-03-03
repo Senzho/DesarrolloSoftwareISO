@@ -1,0 +1,157 @@
+Redacción Víctor
+
+
+
+1. Introducción.
+
+
+
+El estudio Ared espacio es una escuela de danza con dos años de operación, que requiere de un control de sus estudiantes, profesores, clientes , grupos y espacios de clases o rentas. En la actualidad, la administración de la escuela se lleva a cabo de forma manual utilizando equipo de cómputo, toda la información se guarda en archivos. La actual directora genera una tabla en donde puede consultar el horario completo de clases y de rentas de espacio, para verificar que en la creación y modificación del horario, no chóquen dos grupos y/o rentas.
+
+
+
+Con el sistema a implementar se pretende lograr la automatización de los procesos llevados a cabo, donde la directora obtenga una facilidad para la administración de los catálogos de alumnos, profesores y clientes, así como de los grupos, el horario de clase, egresos e ingresos. También se pretende lograr que los profesores hagan uso del sistema para consultar sus grupos y alumnos, al igual que puedan administrar las ganancias obtenidas.
+
+
+
+En las siguientes secciones del documento, se especifican los requisitos del sistema, usuarios, la forma en que los usuarios utilizarán las funciones y especificaciones técnicas del producto de software.
+
+
+
+2.1. Perspectiva del producto.
+
+
+
+El producto descrito es un sistema completo, que no dependerá de otro sistema ni formará parte de uno mayor, será un sistema totalmente independiente.
+
+
+
+2.2. Funciones del producto.
+
+
+
+El sistema proveera funcionalidades generales para profesores y específicas para el director de la escuela, las cuales se enlistan a continuación.
+
+
+
+2.2.1. Profesores.
+
+
+
+- El sistema facilitará la consulta de los grupos asignados del profesor, al igual que los alumnos que se encuentran inscritos a cada uno de los grupos.
+
+- El sistema soportará el pase de lista por grupo.
+
+- El sistema mostrará los pagos realacionados con los alumnos inscritos a los grupos del profesor.
+
+- El sistema permitirá la inscripción de alumnos a grupos, así como el cambio de grupo.
+
+- El sistema soportará el registro de pagos por parte de los alumnos.
+
+
+
+2.2.2. Director.
+
+
+
+- El sistema facilitará la consulta y administración (incluyendo la adicción y modificación) de todos los grupos, alumnos, profesores, clientes y rentas de espacio.
+
+- El sistema soportará el registro de pagos por parte de los profesores, así como el registro de egresos.
+
+- El sistema mostrará los pagos relacionados con los profesores activos.
+
+- El sistema mostrará los ingresos y egresos mensuales.
+
+
+
+2.3. Características de los usuarios.
+
+
+
+El sistema será únicamente utilizado por dos clases de usuarios: profesor y director.
+
+
+
+2.3.1. Características del director.
+
+
+
+- Estudios de nivel licenciatura.
+
+- Experiencia en diversos tipos de danza.
+
+- Experiencia en el empleo de la paqueteria de software de Microsoft Office.
+
+- Experiencia básica en el uso de Mirosoft Windows y Linux.
+
+
+
+2.3.2. Características de los profesores.
+
+
+
+- Nivel de estudios variado.
+
+- Experiencia en tipos de danza variados.
+
+- Experiencia en el uso de paquetería de Microsoft Office, Windows y Linux variable, de poca a moderada.
+
+
+
+2.6. Requisitos futuros.
+
+
+
+Los requisitos y necesidades que podrían ser implementados en futuras versiones se enlistan a continuación.
+
+
+
+- Permitir pagos directos con tarjeta bancaria.
+
+- Versión móvil del sistema para los profesores.
+
+- Soporte para clientes, donde exista la posibilidad de solicitar una renta de espacio.
+
+- Soporte de clases virtuales mediante la visualización de videos.
+
+
+
+3.1. Interfaces externas.
+
+
+
+Por necesidad del negocio, es requerido que se respeten en la interfaz de usuario los colores de la escuela, entre los cuales se encuentran: rojo, rosa, violeta y blanco.
+
+
+
+3.3. Requisitos de rendimiento.
+
+
+
+El sistema deberá soportar los siguientes requisitos.
+
+
+
+- Un único usuario simultáneo.
+
+- Una sola términal.
+
+- Frecuencía de uso diaria.
+
+- Almacenamiento de hasta miles e incluso millones de registros con el tiempo.
+
+
+
+3.4. Restricciones de diseño.
+
+
+
+El sistema deberá correr en una computadora, sin importar el sistema operativo, ya sea Microsoft Windows o una distribución Linux.
+
+
+
+3. Requisitos específicos.
+
+
+
+En esta sección del documento se especifican detalladamente los requerimientos del sistema, incluyendo la forma en que serán utilizadas las funciones y quienes serán los usuarios.
