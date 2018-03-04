@@ -30,7 +30,7 @@ El producto descrito es un sistema completo, que no dependerá de otro sistema ni
 
 
 
-El sistema proveera funcionalidades generales para profesores y específicas para el director de la escuela, las cuales se enlistan a continuación.
+El sistema proveerá funcionalidades generales para profesores y específicas para el director de la escuela, las cuales se enlistan a continuación.
 
 
 
@@ -132,7 +132,7 @@ El sistema deberá soportar los siguientes requisitos.
 
 
 
-- Un único usuario simultáneo.
+- Un único usuario al momento.
 
 - Una sola términal.
 
