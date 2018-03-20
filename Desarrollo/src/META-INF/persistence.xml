@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="CentroDeControlAredPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>Accesodatos.Entidades.Renta</class>
+    <class>Accesodatos.Entidades.Alumno</class>
+    <class>Accesodatos.Entidades.Asistencia</class>
+    <class>Accesodatos.Entidades.Cliente</class>
+    <class>Accesodatos.Entidades.Egreso</class>
+    <class>Accesodatos.Entidades.Pagoalumno</class>
+    <class>Accesodatos.Entidades.Usuario</class>
+    <class>Accesodatos.Entidades.Grupo</class>
+    <class>Accesodatos.Entidades.Inscripcion</class>
+    <class>Accesodatos.Entidades.Pagocliente</class>
+    <class>Accesodatos.Entidades.Dia</class>
+    <class>Accesodatos.Entidades.Promocion</class>
+    <class>Accesodatos.Entidades.Profesor</class>
+    <class>Accesodatos.Entidades.Gastopromocional</class>
+    <class>Accesodatos.Entidades.Pagoprofesor</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/Ared?zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="123456"/>
+    </properties>
+  </persistence-unit>
+</persistence>
