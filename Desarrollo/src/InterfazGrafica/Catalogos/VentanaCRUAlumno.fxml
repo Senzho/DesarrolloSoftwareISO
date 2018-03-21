@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="489.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="LogicaNegocio.Catalogos.VentanaCRUAlumnoController">
+  <children>
+    <ImageView fx:id="imagen" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0" />
+    <Label text="Nombre:" AnchorPane.leftAnchor="144.0" AnchorPane.topAnchor="22.0">
+      <font>
+        <Font name="Arial" size="16.0" fx:id="x1" />
+      </font>
+    </Label>
+    <TextField fx:id="nombre" prefWidth="372.0" AnchorPane.leftAnchor="214.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="19.0" />
+    <Label font="$x1" text="Telefono:" AnchorPane.leftAnchor="144.0" AnchorPane.topAnchor="48.0" />
+    <TextField fx:id="telefono" prefWidth="372.0" AnchorPane.leftAnchor="214.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="45.0" />
+    <Label font="$x1" text="Correo:" AnchorPane.leftAnchor="144.0" AnchorPane.topAnchor="75.0" />
+    <TextField fx:id="correo" prefWidth="372.0" AnchorPane.leftAnchor="214.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="72.0" />
+    <Label font="$x1" text="Direccion:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="142.0" />
+    <TextArea fx:id="direccion" prefWidth="493.0" wrapText="true" AnchorPane.bottomAnchor="88.0" AnchorPane.leftAnchor="93.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="142.0" />
+    <Separator prefWidth="571.0" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="14.0" />
+    <Button fx:id="registrar" mnemonicParsing="false" onMouseClicked="#registrar_OnClick" text="Registrar" AnchorPane.bottomAnchor="13.0" AnchorPane.rightAnchor="14.0" />
+  </children>
+</AnchorPane>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="100.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="LogicaNegocio.Catalogos.PanelAlumnoDirectorController">
+  <children>
+    <ImageView fx:id="imagen" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
+    <Label fx:id="nombre" prefWidth="241.0" text="" AnchorPane.leftAnchor="92.0" AnchorPane.topAnchor="21.0">
+      <font>
+        <Font name="Arial Bold" size="16.0" />
+      </font>
+    </Label>
+    <Label fx:id="telefono" prefWidth="148.0" text="" AnchorPane.leftAnchor="92.0" AnchorPane.topAnchor="49.0">
+      <font>
+        <Font name="Arial" size="16.0" fx:id="x1" />
+      </font>
+    </Label>
+    <Label fx:id="correo" font="$x1" prefWidth="157.0" text="" AnchorPane.leftAnchor="265.0" AnchorPane.topAnchor="49.0" />
+    <ImageView fx:id="editar" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="17.0" AnchorPane.rightAnchor="14.0" />
+    <ImageView fx:id="baja" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="17.0" AnchorPane.rightAnchor="51.0" />
+  </children>
+</AnchorPane>
