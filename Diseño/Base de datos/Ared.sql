@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
--- Host: localhost    Database: Ared
+-- Host: localhost    Database: ared
 -- ------------------------------------------------------
 -- Server version	5.7.17-log
 
@@ -31,7 +31,7 @@ CREATE TABLE `alumno` (
   `estado` int(11) DEFAULT NULL,
   `telefono` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`idAlumno`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,6 +40,7 @@ CREATE TABLE `alumno` (
 
 LOCK TABLES `alumno` WRITE;
 /*!40000 ALTER TABLE `alumno` DISABLE KEYS */;
+INSERT INTO `alumno` VALUES (1,'2018-03-20','Víctor Javier García Mascareñas','Camino Mata Obscura S/N, Municipio de El Lencero, Veracruz','vijagama@outlook.es',1,'2281843459'),(2,'2018-03-20','Mario Hurtado López','Caxa # 23, Colonia Villa de las Margaritas, Xalapa Veracruz','mario@gmail.com',1,'2281765434');
 /*!40000 ALTER TABLE `alumno` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -335,6 +336,7 @@ CREATE TABLE `profesor` (
   `correo` varchar(150) DEFAULT NULL,
   `fecha` date DEFAULT NULL,
   `direccion` text,
+  `monto` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`idProfesor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -437,4 +439,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-03-19 17:05:56
+-- Dump completed on 2018-03-22  0:14:16

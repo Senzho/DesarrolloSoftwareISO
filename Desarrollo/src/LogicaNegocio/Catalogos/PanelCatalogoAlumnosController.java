@@ -1,8 +1,8 @@
 package LogicaNegocio.Catalogos;
 
-import Accesodatos.Catalogos.AlumnoDAOSql;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
 
 public class PanelCatalogoAlumnosController implements Initializable {
     @FXML
@@ -19,21 +20,23 @@ public class PanelCatalogoAlumnosController implements Initializable {
     @FXML
     private Button buscar;
     @FXML
-    private AnchorPane panelAlumnos;
+    private FlowPane panelAlumnos;
 
     public void initialize(URL url, ResourceBundle rb) {
-        this.cargarAlumnos();
+        this.panelAlumnos.setVgap(5);
+        this.cargarAlumnos(new Alumno().obtenerAlumnos());
     }    
     
-    public void cargarAlumnos(){
-        AlumnoDAOSql alumnoDAO = new AlumnoDAOSql();
-        alumnoDAO.obtenerAlumnos().forEach((alumno) -> {
+    public void cargarAlumnos(List<Alumno> alumnos){
+        this.panelAlumnos.getChildren().clear();
+        alumnos.forEach((alumnoObtenido) -> {
             FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/InterfazGrafica/Catalogos/PanelAlumnoDirector.fxml"));
             AnchorPane panel;
             try {
                 panel = loader.load();
+                panel.setStyle("-fx-background-color: #D8D8D8;");
                 PanelAlumnoDirectorController controller = loader.getController();
-                controller.setAlumno(alumno);
+                controller.setAlumno(alumnoObtenido);
                 this.panelAlumnos.getChildren().add(panel);
             } catch (IOException ex) {
                 Logger.getLogger(PanelCatalogoAlumnosController.class.getName()).log(Level.SEVERE, null, ex);
@@ -42,6 +45,9 @@ public class PanelCatalogoAlumnosController implements Initializable {
     }
     
     public void buscar_OnClick(){
-        
+        List<Alumno> alumnos = new Alumno().obtenerAlumnos(this.busqueda.getText());
+        if (!alumnos.isEmpty()){
+            this.cargarAlumnos(alumnos);
+        }
     }
 }

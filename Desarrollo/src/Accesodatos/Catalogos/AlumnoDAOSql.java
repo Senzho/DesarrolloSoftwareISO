@@ -2,7 +2,9 @@ package Accesodatos.Catalogos;
 
 import Accesodatos.Controladores.AlumnoJpaController;
 import LogicaNegocio.Catalogos.Alumno;
+import LogicaNegocio.Catalogos.OperacionesString;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.Persistence;
@@ -12,8 +14,7 @@ public class AlumnoDAOSql implements AlumnoDAO{
         
     }
     
-    @Override
-    public Accesodatos.Entidades.Alumno obtenerEntidad(Alumno alumno){
+    private Accesodatos.Entidades.Alumno obtenerEntidad(Alumno alumno){
         Accesodatos.Entidades.Alumno alumnoJpa = new Accesodatos.Entidades.Alumno();
         alumnoJpa.setIdAlumno(alumno.getIdAlumno());
         alumnoJpa.setCorreo(alumno.getCorreo());
@@ -30,6 +31,20 @@ public class AlumnoDAOSql implements AlumnoDAO{
         alumnoJpa.setTelefono(alumno.getTeléfono());
         return alumnoJpa;
     }
+    private Alumno obtenerEntidad(Accesodatos.Entidades.Alumno alumnoJpa){
+        Alumno alumno = new Alumno();
+        alumno.setIdAlumno(alumnoJpa.getIdAlumno());
+        alumno.setCorreo(alumnoJpa.getCorreo());
+        alumno.setDireccion(alumnoJpa.getDireccion());
+        boolean estado;
+        estado = alumnoJpa.getEstado() != 0;
+        alumno.setEstado(estado);
+        alumno.setFecha(alumnoJpa.getFecha());
+        alumno.setNombre(alumnoJpa.getNombre());
+        alumno.setTeléfono(alumnoJpa.getTelefono());
+        return alumno;
+    }
+    
     @Override
     public boolean registrarAlumno(Alumno alumno) {
         boolean registrado;
@@ -69,31 +84,27 @@ public class AlumnoDAOSql implements AlumnoDAO{
         return editado;
     }
     @Override
-    public ArrayList<Alumno> obtenerAlumnos() {
+    public List<Alumno> obtenerAlumnos() {
         ArrayList<Alumno> alumnos = new ArrayList();
         AlumnoJpaController controller = new AlumnoJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
         controller.findAlumnoEntities().forEach((alumnoJpa) -> {
-            Alumno alumno = new Alumno();
-            alumno.setIdAlumno(alumnoJpa.getIdAlumno());
-            alumno.setCorreo(alumnoJpa.getCorreo());
-            alumno.setDireccion(alumnoJpa.getDireccion());
-            boolean estado;
-            if (alumnoJpa.getEstado() == 0){
-                estado = false;
-            }else{
-                estado = true;
-            }
-            alumno.setEstado(estado);
-            alumno.setFecha(alumnoJpa.getFecha());
-            alumno.setNombre(alumnoJpa.getNombre());
-            alumno.setTeléfono(alumnoJpa.getTelefono());
-            alumnos.add(alumno);
+            alumnos.add(this.obtenerEntidad(alumnoJpa));
         });
         return alumnos;
     }
     @Override
-    public ArrayList obtenerPagos() {
-        ArrayList pagos = new ArrayList();
+    public List<Alumno> obtenerAlumnos(String nombre){
+        List<Alumno> alumnos = new ArrayList();
+        for (Alumno alumno : this.obtenerAlumnos()){
+            if (OperacionesString.coincide(nombre, alumno.getNombre())){
+                alumnos.add(alumno);
+            }
+        }
+        return alumnos;
+    }
+    @Override
+    public List obtenerPagos() {
+        List pagos = new ArrayList();
         //A la espera de la entidad de PagoAlumno
         return pagos;
     }

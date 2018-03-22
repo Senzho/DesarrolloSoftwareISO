@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="489.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="LogicaNegocio.Catalogos.VentanaCRUProfesorController">
+  <children>
+    <ImageView fx:id="imagen" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="14.0" />
+    <Label text="Nombre:" AnchorPane.leftAnchor="144.0" AnchorPane.topAnchor="21.0">
+      <font>
+        <Font name="Arial" size="16.0" fx:id="x1" />
+      </font>
+    </Label>
+    <TextField fx:id="nombre" prefWidth="261.0" AnchorPane.leftAnchor="214.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="18.0" />
+    <Label font="$x1" text="Telefono:" AnchorPane.leftAnchor="144.0" AnchorPane.topAnchor="47.0" />
+    <TextField fx:id="telefono" prefWidth="261.0" AnchorPane.leftAnchor="214.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="44.0" />
+    <Label font="$x1" text="Correo:" AnchorPane.leftAnchor="144.0" AnchorPane.topAnchor="74.0" />
+    <TextField fx:id="correo" prefWidth="261.0" AnchorPane.leftAnchor="214.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="71.0" />
+    <Label font="$x1" text="Direccion:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="141.0" />
+    <TextArea fx:id="direccion" prefHeight="162.0" prefWidth="348.0" wrapText="true" AnchorPane.bottomAnchor="147.0" AnchorPane.leftAnchor="127.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="141.0" />
+    <Separator prefWidth="460.0" AnchorPane.bottomAnchor="49.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="14.0" />
+    <Button fx:id="registrar" mnemonicParsing="false" onMouseClicked="#registrar_OnClick" text="Registrar" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+    <Label font="$x1" text="Estado:" AnchorPane.leftAnchor="144.0" AnchorPane.topAnchor="100.0" />
+    <RadioButton fx:id="activo" mnemonicParsing="false" onMouseClicked="#activo_OnClick" text="Activo" AnchorPane.leftAnchor="214.0" AnchorPane.topAnchor="102.0" />
+    <RadioButton fx:id="inactivo" mnemonicParsing="false" onMouseClicked="#inactivo_OnClick" text="Inactivo" AnchorPane.leftAnchor="284.0" AnchorPane.topAnchor="102.0" />
+    <Label font="$x1" text="Tipo de pago:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="315.0" />
+    <ComboBox fx:id="tipoPago" prefHeight="21.0" prefWidth="120.0" AnchorPane.leftAnchor="127.0" AnchorPane.topAnchor="314.0">
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="Item 1" />
+          <String fx:value="Item 2" />
+          <String fx:value="Item 3" />
+        </FXCollections>
+      </items>
+    </ComboBox>
+    <Label font="$x1" text="Monto:" AnchorPane.leftAnchor="260.0" AnchorPane.topAnchor="315.0" />
+    <TextField fx:id="monto" prefWidth="154.0" AnchorPane.leftAnchor="321.0" AnchorPane.topAnchor="312.0" />
+  </children>
+</AnchorPane>

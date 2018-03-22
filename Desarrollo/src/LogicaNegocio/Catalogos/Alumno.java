@@ -1,8 +1,8 @@
 package LogicaNegocio.Catalogos;
 
 import Accesodatos.Catalogos.AlumnoDAOSql;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Alumno {
     private int idAlumno;
@@ -77,10 +77,13 @@ public class Alumno {
     public boolean editarAlumno() {
         return this.alumnoDAO.editarAlumno(this);
     }
-    public ArrayList<Alumno> obtenerAlumnos() {
+    public List<Alumno> obtenerAlumnos() {
         return this.alumnoDAO.obtenerAlumnos();
     }
-    public ArrayList obtenerPagos() {
+    public List<Alumno> obtenerAlumnos(String nombre) {
+        return this.alumnoDAO.obtenerAlumnos(nombre);
+    }
+    public List obtenerPagos() {
         return this.alumnoDAO.obtenerPagos();
     }
     public int[] obtenerGrupos() {

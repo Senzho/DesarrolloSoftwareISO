@@ -1,13 +1,13 @@
 package Accesodatos.Catalogos;
 
 import LogicaNegocio.Catalogos.Alumno;
-import java.util.ArrayList;
+import java.util.List;
 
 public interface AlumnoDAO {
-    public Accesodatos.Entidades.Alumno obtenerEntidad(Alumno alumno);
     public boolean registrarAlumno(Alumno alumno);
     public boolean editarAlumno(Alumno alumno);
-    public ArrayList<Alumno> obtenerAlumnos();
-    public ArrayList obtenerPagos();//la lista regresa entidades de PagoAlumno
+    public List<Alumno> obtenerAlumnos();
+    public List<Alumno> obtenerAlumnos(String nombre);
+    public List obtenerPagos();//la lista regresa entidades de PagoAlumno
     public int[] obtenerGrupos();
 }

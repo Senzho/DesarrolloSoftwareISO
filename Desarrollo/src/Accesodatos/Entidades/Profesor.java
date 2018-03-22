@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Desktop
+ * @author Victor Javier
  */
 @Entity
 @Table(name = "profesor")
@@ -39,7 +39,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Profesor.findByTelefono", query = "SELECT p FROM Profesor p WHERE p.telefono = :telefono")
     , @NamedQuery(name = "Profesor.findByTipoPago", query = "SELECT p FROM Profesor p WHERE p.tipoPago = :tipoPago")
     , @NamedQuery(name = "Profesor.findByCorreo", query = "SELECT p FROM Profesor p WHERE p.correo = :correo")
-    , @NamedQuery(name = "Profesor.findByFecha", query = "SELECT p FROM Profesor p WHERE p.fecha = :fecha")})
+    , @NamedQuery(name = "Profesor.findByFecha", query = "SELECT p FROM Profesor p WHERE p.fecha = :fecha")
+    , @NamedQuery(name = "Profesor.findByMonto", query = "SELECT p FROM Profesor p WHERE p.monto = :monto")})
 public class Profesor implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -64,6 +65,8 @@ public class Profesor implements Serializable {
     @Lob
     @Column(name = "direccion")
     private String direccion;
+    @Column(name = "monto")
+    private String monto;
     @OneToMany(mappedBy = "idProfesor")
     private Collection<Promocion> promocionCollection;
     @OneToMany(mappedBy = "idProfesor")
@@ -140,6 +143,14 @@ public class Profesor implements Serializable {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+
+    public String getMonto() {
+        return monto;
+    }
+
+    public void setMonto(String monto) {
+        this.monto = monto;
     }
 
     @XmlTransient

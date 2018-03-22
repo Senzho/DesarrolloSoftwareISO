@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="LogicaNegocio.Catalogos.PanelCatalogoAlumnosController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="786.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="LogicaNegocio.Catalogos.PanelCatalogoAlumnosController">
   <children>
     <Label text="Nombre:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
       <font>
@@ -15,8 +15,12 @@
       </font>
     </Label>
     <TextField fx:id="busqueda" prefWidth="437.0" AnchorPane.leftAnchor="84.0" AnchorPane.rightAnchor="79.0" AnchorPane.topAnchor="11.0" />
-    <Button fx:id="buscar" mnemonicParsing="false" onMouseClicked="#buscar_OnClick" text="Buscar" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="12.0" />
+    <Button fx:id="buscar" mnemonicParsing="false" onMouseClicked="#buscar_OnClick" text="Buscar" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="11.0" />
     <Separator prefWidth="571.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="43.0" />
-    <FlowPane fx:id="panelAlumnos" prefHeight="331.0" prefWidth="571.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="55.0" />
+    <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="331.0" prefWidth="571.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="54.0">
+      <content>
+        <FlowPane fx:id="panelAlumnos" prefHeight="330.0" prefWidth="742.0" />
+      </content>
+    </ScrollPane>
   </children>
 </AnchorPane>
