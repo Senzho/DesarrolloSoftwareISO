@@ -1,6 +1,8 @@
 package LogicaNegocio.Sesiones;
 
 import Accesodatos.Sesiones.UsuarioDAOSql;
+import LogicaNegocio.Catalogos.Profesor;
+import javax.persistence.NoResultException;
 
 public class Usuario {
     private int idUsuario;
@@ -87,8 +89,8 @@ public class Usuario {
         return usuarioDAO.editarUsuario(usuario);
     }
 
-    public Profesor obtenerProfesor(int idProfesor) {
-        return usuarioDAO.obtenerProfesor(idProfesor);
+    public Profesor obtenerProfesor() {
+        return usuarioDAO.obtenerProfesor(idTipoUsuario);
     }
     
 }

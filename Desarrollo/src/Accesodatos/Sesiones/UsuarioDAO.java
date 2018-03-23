@@ -1,6 +1,6 @@
 package Accesodatos.Sesiones;
 
-import LogicaNegocio.Sesiones.Profesor;
+import LogicaNegocio.Catalogos.Profesor;
 import LogicaNegocio.Sesiones.Usuario;
 
 public interface UsuarioDAO {
