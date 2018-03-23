@@ -34,26 +34,26 @@ public class VentanaCRUAlumnoController implements Initializable {
     
     private Alumno alumno;
     
-    private AlumnoEnum validarDatos(){
-        AlumnoEnum validacion = AlumnoEnum.DATOS_VALIDOS;
+    private CatalogoEnum validarDatos(){
+        CatalogoEnum validacion = CatalogoEnum.DATOS_VALIDOS;
         if (this.nombre.getText().isEmpty()){
-            validacion = AlumnoEnum.NOMBRE_VACIO;
+            validacion = CatalogoEnum.NOMBRE_VACIO;
         }else if (this.nombre.getText().length() > 150){
-            validacion = AlumnoEnum.NOMBRE_LARGO;
+            validacion = CatalogoEnum.NOMBRE_LARGO;
         }else if (this.telefono.getText().isEmpty()){
-            validacion = AlumnoEnum.TELEFONO_VACIO;
+            validacion = CatalogoEnum.TELEFONO_VACIO;
         }else if (this.telefono.getText().length() > 10){
-            validacion = AlumnoEnum.TELEFONO_LARGO;
+            validacion = CatalogoEnum.TELEFONO_LARGO;
         }else if(this.correo.getText().isEmpty()){
-            validacion = AlumnoEnum.CORREO_VACIO;
+            validacion = CatalogoEnum.CORREO_VACIO;
         }else if (this.correo.getText().length() > 150){
-            validacion = AlumnoEnum.CORREO_LARGO;
+            validacion = CatalogoEnum.CORREO_LARGO;
         }else if (!OperacionesString.emailValido(this.correo.getText())){
-            validacion = AlumnoEnum.CORREO_NO_VALIDO;
+            validacion = CatalogoEnum.CORREO_NO_VALIDO;
         }
         return validacion;
     }
-    private void mostrarMensajeError(AlumnoEnum alumnoEnum){
+    private void mostrarMensajeError(CatalogoEnum alumnoEnum){
         String mensaje;
         switch(alumnoEnum){
             default:
@@ -85,7 +85,7 @@ public class VentanaCRUAlumnoController implements Initializable {
     }
     
     public void initialize(URL url, ResourceBundle rb) {
-        
+        this.cargarImagen();
     }
     
     public void cargarAlumno(){
@@ -116,15 +116,14 @@ public class VentanaCRUAlumnoController implements Initializable {
     }
     
     public void registrar_OnClick(){
-        AlumnoEnum alumnoEnum = this.validarDatos();
-        if (alumnoEnum.equals(AlumnoEnum.DATOS_VALIDOS)){
+        CatalogoEnum alumnoEnum = this.validarDatos();
+        if (alumnoEnum.equals(CatalogoEnum.DATOS_VALIDOS)){
             boolean realizado = false;
             if (this.alumno != null){
                 this.alumno.setNombre(this.nombre.getText());
                 this.alumno.setTeléfono(this.telefono.getText());
                 this.alumno.setCorreo(this.correo.getText());
                 this.alumno.setDireccion(this.direccion.getText());
-                this.alumno.setFecha(new Date());
                 this.alumno.setEstado(this.activo.isSelected());
                 if (this.alumno.editarAlumno())
                     realizado = true;
@@ -136,8 +135,10 @@ public class VentanaCRUAlumnoController implements Initializable {
                 this.alumno.setDireccion(this.direccion.getText());
                 this.alumno.setFecha(new Date());
                 this.alumno.setEstado(this.activo.isSelected());
-                if (this.alumno.registrarAlumno())
+                if (this.alumno.registrarAlumno()){
                     realizado = true;
+                    this.registrar.setText("Guardar");
+                }
             }
             if (!realizado){
                 MessageFactory.showMessage("Error", "Registro", "No se pudo guardar el alumno", Alert.AlertType.ERROR);

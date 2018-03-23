@@ -50,7 +50,9 @@ public class AlumnoDAOSql implements AlumnoDAO{
         boolean registrado;
         AlumnoJpaController controller = new AlumnoJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
         try{
-            controller.create(this.obtenerEntidad(alumno));
+            Accesodatos.Entidades.Alumno alumnoJpa = this.obtenerEntidad(alumno);
+            controller.create(alumnoJpa);
+            alumno.setIdAlumno(alumnoJpa.getIdAlumno());
             registrado = true;
         }catch(Exception excepcion){
             registrado = false;

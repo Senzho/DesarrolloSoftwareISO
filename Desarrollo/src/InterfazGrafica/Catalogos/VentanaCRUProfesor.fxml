@@ -29,8 +29,8 @@
     <Label font="$x1" text="Estado:" AnchorPane.leftAnchor="144.0" AnchorPane.topAnchor="100.0" />
     <RadioButton fx:id="activo" mnemonicParsing="false" onMouseClicked="#activo_OnClick" text="Activo" AnchorPane.leftAnchor="214.0" AnchorPane.topAnchor="102.0" />
     <RadioButton fx:id="inactivo" mnemonicParsing="false" onMouseClicked="#inactivo_OnClick" text="Inactivo" AnchorPane.leftAnchor="284.0" AnchorPane.topAnchor="102.0" />
-    <Label font="$x1" text="Tipo de pago:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="315.0" />
-    <ComboBox fx:id="tipoPago" prefHeight="21.0" prefWidth="120.0" AnchorPane.leftAnchor="127.0" AnchorPane.topAnchor="314.0">
+    <Label font="$x1" text="Tipo de pago:" AnchorPane.bottomAnchor="116.0" AnchorPane.leftAnchor="14.0" />
+    <ComboBox fx:id="tipoPago" minHeight="19.0" prefHeight="21.999900000002526" prefWidth="120.0" AnchorPane.bottomAnchor="116.0" AnchorPane.leftAnchor="127.0">
       <items>
         <FXCollections fx:factory="observableArrayList">
           <String fx:value="Item 1" />
@@ -39,7 +39,7 @@
         </FXCollections>
       </items>
     </ComboBox>
-    <Label font="$x1" text="Monto:" AnchorPane.leftAnchor="260.0" AnchorPane.topAnchor="315.0" />
-    <TextField fx:id="monto" prefWidth="154.0" AnchorPane.leftAnchor="321.0" AnchorPane.topAnchor="312.0" />
+    <Label font="$x1" text="Monto:" AnchorPane.bottomAnchor="116.0" AnchorPane.leftAnchor="260.0" />
+    <TextField fx:id="monto" prefWidth="154.0" AnchorPane.bottomAnchor="116.0" AnchorPane.leftAnchor="321.0" AnchorPane.rightAnchor="14.0" />
   </children>
 </AnchorPane>

@@ -1,6 +1,7 @@
 package Accesodatos.Catalogos;
 
 import Accesodatos.Controladores.ProfesorJpaController;
+import LogicaNegocio.Catalogos.OperacionesString;
 import LogicaNegocio.Catalogos.Profesor;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,10 +55,13 @@ public class ProfesorDAOSql implements ProfesorDAO{
     
     @Override
     public boolean registrarProfesor(Profesor profesor) {
-        boolean registrado = false;
+        boolean registrado;
         ProfesorJpaController controller = new ProfesorJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
         try{
-            controller.create(this.obtenerEntidad(profesor));
+            Accesodatos.Entidades.Profesor profesorJpa = this.obtenerEntidad(profesor);
+            controller.create(profesorJpa);
+            profesor.setIdProfesor(profesorJpa.getIdProfesor());
+            registrado = true;
         }catch(Exception excepcion){
             registrado = false;
             Logger.getLogger(ProfesorDAOSql.class.getName()).log(Level.SEVERE, null, excepcion);
@@ -108,6 +112,16 @@ public class ProfesorDAOSql implements ProfesorDAO{
         controller.findProfesorEntities().forEach((profesorJpa) -> {
             profesores.add(this.obtenerEntidad(profesorJpa));
         });
+        return profesores;
+    }
+    @Override
+    public List<Profesor> obtenerProfesores(String nombre) {
+        List<Profesor> profesores = new ArrayList();
+        for (Profesor profesor : this.obtenerProfesores()){
+            if (OperacionesString.coincide(nombre, profesor.getNombre())){
+                profesores.add(profesor);
+            }
+        }
         return profesores;
     }
 }

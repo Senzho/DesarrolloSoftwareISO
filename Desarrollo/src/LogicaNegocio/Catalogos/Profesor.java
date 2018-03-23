@@ -97,5 +97,8 @@ public class Profesor {
     }
     public List<Profesor> obtenerProfesores(){
         return this.profesorDAO.obtenerProfesores();
-    } 
+    }
+    public List<Profesor> obtenerProfesores(String nombre){
+        return this.profesorDAO.obtenerProfesores(nombre);
+    }
 }
