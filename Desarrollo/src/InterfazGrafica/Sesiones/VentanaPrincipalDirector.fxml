@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="468.0" prefWidth="768.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="LogicaNegocio.Sesiones.VentanaPrincipalDirectorController">
+  <children>
+    <MenuBar prefHeight="26.0" prefWidth="741.0" useSystemMenuBar="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="27.0" AnchorPane.topAnchor="0.0">
+      <menus>
+        <Menu mnemonicParsing="false" text="Asistencia" />
+        <Menu mnemonicParsing="false" text="Inscripción" />
+        <Menu mnemonicParsing="false" text="Pagos">
+          <items>
+            <Menu mnemonicParsing="false" text="Registro de pagos">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Alumno" />
+                <MenuItem mnemonicParsing="false" text="Profesor" />
+                <MenuItem mnemonicParsing="false" text="Renta" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Próximos pagos">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Profesores" />
+                <MenuItem mnemonicParsing="false" text="Alumnos" />
+              </items>
+            </Menu>
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Mis grupos" />
+        <Menu mnemonicParsing="false" text="Grupos y rentas" />
+        <Menu mnemonicParsing="false" text="Catálogos">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Alumnos" />
+            <MenuItem mnemonicParsing="false" text="Profesores" />
+            <MenuItem mnemonicParsing="false" text="Clientes" />
+            <MenuItem mnemonicParsing="false" text="Registrar alumno" />
+            <MenuItem mnemonicParsing="false" text="Registrar profesor" />
+            <MenuItem mnemonicParsing="false" text="Registrar cliente" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Gastos">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Promoción de facebook" />
+            <MenuItem mnemonicParsing="false" text="Egreso" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Reporte" />
+      </menus>
+    </MenuBar>
+    <ImageView fx:id="imagenCambiarCuenta" fitHeight="26.0" fitWidth="26.0" onMouseClicked="#imageView_onClick" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0" />
+  </children>
+</AnchorPane>

@@ -22,23 +22,20 @@ public class UsuarioDAOSql implements UsuarioDAO {
         query.setParameter("nombre", nombreUsuario);
         query.setParameter("contrasena", contraseña);
         Usuario usuario = null;
-        System.out.println("entrando al try");
-        try{
+        try {
             Accesodatos.Entidades.Usuario usuarioJpa = (Accesodatos.Entidades.Usuario) query.getSingleResult();
-            System.out.println("entro al metodo");
             if (usuarioJpa != null) {
-                System.out.println("aqui quiza");
                 usuario = new Usuario();
                 usuario.setNombre(usuarioJpa.getNombre());
                 usuario.setContraseña(usuarioJpa.getContrasena());
                 usuario.setIdTipoUsuario(usuarioJpa.getIdTipoUsuario());
-                usuario.setTipoUsuario(usuario.getTipoUsuario());
+                usuario.setTipoUsuario(usuarioJpa.getTipoUsuario());
                 usuario.setIdUsuario(usuarioJpa.getIdUsuario());
             }
-        }catch(NoResultException excepcion){
+        } catch (NoResultException excepcion) {
             excepcion.printStackTrace();
         }
-        
+
         return usuario;
     }
 
@@ -48,9 +45,11 @@ public class UsuarioDAOSql implements UsuarioDAO {
         EntityManager entityManager = Persistence.createEntityManagerFactory("CentroDeControlAredPU").createEntityManager();
         Query query = entityManager.createNamedQuery("Usuario.findByNombre");
         query.setParameter("nombre", nombreUsuario);
-        Accesodatos.Entidades.Usuario usuarioJpa = (Accesodatos.Entidades.Usuario) query.getSingleResult();
-        if (usuarioJpa != null) {
+        try {
+            Accesodatos.Entidades.Usuario usuarioJpa = (Accesodatos.Entidades.Usuario) query.getSingleResult();
             usuarioEncontrado = true;
+        } catch (NoResultException excepcion) {
+            excepcion.printStackTrace();
         }
         return usuarioEncontrado;
     }
@@ -65,7 +64,12 @@ public class UsuarioDAOSql implements UsuarioDAO {
         usuarioJpa.setIdUsuario(usuario.getIdUsuario());
         usuarioJpa.setNombre(usuario.getNombre());
         usuarioJpa.setTipoUsuario(usuario.getTipoUsuario());
-        usuarioController.create(usuarioJpa);
+        try {
+            usuarioController.create(usuarioJpa);
+            registrado = true;
+        } catch (Exception excepcion) {
+            excepcion.printStackTrace();
+        }
         return registrado;
     }
 

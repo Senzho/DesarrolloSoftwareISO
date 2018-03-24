@@ -1,12 +1,14 @@
 package LogicaNegocio.Sesiones;
 
+import InterfazGrafica.MessageFactory;
+import LogicaNegocio.Catalogos.Profesor;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javax.persistence.NoResultException;
 
 public class VentanaInicioSesionController implements Initializable {
     @FXML
@@ -16,16 +18,27 @@ public class VentanaInicioSesionController implements Initializable {
     @FXML
     private Button btnIniciarSesion;
     private Usuario usuario;
+    private Profesor profesor;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
     }    
     public void btnIniciarSesion_onClick(){
-        this.usuario = new Usuario().buscarUsuarioSesion(this.txtUsuario.getText(), this.txtContraseña.getText());
+        String nombreUsuario = this.txtUsuario.getText();
+        String contraseña = this.txtContraseña.getText();
+        this.usuario = new Usuario().buscarUsuarioSesion(nombreUsuario, contraseña);
         if(usuario!= null){
-            System.out.println("si existe y entre al usuario");
+            System.out.println(this.usuario.getTipoUsuario());
+            System.out.println(this.usuario.getIdUsuario());
+            System.out.println(usuario.getIdTipoUsuario());
+            this.profesor = new Usuario().obtenerProfesor(this.usuario.getIdTipoUsuario());//id tipo usuario es id profesor
+            if(usuario.getTipoUsuario() == 0){                
+                new VentanaPrincipalDirector(usuario, profesor);
+            }else{
+                new VentanaPrincipalProfesor(usuario, profesor);
+            }
         }else{
-            System.out.println("no conexion o no usuario");
+            MessageFactory.showMessage("Información","Usuario incorrecto","El usuario y/o contraseña son incorrectos", AlertType.INFORMATION);
         }
     }
     

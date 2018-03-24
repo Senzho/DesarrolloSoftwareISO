@@ -5,17 +5,23 @@
  */
 package centrodecontrolared;
 
+import LogicaNegocio.Sesiones.VentanaInicioSesion;
+import javafx.application.Application;
+import javafx.stage.Stage;
+
 /**
  *
- * @author Desktop
+ * @author marioolopez
  */
-public class CentroDeControlAred {
+public class CentroDeControlAred extends Application {
+    
+    @Override
+    public void start(Stage primaryStage) {
+        new VentanaInicioSesion();
+    }
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
+        launch(args);
     }
     
 }
