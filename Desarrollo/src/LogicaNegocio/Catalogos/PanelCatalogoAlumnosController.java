@@ -1,5 +1,6 @@
 package LogicaNegocio.Catalogos;
 
+import InterfazGrafica.MessageFactory;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -48,6 +50,8 @@ public class PanelCatalogoAlumnosController implements Initializable {
         List<Alumno> alumnos = new Alumno().obtenerAlumnos(this.busqueda.getText());
         if (!alumnos.isEmpty()){
             this.cargarAlumnos(alumnos);
+        }else{
+            MessageFactory.showMessage("Información", "Búsqueda", "No hay resultados", Alert.AlertType.INFORMATION);
         }
     }
 }

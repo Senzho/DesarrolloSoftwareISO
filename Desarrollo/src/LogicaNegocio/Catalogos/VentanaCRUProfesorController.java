@@ -54,6 +54,8 @@ public class VentanaCRUProfesorController implements Initializable {
             validacion = CatalogoEnum.TELEFONO_VACIO;
         }else if (this.telefono.getText().length() > 10){
             validacion = CatalogoEnum.TELEFONO_LARGO;
+        }else if (!OperacionesString.telefonoValido(this.telefono.getText())){
+            validacion = CatalogoEnum.TELEFONO_NO_VALIDO;
         }else if(this.correo.getText().isEmpty()){
             validacion = CatalogoEnum.CORREO_VACIO;
         }else if (this.correo.getText().length() > 150){
@@ -91,6 +93,9 @@ public class VentanaCRUProfesorController implements Initializable {
             case TELEFONO_LARGO:
                 mensaje = "El campo telefono es demasiado largo";
                 break;
+            case TELEFONO_NO_VALIDO:
+                mensaje = "El campo telefono no es válido";
+                break;
             case CORREO_VACIO:
                 mensaje = "El campo correo es requerido";
                 break;
@@ -110,7 +115,7 @@ public class VentanaCRUProfesorController implements Initializable {
                 mensaje = "El campo monto no es válido";
                 break;
         }
-        MessageFactory.showMessage("Error", "Datos no válidos", mensaje, Alert.AlertType.INFORMATION);
+        MessageFactory.showMessage("Error", "Datos no válidos", mensaje, Alert.AlertType.ERROR);
     }
     
     @Override

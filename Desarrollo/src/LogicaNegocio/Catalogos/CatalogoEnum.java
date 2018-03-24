@@ -8,6 +8,7 @@ public enum CatalogoEnum {
     NOMBRE_LARGO,
     TELEFONO_VACIO,
     TELEFONO_LARGO,
+    TELEFONO_NO_VALIDO,
     CORREO_VACIO,
     CORREO_LARGO,
     CORREO_NO_VALIDO,

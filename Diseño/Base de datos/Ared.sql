@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
--- Host: localhost    Database: ared
+-- Host: localhost    Database: Ared
 -- ------------------------------------------------------
 -- Server version	5.7.17-log
 
@@ -31,7 +31,7 @@ CREATE TABLE `alumno` (
   `estado` int(11) DEFAULT NULL,
   `telefono` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`idAlumno`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -86,6 +86,7 @@ CREATE TABLE `cliente` (
   `correo` varchar(150) DEFAULT NULL,
   `telefono` varchar(10) DEFAULT NULL,
   `nombre` varchar(150) DEFAULT NULL,
+  `direccion` text,
   PRIMARY KEY (`idCliente`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -338,7 +339,7 @@ CREATE TABLE `profesor` (
   `direccion` text,
   `monto` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`idProfesor`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -347,6 +348,7 @@ CREATE TABLE `profesor` (
 
 LOCK TABLES `profesor` WRITE;
 /*!40000 ALTER TABLE `profesor` DISABLE KEYS */;
+INSERT INTO `profesor` VALUES (1,1,'Laura Gabriela Sosa Martínez','2281976654',0,'lagasoma@gmail.com','2018-03-22','Mi dirección','2500'),(4,1,'Angel David Revilla','2267453728',1,'reanda@outlook.es','2018-03-22','','2345');
 /*!40000 ALTER TABLE `profesor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -418,7 +420,7 @@ CREATE TABLE `usuario` (
   `tipoUsuario` int(11) DEFAULT NULL,
   `idTipoUsuario` int(11) DEFAULT NULL,
   PRIMARY KEY (`idUsuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -427,6 +429,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
+INSERT INTO `usuario` VALUES (1,'victor','snape',1,1);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -439,4 +442,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-03-22  0:14:16
+-- Dump completed on 2018-03-23 18:43:42

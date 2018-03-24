@@ -17,6 +17,7 @@ public class ClienteDAOSql implements ClienteDAO{
         cliente.setIdCliente(clienteJpa.getIdCliente());
         cliente.setNombre(clienteJpa.getNombre());
         cliente.setTelefono(clienteJpa.getTelefono());
+        cliente.setDireccion(clienteJpa.getDireccion());
         return cliente;
     }
     private Accesodatos.Entidades.Cliente obtenerEntidad(Cliente cliente){
@@ -26,6 +27,7 @@ public class ClienteDAOSql implements ClienteDAO{
         clienteJpa.setIdCliente(cliente.getIdCliente());
         clienteJpa.setNombre(cliente.getNombre());
         clienteJpa.setTelefono(cliente.getTelefono());
+        clienteJpa.setDireccion(cliente.getDireccion());
         return clienteJpa;
     }
     
@@ -56,6 +58,7 @@ public class ClienteDAOSql implements ClienteDAO{
             clienteJpa.setCorreo(cliente.getCorreo());
             clienteJpa.setNombre(cliente.getNombre());
             clienteJpa.setTelefono(cliente.getTelefono());
+            clienteJpa.setDireccion(cliente.getDireccion());
             controller.edit(clienteJpa);
             editado = true;
         } catch (Exception ex) {

@@ -14,6 +14,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -25,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Desktop
+ * @author Victor Javier
  */
 @Entity
 @Table(name = "cliente")
@@ -54,6 +55,9 @@ public class Cliente implements Serializable {
     private String telefono;
     @Column(name = "nombre")
     private String nombre;
+    @Lob
+    @Column(name = "direccion")
+    private String direccion;
     @OneToMany(mappedBy = "idCliente")
     private Collection<Pagocliente> pagoclienteCollection;
     @OneToMany(mappedBy = "idCliente")
@@ -104,6 +108,14 @@ public class Cliente implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
     @XmlTransient

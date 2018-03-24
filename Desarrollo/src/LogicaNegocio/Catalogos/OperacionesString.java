@@ -39,4 +39,13 @@ public class OperacionesString {
         }
         return valido;
     }
+    public static boolean telefonoValido(String telefono){
+        boolean valido = false;
+        Pattern patron = Pattern.compile("^[0-9]*$");
+        Matcher coincidencia = patron.matcher(telefono);
+        if (coincidencia.find()){
+            valido = true;
+        }
+        return valido;
+    }
 }

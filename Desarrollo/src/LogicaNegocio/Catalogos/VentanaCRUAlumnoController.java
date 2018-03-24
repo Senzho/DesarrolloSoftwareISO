@@ -44,6 +44,8 @@ public class VentanaCRUAlumnoController implements Initializable {
             validacion = CatalogoEnum.TELEFONO_VACIO;
         }else if (this.telefono.getText().length() > 10){
             validacion = CatalogoEnum.TELEFONO_LARGO;
+        }else if (!OperacionesString.telefonoValido(this.telefono.getText())){
+            validacion = CatalogoEnum.TELEFONO_NO_VALIDO;
         }else if(this.correo.getText().isEmpty()){
             validacion = CatalogoEnum.CORREO_VACIO;
         }else if (this.correo.getText().length() > 150){
@@ -71,6 +73,9 @@ public class VentanaCRUAlumnoController implements Initializable {
             case TELEFONO_LARGO:
                 mensaje = "El campo telefono es demasiado largo";
                 break;
+            case TELEFONO_NO_VALIDO:
+                mensaje = "El campo telefono no es válido";
+                break;
             case CORREO_VACIO:
                 mensaje = "El campo correo es requerido";
                 break;
@@ -81,7 +86,7 @@ public class VentanaCRUAlumnoController implements Initializable {
                 mensaje = "El campo correo no es válido";
                 break;
         }
-        MessageFactory.showMessage("Error", "Datos no válidos", mensaje, Alert.AlertType.INFORMATION);
+        MessageFactory.showMessage("Error", "Datos no válidos", mensaje, Alert.AlertType.ERROR);
     }
     
     public void initialize(URL url, ResourceBundle rb) {
@@ -108,7 +113,6 @@ public class VentanaCRUAlumnoController implements Initializable {
             this.inactivo.setSelected(true);
             this.registrar.setText("Registrar");
         }
-        this.cargarImagen();
     }
     public void cargarImagen(){
         //Validar si existe una imágen, en caso contrario:
@@ -143,7 +147,7 @@ public class VentanaCRUAlumnoController implements Initializable {
             if (!realizado){
                 MessageFactory.showMessage("Error", "Registro", "No se pudo guardar el alumno", Alert.AlertType.ERROR);
             }else{
-                MessageFactory.showMessage("Éxito", "Registro", "El alumno se guardó exitosamente", Alert.AlertType.CONFIRMATION);
+                MessageFactory.showMessage("Éxito", "Registro", "El alumno se guardó exitosamente", Alert.AlertType.INFORMATION);
             }
         }else{
             this.mostrarMensajeError(alumnoEnum);

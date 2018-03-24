@@ -9,6 +9,7 @@ public class Cliente {
     private String nombre;
     private String correo;
     private String telefono;
+    private String direccion;
     private Date fecha;
     
     private ClienteDAOSql clienteDAO;
@@ -16,11 +17,12 @@ public class Cliente {
     public Cliente(){
         this.clienteDAO = new ClienteDAOSql();
     }
-    public Cliente(int idCliente, String nombre, String correo, String telefono, Date fecha) {
+    public Cliente(int idCliente, String nombre, String correo, String telefono, String direccion, Date fecha) {
         this.idCliente = idCliente;
         this.nombre = nombre;
         this.correo = correo;
         this.telefono = telefono;
+        this.direccion = direccion;
         this.fecha = fecha;
         this.clienteDAO = new ClienteDAOSql();
     }
@@ -48,6 +50,12 @@ public class Cliente {
     }
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+    public String getDireccion() {
+        return direccion;
+    }
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
     public Date getFecha() {
         return fecha;
