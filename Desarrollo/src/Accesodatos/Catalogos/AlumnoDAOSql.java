@@ -47,41 +47,44 @@ public class AlumnoDAOSql implements AlumnoDAO{
     
     @Override
     public boolean registrarAlumno(Alumno alumno) {
-        boolean registrado;
-        AlumnoJpaController controller = new AlumnoJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
-        try{
-            Accesodatos.Entidades.Alumno alumnoJpa = this.obtenerEntidad(alumno);
-            controller.create(alumnoJpa);
-            alumno.setIdAlumno(alumnoJpa.getIdAlumno());
-            registrado = true;
-        }catch(Exception excepcion){
-            registrado = false;
-            Logger.getLogger(AlumnoDAOSql.class.getName()).log(Level.SEVERE, null, excepcion);
-        }
+        boolean registrado = false;
+        if (OperacionesString.emailValido(alumno.getCorreo()) && OperacionesString.telefonoValido(alumno.getTeléfono())){
+            AlumnoJpaController controller = new AlumnoJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
+            try{
+                Accesodatos.Entidades.Alumno alumnoJpa = this.obtenerEntidad(alumno);
+                controller.create(alumnoJpa);
+                alumno.setIdAlumno(alumnoJpa.getIdAlumno());
+                registrado = true;
+            }catch(Exception excepcion){
+                Logger.getLogger(AlumnoDAOSql.class.getName()).log(Level.SEVERE, null, excepcion);
+            }
+        } 
         return registrado;
     }
     @Override
     public boolean editarAlumno(Alumno alumno) {
-        boolean editado;
-        AlumnoJpaController controller = new AlumnoJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
-        try {
-            Accesodatos.Entidades.Alumno alumnoJpa = controller.findAlumno(alumno.getIdAlumno());
-            alumnoJpa.setCorreo(alumno.getCorreo());
-            alumnoJpa.setDireccion(alumno.getDireccion());
-            int estado;
-            if (alumno.isEstado()){
-                estado = 1;
-            }else{
-                estado = 0;
+        boolean editado = false;
+        if (OperacionesString.emailValido(alumno.getCorreo()) && OperacionesString.telefonoValido(alumno.getTeléfono())){
+            AlumnoJpaController controller = new AlumnoJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
+            try {
+                Accesodatos.Entidades.Alumno alumnoJpa = controller.findAlumno(alumno.getIdAlumno());
+                alumnoJpa.setCorreo(alumno.getCorreo());
+                alumnoJpa.setDireccion(alumno.getDireccion());
+                int estado;
+                if (alumno.isEstado()){
+                    estado = 1;
+                }else{
+                    estado = 0;
+                }
+                alumnoJpa.setEstado(estado);
+                alumnoJpa.setNombre(alumno.getNombre());
+                alumnoJpa.setTelefono(alumno.getTeléfono());
+                controller.edit(alumnoJpa);
+                editado = true;
+            } catch (Exception ex) {
+                editado = false;
+                Logger.getLogger(AlumnoDAOSql.class.getName()).log(Level.SEVERE, null, ex);
             }
-            alumnoJpa.setEstado(estado);
-            alumnoJpa.setNombre(alumno.getNombre());
-            alumnoJpa.setTelefono(alumno.getTeléfono());
-            controller.edit(alumnoJpa);
-            editado = true;
-        } catch (Exception ex) {
-            editado = false;
-            Logger.getLogger(AlumnoDAOSql.class.getName()).log(Level.SEVERE, null, ex);
         }
         return editado;
     }

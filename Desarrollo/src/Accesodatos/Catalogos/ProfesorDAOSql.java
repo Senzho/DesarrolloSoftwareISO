@@ -55,48 +55,52 @@ public class ProfesorDAOSql implements ProfesorDAO{
     
     @Override
     public boolean registrarProfesor(Profesor profesor) {
-        boolean registrado;
-        ProfesorJpaController controller = new ProfesorJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
-        try{
-            Accesodatos.Entidades.Profesor profesorJpa = this.obtenerEntidad(profesor);
-            controller.create(profesorJpa);
-            profesor.setIdProfesor(profesorJpa.getIdProfesor());
-            registrado = true;
-        }catch(Exception excepcion){
-            registrado = false;
-            Logger.getLogger(ProfesorDAOSql.class.getName()).log(Level.SEVERE, null, excepcion);
-        }
+        boolean registrado = false;
+        if (OperacionesString.emailValido(profesor.getCorreo()) && OperacionesString.telefonoValido(profesor.getTelefono()) && OperacionesString.montoValido(profesor.getMonto())){
+            ProfesorJpaController controller = new ProfesorJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
+            try{
+                Accesodatos.Entidades.Profesor profesorJpa = this.obtenerEntidad(profesor);
+                controller.create(profesorJpa);
+                profesor.setIdProfesor(profesorJpa.getIdProfesor());
+                registrado = true;
+            }catch(Exception excepcion){
+                registrado = false;
+                Logger.getLogger(ProfesorDAOSql.class.getName()).log(Level.SEVERE, null, excepcion);
+            }
+        } 
         return registrado;
     }
     @Override
     public boolean editarProfesor(Profesor profesor) {
         boolean editado = false;
-        ProfesorJpaController controller = new ProfesorJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
-        try {
-            Accesodatos.Entidades.Profesor profesorJpa = controller.findProfesor(profesor.getIdProfesor());
-            profesorJpa.setCorreo(profesor.getCorreo());
-            profesorJpa.setDireccion(profesor.getDireccion());
-            int estado;
-            if (profesor.isEstado()){
-                estado = 1;
-            }else{
-                estado = 0;
+        if (OperacionesString.emailValido(profesor.getCorreo()) && OperacionesString.telefonoValido(profesor.getTelefono()) && OperacionesString.montoValido(profesor.getMonto())){
+            ProfesorJpaController controller = new ProfesorJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
+            try {
+                Accesodatos.Entidades.Profesor profesorJpa = controller.findProfesor(profesor.getIdProfesor());
+                profesorJpa.setCorreo(profesor.getCorreo());
+                profesorJpa.setDireccion(profesor.getDireccion());
+                int estado;
+                if (profesor.isEstado()){
+                    estado = 1;
+                }else{
+                    estado = 0;
+                }
+                profesorJpa.setEstado(estado);
+                profesorJpa.setMonto(profesor.getMonto());
+                profesorJpa.setNombre(profesor.getNombre());
+                profesorJpa.setTelefono(profesor.getTelefono());
+                int tipoPago;
+                if (profesor.isTipoPago()){
+                    tipoPago = 1;
+                }else{
+                    tipoPago = 0;
+                }
+                profesorJpa.setTipoPago(tipoPago);
+                controller.edit(profesorJpa);
+                editado = true;
+            } catch (Exception ex) {
+                Logger.getLogger(ProfesorDAOSql.class.getName()).log(Level.SEVERE, null, ex);
             }
-            profesorJpa.setEstado(estado);
-            profesorJpa.setMonto(profesor.getMonto());
-            profesorJpa.setNombre(profesor.getNombre());
-            profesorJpa.setTelefono(profesor.getTelefono());
-            int tipoPago;
-            if (profesor.isTipoPago()){
-                tipoPago = 1;
-            }else{
-                tipoPago = 0;
-            }
-            profesorJpa.setTipoPago(tipoPago);
-            controller.edit(profesorJpa);
-            editado = true;
-        } catch (Exception ex) {
-            Logger.getLogger(ProfesorDAOSql.class.getName()).log(Level.SEVERE, null, ex);
         }
         return editado;
     }

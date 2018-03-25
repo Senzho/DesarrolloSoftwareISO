@@ -66,12 +66,8 @@ public class VentanaCRUProfesorController implements Initializable {
             validacion = CatalogoEnum.MONTO_VACIO;
         }else if (this.monto.getText().length() > 15){
             validacion = CatalogoEnum.MONTO_LARGO;
-        }else {
-            try{
-                Integer.valueOf(this.monto.getText());
-            }catch(NumberFormatException excepcion){
-                validacion = CatalogoEnum.MONTO_NO_VALIDO;
-            }
+        }else if (!OperacionesString.montoVaido(this.monto.getText())){
+            validacion = CatalogoEnum.MONTO_NO_VALIDO;
         }
         return validacion;
     }

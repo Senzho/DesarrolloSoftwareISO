@@ -38,31 +38,35 @@ public class ClienteDAOSql implements ClienteDAO{
     @Override
     public boolean registrarCliente(Cliente cliente) {
         boolean registrado = false;
-        ClienteJpaController controller = new ClienteJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
-        Accesodatos.Entidades.Cliente clienteJpa = this.obtenerEntidad(cliente);
-        try{
-            controller.create(clienteJpa);
-            cliente.setIdCliente(clienteJpa.getIdCliente());
-            registrado = true;
-        }catch(Exception excepcion){
-            Logger.getLogger(ClienteDAOSql.class.getName()).log(Level.SEVERE, null, excepcion);
-        }
+        if (OperacionesString.emailValido(cliente.getCorreo()) && OperacionesString.telefonoValido(cliente.getTelefono())){
+            ClienteJpaController controller = new ClienteJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
+            Accesodatos.Entidades.Cliente clienteJpa = this.obtenerEntidad(cliente);
+            try{
+                controller.create(clienteJpa);
+                cliente.setIdCliente(clienteJpa.getIdCliente());
+                registrado = true;
+            }catch(Exception excepcion){
+                Logger.getLogger(ClienteDAOSql.class.getName()).log(Level.SEVERE, null, excepcion);
+            }
+        } 
         return registrado;
     }
     @Override
     public boolean editarCliente(Cliente cliente) {
         boolean editado = false;
-        ClienteJpaController controller = new ClienteJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
-        try {
-            Accesodatos.Entidades.Cliente clienteJpa = controller.findCliente(cliente.getIdCliente());
-            clienteJpa.setCorreo(cliente.getCorreo());
-            clienteJpa.setNombre(cliente.getNombre());
-            clienteJpa.setTelefono(cliente.getTelefono());
-            clienteJpa.setDireccion(cliente.getDireccion());
-            controller.edit(clienteJpa);
-            editado = true;
-        } catch (Exception ex) {
-            Logger.getLogger(ClienteDAOSql.class.getName()).log(Level.SEVERE, null, ex);
+        if (OperacionesString.emailValido(cliente.getCorreo()) && OperacionesString.telefonoValido(cliente.getTelefono())){
+            ClienteJpaController controller = new ClienteJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
+            try {
+                Accesodatos.Entidades.Cliente clienteJpa = controller.findCliente(cliente.getIdCliente());
+                clienteJpa.setCorreo(cliente.getCorreo());
+                clienteJpa.setNombre(cliente.getNombre());
+                clienteJpa.setTelefono(cliente.getTelefono());
+                clienteJpa.setDireccion(cliente.getDireccion());
+                controller.edit(clienteJpa);
+                editado = true;
+            } catch (Exception ex) {
+                Logger.getLogger(ClienteDAOSql.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return editado;
     }

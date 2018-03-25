@@ -34,7 +34,7 @@ public class OperacionesString {
         Pattern patron = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
                 + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
         Matcher coincidencia = patron.matcher(email);
-        if (coincidencia.find()){
+        if (coincidencia.find() && email.length() <= 150){
             valido = true;
         }
         return valido;
@@ -43,8 +43,20 @@ public class OperacionesString {
         boolean valido = false;
         Pattern patron = Pattern.compile("^[0-9]*$");
         Matcher coincidencia = patron.matcher(telefono);
-        if (coincidencia.find()){
+        if (coincidencia.find() && telefono.length() == 10){
             valido = true;
+        }
+        return valido;
+    }
+    public static boolean montoValido(String monto){
+        boolean valido = false;
+        if (monto.length() > 2 && monto.length() < 6){
+            try{
+                Double.valueOf(monto);
+                valido = true;
+            }catch(NumberFormatException excepcion){
+                valido = false;
+            }
         }
         return valido;
     }
