@@ -49,8 +49,6 @@ public class VentanaModificarCuentaController implements Initializable {
         this.imagenUsuario.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkPersonIcon.png")));
         this.lblNombreUsuario.setText(this.profesor.getNombre());
         this.txtNombre.setText(this.usuario.getNombre());
-        this.txtContraseña.setText(this.usuario.getContraseña());
-        this.txtRepetirContraseña.setText(this.usuario.getContraseña());
         
     }
     @Override
@@ -64,10 +62,9 @@ public class VentanaModificarCuentaController implements Initializable {
             if(!txtContraseña.getText().equals(txtRepetirContraseña.getText())){
                  MessageFactory.showMessage("Información","Datos invalidos","Las contraseñas no coinciden", AlertType.INFORMATION);
             }else{
-                
-                usuario.setContraseña(this.txtContraseña.getText());
+                String contraseña = Hasher.hash(this.txtContraseña.getText());
+                usuario.setContraseña(contraseña);
                 usuario.setNombre(this.txtNombre.getText());
-                System.out.println(this.usuario.getIdUsuario());
                 usuario.editarUsuario();
                  MessageFactory.showMessage("Información","Datos registrados","Usuario editado con exito", AlertType.CONFIRMATION);
             }

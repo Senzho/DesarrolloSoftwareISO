@@ -10,18 +10,18 @@
 
 <AnchorPane id="AnchorPane" opacity="1.0" prefHeight="314.0" prefWidth="440.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="LogicaNegocio.Sesiones.VentanaModificarCuentaController">
   <children>
-    <Label fx:id="lblNombreUsuario" layoutX="138.0" layoutY="47.0" text="José Ivan zaragoza Lopez">
+    <Label fx:id="lblNombreUsuario" text="José Ivan zaragoza Lopez" AnchorPane.leftAnchor="138.0" AnchorPane.rightAnchor="115.0" AnchorPane.topAnchor="47.0">
       <font>
         <Font name="Arial" size="16.0" fx:id="x1" />
       </font>
     </Label>
-    <Label fx:id="lblUsuario" font="$x1" layoutX="38.0" layoutY="127.0" text="Usuario:" />
-    <Label fx:id="lblContraseña" font="$x1" layoutX="38.0" layoutY="171.0" text="Contraseña:" />
-    <Label fx:id="lblRepetirContraseña" font="$x1" layoutX="38.0" layoutY="209.0" text="Repetir contraseña:" />
-    <PasswordField fx:id="txtContraseña" layoutX="196.0" layoutY="154.0" prefHeight="31.0" prefWidth="230.0" />
-    <PasswordField fx:id="txtRepetirContraseña" layoutX="196.0" layoutY="197.0" prefHeight="31.0" prefWidth="230.0" />
-    <TextField fx:id="txtNombre" layoutX="196.0" layoutY="112.0" prefHeight="31.0" prefWidth="230.0" />
-    <Button fx:id="btnGuardar" font="$x1" layoutX="277.0" layoutY="269.0" mnemonicParsing="false" onMouseClicked="#btnGuardar_onClick" prefHeight="31.0" text="Guardar cambios" />
+    <Label fx:id="lblUsuario" font="$x1" text="Usuario:" AnchorPane.leftAnchor="38.0" AnchorPane.topAnchor="127.0" />
+    <Label fx:id="lblContraseña" font="$x1" text="Contraseña:" AnchorPane.leftAnchor="38.0" AnchorPane.topAnchor="171.0" />
+    <Label fx:id="lblRepetirContraseña" font="$x1" text="Repetir contraseña:" AnchorPane.leftAnchor="38.0" AnchorPane.topAnchor="209.0" />
+    <PasswordField fx:id="txtContraseña" prefHeight="31.0" prefWidth="230.0" AnchorPane.leftAnchor="196.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="154.0" />
+    <PasswordField fx:id="txtRepetirContraseña" prefHeight="31.0" prefWidth="230.0" AnchorPane.leftAnchor="196.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="197.0" />
+    <TextField fx:id="txtNombre" prefHeight="31.0" prefWidth="230.0" AnchorPane.leftAnchor="196.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="112.0" />
+    <Button fx:id="btnGuardar" font="$x1" mnemonicParsing="false" onMouseClicked="#btnGuardar_onClick" prefHeight="31.0" text="Guardar cambios" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
     <ImageView fx:id="imagenUsuario" fitHeight="92.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="38.0" AnchorPane.topAnchor="20.0" />
   </children>
 </AnchorPane>

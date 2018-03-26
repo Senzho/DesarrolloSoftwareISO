@@ -21,7 +21,7 @@ public class VentanaInicioSesion extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/InterfazGrafica/Sesiones/VentanaInicioSesion.fxml"));
-        AnchorPane root = loader.load();//ancho largo
+        AnchorPane root = loader.load();
         Scene scene = new Scene(root, 370, 165);
         primaryStage.setTitle("Inicio sesión");
         primaryStage.setScene(scene);

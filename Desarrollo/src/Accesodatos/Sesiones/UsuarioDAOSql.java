@@ -80,7 +80,7 @@ public class UsuarioDAOSql implements UsuarioDAO {
         Accesodatos.Entidades.Usuario usuarioJpa = new Accesodatos.Entidades.Usuario();
         usuarioJpa.setContrasena(usuario.getContraseña());
         usuarioJpa.setIdTipoUsuario(usuario.getIdTipoUsuario());
-        usuarioJpa.setIdUsuario(usuario.getIdTipoUsuario());
+        usuarioJpa.setIdUsuario(usuario.getIdUsuario());
         usuarioJpa.setNombre(usuario.getNombre());
         usuarioJpa.setTipoUsuario(usuario.getTipoUsuario());
         try {
@@ -98,10 +98,14 @@ public class UsuarioDAOSql implements UsuarioDAO {
         EntityManager entityManager = Persistence.createEntityManagerFactory("CentroDeControlAredPU").createEntityManager();
         Query query = entityManager.createNamedQuery("Profesor.findByIdProfesor");
         query.setParameter("idProfesor", idProfesor);
-        Accesodatos.Entidades.Profesor profesorJpa = (Accesodatos.Entidades.Profesor) query.getSingleResult();
-        if (profesorJpa != null) {
-            profesor = new Profesor(profesorJpa.getIdProfesor(), profesorJpa.getNombre(), profesorJpa.getCorreo(),
-                    profesorJpa.getTelefono(), profesorJpa.getDireccion(), profesorJpa.getMonto(), profesorJpa.getFecha());
+        try {
+            Accesodatos.Entidades.Profesor profesorJpa = (Accesodatos.Entidades.Profesor) query.getSingleResult();
+            if (profesorJpa != null) {
+                profesor = new Profesor(profesorJpa.getIdProfesor(), profesorJpa.getNombre(), profesorJpa.getCorreo(),
+                        profesorJpa.getTelefono(), profesorJpa.getDireccion(), profesorJpa.getMonto(), profesorJpa.getFecha());
+            }
+        } catch (NoResultException excepcion) {
+            excepcion.printStackTrace();
         }
         return profesor;
     }

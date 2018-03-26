@@ -6,8 +6,6 @@
 package LogicaNegocio.Sesiones;
 
 import LogicaNegocio.Catalogos.Profesor;
-import LogicaNegocio.Sesiones.Usuario;
-import LogicaNegocio.Sesiones.VentanaModificarCuenta;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;

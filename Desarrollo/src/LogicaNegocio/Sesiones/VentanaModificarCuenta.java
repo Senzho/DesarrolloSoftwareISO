@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 public class VentanaModificarCuenta extends Application {
     private Usuario usuario;
     private Profesor profesor;
-    //private Director director;
+    
     public VentanaModificarCuenta(Usuario usuario, Profesor profesor){
         try {
             this.usuario = usuario;
@@ -21,12 +21,12 @@ public class VentanaModificarCuenta extends Application {
         } catch (Exception ex) {
             Logger.getLogger(VentanaModificarCuenta.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//idTipoUsuario llave foranea para saber el numero de profesor
+    }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/InterfazGrafica/Sesiones/VentanaModificarCuenta.fxml"));
-        AnchorPane root = loader.load();//ancho largo
+        AnchorPane root = loader.load();
         VentanaModificarCuentaController controller = loader.getController();
         controller.setUsuario(usuario,this.profesor);
         Scene scene = new Scene(root, 440, 314);

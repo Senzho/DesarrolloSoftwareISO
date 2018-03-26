@@ -26,7 +26,6 @@ public class VentanaPrincipalDirectorController implements Initializable {
     
     public void setUsuario(Usuario usuario, Profesor profesor){
         this.imagenCambiarCuenta.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkPencilIcon.png")));
-        System.out.println(usuario.getNombre());
         this.usuario = usuario;
         this.profesor = profesor;
     }

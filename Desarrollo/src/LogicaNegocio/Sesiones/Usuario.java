@@ -2,7 +2,6 @@ package LogicaNegocio.Sesiones;
 
 import Accesodatos.Sesiones.UsuarioDAOSql;
 import LogicaNegocio.Catalogos.Profesor;
-import javax.persistence.NoResultException;
 
 public class Usuario {
     private int idUsuario;
