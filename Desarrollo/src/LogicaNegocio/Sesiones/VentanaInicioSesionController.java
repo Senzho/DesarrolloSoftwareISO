@@ -9,8 +9,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class VentanaInicioSesionController implements Initializable {
+
     @FXML
     private TextField txtUsuario;
     @FXML
@@ -19,24 +21,33 @@ public class VentanaInicioSesionController implements Initializable {
     private Button btnIniciarSesion;
     private Usuario usuario;
     private Profesor profesor;
+    private Stage stage;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-    }    
-    public void btnIniciarSesion_onClick(){
+
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    public void btnIniciarSesion_onClick() {
         String nombreUsuario = this.txtUsuario.getText();
         String contraseña = Hasher.hash(this.txtContraseña.getText());
         this.usuario = new Usuario().buscarUsuarioSesion(nombreUsuario, contraseña);
-        if(usuario!= null){
+        if (usuario != null) {
             this.profesor = new Usuario().obtenerProfesor(this.usuario.getIdTipoUsuario());
-            if(usuario.getTipoUsuario() == 0){                
+            if (usuario.getTipoUsuario() == 0) {
                 new VentanaPrincipalDirector(usuario, profesor);
-            }else{
+                this.stage.close();
+            } else {
                 new VentanaPrincipalProfesor(usuario, profesor);
+                this.stage.close();
             }
-        }else{
-            MessageFactory.showMessage("Información","Usuario incorrecto","El usuario y/o contraseña son incorrectos", AlertType.INFORMATION);
+        } else {
+            MessageFactory.showMessage("Información", "Usuario incorrecto", "El usuario y/o contraseña son incorrectos", AlertType.INFORMATION);
         }
     }
-    
+
 }

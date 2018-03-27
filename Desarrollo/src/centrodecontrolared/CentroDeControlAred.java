@@ -14,7 +14,7 @@ import javafx.stage.Stage;
  * @author marioolopez
  */
 public class CentroDeControlAred extends Application {
-    
+
     @Override
     public void start(Stage primaryStage) {
         new VentanaInicioSesion();
@@ -23,5 +23,5 @@ public class CentroDeControlAred extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }

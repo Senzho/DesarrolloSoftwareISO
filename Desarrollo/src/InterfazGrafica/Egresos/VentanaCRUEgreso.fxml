@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="345.0000999999975" prefWidth="337.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="LogicaNegocio.Egresos.VentanaCRUEgresoController">
+  <children>
+    <Label text="Fecha:" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="40.0">
+      <font>
+        <Font name="Arial" size="16.0" fx:id="x1" />
+      </font>
+    </Label>
+    <Label font="$x1" text="Descripción:" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="77.0" />
+    <Label font="$x1" text="Costo:" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="259.0" />
+    <TextArea fx:id="txtDescripcion" prefHeight="163.0" prefWidth="200.0" text="" wrapText="true" AnchorPane.leftAnchor="122.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="77.0" />
+    <TextField fx:id="txtCosto" prefHeight="26.0" prefWidth="201.0" AnchorPane.leftAnchor="122.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="252.0" />
+    <Line endX="225.0" endY="1.0" layoutY="289.0" startX="-88.0" startY="0.0" stroke="#9f9f9f" AnchorPane.leftAnchor="11.71" AnchorPane.rightAnchor="10.29" />
+    <Button fx:id="btnRegistrar" font="$x1" mnemonicParsing="false" onMouseClicked="#btnRegistrar_onClick" prefWidth="123.0" text="Registrar" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="15.0" />
+    <TextField fx:id="txtFecha" prefWidth="200.0" AnchorPane.leftAnchor="122.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="37.0" />
+  </children>
+</AnchorPane>
