@@ -1,6 +1,8 @@
 package LogicaNegocio.Catalogos;
 
 import InterfazGrafica.MessageFactory;
+import LogicaNegocio.Sesiones.Hasher;
+import LogicaNegocio.Sesiones.Usuario;
 import java.net.URL;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -66,7 +68,7 @@ public class VentanaCRUProfesorController implements Initializable {
             validacion = CatalogoEnum.MONTO_VACIO;
         }else if (this.monto.getText().length() > 15){
             validacion = CatalogoEnum.MONTO_LARGO;
-        }else if (!OperacionesString.montoVaido(this.monto.getText())){
+        }else if (!OperacionesString.montoValido(this.monto.getText())){
             validacion = CatalogoEnum.MONTO_NO_VALIDO;
         }
         return validacion;
@@ -165,6 +167,7 @@ public class VentanaCRUProfesorController implements Initializable {
         CatalogoEnum catalogoEnum = this.validarDatos();
         if (catalogoEnum.equals(CatalogoEnum.DATOS_VALIDOS)){
             boolean realizado = false;
+            String mensajeUsuario = "";
             if (this.profesor != null){
                 this.profesor.setNombre(this.nombre.getText());
                 this.profesor.setTelefono(this.telefono.getText());
@@ -186,6 +189,11 @@ public class VentanaCRUProfesorController implements Initializable {
                 this.profesor.setFecha(new Date());
                 this.profesor.setTipoPago(this.tipoPago.getValue().equals(VentanaCRUProfesorController.TIPO_PAGO_MENSUAL));
                 if (this.profesor.registrarProfesor()){
+                    String contraseña = Hasher.hash(OperacionesString.sinAcentosYMayusculas(this.profesor.getNombre()));
+                    String usuario = OperacionesString.obtenerNombreUsuario(this.profesor.getCorreo());
+                    if (!new Usuario(1, contraseña, this.profesor.getIdProfesor(), usuario, 1).crearUsuario()){
+                        mensajeUsuario = ". No se pudo crear un usuario para el profesor, deberá crearse manualmente";
+                    }
                     realizado = true;
                     this.registrar.setText("Guardar");
                 }
@@ -193,7 +201,7 @@ public class VentanaCRUProfesorController implements Initializable {
             if (!realizado){
                 MessageFactory.showMessage("Error", "Registro", "No se pudo guardar el profesor", Alert.AlertType.ERROR);
             }else{
-                MessageFactory.showMessage("Éxito", "Registro", "El profesor se guardó exitosamente", Alert.AlertType.INFORMATION);
+                MessageFactory.showMessage("Éxito", "Registro", "El profesor se guardó exitosamente" + mensajeUsuario, Alert.AlertType.INFORMATION);
             }
         }else{
             this.mostrarMensajeError(catalogoEnum);

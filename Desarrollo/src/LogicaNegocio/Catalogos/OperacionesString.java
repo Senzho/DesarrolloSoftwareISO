@@ -60,4 +60,13 @@ public class OperacionesString {
         }
         return valido;
     }
+    public static String obtenerNombreUsuario(String correo){
+        String nombreUsuario;
+        if (correo.length() > 20){
+            nombreUsuario = correo.substring(0, 19);
+        }else{
+            nombreUsuario = correo;
+        }
+        return nombreUsuario;
+    }
 }
