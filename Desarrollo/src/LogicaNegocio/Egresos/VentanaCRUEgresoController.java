@@ -6,6 +6,7 @@
 package LogicaNegocio.Egresos;
 
 import InterfazGrafica.MessageFactory;
+import LogicaNegocio.Catalogos.OperacionesString;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -64,9 +65,9 @@ public class VentanaCRUEgresoController implements Initializable {
 
     public boolean validarCampos() {
         boolean valido = true;
-        if (txtDescripcion.getText().equals("") || txtCosto.getText().equals("")) {
-            valido = false;
-        }
+        if (txtDescripcion.getText().equals("") || !OperacionesString.montoValido(txtCosto.getText())) {
+                valido = false;
+        }    
         return valido;
     }
 

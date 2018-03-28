@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="374.0000999999975" prefWidth="337.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="LogicaNegocio.Egresos.VentanaCRUGastoPromocionalController">
+  <children>
+    <Label text="URL o enlace:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+      <font>
+        <Font name="Arial" size="16.0" fx:id="x1" />
+      </font>
+    </Label>
+    <Label font="$x1" text="Descripción:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="45.0" />
+    <Label font="$x1" text="Monto:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="220.0" />
+    <Label font="$x1" text="Fecha de inicio:" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="258.0" />
+    <Label font="$x1" text="Fecha de fin:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="288.0" />
+    <TextArea fx:id="txtDescripcion" layoutY="42.0" prefWidth="200.0" wrapText="true" AnchorPane.leftAnchor="128.0" AnchorPane.rightAnchor="9.0" />
+    <TextField fx:id="txtEnlace" prefWidth="200.0" AnchorPane.leftAnchor="128.0" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="14.0" />
+    <TextField fx:id="txtMonto" layoutY="220.0" prefWidth="200.0" AnchorPane.leftAnchor="128.0" AnchorPane.rightAnchor="9.0" />
+    <ComboBox fx:id="comboFechaInicio" prefHeight="21.0" prefWidth="200.0" AnchorPane.leftAnchor="128.0" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="251.0">
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="Item 1" />
+          <String fx:value="Item 2" />
+          <String fx:value="Item 3" />
+        </FXCollections>
+      </items>
+    </ComboBox>
+    <ComboBox fx:id="comboFechaFin" prefHeight="21.0" prefWidth="200.0" AnchorPane.leftAnchor="128.0" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="286.0">
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="Item 1" />
+          <String fx:value="Item 2" />
+          <String fx:value="Item 3" />
+        </FXCollections>
+      </items>
+    </ComboBox>
+    <Line endX="213.0" endY="5.0" startX="-100.0" startY="5.0" stroke="GREY" AnchorPane.leftAnchor="14.5" AnchorPane.rightAnchor="8.5" AnchorPane.topAnchor="320.5" />
+    <Button fx:id="btnRegistrar" font="$x1" mnemonicParsing="false" onMouseClicked="#btnRegistrar_onClick" text="Registrar" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="8.0" />
+  </children>
+</AnchorPane>

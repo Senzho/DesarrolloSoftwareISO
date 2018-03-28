@@ -18,6 +18,6 @@
         <Menu mnemonicParsing="false" text="Registrar pagos" />
       </menus>
     </MenuBar>
-    <ImageView fx:id="imagenCambiarCuenta" fitHeight="26.0" fitWidth="26.0" layoutX="741.0" layoutY="1.0" onMouseClicked="#imageView_onClick" pickOnBounds="true" preserveRatio="true" />
+    <ImageView fx:id="imagenCambiarCuenta" fitHeight="26.0" fitWidth="26.0" onMouseClicked="#imageView_onClick" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0" />
   </children>
 </AnchorPane>

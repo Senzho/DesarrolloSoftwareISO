@@ -24,6 +24,7 @@ import javafx.scene.image.ImageView;
  * @author Marioolopez
  */
 public class VentanaModificarCuentaController implements Initializable {
+
     private Usuario usuario;
     private Profesor profesor;
     @FXML
@@ -38,38 +39,45 @@ public class VentanaModificarCuentaController implements Initializable {
     private Button btnGuardar;
     @FXML
     private Label lblNombreUsuario;
-    
-    public void setUsuario(Usuario usuario, Profesor profesor){
+
+    public void setUsuario(Usuario usuario, Profesor profesor) {
         this.usuario = usuario;
         this.profesor = profesor;
         this.cargarDatosUsuario();
     }
-    public void cargarDatosUsuario(){
+
+    public void cargarDatosUsuario() {
         Profesor profesor = new Usuario().obtenerProfesor(this.usuario.getIdTipoUsuario());
         this.imagenUsuario.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkPersonIcon.png")));
         this.lblNombreUsuario.setText(this.profesor.getNombre());
         this.txtNombre.setText(this.usuario.getNombre());
-        
+
     }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    public void btnGuardar_onClick(){
-        if(txtNombre.getText().equals("") || txtContraseña.getText().equals("") || txtRepetirContraseña.getText().equals("")){
-            MessageFactory.showMessage("Información","Datos invalidos","Faltan datos del usuario", AlertType.INFORMATION);
-        }else{
-            if(!txtContraseña.getText().equals(txtRepetirContraseña.getText())){
-                 MessageFactory.showMessage("Información","Datos invalidos","Las contraseñas no coinciden", AlertType.INFORMATION);
-            }else{
+    }
+
+    public void btnGuardar_onClick() {
+        if (txtNombre.getText().equals("") || txtContraseña.getText().equals("") || txtRepetirContraseña.getText().equals("")) {
+            MessageFactory.showMessage("Información", "Datos invalidos", "Faltan datos del usuario", AlertType.INFORMATION);
+        } else {
+            if (!txtContraseña.getText().equals(txtRepetirContraseña.getText())) {
+                MessageFactory.showMessage("Información", "Datos invalidos", "Las contraseñas no coinciden", AlertType.INFORMATION);
+            } else {
                 String contraseña = Hasher.hash(this.txtContraseña.getText());
                 usuario.setContraseña(contraseña);
                 usuario.setNombre(this.txtNombre.getText());
-                usuario.editarUsuario();
-                 MessageFactory.showMessage("Información","Datos registrados","Usuario editado con exito", AlertType.CONFIRMATION);
+                if (this.usuario.buscarUsuario(this.txtNombre.getText())) {
+                    MessageFactory.showMessage("Información", "Datos invalidos", "El usuario seleccionado existe en el sistema", AlertType.ERROR);
+                } else {
+                    usuario.editarUsuario();
+                    MessageFactory.showMessage("Información", "Datos registrados", "Usuario editado con exito", AlertType.CONFIRMATION);
+                }
             }
         }
-        
+
     }
-    
+
 }

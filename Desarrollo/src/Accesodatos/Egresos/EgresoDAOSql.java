@@ -39,26 +39,7 @@ public class EgresoDAOSql implements EgresoDAO {
        
         return egresoRegistrado;
     }
-/*
-    public boolean editarCliente(Cliente cliente) {
-        boolean editado = false;
-        if (OperacionesString.emailValido(cliente.getCorreo()) && OperacionesString.telefonoValido(cliente.getTelefono())){
-            ClienteJpaController controller = new ClienteJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
-            try {
-aq                Accesodatos.Entidades.Cliente clienteJpa = controller.findCliente(cliente.getIdCliente());
-                clienteJpa.setCorreo(cliente.getCorreo());
-                clienteJpa.setNombre(cliente.getNombre());
-                clienteJpa.setTelefono(cliente.getTelefono());
-                clienteJpa.setDireccion(cliente.getDireccion());
-                controller.edit(clienteJpa);
-                editado = true;
-            } catch (Exception ex) {
-                Logger.getLogger(ClienteDAOSql.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        return editado;
-    }
-    */
+
     @Override
     public boolean editarEgreso(Egreso egreso) {
         boolean egresoRegistrado = false;
