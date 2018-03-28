@@ -2,6 +2,7 @@ package Accesodatos.Pagos;
 
 import Accesodatos.Controladores.PagoprofesorJpaController;
 import Accesodatos.Controladores.ProfesorJpaController;
+import LogicaNegocio.Catalogos.OperacionesString;
 import LogicaNegocio.Pagos.PagoProfesor;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,17 +38,22 @@ public class PagoProfesorDAOSql implements PagoProfesorDAO{
     
     @Override
     public boolean registrarPago(PagoProfesor pago, int idProfesor) {
-        boolean registrado;
-        PagoprofesorJpaController controller = new PagoprofesorJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
-        Accesodatos.Entidades.Pagoprofesor pagoJpa = this.obtenerEntidad(pago);
-        ProfesorJpaController profesorController = new ProfesorJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
-        try{
-            pagoJpa.setIdProfesor(profesorController.findProfesor(idProfesor));
-            controller.create(pagoJpa);
-            pago.setIdPago(pagoJpa.getIdPago());
-            registrado = true;
-        }catch(Exception excepcion){
-            registrado = false;
+        boolean registrado = false;
+        if (OperacionesString.montoValido(pago.getMonto())){
+            PagoprofesorJpaController controller = new PagoprofesorJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
+            Accesodatos.Entidades.Pagoprofesor pagoJpa = this.obtenerEntidad(pago);
+            ProfesorJpaController profesorController = new ProfesorJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
+            try{
+                Accesodatos.Entidades.Profesor profesorJpa = profesorController.findProfesor(idProfesor);
+                if (profesorJpa != null){
+                    pagoJpa.setIdProfesor(profesorJpa);
+                    controller.create(pagoJpa);
+                    pago.setIdPago(pagoJpa.getIdPago());
+                    registrado = true;
+                }
+            }catch(Exception excepcion){
+                registrado = false;
+            }
         }
         return registrado;
     }
