@@ -26,7 +26,6 @@ public class PanelCatalogoClientesController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        this.panelClientes.setVgap(5);
         this.cargarClientes(new Cliente().obtenerClientes());
     }
     public void cargarClientes(List<Cliente> clientes){

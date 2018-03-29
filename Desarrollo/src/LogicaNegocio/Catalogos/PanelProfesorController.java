@@ -69,9 +69,9 @@ public class PanelProfesorController implements Initializable {
             }else{
                 estado = "inactivo";
             }
-            MessageFactory.showMessage("Éxito", "Registro", "El estado del alumno cambió a " +  estado, Alert.AlertType.INFORMATION);
+            MessageFactory.showMessage("Éxito", "Registro", "El estado del profesor cambió a " +  estado, Alert.AlertType.INFORMATION);
         }else{
-            MessageFactory.showMessage("Error", "Registro", "No se pudo cambiar el estado del alumno", Alert.AlertType.ERROR);
+            MessageFactory.showMessage("Error", "Registro", "No se pudo cambiar el estado del profesor", Alert.AlertType.ERROR);
         }
     }
     public void editar_OnClick(){

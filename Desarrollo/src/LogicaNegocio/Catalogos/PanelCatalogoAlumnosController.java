@@ -25,7 +25,6 @@ public class PanelCatalogoAlumnosController implements Initializable {
     private FlowPane panelAlumnos;
 
     public void initialize(URL url, ResourceBundle rb) {
-        this.panelAlumnos.setVgap(5);
         this.cargarAlumnos(new Alumno().obtenerAlumnos());
     }    
     

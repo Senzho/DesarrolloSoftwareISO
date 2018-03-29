@@ -51,7 +51,7 @@ public class PagoProfesor {
     public boolean registrarPago(int idProfesor){
         return this.pagoProfesorDAO.registrarPago(this, idProfesor);
     }
-    public List<PagoProfesor> obtenerPagos(){
-        return this.pagoProfesorDAO.obtenerPagos(this.idPago);
+    public List<PagoProfesor> obtenerPagos(int idProfesor){
+        return this.pagoProfesorDAO.obtenerPagos(idProfesor);
     }
 }

@@ -26,7 +26,6 @@ public class PanelCatalogoProfesoresController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        this.panelProfesores.setVgap(5);
         this.cargarProfesores(new Profesor().obtenerProfesores());
     }
     

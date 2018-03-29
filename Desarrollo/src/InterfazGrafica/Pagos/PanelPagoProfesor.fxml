@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="93.0" prefWidth="515.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="LogicaNegocio.Pagos.PanelPagoProfesorController">
+  <children>
+    <Label fx:id="fecha" prefWidth="179.0" text="Fecha" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+      <font>
+        <Font name="Arial" size="16.0" fx:id="x1" />
+      </font>
+    </Label>
+    <Label fx:id="tipoPago" font="$x1" prefWidth="189.0" text="Tipo de pago" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" />
+    <Label fx:id="monto" font="$x1" prefWidth="138.0" text="Monto" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="213.0" />
+    <Button fx:id="generar" mnemonicParsing="false" onMouseClicked="#generar_OnClick" text="Generar recibo" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+  </children>
+</AnchorPane>

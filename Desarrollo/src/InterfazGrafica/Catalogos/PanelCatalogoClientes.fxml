@@ -19,7 +19,7 @@
     <Separator layoutX="15.0" layoutY="45.0" prefWidth="757.0" />
     <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="331.0" prefWidth="757.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="56.0">
       <content>
-        <FlowPane id="panelAlumnos" fx:id="panelClientes" prefHeight="330.0" prefWidth="742.0" />
+        <FlowPane fx:id="panelClientes" hgap="5.0" prefHeight="200.0" prefWidth="200.0" vgap="5.0" />
       </content>
     </ScrollPane>
   </children>
