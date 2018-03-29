@@ -65,6 +65,7 @@ public class VentanaCRUEgresoController implements Initializable {
 
     public boolean validarCampos() {
         boolean valido = true;
+        String monto = txtDescripcion.getText();
         if (txtDescripcion.getText().equals("") || !OperacionesString.montoValido(txtCosto.getText())) {
                 valido = false;
         }    
@@ -80,6 +81,7 @@ public class VentanaCRUEgresoController implements Initializable {
         this.egreso = egreso;
         if (egreso != null) {
             cargarDatosEgreso();
+            this.btnRegistrar.setText("Guardar");
         }
         inicializarComponentes();
     }
@@ -90,12 +92,12 @@ public class VentanaCRUEgresoController implements Initializable {
         if (validarCampos()) {
             registroExitoso = egresoRegistro.editarEgreso();
             if (registroExitoso) {
-                MessageFactory.showMessage("Aviso", "Registro egreso", "egreso editado exitosamente", Alert.AlertType.CONFIRMATION);
+                MessageFactory.showMessage("Aviso", "Registro egreso", "Egreso editado exitosamente", Alert.AlertType.CONFIRMATION);
             } else {
-                MessageFactory.showMessage("Aviso", "Registro egreso", "no se pudo crear el egreso", Alert.AlertType.ERROR);
+                MessageFactory.showMessage("Aviso", "Registro egreso", "No se pudo crear el egreso", Alert.AlertType.ERROR);
             }
         } else {
-            MessageFactory.showMessage("Aviso", "Registro egreso", "faltan datos por llenar", Alert.AlertType.ERROR);
+            MessageFactory.showMessage("Aviso", "Registro egreso", "Faltan datos por llenar", Alert.AlertType.ERROR);
         }
     }
 

@@ -13,6 +13,7 @@ import java.util.List;
  * @author Desktop
  */
 public interface EgresoDAO {
+
     public boolean registrarEgreso(Egreso egreso);
     public boolean editarEgreso(Egreso egreso);
     public List<Egreso> obtenerEgresos();

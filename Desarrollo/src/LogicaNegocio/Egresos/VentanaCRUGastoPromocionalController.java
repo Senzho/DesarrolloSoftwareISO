@@ -108,7 +108,7 @@ public class VentanaCRUGastoPromocionalController implements Initializable {
                 MessageFactory.showMessage("Aviso", "Registro gasto promocional", "no se pudo crear el gasto promocional", Alert.AlertType.ERROR);
             }
         } else {
-            MessageFactory.showMessage("Aviso", "Registro gasto promocional", "faltan datos por llenar", Alert.AlertType.ERROR);
+            MessageFactory.showMessage("Aviso", "Registro gasto promocional", "faltan datos por llenar o algunos son incorrectos", Alert.AlertType.ERROR);
         }
     }
 
@@ -125,7 +125,7 @@ public class VentanaCRUGastoPromocionalController implements Initializable {
                 MessageFactory.showMessage("Aviso", "Registro egreso", "no se pudo crear el egreso", Alert.AlertType.ERROR);
             }
         } else {
-            MessageFactory.showMessage("Aviso", "Registro egreso", "faltan datos por llenar", Alert.AlertType.ERROR);
+            MessageFactory.showMessage("Aviso", "Registro egreso", "faltan datos por llenar o algunos son incorrectos", Alert.AlertType.ERROR);
         }
     }
 
