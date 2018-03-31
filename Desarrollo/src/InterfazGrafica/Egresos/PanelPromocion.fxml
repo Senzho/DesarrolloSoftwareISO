@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="85.99980000000505" prefWidth="320.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="LogicaNegocio.Egresos.PanelPromocionController">
+<AnchorPane id="AnchorPane" prefHeight="85.99990000000253" prefWidth="359.00019999999495" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="LogicaNegocio.Egresos.PanelPromocionController">
   <children>
-    <Label id="nombre" fx:id="lblDescripcion" layoutX="14.0" layoutY="14.0" prefWidth="285.0" text="Descripcion" textFill="BLACK">
+    <Label id="nombre" fx:id="lblDescripcion" layoutX="14.0" layoutY="14.0" prefWidth="292.0" text="Descripcion" textFill="BLACK">
       <font>
         <Font name="Arial Bold" size="16.0" />
       </font>
@@ -21,6 +21,6 @@
       </font>
     </Label>
     <Label id="correo" fx:id="lblFecha" font="$x1" layoutX="135.0" layoutY="53.0" prefWidth="134.0" text="Fecha" />
-    <ImageView id="editar" fx:id="imagenEditar" fitHeight="30.0" fitWidth="30.0" layoutX="276.0" layoutY="42.0" onMouseClicked="#imagenEditar_onClick" pickOnBounds="true" preserveRatio="true" />
+    <ImageView id="editar" fx:id="imagenEditar" fitHeight="30.0" fitWidth="30.0" layoutX="315.0" layoutY="46.0" onMouseClicked="#imagenEditar_onClick" pickOnBounds="true" preserveRatio="true" />
   </children>
 </AnchorPane>

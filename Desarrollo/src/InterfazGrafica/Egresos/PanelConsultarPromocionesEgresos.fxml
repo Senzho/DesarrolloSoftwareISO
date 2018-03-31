@@ -9,9 +9,9 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="378.9999000000025" prefWidth="748.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="LogicaNegocio.Egresos.PanelConsultarPromocionesEgresosController">
+<AnchorPane id="AnchorPane" prefHeight="397.9999000000025" prefWidth="774.0041845703124" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="LogicaNegocio.Egresos.PanelConsultarPromocionesEgresos">
   <children>
-    <ComboBox layoutX="112.0" layoutY="15.0" prefHeight="26.0" prefWidth="166.0">
+    <ComboBox fx:id="comboMes" prefHeight="26.0" prefWidth="166.0" AnchorPane.leftAnchor="112.0" AnchorPane.topAnchor="16.0">
       <items>
         <FXCollections fx:factory="observableArrayList">
           <String fx:value="Item 1" />
@@ -20,25 +20,12 @@
         </FXCollections>
       </items>
     </ComboBox>
-    <Label layoutX="33.0" layoutY="20.0" text="Periodo:">
+    <Label text="Periodo:" AnchorPane.leftAnchor="33.0" AnchorPane.topAnchor="20.0">
       <font>
         <Font name="Arial" size="16.0" fx:id="x1" />
       </font>
     </Label>
-    <Line endX="615.0" endY="8.0" layoutX="115.0" layoutY="45.0" startX="-104.0" startY="9.0" stroke="GREY" />
-    <Label font="$x1" layoutX="385.0" layoutY="68.0" text="Egresos:" />
-    <Label font="$x1" layoutX="26.0" layoutY="63.0" text="Promociones:" />
-    <ScrollPane layoutX="385.0" layoutY="90.0" prefHeight="269.0" prefWidth="349.0">
-      <content>
-        <FlowPane id="panelPromociones" fx:id="panelEgresos" prefHeight="268.0" prefWidth="338.0" />
-      </content>
-    </ScrollPane>
-    <ScrollPane layoutX="25.0" layoutY="91.0" prefHeight="268.0" prefWidth="349.0">
-      <content>
-        <FlowPane id="panelEgresos" fx:id="panelPromociones" prefHeight="267.0" prefWidth="334.0" />
-      </content>
-    </ScrollPane>
-    <ComboBox layoutX="291.0" layoutY="16.0" prefHeight="27.0" prefWidth="126.0">
+    <ComboBox fx:id="comboAño" prefHeight="27.0" prefWidth="126.0" AnchorPane.leftAnchor="291.0" AnchorPane.topAnchor="16.0">
       <items>
         <FXCollections fx:factory="observableArrayList">
           <String fx:value="Item 1" />
@@ -47,5 +34,40 @@
         </FXCollections>
       </items>
     </ComboBox>
+    <GridPane prefHeight="288.9999000000025" prefWidth="755.7141845703125" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="11.29" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="95.0">
+      <children>
+        <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+          <content>
+            <FlowPane fx:id="panelPromociones" prefHeight="301.0" prefWidth="378.0" />
+          </content>
+        </ScrollPane>
+        <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+          <content>
+            <FlowPane fx:id="panelEgresos" prefHeight="301.0" prefWidth="386.0" />
+          </content>
+        </ScrollPane>
+      </children>
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+    </GridPane>
+    <GridPane layoutY="66.0" prefHeight="26.0" prefWidth="748.7141845703125" AnchorPane.leftAnchor="11.29" AnchorPane.rightAnchor="14.0">
+      <children>
+        <Label font="$x1" text="Promociones:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <Label font="$x1" text="Egresos:" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+      </children>
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+    </GridPane>
+    <Line endX="778.4951782226562" endY="2.0" layoutY="50.0" startX="34.49229431152344" startY="3.0" stroke="GREY" AnchorPane.leftAnchor="11.29" AnchorPane.rightAnchor="8.3" />
   </children>
 </AnchorPane>

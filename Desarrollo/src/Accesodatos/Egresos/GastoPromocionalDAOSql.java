@@ -6,6 +6,7 @@
 package Accesodatos.Egresos;
 
 import Accesodatos.Controladores.GastopromocionalJpaController;
+import LogicaNegocio.Catalogos.OperacionesString;
 import LogicaNegocio.Egresos.GastoPromocional;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,21 +23,22 @@ public class GastoPromocionalDAOSql implements GastoPromocionalDAO {
 
     @Override
     public boolean editarGasto(GastoPromocional gastoPromocional) {
-     boolean gastoEditado = false;
-        GastopromocionalJpaController gastoController = new GastopromocionalJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
-        Accesodatos.Entidades.Gastopromocional gastoJpa = gastoController.findGastopromocional(gastoPromocional.getIdGastoPromocional());
-        gastoJpa.setDescripcion(gastoPromocional.getDescripcion());
-        gastoJpa.setFechaFin(gastoPromocional.getFechaFin());
-        gastoJpa.setFechaInicio(gastoPromocional.getFechaInicio());
-        gastoJpa.setMonto(gastoPromocional.getMonto());
-        gastoJpa.setUrl(gastoPromocional.getURL());
-        try {
-             gastoController.edit(gastoJpa);
-            gastoEditado = true;
-        } catch (Exception excepcion) {
-            excepcion.printStackTrace();
+        boolean gastoEditado = false;
+        if (OperacionesString.URLValida(gastoPromocional.getURL()) && OperacionesString.montoValido(gastoPromocional.getMonto())) {
+            GastopromocionalJpaController gastoController = new GastopromocionalJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
+            Accesodatos.Entidades.Gastopromocional gastoJpa = gastoController.findGastopromocional(gastoPromocional.getIdGastoPromocional());
+            gastoJpa.setDescripcion(gastoPromocional.getDescripcion());
+            gastoJpa.setFechaFin(gastoPromocional.getFechaFin());
+            gastoJpa.setFechaInicio(gastoPromocional.getFechaInicio());
+            gastoJpa.setMonto(gastoPromocional.getMonto());
+            gastoJpa.setUrl(gastoPromocional.getURL());
+            try {
+                gastoController.edit(gastoJpa);
+                gastoEditado = true;
+            } catch (Exception excepcion) {
+                excepcion.printStackTrace();
+            }
         }
-       
         return gastoEditado;
     }
 
@@ -49,7 +51,8 @@ public class GastoPromocionalDAOSql implements GastoPromocionalDAO {
         });
         return listaGastos;
     }
-    private GastoPromocional obtenerEntidad(Accesodatos.Entidades.Gastopromocional egresoJpa){
+
+    private GastoPromocional obtenerEntidad(Accesodatos.Entidades.Gastopromocional egresoJpa) {
         GastoPromocional gastoPromocional = new GastoPromocional();
         gastoPromocional.setDescripcion(egresoJpa.getDescripcion());
         gastoPromocional.setFechaFin(egresoJpa.getFechaFin());
@@ -63,23 +66,24 @@ public class GastoPromocionalDAOSql implements GastoPromocionalDAO {
     @Override
     public boolean registrarGasto(GastoPromocional gastoPromocional) {
         boolean gastoRegistrado = false;
-        GastopromocionalJpaController gastoController = new GastopromocionalJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
-        Accesodatos.Entidades.Gastopromocional gastoJpa = new Accesodatos.Entidades.Gastopromocional();
-        gastoJpa.setDescripcion(gastoPromocional.getDescripcion());
-        gastoJpa.setFechaFin(gastoPromocional.getFechaFin());
-        gastoJpa.setFechaInicio(gastoPromocional.getFechaInicio());
-        gastoJpa.setIdGasto(gastoPromocional.getIdGastoPromocional());
-        gastoJpa.setMonto(gastoPromocional.getMonto());
-        gastoJpa.setUrl(gastoPromocional.getURL());
-        try {
-             gastoController.create(gastoJpa);
-             gastoPromocional.setIdGastoPromocional(gastoJpa.getIdGasto());
-            gastoRegistrado = true;
-        } catch (Exception excepcion) {
-            excepcion.printStackTrace();
+        if (OperacionesString.URLValida(gastoPromocional.getURL()) && OperacionesString.montoValido(gastoPromocional.getMonto())) {
+            GastopromocionalJpaController gastoController = new GastopromocionalJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
+            Accesodatos.Entidades.Gastopromocional gastoJpa = new Accesodatos.Entidades.Gastopromocional();
+            gastoJpa.setDescripcion(gastoPromocional.getDescripcion());
+            gastoJpa.setFechaFin(gastoPromocional.getFechaFin());
+            gastoJpa.setFechaInicio(gastoPromocional.getFechaInicio());
+            gastoJpa.setIdGasto(gastoPromocional.getIdGastoPromocional());
+            gastoJpa.setMonto(gastoPromocional.getMonto());
+            gastoJpa.setUrl(gastoPromocional.getURL());
+            try {
+                gastoController.create(gastoJpa);
+                gastoPromocional.setIdGastoPromocional(gastoJpa.getIdGasto());
+                gastoRegistrado = true;
+            } catch (Exception excepcion) {
+                excepcion.printStackTrace();
+            }
         }
-       
         return gastoRegistrado;
     }
-    
+
 }

@@ -32,7 +32,7 @@ public class PanelConsultarPromocionesEgresos extends Application {
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/InterfazGrafica/Egresos/PanelConsultarPromocionesEgresos.fxml"));
         AnchorPane root = loader.load();
-        Scene scene = new Scene(root, 748, 379);
+        Scene scene = new Scene(root, 774, 398);
         primaryStage.setTitle("Registro egreso");
         primaryStage.setScene(scene);
         primaryStage.show();

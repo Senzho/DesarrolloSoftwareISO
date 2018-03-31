@@ -44,7 +44,6 @@ public class PanelGastoPromocionalController implements Initializable {
         this.lblDescripcion.setText(this.gasto.getDescripcion());
         this.lblFechaInicio.setText(this.gasto.getFechaInicio().toGMTString());
          this.lblFechaFin.setText(this.gasto.getFechaFin().toGMTString());
-        //cambiar metodo de arriba
         this.lblCosto.setText(this.gasto.getMonto());
     }
     public void imagenEditar_onClick(){
