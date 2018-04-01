@@ -46,9 +46,9 @@ public class VentanaCRUClienteController implements Initializable {
         }
         return validacion;
     }
-    private void mostrarMensajeError(CatalogoEnum alumnoEnum){
+    private void mostrarMensajeError(CatalogoEnum clienteEnum){
         String mensaje;
-        switch(alumnoEnum){
+        switch(clienteEnum){
             default:
                 mensaje = "";
                 break;
@@ -100,29 +100,39 @@ public class VentanaCRUClienteController implements Initializable {
         this.telefono.setText(this.cliente.getTelefono());
         this.domicilio.setText(this.cliente.getDireccion());
     }
+    public boolean registrarCliente(){
+        boolean realizado = false;
+        this.cliente = new Cliente();
+        this.cliente.setNombre(this.nombre.getText());
+        this.cliente.setTelefono(this.telefono.getText());
+        this.cliente.setCorreo(this.correo.getText());
+        this.cliente.setDireccion(this.domicilio.getText());
+        this.cliente.setFecha(new Date());
+        if (this.cliente.registrarCliente()){
+            realizado = true;
+            this.registrar.setText("Guardar");
+        }
+        return realizado;
+    }
+    public boolean editarCliente(){
+        boolean realizado = false;
+        this.cliente.setNombre(this.nombre.getText());
+        this.cliente.setTelefono(this.telefono.getText());
+        this.cliente.setCorreo(this.correo.getText());
+        this.cliente.setDireccion(this.domicilio.getText());
+        if (this.cliente.editarCliente())
+            realizado = true;
+        return realizado;
+    }
     
     public void registrar_OnClick(){
         CatalogoEnum alumnoEnum = this.validarDatos();
         if (alumnoEnum.equals(CatalogoEnum.DATOS_VALIDOS)){
             boolean realizado = false;
             if (this.cliente != null){
-                this.cliente.setNombre(this.nombre.getText());
-                this.cliente.setTelefono(this.telefono.getText());
-                this.cliente.setCorreo(this.correo.getText());
-                this.cliente.setDireccion(this.domicilio.getText());
-                if (this.cliente.editarCliente())
-                    realizado = true;
+                realizado = this.editarCliente();
             }else{
-                this.cliente = new Cliente();
-                this.cliente.setNombre(this.nombre.getText());
-                this.cliente.setTelefono(this.telefono.getText());
-                this.cliente.setCorreo(this.correo.getText());
-                this.cliente.setDireccion(this.domicilio.getText());
-                this.cliente.setFecha(new Date());
-                if (this.cliente.registrarCliente()){
-                    realizado = true;
-                    this.registrar.setText("Guardar");
-                }
+                realizado = this.registrarCliente();
             }
             if (!realizado){
                 MessageFactory.showMessage("Error", "Registro", "No se pudo guardar el cliente", Alert.AlertType.ERROR);

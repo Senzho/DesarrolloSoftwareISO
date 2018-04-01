@@ -55,9 +55,9 @@ public class VentanaCRUAlumnoController implements Initializable {
         }
         return validacion;
     }
-    private void mostrarMensajeError(CatalogoEnum alumnoEnum){
+    private void mostrarMensajeError(CatalogoEnum catalogoEnum){
         String mensaje;
-        switch(alumnoEnum){
+        switch(catalogoEnum){
             default:
                 mensaje = "";
                 break;
@@ -118,31 +118,41 @@ public class VentanaCRUAlumnoController implements Initializable {
         //Validar si existe una imágen, en caso contrario:
         this.imagen.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkPersonIcon.png")));
     }
+    public boolean registrarAlumno(){
+		boolean realizado = false;
+		this.alumno = new Alumno();
+        this.alumno.setNombre(this.nombre.getText());
+        this.alumno.setTeléfono(this.telefono.getText());
+        this.alumno.setCorreo(this.correo.getText());
+        this.alumno.setDireccion(this.direccion.getText());
+        this.alumno.setFecha(new Date());
+        this.alumno.setEstado(this.activo.isSelected());
+        if (this.alumno.registrarAlumno()){
+            realizado = true;
+            this.registrar.setText("Guardar");
+        }
+        return realizado;
+    }
+    public boolean editarAlumno(){
+    	boolean realizado = false;
+    	this.alumno.setNombre(this.nombre.getText());
+        this.alumno.setTeléfono(this.telefono.getText());
+        this.alumno.setCorreo(this.correo.getText());
+        this.alumno.setDireccion(this.direccion.getText());
+        this.alumno.setEstado(this.activo.isSelected());
+        if (this.alumno.editarAlumno())
+            realizado = true;
+        return realizado;
+    }
     
     public void registrar_OnClick(){
         CatalogoEnum alumnoEnum = this.validarDatos();
         if (alumnoEnum.equals(CatalogoEnum.DATOS_VALIDOS)){
             boolean realizado = false;
             if (this.alumno != null){
-                this.alumno.setNombre(this.nombre.getText());
-                this.alumno.setTeléfono(this.telefono.getText());
-                this.alumno.setCorreo(this.correo.getText());
-                this.alumno.setDireccion(this.direccion.getText());
-                this.alumno.setEstado(this.activo.isSelected());
-                if (this.alumno.editarAlumno())
-                    realizado = true;
+                realizado = this.editarAlumno();
             }else{
-                this.alumno = new Alumno();
-                this.alumno.setNombre(this.nombre.getText());
-                this.alumno.setTeléfono(this.telefono.getText());
-                this.alumno.setCorreo(this.correo.getText());
-                this.alumno.setDireccion(this.direccion.getText());
-                this.alumno.setFecha(new Date());
-                this.alumno.setEstado(this.activo.isSelected());
-                if (this.alumno.registrarAlumno()){
-                    realizado = true;
-                    this.registrar.setText("Guardar");
-                }
+                realizado = this.registrarAlumno();
             }
             if (!realizado){
                 MessageFactory.showMessage("Error", "Registro", "No se pudo guardar el alumno", Alert.AlertType.ERROR);

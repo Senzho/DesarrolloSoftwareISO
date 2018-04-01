@@ -73,9 +73,9 @@ public class VentanaCRUProfesorController implements Initializable {
         }
         return validacion;
     }
-    private void mostrarMensajeError(CatalogoEnum alumnoEnum){
+    private void mostrarMensajeError(CatalogoEnum profesorEnum){
         String mensaje;
-        switch(alumnoEnum){
+        switch(profesorEnum){
             default:
                 mensaje = "";
                 break;
@@ -162,6 +162,36 @@ public class VentanaCRUProfesorController implements Initializable {
         //Validar si existe una imágen, en caso contrario:
         this.imagen.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkPersonIcon.png")));
     }
+    public boolean registrarProfesor(){
+        boolean realizado = false;
+        this.profesor = new Profesor();
+        this.profesor.setNombre(this.nombre.getText());
+        this.profesor.setTelefono(this.telefono.getText());
+        this.profesor.setCorreo(this.correo.getText());
+        this.profesor.setDireccion(this.direccion.getText());
+        this.profesor.setEstado(this.activo.isSelected());
+        this.profesor.setMonto(this.monto.getText());
+        this.profesor.setFecha(new Date());
+        this.profesor.setTipoPago(this.tipoPago.getValue().equals(VentanaCRUProfesorController.TIPO_PAGO_MENSUAL));
+        if (this.profesor.registrarProfesor()){
+            realizado = true;
+            this.registrar.setText("Guardar");
+        }
+        return realizado;
+    }
+    public boolean editarProfesor(){
+        boolean realizado = false;
+        this.profesor.setNombre(this.nombre.getText());
+        this.profesor.setTelefono(this.telefono.getText());
+        this.profesor.setCorreo(this.correo.getText());
+        this.profesor.setDireccion(this.direccion.getText());
+        this.profesor.setEstado(this.activo.isSelected());
+        this.profesor.setMonto(this.monto.getText());
+        this.profesor.setTipoPago(this.tipoPago.getValue().equals(VentanaCRUProfesorController.TIPO_PAGO_MENSUAL));
+        if (this.profesor.editarProfesor())
+            realizado = true;
+        return realizado;
+    }
     
     public void registrar_OnClick(){
         CatalogoEnum catalogoEnum = this.validarDatos();
@@ -169,33 +199,15 @@ public class VentanaCRUProfesorController implements Initializable {
             boolean realizado = false;
             String mensajeUsuario = "";
             if (this.profesor != null){
-                this.profesor.setNombre(this.nombre.getText());
-                this.profesor.setTelefono(this.telefono.getText());
-                this.profesor.setCorreo(this.correo.getText());
-                this.profesor.setDireccion(this.direccion.getText());
-                this.profesor.setEstado(this.activo.isSelected());
-                this.profesor.setMonto(this.monto.getText());
-                this.profesor.setTipoPago(this.tipoPago.getValue().equals(VentanaCRUProfesorController.TIPO_PAGO_MENSUAL));
-                if (this.profesor.editarProfesor())
-                    realizado = true;
+                realizado = this.editarProfesor();
             }else{
-                this.profesor = new Profesor();
-                this.profesor.setNombre(this.nombre.getText());
-                this.profesor.setTelefono(this.telefono.getText());
-                this.profesor.setCorreo(this.correo.getText());
-                this.profesor.setDireccion(this.direccion.getText());
-                this.profesor.setEstado(this.activo.isSelected());
-                this.profesor.setMonto(this.monto.getText());
-                this.profesor.setFecha(new Date());
-                this.profesor.setTipoPago(this.tipoPago.getValue().equals(VentanaCRUProfesorController.TIPO_PAGO_MENSUAL));
-                if (this.profesor.registrarProfesor()){
+                if (this.registrarProfesor()){
                     String contraseña = Hasher.hash(OperacionesString.sinAcentosYMayusculas(this.profesor.getNombre()));
                     String usuario = OperacionesString.obtenerNombreUsuario(this.profesor.getCorreo());
                     if (!new Usuario(1, contraseña, this.profesor.getIdProfesor(), usuario, 1).crearUsuario()){
                         mensajeUsuario = ". No se pudo crear un usuario para el profesor, deberá crearse manualmente";
                     }
                     realizado = true;
-                    this.registrar.setText("Guardar");
                 }
             }
             if (!realizado){
