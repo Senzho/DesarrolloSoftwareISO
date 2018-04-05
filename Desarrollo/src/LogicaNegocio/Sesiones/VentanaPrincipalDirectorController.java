@@ -1,11 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package LogicaNegocio.Sesiones;
 
 import LogicaNegocio.Catalogos.Profesor;
+import LogicaNegocio.Catalogos.VentanaCRUAlumno;
+import LogicaNegocio.Catalogos.VentanaCRUCliente;
+import LogicaNegocio.Catalogos.VentanaCRUProfesor;
+import LogicaNegocio.Egresos.VentanaCRUEgreso;
+import LogicaNegocio.Egresos.VentanaCRUGastoPromocional;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -13,11 +13,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-/**
- * FXML Controller class
- *
- * @author Marioolopez
- */
 public class VentanaPrincipalDirectorController implements Initializable {
     private Usuario usuario;
     private Profesor profesor;
@@ -29,15 +24,28 @@ public class VentanaPrincipalDirectorController implements Initializable {
         this.usuario = usuario;
         this.profesor = profesor;
     }
-    /**
-     * Initializes the controller class.
-     */
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {//1 activo 2 baja
         // TODO
     }    
+    
     public void imageView_onClick(){
-        
         new VentanaModificarCuenta(this.usuario, this.profesor);
+    }
+    public void menuRegistrarAlumno_onClick(){
+        new VentanaCRUAlumno();
+    }
+    public void menuRegistrarProfesor_onClick(){
+        new VentanaCRUProfesor();
+    }
+    public void menuRegistrarCliente_onClick(){
+        new VentanaCRUCliente();
+    }
+    public void menuPromocionFacebook_onClick(){
+        new VentanaCRUGastoPromocional();
+    }
+    public void menuEgreso_onClick(){
+        new VentanaCRUEgreso();
     }
 }

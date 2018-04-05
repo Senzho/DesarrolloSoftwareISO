@@ -37,15 +37,15 @@
             <MenuItem mnemonicParsing="false" text="Alumnos" />
             <MenuItem mnemonicParsing="false" text="Profesores" />
             <MenuItem mnemonicParsing="false" text="Clientes" />
-            <MenuItem mnemonicParsing="false" text="Registrar alumno" />
-            <MenuItem mnemonicParsing="false" text="Registrar profesor" />
-            <MenuItem mnemonicParsing="false" text="Registrar cliente" />
+            <MenuItem mnemonicParsing="false" onAction="#menuRegistrarAlumno_onClick" text="Registrar alumno" />
+            <MenuItem mnemonicParsing="false" onAction="#menuRegistrarProfesor_onClick" text="Registrar profesor" />
+            <MenuItem mnemonicParsing="false" onAction="#menuRegistrarCliente_onClick" text="Registrar cliente" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Gastos">
           <items>
-            <MenuItem mnemonicParsing="false" text="Promoción de facebook" />
-            <MenuItem mnemonicParsing="false" text="Egreso" />
+            <MenuItem mnemonicParsing="false" onAction="#menuPromocionFacebook_onClick" text="Promoción de facebook" />
+            <MenuItem mnemonicParsing="false" onAction="#menuEgreso_onClick" text="Egreso" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Reporte" />
