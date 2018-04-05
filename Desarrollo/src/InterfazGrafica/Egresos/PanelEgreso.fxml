@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="85.99990000000253" prefWidth="359.00019999999495" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="LogicaNegocio.Egresos.PanelPromocionController">
+<AnchorPane id="AnchorPane" prefHeight="85.99990000000253" prefWidth="359.00019999999495" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="LogicaNegocio.Egresos.PanelEgresoController">
   <children>
     <Label id="nombre" fx:id="lblDescripcion" layoutX="14.0" layoutY="14.0" prefWidth="292.0" text="Descripcion" textFill="BLACK">
       <font>

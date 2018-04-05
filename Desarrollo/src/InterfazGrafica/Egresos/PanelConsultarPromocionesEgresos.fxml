@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="397.9999000000025" prefWidth="774.0041845703124" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="LogicaNegocio.Egresos.PanelConsultarPromocionesEgresos">
+<AnchorPane id="AnchorPane" prefHeight="397.9999000000025" prefWidth="774.0041845703124" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="LogicaNegocio.Egresos.PanelConsultarPromocionesEgresosController">
   <children>
     <ComboBox fx:id="comboMes" prefHeight="26.0" prefWidth="166.0" AnchorPane.leftAnchor="112.0" AnchorPane.topAnchor="16.0">
       <items>
@@ -69,5 +69,6 @@
       </rowConstraints>
     </GridPane>
     <Line endX="778.4951782226562" endY="2.0" layoutY="50.0" startX="34.49229431152344" startY="3.0" stroke="GREY" AnchorPane.leftAnchor="11.29" AnchorPane.rightAnchor="8.3" />
+    <Button fx:id="btnBuscar" font="$x1" layoutX="437.0" layoutY="16.0" mnemonicParsing="false" onMouseClicked="#btnBuscar_onClick" text="Buscar" />
   </children>
 </AnchorPane>

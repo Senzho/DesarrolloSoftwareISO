@@ -18,7 +18,7 @@ import javafx.scene.image.ImageView;
  *
  * @author Desktop
  */
-public class PanelPromocionController implements Initializable {
+public class PanelEgresoController implements Initializable {
     @FXML
     private ImageView imagenEditar;
     @FXML
