@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="93.0" prefWidth="661.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="LogicaNegocio.Grupos.PanelAlumnoProfesorController">
+   <children>
+      <Label layoutX="95.0" layoutY="20.0" prefHeight="20.0" prefWidth="350.0" text="Nombre" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="216.0" AnchorPane.topAnchor="20.0">
+         <font>
+            <Font name="Arial Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="95.0" layoutY="59.0" prefHeight="20.0" prefWidth="149.0" text="Teléfono" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="417.0">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="252.0" layoutY="60.0" prefHeight="20.0" prefWidth="193.0" text="Correo" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="252.0" AnchorPane.rightAnchor="216.0">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="14.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="12.0" />
+      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="456.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="175.0" />
+      <Button layoutX="495.0" layoutY="57.0" mnemonicParsing="false" text="Pagos" AnchorPane.bottomAnchor="11.0" AnchorPane.rightAnchor="117.0" />
+      <Button layoutX="551.0" layoutY="57.0" mnemonicParsing="false" text="Registrar pago" AnchorPane.bottomAnchor="11.0" AnchorPane.rightAnchor="16.0" />
+   </children>
+</AnchorPane>
