@@ -49,15 +49,25 @@ public class PagoAlumnoDAOSql implements PagoAlumnoDAO {
             Accesodatos.Entidades.Pagoalumno pagoJpa = new Accesodatos.Entidades.Pagoalumno();
             pagoJpa.setFecha(pagoAlumno.getFecha());
             AlumnoJpaController AlumnoController = new AlumnoJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
-            Accesodatos.Entidades.Alumno alumnoJpa = AlumnoController.findAlumno(idAlumno);
-            if (alumnoJpa != null) {
-                pagoJpa.setIdAlumno(alumnoJpa);
-                pagoJpa.setFecha(pagoAlumno.getFecha());
-                pagoJpa.setIdPago(pagoAlumno.getIdAlumno());
-                pagoJpa.setIdPromocion(promocion);
-                pagoJpa.setMonto(pagoAlumno.getMonto());
-                pagoJpa.setTipoPago(Integer.parseInt(pagoAlumno.getTipoPago()));
-                controller.create(pagoJpa);
+            try {
+                Accesodatos.Entidades.Alumno alumnoJpa = AlumnoController.findAlumno(idAlumno);
+                if (alumnoJpa != null) {
+                    pagoJpa.setIdAlumno(alumnoJpa);
+                    pagoJpa.setFecha(pagoAlumno.getFecha());
+                    pagoJpa.setIdPago(pagoAlumno.getIdAlumno());
+                    if (promocion != null) {
+                        promocion.setIdPromocion(0);
+                        pagoJpa.setIdPromocion(promocion);
+                    } else {
+                        pagoJpa.setIdPromocion(promocion);
+                    }
+                    pagoJpa.setMonto(pagoAlumno.getMonto());
+                    pagoJpa.setTipoPago(Integer.parseInt(pagoAlumno.getTipoPago()));
+                    controller.create(pagoJpa);
+                    registrado = true;
+                }
+            } catch (Exception excepcion) {
+                excepcion.printStackTrace();
             }
         }
         return registrado;

@@ -3,7 +3,6 @@ package Accesodatos.Pagos;
 import Accesodatos.Controladores.PagoprofesorJpaController;
 import Accesodatos.Controladores.ProfesorJpaController;
 import Accesodatos.Entidades.Pagoprofesor;
-import Accesodatos.Entidades.Profesor;
 import LogicaNegocio.Catalogos.OperacionesString;
 import LogicaNegocio.Pagos.PagoProfesor;
 import java.util.ArrayList;
@@ -54,7 +53,7 @@ public class PagoProfesorDAOSql implements PagoProfesorDAO{
                     registrado = true;
                 }
             }catch(Exception excepcion){
-                registrado = false;
+                excepcion.printStackTrace();
             }
         }
         return registrado;

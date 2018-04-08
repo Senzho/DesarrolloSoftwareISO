@@ -5,18 +5,23 @@
  */
 package LogicaNegocio.Pagos;
 
+import Accesodatos.Pagos.PromocionDAOSql;
+
 /**
  *
  * @author Desktop
  */
 public class Promocion {
+
     private String descripcion;
     private int idPromocion;
     private int idProfesor;
     private String nombre;
     private double porcentaje;
+    private PromocionDAOSql promocionDao;
 
     public Promocion() {
+        promocionDao = new PromocionDAOSql();
     }
 
     public Promocion(String descripcion, int idPromocion, int idProfesor, String nombre, double porcentaje) {
@@ -25,6 +30,7 @@ public class Promocion {
         this.idProfesor = idProfesor;
         this.nombre = nombre;
         this.porcentaje = porcentaje;
+        promocionDao = new PromocionDAOSql();
     }
 
     public String getDescripcion() {
@@ -66,5 +72,13 @@ public class Promocion {
     public void setPorcentaje(double porcentaje) {
         this.porcentaje = porcentaje;
     }
-        
+
+    public boolean editarPromocion() {
+        return promocionDao.editarPromocion(this);
+    }
+
+    public boolean registrarPromocion() {
+        return promocionDao.registrarPromocion(this);
+    }
+
 }
