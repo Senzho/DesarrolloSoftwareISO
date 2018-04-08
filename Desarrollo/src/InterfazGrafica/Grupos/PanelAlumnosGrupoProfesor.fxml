@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="LogicaNegocio.Grupos.PanelAlumnosGrupoProfesorController">
+   <children>
+      <Label layoutX="14.0" layoutY="14.0" text="Grupo:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <ComboBox layoutX="69.0" layoutY="12.0" prefHeight="25.0" prefWidth="248.0" AnchorPane.leftAnchor="69.0" AnchorPane.rightAnchor="283.0" AnchorPane.topAnchor="12.0" />
+      <Button layoutX="468.0" layoutY="12.0" mnemonicParsing="false" text="Registrar asistencia" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="12.0" />
+      <Separator layoutX="12.0" layoutY="46.0" prefHeight="0.0" prefWidth="574.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="46.0" />
+      <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="14.0" layoutY="56.0" prefHeight="333.0" prefWidth="574.0" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="56.0">
+         <content>
+            <FlowPane prefHeight="200.0" prefWidth="200.0" />
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>

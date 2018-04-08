@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="41.0" prefWidth="503.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LogicaNegocio.Grupos.PanelDiaGrupoController">
+   <children>
+      <ComboBox fx:id="dia" layoutX="14.0" layoutY="8.0" prefHeight="25.0" prefWidth="98.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="391.0" AnchorPane.topAnchor="8.0" />
+      <ComboBox fx:id="horaInicio" layoutX="118.0" layoutY="8.0" prefHeight="25.0" prefWidth="87.0" AnchorPane.leftAnchor="118.0" AnchorPane.topAnchor="8.0" />
+      <ComboBox fx:id="horaFin" layoutX="224.0" layoutY="8.0" prefHeight="25.0" prefWidth="79.0" AnchorPane.leftAnchor="224.0" AnchorPane.topAnchor="8.0" />
+      <Label layoutX="212.0" layoutY="11.0" text="-" AnchorPane.leftAnchor="212.0" AnchorPane.topAnchor="11.0">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="309.0" layoutY="12.0" text="Salon:" AnchorPane.leftAnchor="309.0" AnchorPane.topAnchor="12.0">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="salon" layoutX="362.0" layoutY="8.0" prefHeight="25.0" prefWidth="98.0" AnchorPane.leftAnchor="362.0" AnchorPane.topAnchor="8.0" />
+      <ImageView fx:id="eliminar" fitHeight="30.0" fitWidth="30.0" layoutX="466.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="7.0" />
+   </children>
+</AnchorPane>
