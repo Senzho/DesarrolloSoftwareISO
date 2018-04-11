@@ -83,9 +83,6 @@ public class Alumno {
     public List<Alumno> obtenerAlumnos(String nombre) {
         return this.alumnoDAO.obtenerAlumnos(nombre);
     }
-    public List obtenerPagos() {
-        return this.alumnoDAO.obtenerPagos();
-    }
     public int[] obtenerGrupos() {
         return this.alumnoDAO.obtenerGrupos();
     }

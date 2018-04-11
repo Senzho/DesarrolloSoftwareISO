@@ -104,11 +104,7 @@ public class ProfesorDAOSql implements ProfesorDAO{
         }
         return editado;
     }
-    @Override
-    public List obtenerPromociones(int idProfesor) {//A la espera de entidad Promocion
-        List promociones = new ArrayList();
-        return promociones;
-    }
+
     @Override
     public List<Profesor> obtenerProfesores() {
         ProfesorJpaController controller = new ProfesorJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));

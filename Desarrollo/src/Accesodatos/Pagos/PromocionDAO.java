@@ -6,6 +6,7 @@
 package Accesodatos.Pagos;
 
 import LogicaNegocio.Pagos.Promocion;
+import java.util.List;
 
 /**
  *
@@ -14,4 +15,5 @@ import LogicaNegocio.Pagos.Promocion;
 public interface PromocionDAO {
     public boolean editarPromocion(Promocion promocion);
     public boolean registrarPromocion(Promocion promocion);
+    public List<Promocion> obtenerPromociones(int idProfesor);
 }

@@ -92,9 +92,6 @@ public class Profesor {
     public boolean editarProfesor(){
         return this.profesorDAO.editarProfesor(this);
     }
-    public List obtenerPromociones(){
-        return this.profesorDAO.obtenerPromociones(this.idProfesor);
-    }
     public List<Profesor> obtenerProfesores(){
         return this.profesorDAO.obtenerProfesores();
     }

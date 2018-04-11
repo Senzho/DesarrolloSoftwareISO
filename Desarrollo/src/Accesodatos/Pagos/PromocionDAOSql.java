@@ -8,6 +8,8 @@ package Accesodatos.Pagos;
 import Accesodatos.Controladores.ProfesorJpaController;
 import Accesodatos.Controladores.PromocionJpaController;
 import LogicaNegocio.Pagos.Promocion;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Persistence;
 
 /**
@@ -55,6 +57,26 @@ public class PromocionDAOSql implements PromocionDAO {
             excepcion.printStackTrace();
         }
         return promocionRegistrada;
+    }
+
+    @Override
+    public List<Promocion> obtenerPromociones(int idProfesor) {
+        List<Promocion> promociones = new ArrayList<>();
+        ProfesorJpaController profesorController = new ProfesorJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
+        Accesodatos.Entidades.Profesor profesorJpa = profesorController.findProfesor(idProfesor);
+        for(Accesodatos.Entidades.Promocion promocionJpa : profesorJpa.getPromocionCollection()){
+            promociones.add(this.obtenerEntidad(promocionJpa));
+        }
+        return promociones;
+    }
+    private Promocion obtenerEntidad(Accesodatos.Entidades.Promocion promocionJpa) {
+        Promocion promocion = new Promocion();
+        promocion.setDescripcion(promocionJpa.getDescripcion());
+        promocion.setIdProfesor(promocionJpa.getIdProfesor().getIdProfesor());
+        promocion.setIdPromocion(promocionJpa.getIdPromocion());
+        promocion.setNombre(promocionJpa.getNombre());
+        promocion.setPorcentaje(promocionJpa.getPorcentaje());
+        return promocion;
     }
 
 }

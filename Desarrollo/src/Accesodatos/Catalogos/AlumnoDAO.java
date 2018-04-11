@@ -8,6 +8,5 @@ public interface AlumnoDAO {
     public boolean editarAlumno(Alumno alumno);
     public List<Alumno> obtenerAlumnos();
     public List<Alumno> obtenerAlumnos(String nombre);
-    public List obtenerPagos();//la lista regresa entidades de PagoAlumno
     public int[] obtenerGrupos();
 }

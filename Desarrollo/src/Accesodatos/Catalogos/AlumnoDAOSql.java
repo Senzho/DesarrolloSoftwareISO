@@ -108,12 +108,6 @@ public class AlumnoDAOSql implements AlumnoDAO{
         return alumnos;
     }
     @Override
-    public List obtenerPagos() {
-        List pagos = new ArrayList();
-        //A la espera de la entidad de PagoAlumno
-        return pagos;
-    }
-    @Override
     public int[] obtenerGrupos() {
         int[] grupos = {0, 1};
         //A la espera de la entidad de Grupo
