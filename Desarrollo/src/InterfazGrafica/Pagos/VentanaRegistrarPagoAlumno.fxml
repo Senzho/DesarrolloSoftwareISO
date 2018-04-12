@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="231.0" prefWidth="455.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="LogicaNegocio.Pagos.VentanaRegistrarPagoAlumnoController">
+   <children>
+      <Label layoutX="25.0" layoutY="16.0" text="Alumno:" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="16.0">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="25.0" layoutY="57.0" text="Monto:" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="57.0">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="261.0" layoutY="57.0" text="Promoción:" AnchorPane.rightAnchor="125.5" AnchorPane.topAnchor="57.0">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <RadioButton fx:id="radioInscripcion" layoutX="25.0" layoutY="105.0" mnemonicParsing="false" text="Inscripción" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="336.5" AnchorPane.topAnchor="105.0">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </RadioButton>
+      <RadioButton fx:id="radioMensualidad" layoutX="156.0" layoutY="105.0" mnemonicParsing="false" text="Mensualidad" AnchorPane.topAnchor="105.0">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </RadioButton>
+      <Button fx:id="btnPromocion" layoutX="349.0" layoutY="50.0" mnemonicParsing="false" text="Seleccionar" AnchorPane.rightAnchor="12.5" AnchorPane.topAnchor="50.0">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="s" layoutX="368.0" layoutY="189.0" mnemonicParsing="false" text="Registrar" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="12.5">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Button>
+      <ComboBox fx:id="comboAlumno" layoutX="101.0" layoutY="12.0" prefHeight="25.0" prefWidth="353.0" AnchorPane.leftAnchor="101.0" AnchorPane.rightAnchor="13.5" AnchorPane.topAnchor="12.0" />
+      <TextField fx:id="txtMonto" layoutX="102.0" layoutY="53.0" prefHeight="25.0" prefWidth="147.0" AnchorPane.leftAnchor="102.0" AnchorPane.rightAnchor="218.5" AnchorPane.topAnchor="53.0" />
+      <Line endX="370.0" layoutX="97.0" layoutY="177.0" startX="-100.0" stroke="#908b8b" AnchorPane.bottomAnchor="53.5" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+   </children>
+</AnchorPane>

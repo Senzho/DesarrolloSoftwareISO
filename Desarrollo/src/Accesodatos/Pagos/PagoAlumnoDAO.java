@@ -15,5 +15,5 @@ import java.util.List;
  */
 public interface PagoAlumnoDAO {
     public List<PagoAlumno> obtenerPagos(int idAlumno);
-    public boolean registrarPago(PagoAlumno pagoAlumno, int idAlumo, Promocion promocion);
+    public boolean registrarPago(PagoAlumno pagoAlumno, int idAlumno, Promocion promocion);
 }

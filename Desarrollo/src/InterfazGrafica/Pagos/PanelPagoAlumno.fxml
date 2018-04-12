@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="79.0" prefWidth="559.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="LogicaNegocio.Pagos.PanelPagoAlumnoController">
+   <children>
+      <Label fx:id="lblFecha" layoutX="14.0" layoutY="14.0" prefHeight="20.0" prefWidth="166.0" text="dd/mm/aaaa">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblMonto" layoutX="14.0" layoutY="44.0" prefHeight="20.0" prefWidth="166.0" text="Monto">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblPromocion" layoutX="205.0" layoutY="44.0" prefHeight="20.0" prefWidth="201.0" text="Promocion">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblTipoPago" layoutX="205.0" layoutY="14.0" prefHeight="20.0" prefWidth="201.0" text="tipoPago">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnGenerarRecibo" layoutX="424.0" layoutY="38.0" mnemonicParsing="false" text="Generar recibo">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
