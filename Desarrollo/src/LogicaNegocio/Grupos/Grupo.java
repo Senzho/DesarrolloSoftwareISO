@@ -7,6 +7,7 @@ public class Grupo {
     private int id;
     private String nombre;
     private String danza;
+    private Horario horario;
     private GrupoDAOSql grupoDAO;
 
     public Grupo(){
@@ -36,6 +37,12 @@ public class Grupo {
     }
     public void setDanza(String danza) {
         this.danza = danza;
+    }
+    public Horario getHorario() {
+        return horario;
+    }
+    public void setHorario(Horario horario) {
+        this.horario = horario;
     }
     
     public boolean registrarGrupo(){
