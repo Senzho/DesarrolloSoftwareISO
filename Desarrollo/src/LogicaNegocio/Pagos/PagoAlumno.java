@@ -5,7 +5,6 @@
  */
 package LogicaNegocio.Pagos;
 
-import Accesodatos.Entidades.Promocion;
 import Accesodatos.Pagos.PagoAlumnoDAOSql;
 import java.util.Date;
 import java.util.List;
@@ -19,14 +18,15 @@ public class PagoAlumno {
     private Date fecha;
     private int idPagoAlumno;
     private String monto;
-    private String tipoPago;
+    private int tipoPago;
+    private int idPromocion;
     private PagoAlumnoDAOSql pagoAlumnoDao;
     
     public PagoAlumno() {
         pagoAlumnoDao = new PagoAlumnoDAOSql();
     }
 
-    public PagoAlumno(Date fecha, int idPagoAlumno, String monto, String tipoPago) {
+    public PagoAlumno(Date fecha, int idPagoAlumno, String monto, int tipoPago) {
         this.fecha = fecha;
         this.idPagoAlumno = idPagoAlumno;
         this.monto = monto;
@@ -58,19 +58,27 @@ public class PagoAlumno {
         this.monto = monto;
     }
 
-    public String getTipoPago() {
+    public int getTipoPago() {
         return tipoPago;
     }
 
-    public void setTipoPago(String tipoPago) {
+    public void setTipoPago(int tipoPago) {
         this.tipoPago = tipoPago;
+    }
+
+    public int getIdPromocion() {
+        return idPromocion;
+    }
+
+    public void setIdPromocion(int idPromocion) {
+        this.idPromocion = idPromocion;
     }
 
     public List<PagoAlumno> obtenerPagos(int idAlumno) {
        return pagoAlumnoDao.obtenerPagos(idAlumno);
     }
     
-    public boolean registrarPago(int idAlumno, Promocion promocion) {
-        return pagoAlumnoDao.registrarPago(this, idAlumno, promocion);
+    public boolean registrarPago(int idAlumno, int idPromocion) {
+        return pagoAlumnoDao.registrarPago(this, idAlumno, idPromocion);
     }
 }

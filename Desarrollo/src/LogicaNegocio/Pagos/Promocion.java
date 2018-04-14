@@ -17,14 +17,14 @@ public class Promocion {
     private int idPromocion;
     private int idProfesor;
     private String nombre;
-    private double porcentaje;
+    private int porcentaje;
     private PromocionDAOSql promocionDao;
 
     public Promocion() {
         promocionDao = new PromocionDAOSql();
     }
 
-    public Promocion(String descripcion, int idPromocion, int idProfesor, String nombre, double porcentaje) {
+    public Promocion(String descripcion, int idPromocion, int idProfesor, String nombre, int porcentaje) {
         this.descripcion = descripcion;
         this.idPromocion = idPromocion;
         this.idProfesor = idProfesor;
@@ -65,11 +65,11 @@ public class Promocion {
         this.nombre = nombre;
     }
 
-    public double getPorcentaje() {
+    public int getPorcentaje() {
         return porcentaje;
     }
 
-    public void setPorcentaje(double porcentaje) {
+    public void setPorcentaje(int porcentaje) {
         this.porcentaje = porcentaje;
     }
 

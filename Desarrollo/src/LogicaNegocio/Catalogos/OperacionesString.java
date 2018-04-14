@@ -60,6 +60,17 @@ public class OperacionesString {
         }
         return valido;
     }
+    public static boolean porcentajeValido(String monto) {
+        boolean valido = false;
+            try {
+                Double.valueOf(monto);
+                valido = true;
+            } catch (NumberFormatException excepcion) {
+                valido = false;
+            }
+        
+        return valido;
+    }
     public static String obtenerNombreUsuario(String correo){
         String nombreUsuario;
         if (correo.length() > 20){

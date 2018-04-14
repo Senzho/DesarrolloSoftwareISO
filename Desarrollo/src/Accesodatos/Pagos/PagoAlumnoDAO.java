@@ -5,7 +5,6 @@
  */
 package Accesodatos.Pagos;
 
-import Accesodatos.Entidades.Promocion;
 import LogicaNegocio.Pagos.PagoAlumno;
 import java.util.List;
 
@@ -15,5 +14,5 @@ import java.util.List;
  */
 public interface PagoAlumnoDAO {
     public List<PagoAlumno> obtenerPagos(int idAlumno);
-    public boolean registrarPago(PagoAlumno pagoAlumno, int idAlumno, Promocion promocion);
+    public boolean registrarPago(PagoAlumno pagoAlumno, int idAlumno, int idPromocion);
 }

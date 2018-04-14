@@ -7,8 +7,9 @@ package Accesodatos.Pagos;
 
 import Accesodatos.Controladores.AlumnoJpaController;
 import Accesodatos.Controladores.PagoalumnoJpaController;
+import Accesodatos.Controladores.PromocionJpaController;
 import Accesodatos.Entidades.Pagoalumno;
-import Accesodatos.Entidades.Promocion;
+import LogicaNegocio.Pagos.Promocion;
 import LogicaNegocio.Catalogos.OperacionesString;
 import LogicaNegocio.Pagos.PagoAlumno;
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ import javax.persistence.Persistence;
  * @author Desktop
  */
 public class PagoAlumnoDAOSql implements PagoAlumnoDAO {
-
+    
     @Override
     public List<PagoAlumno> obtenerPagos(int idAlumno) {
         List<PagoAlumno> listaPagos = new ArrayList();
@@ -28,21 +29,27 @@ public class PagoAlumnoDAOSql implements PagoAlumnoDAO {
         Accesodatos.Entidades.Alumno alumnoJpa = controller.findAlumno(idAlumno);
         for (Pagoalumno pagoJpa : alumnoJpa.getPagoalumnoCollection()) {
             listaPagos.add(this.obtenerEntidad(pagoJpa));
+            
         }
         return listaPagos;
     }
-
+    
     private PagoAlumno obtenerEntidad(Accesodatos.Entidades.Pagoalumno pagoJpa) {
         PagoAlumno pago = new PagoAlumno();
         pago.setFecha(pagoJpa.getFecha());
         pago.setIdPagoAlumno(pagoJpa.getIdPago());
         pago.setMonto(pagoJpa.getMonto());
-        pago.setTipoPago(pagoJpa.getTipoPago().toString());
+        if (pagoJpa.getIdPromocion() != null) {
+            pago.setIdPromocion(pagoJpa.getIdPromocion().getIdPromocion());
+        } else {
+            pago.setIdPromocion(0);
+        }
+        pago.setTipoPago(pagoJpa.getTipoPago());
         return pago;
     }
-
+    
     @Override
-    public boolean registrarPago(PagoAlumno pagoAlumno, int idAlumno, Promocion promocion) {
+    public boolean registrarPago(PagoAlumno pagoAlumno, int idAlumno, int idPromocion) {
         boolean registrado = false;
         if (OperacionesString.montoValido(pagoAlumno.getMonto())) {
             PagoalumnoJpaController controller = new PagoalumnoJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
@@ -55,14 +62,13 @@ public class PagoAlumnoDAOSql implements PagoAlumnoDAO {
                     pagoJpa.setIdAlumno(alumnoJpa);
                     pagoJpa.setFecha(pagoAlumno.getFecha());
                     pagoJpa.setIdPago(pagoAlumno.getIdPagoAlumno());
-                    if (promocion != null) {
-                        promocion.setIdPromocion(0);
-                        pagoJpa.setIdPromocion(promocion);
-                    } else {
-                        pagoJpa.setIdPromocion(promocion);
+                    PromocionJpaController promocionController = new PromocionJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
+                    Accesodatos.Entidades.Promocion promocionJpa = promocionController.findPromocion(idPromocion);
+                    if (promocionJpa != null) {
+                        pagoJpa.setIdPromocion(promocionJpa);
                     }
                     pagoJpa.setMonto(pagoAlumno.getMonto());
-                    pagoJpa.setTipoPago(Integer.parseInt(pagoAlumno.getTipoPago()));
+                    pagoJpa.setTipoPago(pagoAlumno.getTipoPago());
                     controller.create(pagoJpa);
                     registrado = true;
                 }
@@ -72,5 +78,5 @@ public class PagoAlumnoDAOSql implements PagoAlumnoDAO {
         }
         return registrado;
     }
-
+    
 }

@@ -25,16 +25,18 @@ public class PromocionDAOSql implements PromocionDAO {
         ProfesorJpaController profesorController = new ProfesorJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
         Accesodatos.Entidades.Promocion promocionJpa = promocionController.findPromocion(promocion.getIdPromocion());
         Accesodatos.Entidades.Profesor profesorJpa = profesorController.findProfesor(promocion.getIdProfesor());
-        promocionJpa.setDescripcion(promocion.getDescripcion());
-        promocionJpa.setIdProfesor(profesorJpa);
-        promocionJpa.setIdPromocion(promocion.getIdPromocion());
-        promocionJpa.setNombre(promocion.getNombre());
-        promocionJpa.setPorcentaje(Integer.MIN_VALUE);
-        try {
-            promocionController.edit(promocionJpa);
-            editado = true;
-        } catch (Exception excepcion) {
-            excepcion.printStackTrace();
+        if (profesorJpa != null) {
+            promocionJpa.setDescripcion(promocion.getDescripcion());
+            promocionJpa.setIdProfesor(profesorJpa);
+            promocionJpa.setIdPromocion(promocion.getIdPromocion());
+            promocionJpa.setNombre(promocion.getNombre());
+            promocionJpa.setPorcentaje(promocion.getPorcentaje());
+            try {
+                promocionController.edit(promocionJpa);
+                editado = true;
+            } catch (Exception excepcion) {
+                excepcion.printStackTrace();
+            }
         }
         return editado;
     }
@@ -44,15 +46,20 @@ public class PromocionDAOSql implements PromocionDAO {
         boolean promocionRegistrada = false;
         PromocionJpaController promocionController = new PromocionJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
         Accesodatos.Entidades.Promocion promocionJpa = new Accesodatos.Entidades.Promocion();
-        promocionJpa.setDescripcion(promocionJpa.getDescripcion());
-        promocionJpa.setIdProfesor(promocionJpa.getIdProfesor());
-        promocionJpa.setIdPromocion(promocionJpa.getIdPromocion());
-        promocionJpa.setNombre(promocionJpa.getNombre());
-        promocionJpa.setPorcentaje(promocionJpa.getPorcentaje());
+        ProfesorJpaController profesorController = new ProfesorJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
+
         try {
-            promocionController.create(promocionJpa);
-            promocion.setIdPromocion(promocionJpa.getIdPromocion());
-            promocionRegistrada = true;
+            Accesodatos.Entidades.Profesor profesorJpa = profesorController.findProfesor(promocion.getIdProfesor());
+            if (profesorJpa != null) {
+                promocionJpa.setDescripcion(promocion.getDescripcion());
+                promocionJpa.setIdProfesor(profesorJpa);
+                promocionJpa.setIdPromocion(promocion.getIdPromocion());
+                promocionJpa.setNombre(promocion.getNombre());
+                promocionJpa.setPorcentaje(promocion.getPorcentaje());
+                promocionController.create(promocionJpa);
+                promocion.setIdPromocion(promocionJpa.getIdPromocion());
+                promocionRegistrada = true;
+            }
         } catch (Exception excepcion) {
             excepcion.printStackTrace();
         }
@@ -64,11 +71,12 @@ public class PromocionDAOSql implements PromocionDAO {
         List<Promocion> promociones = new ArrayList<>();
         ProfesorJpaController profesorController = new ProfesorJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
         Accesodatos.Entidades.Profesor profesorJpa = profesorController.findProfesor(idProfesor);
-        for(Accesodatos.Entidades.Promocion promocionJpa : profesorJpa.getPromocionCollection()){
+        for (Accesodatos.Entidades.Promocion promocionJpa : profesorJpa.getPromocionCollection()) {
             promociones.add(this.obtenerEntidad(promocionJpa));
         }
         return promociones;
     }
+
     private Promocion obtenerEntidad(Accesodatos.Entidades.Promocion promocionJpa) {
         Promocion promocion = new Promocion();
         promocion.setDescripcion(promocionJpa.getDescripcion());
