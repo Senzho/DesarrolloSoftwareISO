@@ -11,7 +11,10 @@ public class Horario {
     public Horario(int idGrupo){
         this.idGrupo = idGrupo;
         this.diaDAO = new DiaDAOSql();
-        this.setDias(this.diaDAO.obtenerDias(idGrupo));
+        this.dias = this.diaDAO.obtenerDias(idGrupo);
+    }
+    public Horario(){
+        this.diaDAO = new DiaDAOSql();
     }
 
     public int getIdGrupo() {

@@ -35,7 +35,7 @@ public class ProfesorDAOSql implements ProfesorDAO{
         profesorJpa.setMonto(profesor.getMonto());
         return profesorJpa;
     }
-    private Profesor obtenerEntidad(Accesodatos.Entidades.Profesor profesorJpa){
+    public static Profesor obtenerEntidad(Accesodatos.Entidades.Profesor profesorJpa){
         Profesor profesor = new Profesor();
         profesor.setIdProfesor(profesorJpa.getIdProfesor());
         profesor.setCorreo(profesorJpa.getCorreo());
@@ -110,7 +110,7 @@ public class ProfesorDAOSql implements ProfesorDAO{
         ProfesorJpaController controller = new ProfesorJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
         List<Profesor> profesores = new ArrayList();
         controller.findProfesorEntities().forEach((profesorJpa) -> {
-            profesores.add(this.obtenerEntidad(profesorJpa));
+            profesores.add(ProfesorDAOSql.obtenerEntidad(profesorJpa));
         });
         return profesores;
     }

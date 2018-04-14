@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LogicaNegocio.Grupos.VentanaCRUGrupoController">
+<AnchorPane id="AnchorPane" prefHeight="443.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LogicaNegocio.Grupos.VentanaCRUGrupoController">
    <children>
       <Label layoutX="14.0" layoutY="14.0" text="Nombre:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
          <font>
@@ -23,18 +23,24 @@
          </font>
       </Label>
       <ComboBox fx:id="profesores" layoutX="86.0" layoutY="44.0" prefHeight="25.0" prefWidth="502.0" AnchorPane.leftAnchor="86.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="44.0" />
-      <Label layoutX="13.0" layoutY="77.0" text="Horario:" AnchorPane.leftAnchor="13.0" AnchorPane.topAnchor="77.0">
+      <Label layoutX="13.0" layoutY="109.0" text="Horario:" AnchorPane.leftAnchor="13.0" AnchorPane.topAnchor="109.0">
          <font>
             <Font name="Arial" size="16.0" />
          </font>
       </Label>
-      <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="86.0" layoutY="77.0" prefHeight="229.0" prefWidth="464.0" AnchorPane.bottomAnchor="94.0" AnchorPane.leftAnchor="86.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="77.0">
+      <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="86.0" layoutY="109.0" prefHeight="242.0" prefWidth="464.0" AnchorPane.bottomAnchor="92.0" AnchorPane.leftAnchor="86.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="109.0">
          <content>
-            <FlowPane fx:id="panelHorario" prefHeight="200.0" prefWidth="200.0" />
+            <FlowPane fx:id="panelHorario" prefHeight="297.0" prefWidth="462.0" />
          </content>
       </ScrollPane>
       <Separator layoutX="13.0" layoutY="346.0" prefHeight="5.0" prefWidth="573.0" AnchorPane.bottomAnchor="49.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="14.0" />
       <Button fx:id="guardar" layoutX="527.0" layoutY="361.0" mnemonicParsing="false" text="Guardar" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
-      <ImageView fx:id="agregarDia" fitHeight="30.0" fitWidth="30.0" layoutX="557.0" layoutY="78.0" onMouseClicked="#agregarDia_onClick" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="78.0" />
+      <ImageView fx:id="agregarDia" fitHeight="30.0" fitWidth="30.0" layoutX="557.0" layoutY="110.0" onMouseClicked="#agregarDia_onClick" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="110.0" />
+      <Label layoutX="13.0" layoutY="78.0" text="Danza:">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="danza" layoutX="86.0" layoutY="76.0" prefHeight="25.0" prefWidth="502.0" />
    </children>
 </AnchorPane>

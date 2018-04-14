@@ -1,6 +1,7 @@
 package LogicaNegocio.Grupos;
 
 import Accesodatos.Grupos.GrupoDAOSql;
+import LogicaNegocio.Catalogos.Profesor;
 import java.util.List;
 
 public class Grupo {
@@ -8,6 +9,7 @@ public class Grupo {
     private String nombre;
     private String danza;
     private Horario horario;
+    private Profesor profesor;
     private GrupoDAOSql grupoDAO;
 
     public Grupo(){
@@ -44,9 +46,15 @@ public class Grupo {
     public void setHorario(Horario horario) {
         this.horario = horario;
     }
+    public Profesor getProfesor(){
+        return this.profesor;
+    }
+    public void setProfesor(Profesor profesor){
+        this.profesor = profesor;
+    }
     
-    public boolean registrarGrupo(){
-        return this.grupoDAO.registrarGrupo(this);
+    public boolean registrarGrupo(int idProfesor) throws HorarioException{
+        return this.grupoDAO.registrarGrupo(this, idProfesor);
     }
     public boolean editarGrupo(){
         return this.grupoDAO.editarGrupo(this);

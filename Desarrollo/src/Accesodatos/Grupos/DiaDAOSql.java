@@ -47,17 +47,24 @@ public class DiaDAOSql implements DiaDAO{
         }catch(Exception excepcion){
             agregado = false;
         }
-        return false;
+        return agregado;
     }
     @Override
     public boolean editarDia(Dia dia) {
-        return false;
+        boolean editado = true;
+        DiaJpaController controller = new DiaJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
+        try{
+            controller.edit(this.obtenerEntidad(dia));
+        }catch(Exception excepcion){
+            editado = false;
+        }
+        return editado;
     }
     @Override
     public List<Dia> obtenerDias(int idGrupo) {
         List<Dia> dias = new ArrayList();
         EntityManager entityManager = Persistence.createEntityManagerFactory("CentroDeControlAredPU").createEntityManager();
-        Query query = entityManager.createNamedQuery("Dia.findByTipo");
+        Query query = entityManager.createNamedQuery("Dia.findByIdTipo");
         query.setParameter("idTipo", idGrupo);
         query.getResultList().forEach((diaJpa) -> {
             dias.add(this.obtenerEntidad((Accesodatos.Entidades.Dia) diaJpa));
