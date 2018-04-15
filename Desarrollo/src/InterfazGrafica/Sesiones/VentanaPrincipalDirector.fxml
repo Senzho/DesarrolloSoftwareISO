@@ -7,7 +7,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="468.0" prefWidth="768.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="LogicaNegocio.Sesiones.VentanaPrincipalDirectorController">
+<AnchorPane id="AnchorPane" prefHeight="468.0" prefWidth="768.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LogicaNegocio.Sesiones.VentanaPrincipalDirectorController">
   <children>
     <MenuBar prefHeight="26.0" prefWidth="741.0" useSystemMenuBar="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="27.0" AnchorPane.topAnchor="0.0">
       <menus>
@@ -52,5 +52,6 @@
       </menus>
     </MenuBar>
     <ImageView fx:id="imagenCambiarCuenta" fitHeight="26.0" fitWidth="26.0" onMouseClicked="#imageView_onClick" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0" />
+      <BorderPane fx:id="panelPrincipal" layoutY="25.0" prefHeight="443.0" prefWidth="768.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0" />
   </children>
 </AnchorPane>
