@@ -53,8 +53,8 @@ public class Grupo {
         this.profesor = profesor;
     }
     
-    public boolean registrarGrupo(int idProfesor) throws HorarioException{
-        return this.grupoDAO.registrarGrupo(this, idProfesor);
+    public boolean registrarGrupo() throws HorarioException{
+        return this.grupoDAO.registrarGrupo(this);
     }
     public boolean editarGrupo(){
         return this.grupoDAO.editarGrupo(this);

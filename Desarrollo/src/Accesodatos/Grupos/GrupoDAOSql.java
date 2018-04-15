@@ -8,6 +8,7 @@ import LogicaNegocio.Grupos.Dia;
 import LogicaNegocio.Grupos.Grupo;
 import LogicaNegocio.Grupos.Horario;
 import LogicaNegocio.Grupos.HorarioException;
+import LogicaNegocio.Grupos.Horas;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Persistence;
@@ -36,22 +37,10 @@ public class GrupoDAOSql implements GrupoDAO{
             for (Accesodatos.Entidades.Dia diaJpa : diasJpa){
                 if (diaJpa.getDia().equals(dia.getDia())){
                     if (diaJpa.getSalon().equals(dia.getSalon())){
-                        String horaInicioStringsJpa[] = diaJpa.getHoraInicio().split(":");
-                        int horaInicioJpa = Integer.valueOf(horaInicioStringsJpa[0]);
-                        int minutosInicioJpa = Integer.valueOf(horaInicioStringsJpa[1]);
-                        String horaFinStringsJpa[] = diaJpa.getHoraFin().split(":");
-                        int horaFinJpa = Integer.valueOf(horaFinStringsJpa[0]);
-                        int minutosFinJpa = Integer.valueOf(horaFinStringsJpa[1]);
-                        String horaInicioStrings[] = dia.getHoraInicio().split(":");
-                        int horaInicio = Integer.valueOf(horaInicioStrings[0]);
-                        int minutosInicio = Integer.valueOf(horaInicioStrings[1]);
-                        String horaFinStrings[] = dia.getHoraFin().split(":");
-                        int horaFin = Integer.valueOf(horaFinStrings[0]);
-                        int minutosFin = Integer.valueOf(horaFinStrings[1]);
-                        int miliIniJpa = (horaInicioJpa * 60 * 60) + (minutosInicioJpa * 60);
-                        int miliIni = (horaInicio * 60 * 60) + (minutosInicio * 60);
-                        int miliFinJpa = (horaFinJpa * 60 * 60) + (minutosFinJpa * 60);
-                        int miliFin = (horaFin * 60 * 60) + (minutosFin * 60);
+                        int miliIniJpa = Horas.getSegundos(diaJpa.getHoraInicio());
+                        int miliIni = Horas.getSegundos(dia.getHoraInicio());
+                        int miliFinJpa = Horas.getSegundos(diaJpa.getHoraFin());
+                        int miliFin = Horas.getSegundos(dia.getHoraFin());;
                         if ((miliIni >= miliIniJpa && miliIni <= miliFinJpa) || (miliFin >= miliIniJpa && miliFin <= miliFinJpa)){
                             diaError = dia;
                             break fors;
@@ -68,7 +57,7 @@ public class GrupoDAOSql implements GrupoDAO{
     }
     
     @Override
-    public boolean registrarGrupo(Grupo grupo, int idProfesor) throws HorarioException{
+    public boolean registrarGrupo(Grupo grupo) throws HorarioException{
         boolean registrado = true;
         GrupoJpaController controller = new GrupoJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
         ProfesorJpaController profesorController = new ProfesorJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
@@ -76,12 +65,13 @@ public class GrupoDAOSql implements GrupoDAO{
         HorarioException horarioException = null;
         try{
             DiaDAOSql diaDAO = new DiaDAOSql();
-            grupoJpa.setIdProfesor(profesorController.findProfesor(idProfesor));
+            grupoJpa.setIdProfesor(profesorController.findProfesor(grupo.getProfesor().getIdProfesor()));
             Dia diaValidacion = this.horarioValido(grupo.getHorario().getDias());
             if (diaValidacion == null){
                 controller.create(grupoJpa);
                 grupo.setId(grupoJpa.getIdGrupo());
                 for (Dia dia : grupo.getHorario().getDias()){
+                    dia.setTipo(true);
                     dia.setIdTipo(grupo.getId());
                     diaDAO.agregarDia(dia);
                 } 

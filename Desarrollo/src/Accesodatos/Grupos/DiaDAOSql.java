@@ -51,10 +51,11 @@ public class DiaDAOSql implements DiaDAO{
     }
     @Override
     public boolean editarDia(Dia dia) {
-        boolean editado = true;
+        boolean editado;
         DiaJpaController controller = new DiaJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
         try{
             controller.edit(this.obtenerEntidad(dia));
+            editado = true;
         }catch(Exception excepcion){
             editado = false;
         }

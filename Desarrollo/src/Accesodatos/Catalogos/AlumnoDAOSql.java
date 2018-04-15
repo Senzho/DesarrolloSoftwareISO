@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 public class AlumnoDAOSql implements AlumnoDAO{
     public AlumnoDAOSql(){
@@ -105,6 +107,17 @@ public class AlumnoDAOSql implements AlumnoDAO{
                 alumnos.add(alumno);
             }
         }
+        return alumnos;
+    }
+    @Override
+    public List<Alumno> obtenerAlumnos(int idGrupo){
+        List<Alumno> alumnos = new ArrayList();
+        EntityManager entityManager = Persistence.createEntityManagerFactory("CentroDeControlAredPU").createEntityManager();
+        Query query = entityManager.createNamedQuery("Alumno.findFromGrupo");
+        query.setParameter("idGrupo", idGrupo);
+        query.getResultList().forEach((alumnoJpa) -> {
+            alumnos.add(this.obtenerEntidad((Accesodatos.Entidades.Alumno) alumnoJpa));
+        });
         return alumnos;
     }
     @Override

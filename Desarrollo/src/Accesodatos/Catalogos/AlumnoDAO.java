@@ -8,5 +8,6 @@ public interface AlumnoDAO {
     public boolean editarAlumno(Alumno alumno);
     public List<Alumno> obtenerAlumnos();
     public List<Alumno> obtenerAlumnos(String nombre);
+    public List<Alumno> obtenerAlumnos(int idGrupo);
     public int[] obtenerGrupos();
 }

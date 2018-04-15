@@ -26,4 +26,12 @@ public class AlumnoDAOObtencionTest {
             fail();
         }
     }
+    @Test
+    public void obtenerAlumnosGrupoExcepcion(){
+        try{
+            this.alumnoDAO.obtenerAlumnos(18);
+        }catch(Exception exception){
+            fail();
+        }
+    }
 }
