@@ -8,8 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="231.0" prefWidth="455.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="LogicaNegocio.Pagos.VentanaRegistrarPagoAlumnoController">
+<AnchorPane id="AnchorPane" prefHeight="231.0" prefWidth="455.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LogicaNegocio.Pagos.VentanaRegistrarPagoAlumnoController">
    <children>
       <Label layoutX="25.0" layoutY="16.0" text="Alumno:" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="16.0">
          <font>
@@ -36,12 +35,7 @@
             <Font name="Arial" size="16.0" />
          </font>
       </RadioButton>
-      <Button fx:id="btnPromocion" layoutX="349.0" layoutY="50.0" mnemonicParsing="false" text="Seleccionar" AnchorPane.rightAnchor="12.5" AnchorPane.topAnchor="50.0">
-         <font>
-            <Font name="Arial" size="16.0" />
-         </font>
-      </Button>
-      <Button fx:id="s" layoutX="368.0" layoutY="189.0" mnemonicParsing="false" text="Registrar" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="12.5">
+      <Button fx:id="btnRegistrar" layoutX="368.0" layoutY="189.0" mnemonicParsing="false" onMouseClicked="#btnRegistrar_onClick" text="Registrar" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="12.5">
          <font>
             <Font name="Arial" size="16.0" />
          </font>
@@ -49,5 +43,10 @@
       <ComboBox fx:id="comboAlumno" layoutX="101.0" layoutY="12.0" prefHeight="25.0" prefWidth="353.0" AnchorPane.leftAnchor="101.0" AnchorPane.rightAnchor="13.5" AnchorPane.topAnchor="12.0" />
       <TextField fx:id="txtMonto" layoutX="102.0" layoutY="53.0" prefHeight="25.0" prefWidth="147.0" AnchorPane.leftAnchor="102.0" AnchorPane.rightAnchor="218.5" AnchorPane.topAnchor="53.0" />
       <Line endX="370.0" layoutX="97.0" layoutY="177.0" startX="-100.0" stroke="#908b8b" AnchorPane.bottomAnchor="53.5" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <Button fx:id="btnPromocion" layoutX="353.0" layoutY="50.0" mnemonicParsing="false" onMouseClicked="#btnPromocion_onClick" text="Seleccionar" AnchorPane.rightAnchor="12.0">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

@@ -6,6 +6,7 @@
 package LogicaNegocio.Pagos;
 
 import Accesodatos.Pagos.PromocionDAOSql;
+import java.util.List;
 
 /**
  *
@@ -79,6 +80,12 @@ public class Promocion {
 
     public boolean registrarPromocion() {
         return promocionDao.registrarPromocion(this);
+    }
+    public List<Promocion> obtenerPromociones(int idProfesor){
+        return promocionDao.obtenerPromociones(idProfesor);
+    }
+    public Promocion obtenerPromocion(int idPromocion){
+        return promocionDao.obtenerPromocion(idPromocion);
     }
 
 }

@@ -86,4 +86,10 @@ public class Alumno {
     public int[] obtenerGrupos() {
         return this.alumnoDAO.obtenerGrupos();
     }
+    public Alumno obtenerAlumno(int idAlumno){
+        return this.alumnoDAO.obtenerAlumno(idAlumno);
+    }
+    public List<Alumno> obtenerAlumnos(int idGrupo){
+        return this.alumnoDAO.obtenerAlumnos(idGrupo);
+    }
 }
