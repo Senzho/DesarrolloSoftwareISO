@@ -27,7 +27,6 @@ import javafx.stage.Stage;
  */
 public class PanelHistorialPagosAlumnoController implements Initializable {
 
-    private int idAlumno;
     private Stage stage;
     private Alumno alumno;
     @FXML
@@ -46,15 +45,14 @@ public class PanelHistorialPagosAlumnoController implements Initializable {
         this.stage = stage;
     }
 
-    public void setIdAlumno(int idAlumno) {
-        this.idAlumno = idAlumno;
+    public void setAlumno(Alumno alumno) {
+        this.alumno = alumno;
     }
 
     public void inicializarPanelPagos() {
-        alumno = new Alumno().obtenerAlumno(idAlumno);
         lblNombre.setText(alumno.getNombre());
         lblCorreo.setText(alumno.getCorreo());
-        pagos = new PagoAlumno().obtenerPagos(idAlumno);
+        pagos = new PagoAlumno().obtenerPagos(alumno.getIdAlumno());
         this.panelPagos.getChildren().clear();
         pagos.forEach((pago) -> {
             FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/InterfazGrafica/Pagos/PanelPagoAlumno.fxml"));

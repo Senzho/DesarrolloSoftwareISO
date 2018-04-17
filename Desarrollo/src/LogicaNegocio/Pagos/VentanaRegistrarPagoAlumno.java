@@ -19,6 +19,7 @@ import javafx.stage.Stage;
  */
 public class VentanaRegistrarPagoAlumno extends Application {
     private int idProfesor;
+   
     public VentanaRegistrarPagoAlumno(int idProfesor){
         this.idProfesor = idProfesor;
         try {

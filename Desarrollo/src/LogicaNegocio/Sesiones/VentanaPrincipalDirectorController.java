@@ -7,6 +7,8 @@ import LogicaNegocio.Catalogos.VentanaCRUProfesor;
 import LogicaNegocio.Egresos.VentanaCRUEgreso;
 import LogicaNegocio.Egresos.VentanaCRUGastoPromocional;
 import LogicaNegocio.Lanzador;
+import LogicaNegocio.Pagos.VentanaRegistrarPagoAlumno;
+import LogicaNegocio.Pagos.VentanaRegistrarPagoProfesor;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -60,5 +62,11 @@ public class VentanaPrincipalDirectorController implements Initializable {
     }
     public void menuEgreso_onClick(){
         new VentanaCRUEgreso();
+    }
+    public void menuRegistroPagoProfesor_onClick(){
+        new VentanaRegistrarPagoProfesor();
+    }
+    public void menuRegistroPagoAlumno_onClick(){
+        new VentanaRegistrarPagoAlumno(this.profesor.getIdProfesor());
     }
 }

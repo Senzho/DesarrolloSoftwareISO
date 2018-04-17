@@ -120,13 +120,6 @@ public class AlumnoDAOSql implements AlumnoDAO{
         });
         return alumnos;
     }
-    @Override 
-    public Alumno obtenerAlumno(int idAlumno){
-         AlumnoJpaController controller = new AlumnoJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
-         Alumno alumno = obtenerEntidad(controller.findAlumno(idAlumno));
-         return alumno;
-         
-    }
     @Override
     public int[] obtenerGrupos() {
         int[] grupos = {0, 1};

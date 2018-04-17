@@ -7,10 +7,14 @@ package LogicaNegocio.Sesiones;
 
 import LogicaNegocio.Catalogos.Profesor;
 import LogicaNegocio.Lanzador;
+import LogicaNegocio.Pagos.VentanaRegistrarPagoAlumno;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -19,6 +23,8 @@ public class VentanaPrincipalProfesorController implements Initializable {
     private Usuario usuario;
     private Profesor profesor;
     private Lanzador lanzador;
+    @FXML
+    private MenuItem menuRegistrarPagos;
     
     @FXML
     private ImageView imagenCambiarCuenta;

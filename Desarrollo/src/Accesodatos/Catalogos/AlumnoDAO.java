@@ -10,5 +10,4 @@ public interface AlumnoDAO {
     public List<Alumno> obtenerAlumnos(String nombre);
     public List<Alumno> obtenerAlumnos(int idGrupo);
     public int[] obtenerGrupos();
-    public Alumno obtenerAlumno(int idAlumno);
 }

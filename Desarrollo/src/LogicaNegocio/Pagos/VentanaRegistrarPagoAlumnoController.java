@@ -19,9 +19,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  * FXML Controller class
@@ -48,13 +51,17 @@ public class VentanaRegistrarPagoAlumnoController implements Initializable {
     private List<Grupo> listaGrupos;
     private Promocion promocion;
     private ToggleGroup grupo;
-
+    @FXML
+    private Label lblPromocion;
+    @FXML
+    private ImageView imagenCancelar;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        imagenCancelar.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkCrossIcon.png")));
+        imagenCancelar.setVisible(false);
     }
 
     public void inicializarCombo() {
@@ -76,8 +83,8 @@ public class VentanaRegistrarPagoAlumnoController implements Initializable {
 
     public void setPromocion(Promocion promocion) {
         this.promocion = promocion;
-        System.out.println(" esto es una promocion....");
-        System.out.println(promocion.getDescripcion());
+        this.imagenCancelar.setVisible(true);
+        lblPromocion.setText(promocion.getDescripcion());
     }
 
     public void setIdProfesor(int idProfesor) {
@@ -120,5 +127,9 @@ public class VentanaRegistrarPagoAlumnoController implements Initializable {
             MessageFactory.showMessage("Error de datos", "Datos incorrectos", "Debe ingresar un monto", Alert.AlertType.WARNING);
         }
     }
-
+    public void imagenCancelar_onClick(){
+        this.promocion = null;
+        this.imagenCancelar.setVisible(false);
+        this.lblPromocion.setText("");
+    }
 }

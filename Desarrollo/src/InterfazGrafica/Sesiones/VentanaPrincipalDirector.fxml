@@ -17,8 +17,8 @@
           <items>
             <Menu mnemonicParsing="false" text="Registro de pagos">
               <items>
-                <MenuItem mnemonicParsing="false" text="Alumno" />
-                <MenuItem mnemonicParsing="false" text="Profesor" />
+                <MenuItem mnemonicParsing="false" onAction="#menuRegistroPagoAlumno_onClick" text="Alumno" />
+                <MenuItem mnemonicParsing="false" onAction="#menuRegistroPagoProfesor_onClick" text="Profesor" />
                 <MenuItem mnemonicParsing="false" text="Renta" />
               </items>
             </Menu>
