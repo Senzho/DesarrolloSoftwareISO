@@ -1,6 +1,8 @@
 package LogicaNegocio.Catalogos;
 
 import InterfazGrafica.MessageFactory;
+import LogicaNegocio.Lanzador;
+import LogicaNegocio.Pagos.PanelHistorialPagoProfesoresController;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -28,6 +30,7 @@ public class PanelProfesorController implements Initializable {
     private Button pagos;
     
     private Profesor profesor;
+    private Lanzador lanzador;
     
     private void establecerIconos(){
         if (this.profesor.isEstado()){
@@ -36,6 +39,9 @@ public class PanelProfesorController implements Initializable {
             this.baja.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkPlusIcon.png")));
         }
         this.editar.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkPencilIcon.png")));
+    }
+    public void setLanzador(Lanzador lanzador){
+        this.lanzador = lanzador;
     }
     
     @Override
@@ -78,6 +84,8 @@ public class PanelProfesorController implements Initializable {
         new VentanaCRUProfesor(this.profesor);
     }
     public void pagos_OnClick(){
-        //En espera del módulo de pagos.
+        lanzador.lanzar("/InterfazGrafica/Pagos/PanelHistorialPagoProfesores.fxml");
+        PanelHistorialPagoProfesoresController controller =  lanzador.getCargador().getController();
+        controller.setProfesor(this.profesor);
     }
 }

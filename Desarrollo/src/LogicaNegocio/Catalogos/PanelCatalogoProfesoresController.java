@@ -1,6 +1,7 @@
 package LogicaNegocio.Catalogos;
 
 import InterfazGrafica.MessageFactory;
+import LogicaNegocio.Lanzador;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -23,10 +24,14 @@ public class PanelCatalogoProfesoresController implements Initializable {
     private Button buscar;
     @FXML
     private FlowPane panelProfesores;
+    private Lanzador lanzador;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        this.cargarProfesores(new Profesor().obtenerProfesores());
+       
+    }
+    public void setLanzador(Lanzador lanzador){
+        this.lanzador = lanzador; 
     }
     
     public void cargarProfesores(List<Profesor> profesores){
@@ -39,6 +44,7 @@ public class PanelCatalogoProfesoresController implements Initializable {
                 panel.setStyle("-fx-background-color: #D8D8D8;");
                 PanelProfesorController controller = loader.getController();
                 controller.setProfesor(profesorObtenido);
+                controller.setLanzador(this.lanzador);
                 this.panelProfesores.getChildren().add(panel);
             } catch (IOException ex) {
                 Logger.getLogger(PanelCatalogoAlumnosController.class.getName()).log(Level.SEVERE, null, ex);

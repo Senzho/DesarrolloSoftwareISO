@@ -1,5 +1,6 @@
 package LogicaNegocio.Sesiones;
 
+import LogicaNegocio.Catalogos.PanelCatalogoProfesoresController;
 import LogicaNegocio.Catalogos.Profesor;
 import LogicaNegocio.Catalogos.VentanaCRUAlumno;
 import LogicaNegocio.Catalogos.VentanaCRUCliente;
@@ -68,5 +69,17 @@ public class VentanaPrincipalDirectorController implements Initializable {
     }
     public void menuRegistroPagoAlumno_onClick(){
         new VentanaRegistrarPagoAlumno(this.profesor.getIdProfesor());
+    }
+    public void menuProfesor_onclick(){
+        this.lanzador.lanzar("/InterfazGrafica/Catalogos/PanelCatalogoProfesores.fxml");
+        PanelCatalogoProfesoresController controller =  lanzador.getCargador().getController();
+        controller.setLanzador(lanzador);
+        controller.cargarProfesores(new Profesor().obtenerProfesores());
+    }
+    public void menuAlumno_onClick(){
+        this.lanzador.lanzar("/InterfazGrafica/Catalogos/PanelCatalogoAlumnos.fxml");
+    }
+    public void menuCliente_onClick(){
+        this.lanzador.lanzar("/InterfazGrafica/Catalogos/PanelCatalogoClientes.fxml");
     }
 }
