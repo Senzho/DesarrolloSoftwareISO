@@ -6,12 +6,10 @@
 package LogicaNegocio.Sesiones;
 
 import LogicaNegocio.Catalogos.Profesor;
+import LogicaNegocio.Grupos.PanelGruposProfesorController;
 import LogicaNegocio.Lanzador;
-import LogicaNegocio.Pagos.VentanaRegistrarPagoAlumno;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.MenuItem;
@@ -36,14 +34,22 @@ public class VentanaPrincipalProfesorController implements Initializable {
         System.out.println(usuario.getNombre());
         this.usuario = usuario;
         this.profesor = profesor;
+        menuMisGrupos_onClick();
     }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {//1 activo 2 baja
         this.lanzador = new Lanzador(this.panelPrincipal);
+        
     }  
     
     public void imageView_onClick(){
         new VentanaModificarCuenta(this.usuario, this.profesor);
+    }
+    public void menuMisGrupos_onClick(){
+        this.lanzador.lanzar("/InterfazGrafica/Grupos/PanelGruposProfesor.fxml");
+        PanelGruposProfesorController controller = this.lanzador.getCargador().getController();
+        controller.setLanzador(lanzador);
+        controller.setIdProfesor(this.profesor.getIdProfesor());
     }
 }

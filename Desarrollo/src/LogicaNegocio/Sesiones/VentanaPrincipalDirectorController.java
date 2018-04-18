@@ -82,4 +82,10 @@ public class VentanaPrincipalDirectorController implements Initializable {
     public void menuCliente_onClick(){
         this.lanzador.lanzar("/InterfazGrafica/Catalogos/PanelCatalogoClientes.fxml");
     }
+    public void menuMisGrupos_onClick(){
+        this.lanzador.lanzar("/InterfazGrafica/Grupos/PanelGruposProfesor.fxml");
+        PanelGruposProfesorController controller = this.lanzador.getCargador().getController();
+        controller.setLanzador(lanzador);
+        controller.setIdProfesor(this.profesor.getIdProfesor());
+    }
 }

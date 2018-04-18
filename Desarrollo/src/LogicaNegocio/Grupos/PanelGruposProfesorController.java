@@ -1,6 +1,7 @@
 package LogicaNegocio.Grupos;
 
 import Accesodatos.Grupos.GrupoDAOSql;
+import LogicaNegocio.Lanzador;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,6 +16,11 @@ import javafx.scene.layout.FlowPane;
 public class PanelGruposProfesorController implements Initializable {
     @FXML
     FlowPane panelGrupos;
+    private Lanzador lanzador;
+    
+    public void setLanzador(Lanzador lanzador){
+        this.lanzador = lanzador;
+    }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -34,6 +40,7 @@ public class PanelGruposProfesorController implements Initializable {
             AnchorPane pane = loader.load();
             pane.setStyle("-fx-background-color: #F5A9E1;");
             PanelGrupoProfesorController controller = loader.getController();
+            controller.setLanzador(lanzador);
             controller.setGrupo(grupo);
             this.panelGrupos.getChildren().add(pane);
         } catch (IOException ex) {

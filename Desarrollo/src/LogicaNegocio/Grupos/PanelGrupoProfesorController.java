@@ -1,5 +1,6 @@
 package LogicaNegocio.Grupos;
 
+import LogicaNegocio.Lanzador;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -20,7 +21,11 @@ public class PanelGrupoProfesorController implements Initializable {
     private ImageView verAlumnos;
     
     private Grupo grupo;
+    private Lanzador lanzador;
     
+    public void setLanzador(Lanzador lanzador){
+        this.lanzador = lanzador;
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.verAlumnos.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkPersonIcon.png")));
@@ -36,5 +41,11 @@ public class PanelGrupoProfesorController implements Initializable {
         this.grupo.getHorario().getDias().forEach((dia) -> {
             this.horario.getItems().add(dia.getDia() + " " + dia.getHoraInicio() + " - " + dia.getHoraFin() + " salón " + dia.getSalon());
         });
+    }
+    public void verAlumnos_onClick(){
+        lanzador.lanzar("/InterfazGrafica/Grupos/PanelAlumnosGrupoProfesor.fxml");
+        PanelAlumnosGrupoProfesorController controller = this.lanzador.getCargador().getController();
+        controller.setIdProfesor(this.grupo.getProfesor().getIdProfesor());
+        controller.setIdGrupo(grupo.getId());
     }
 }
