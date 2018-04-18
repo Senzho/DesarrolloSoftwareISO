@@ -1,5 +1,6 @@
 package LogicaNegocio.Pagos;
 
+import LogicaNegocio.Egresos.Dates;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -29,7 +30,7 @@ public class PanelPagoProfesorController implements Initializable {
         this.cargarPago();
     }
     public void cargarPago(){
-        this.fecha.setText(this.pagoProfesor.getFecha().toString());
+        this.fecha.setText(Dates.getSentence(this.pagoProfesor.getFecha()));
         String tipoPago;
         if (this.pagoProfesor.isTipoPago()){
             tipoPago = "Pago mensual";

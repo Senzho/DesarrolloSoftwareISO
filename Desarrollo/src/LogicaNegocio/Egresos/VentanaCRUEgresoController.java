@@ -10,6 +10,8 @@ import LogicaNegocio.Catalogos.OperacionesString;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -20,6 +22,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
@@ -31,7 +34,7 @@ import javafx.scene.control.TextField;
 public class VentanaCRUEgresoController implements Initializable {
 
     @FXML
-    private TextField txtFecha;
+    private DatePicker fecha;
     @FXML
     private TextArea txtDescripcion;
     @FXML
@@ -50,17 +53,7 @@ public class VentanaCRUEgresoController implements Initializable {
     }
 
     public void inicializarComponentes() {
-        Calendar fecha = new GregorianCalendar();
-        String dia = Integer.toString(fecha.get(Calendar.DATE));
-        String mes = Integer.toString(fecha.get(Calendar.MONTH));
-        String año = Integer.toString(fecha.get(Calendar.YEAR));
-        SimpleDateFormat formatofecha = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            fechaRegistro = formatofecha.parse(año + "-" + mes + "-" + dia);
-        } catch (ParseException ex) {
-            Logger.getLogger(VentanaCRUEgresoController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        txtFecha.setText(fechaRegistro.toString());
+        this.fecha.setValue(LocalDate.now());
     }
 
     public boolean validarCampos() {
@@ -87,6 +80,7 @@ public class VentanaCRUEgresoController implements Initializable {
     }
 
     public void editarEgreso() {
+        this.fechaRegistro = Dates.toDate(this.fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE));
         Egreso egresoRegistro = new Egreso(egreso.getIdEgreso(), txtCosto.getText(), txtDescripcion.getText(), fechaRegistro);
         boolean registroExitoso = false;
         if (validarCampos()) {
@@ -102,6 +96,7 @@ public class VentanaCRUEgresoController implements Initializable {
     }
 
     public void agregarEgreso() {
+        this.fechaRegistro = Dates.toDate(this.fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE));
         Egreso egresoRegistro = new Egreso(0, txtCosto.getText(), txtDescripcion.getText(), fechaRegistro);
         boolean registroExitoso = false;
         if (validarCampos()) {

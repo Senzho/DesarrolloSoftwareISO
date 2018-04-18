@@ -7,24 +7,18 @@ package LogicaNegocio.Egresos;
 
 import InterfazGrafica.MessageFactory;
 import java.net.URL;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import LogicaNegocio.Catalogos.OperacionesString;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import javafx.scene.control.DatePicker;
 /**
  * FXML Controller class
  *
@@ -38,9 +32,9 @@ public class VentanaCRUGastoPromocionalController implements Initializable {
     @FXML
     private TextField txtMonto;
     @FXML
-    private ComboBox comboFechaInicio;
+    private DatePicker fechaInicioPick;
     @FXML
-    private ComboBox comboFechaFin;
+    private DatePicker fechaFinPick;
     @FXML
     private Button btnRegistrar;
     private GastoPromocional gastoPromocional;
@@ -51,32 +45,14 @@ public class VentanaCRUGastoPromocionalController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-    public void inicializarComponentes() {
-        Calendar fecha = new GregorianCalendar();
-        String dia = Integer.toString(fecha.get(Calendar.DATE));
-        String mes = Integer.toString(fecha.get(Calendar.MONTH));
-        String año = Integer.toString(fecha.get(Calendar.YEAR));
-        SimpleDateFormat formatofecha = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            fechaInicio = formatofecha.parse(año + "-" + mes + "-" + dia);
-            fechaFin = formatofecha.parse(año + "-" + mes + "-" + dia);
-        } catch (ParseException ex) {
-            Logger.getLogger(VentanaCRUGastoPromocionalController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        ObservableList<String> itemsInicio = FXCollections.observableArrayList();
-        itemsInicio.addAll(fechaInicio.toString());
-        comboFechaInicio.setItems(itemsInicio);
-        ObservableList<String> itemsFin = FXCollections.observableArrayList();
-        itemsFin.addAll(fechaFin.toString());
-        comboFechaFin.setItems(itemsFin);
+        this.fechaInicioPick.setValue(LocalDate.now());
+        this.fechaFinPick.setValue(LocalDate.of(Dates.getYear(new Date()), Dates.getMonth(new Date()), Dates.getDay(new Date())));
     }
 
     public boolean validarCampos() {
         boolean valido = true;
         if (txtDescripcion.getText().equals("") || !OperacionesString.URLValida(this.txtEnlace.getText())
-                || !OperacionesString.montoValido(this.txtMonto.getText())) {
+                || !OperacionesString.montoValido(this.txtMonto.getText()) || Dates.getDiference(fechaInicio, fechaFin) < 1) {
                 valido = false;
         }
         return valido;
@@ -93,26 +69,29 @@ public class VentanaCRUGastoPromocionalController implements Initializable {
         if (gastoPromocional != null) {
             cargarDatosGastoPromocional();
         }
-        inicializarComponentes();
     }
 
     public void editarGastoPromocional() {
+        this.fechaInicio = Dates.toDate(this.fechaInicioPick.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE));
+        this.fechaFin = Dates.toDate(this.fechaFinPick.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE));
         GastoPromocional gastoPromocional = new GastoPromocional(this.gastoPromocional.getIdGastoPromocional(), this.txtDescripcion.getText(), this.fechaFin,
                 this.fechaInicio,this.txtMonto.getText(),this.txtEnlace.getText());
         boolean registroExitoso = false;
         if (validarCampos()) {//idGastoPromocional,String descripcion, Date fechaFin, Date fechaInicio, String monto, String URL
             registroExitoso = gastoPromocional.editarGasto();
             if (registroExitoso) {
-                MessageFactory.showMessage("Aviso", "Registro gasto promocional", "gasto promocional editado exitosamente", Alert.AlertType.CONFIRMATION);
+                MessageFactory.showMessage("Aviso", "Registro gasto promocional", "Gasto promocional editado exitosamente", Alert.AlertType.CONFIRMATION);
             } else {
-                MessageFactory.showMessage("Aviso", "Registro gasto promocional", "no se pudo crear el gasto promocional", Alert.AlertType.ERROR);
+                MessageFactory.showMessage("Aviso", "Registro gasto promocional", "No se pudo crear el gasto promocional", Alert.AlertType.ERROR);
             }
         } else {
-            MessageFactory.showMessage("Aviso", "Registro gasto promocional", "faltan datos por llenar o algunos son incorrectos", Alert.AlertType.ERROR);
+            MessageFactory.showMessage("Aviso", "Registro gasto promocional", "Faltan datos por llenar o algunos son incorrectos", Alert.AlertType.ERROR);
         }
     }
 
     public void agregarGastoPromocional() {
+        this.fechaInicio = Dates.toDate(this.fechaInicioPick.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE));
+        this.fechaFin = Dates.toDate(this.fechaFinPick.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE));
         GastoPromocional gasto = new GastoPromocional(0,this.txtDescripcion.getText(), this.fechaFin,
                 this.fechaInicio,this.txtMonto.getText(),this.txtEnlace.getText());
         boolean registroExitoso = false;
@@ -120,12 +99,12 @@ public class VentanaCRUGastoPromocionalController implements Initializable {
             registroExitoso = gasto.registrarGasto();
             if (registroExitoso) {
                 this.gastoPromocional = gasto;
-                MessageFactory.showMessage("Aviso", "Registro egreso", "egreso creado exitosamente", Alert.AlertType.CONFIRMATION);
+                MessageFactory.showMessage("Aviso", "Registro egreso", "Gasto promocional creado exitosamente", Alert.AlertType.INFORMATION);
             }else{
-                MessageFactory.showMessage("Aviso", "Registro egreso", "no se pudo crear el egreso", Alert.AlertType.ERROR);
+                MessageFactory.showMessage("Aviso", "Registro egreso", "No se pudo crear el gasto promocional", Alert.AlertType.ERROR);
             }
         } else {
-            MessageFactory.showMessage("Aviso", "Registro egreso", "faltan datos por llenar o algunos son incorrectos", Alert.AlertType.ERROR);
+            MessageFactory.showMessage("Aviso", "Registro egreso", "Faltan datos por llenar o algunos son incorrectos", Alert.AlertType.ERROR);
         }
     }
 

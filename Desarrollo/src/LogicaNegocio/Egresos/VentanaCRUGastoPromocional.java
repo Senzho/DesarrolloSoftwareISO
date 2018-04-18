@@ -42,7 +42,7 @@ public class VentanaCRUGastoPromocional extends Application {
         AnchorPane root = loader.load();
         VentanaCRUGastoPromocionalController controller = loader.getController();
         controller.setGastoPromocional(this.gastoPromocional);
-        Scene scene = new Scene(root, 337, 374);
+        Scene scene = new Scene(root, 337, 385);
         primaryStage.setTitle("Registro gasto promocional");
         primaryStage.setScene(scene);
         primaryStage.show();
