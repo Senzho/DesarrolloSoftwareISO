@@ -65,4 +65,7 @@ public class Grupo {
     public List<Grupo> obtenerGruposAlumno(int idAlumno){
         return this.grupoDAO.obtenerGruposAlumno(idAlumno);
     }
+    public List<Grupo> obtenerGrupos(){
+        return this.grupoDAO.obtenerGrupos();
+    }
 }
