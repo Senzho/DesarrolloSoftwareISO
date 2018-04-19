@@ -25,7 +25,7 @@ public class VentanaInicioSesionController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        this.txtUsuario.setStyle("-fx-accent: #FA58F4");
     }
 
     public void setStage(Stage stage) {

@@ -14,8 +14,14 @@
         <Menu mnemonicParsing="false" text="Asistencia" />
         <Menu mnemonicParsing="false" text="Inscripción" />
         <Menu mnemonicParsing="false" text="Proximos pagos" />
-        <Menu mnemonicParsing="false" text="Mis grupos" />
-        <Menu fx:id="menuRegistrarPagos" mnemonicParsing="false" text="Registrar pagos"/>
+        <Menu mnemonicParsing="false" text="Mis grupos">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#menuMisGrupos_onClick" text="Ver" />
+               </items></Menu>
+        <Menu fx:id="menuRegistrarPagos" mnemonicParsing="false" text="Registrar pagos">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#menuRegistrarPago_onClick" text="Registrar" />
+               </items></Menu>
       </menus>
     </MenuBar>
     <ImageView fx:id="imagenCambiarCuenta" fitHeight="26.0" fitWidth="26.0" onMouseClicked="#imageView_onClick" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0" />

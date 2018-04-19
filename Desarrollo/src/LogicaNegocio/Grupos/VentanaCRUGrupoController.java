@@ -104,17 +104,18 @@ public class VentanaCRUGrupoController implements Initializable {
     }
     public Dia validarHorario(){
         Dia diaValidacion = null;
+        fors:
         for(Dia dia : this.dias){
             for (Dia dia2 : this.dias){
                 if (!dia.equals(dia2)){
-                    if (dia.getSalon().equals(dia2.getSalon())){
+                    if (dia.getSalon().equals(dia2.getSalon()) && dia.getDia().equals(dia2.getDia())){
                         int miliIni2 = Horas.getSegundos(dia2.getHoraInicio());
                         int miliIni = Horas.getSegundos(dia.getHoraInicio());
                         int miliFin2 = Horas.getSegundos(dia2.getHoraFin());
                         int miliFin = Horas.getSegundos(dia.getHoraFin());;
                         if ((miliIni >= miliIni2 && miliIni <= miliFin2) || (miliFin >= miliIni2 && miliFin <= miliFin2)){
                             diaValidacion = dia;
-                            break;
+                            break fors;
                         }
                     }
                 }
@@ -158,7 +159,7 @@ public class VentanaCRUGrupoController implements Initializable {
                 mensaje = "Debes ingresar el horario";
                 break;
             case HORARIO_INVALIDO:
-                mensaje = "Debes ingresar el horario";
+                mensaje = "Los días ingresados tienen conflictos entre sí";
                 break;
             default:
                 mensaje = "null";

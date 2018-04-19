@@ -3,6 +3,7 @@ package LogicaNegocio.Grupos;
 import Accesodatos.Catalogos.AlumnoDAOSql;
 import LogicaNegocio.Catalogos.Alumno;
 import Accesodatos.Grupos.GrupoDAOSql;
+import LogicaNegocio.Lanzador;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -26,6 +27,8 @@ public class PanelAlumnosGrupoProfesorController implements Initializable {
     private Button registrarAsistencia;
     
     private List<Grupo> grupos;
+    private Lanzador lanzador;
+    private int idProfesor;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -33,6 +36,7 @@ public class PanelAlumnosGrupoProfesorController implements Initializable {
     }
     
     public void setIdProfesor(int idProfesor){
+        this.idProfesor = idProfesor;
         this.grupos = new GrupoDAOSql().obtenerGruposProfesor(idProfesor);
         for(Grupo grupo : this.grupos){
             this.comboGrupos.getItems().add(grupo.getNombre());
@@ -55,6 +59,8 @@ public class PanelAlumnosGrupoProfesorController implements Initializable {
             pane.setStyle("-fx-background-color: #D8D8D8;");
             PanelAlumnoProfesorController controller = loader.getController();
             controller.setAlumno(alumno);
+            controller.setIdProfesor(this.idProfesor);
+            controller.setLanzador(this.lanzador);
             this.panelAlumnos.getChildren().add(pane);
         } catch (IOException ex) {
             Logger.getLogger(PanelGruposProfesorController.class.getName()).log(Level.SEVERE, null, ex);
@@ -79,6 +85,9 @@ public class PanelAlumnosGrupoProfesorController implements Initializable {
             }
         }
         return grupo;
+    }
+    public void setLanzador(Lanzador lanzador){
+        this.lanzador = lanzador;
     }
     
     public void comboGrupos_onAction(){

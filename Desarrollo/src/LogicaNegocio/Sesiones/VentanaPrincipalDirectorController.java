@@ -1,5 +1,6 @@
 package LogicaNegocio.Sesiones;
 
+import InterfazGrafica.Grupos.VentanaCRUGrupo;
 import LogicaNegocio.Catalogos.PanelCatalogoProfesoresController;
 import LogicaNegocio.Catalogos.Profesor;
 import LogicaNegocio.Catalogos.VentanaCRUAlumno;
@@ -7,6 +8,7 @@ import LogicaNegocio.Catalogos.VentanaCRUCliente;
 import LogicaNegocio.Catalogos.VentanaCRUProfesor;
 import LogicaNegocio.Egresos.VentanaCRUEgreso;
 import LogicaNegocio.Egresos.VentanaCRUGastoPromocional;
+import LogicaNegocio.Grupos.PanelGruposProfesorController;
 import LogicaNegocio.Lanzador;
 import LogicaNegocio.Pagos.VentanaRegistrarPagoAlumno;
 import LogicaNegocio.Pagos.VentanaRegistrarPagoProfesor;
@@ -41,16 +43,9 @@ public class VentanaPrincipalDirectorController implements Initializable {
     
     public void imageView_onClick(){
         new VentanaModificarCuenta(this.usuario, this.profesor);
-        /*this.lanzador.lanzar("/InterfazGrafica/Grupos/PanelGruposProfesor.fxml");
-        PanelGruposProfesorController controller = this.lanzador.getCargador().getController();
-        controller.setIdProfesor(new ProfesorDAOSql().obtenerProfesores().get(0).getIdProfesor());*/
     }
     public void menuRegistrarAlumno_onClick(){
         new VentanaCRUAlumno();
-        /*this.lanzador.lanzar("/InterfazGrafica/Grupos/PanelAlumnosGrupoProfesor.fxml");
-        PanelAlumnosGrupoProfesorController controller = this.lanzador.getCargador().getController();
-        controller.setIdProfesor(9);
-        controller.setIdGrupo(20);*/
     }
     public void menuRegistrarProfesor_onClick(){
         new VentanaCRUProfesor();
@@ -87,5 +82,11 @@ public class VentanaPrincipalDirectorController implements Initializable {
         PanelGruposProfesorController controller = this.lanzador.getCargador().getController();
         controller.setLanzador(lanzador);
         controller.setIdProfesor(this.profesor.getIdProfesor());
+    }
+    public void menuCrearGrupo_onClick(){
+        new VentanaCRUGrupo();
+    }
+    public void menuConsultarEgresos_onClick(){
+        this.lanzador.lanzar("/InterfazGrafica/Egresos/PanelConsultarPromocionesEgresos.fxml");
     }
 }

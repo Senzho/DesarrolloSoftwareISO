@@ -30,8 +30,14 @@
             </Menu>
           </items>
         </Menu>
-        <Menu mnemonicParsing="false" text="Mis grupos" />
-        <Menu mnemonicParsing="false" text="Grupos y rentas" />
+        <Menu mnemonicParsing="false" text="Mis grupos">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#menuMisGrupos_onClick" text="Ver" />
+               </items></Menu>
+        <Menu mnemonicParsing="false" text="Grupos y rentas">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#menuCrearGrupo_onClick" text="Registrar grupo" />
+               </items></Menu>
         <Menu mnemonicParsing="false" text="Catálogos">
           <items>
             <MenuItem mnemonicParsing="false" onAction="#menuAlumno_onClick" text="Alumnos" />
@@ -46,6 +52,7 @@
           <items>
             <MenuItem mnemonicParsing="false" onAction="#menuPromocionFacebook_onClick" text="Promoción de facebook" />
             <MenuItem mnemonicParsing="false" onAction="#menuEgreso_onClick" text="Egreso" />
+                  <MenuItem mnemonicParsing="false" onAction="#menuConsultarEgresos_onClick" text="Ver egresos" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Reporte" />

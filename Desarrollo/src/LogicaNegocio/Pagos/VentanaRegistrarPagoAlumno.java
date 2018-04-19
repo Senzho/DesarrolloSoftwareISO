@@ -19,6 +19,7 @@ import javafx.stage.Stage;
  */
 public class VentanaRegistrarPagoAlumno extends Application {
     private int idProfesor;
+    private String nombreAlumno;
    
     public VentanaRegistrarPagoAlumno(int idProfesor){
         this.idProfesor = idProfesor;
@@ -28,6 +29,16 @@ public class VentanaRegistrarPagoAlumno extends Application {
             Logger.getLogger(VentanaRegistrarPagoAlumno.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    public VentanaRegistrarPagoAlumno(int idProfesor, String nombreAlumno){
+        this.idProfesor = idProfesor;
+        this.nombreAlumno = nombreAlumno;
+        try {
+            start(new Stage());
+        } catch (Exception ex) {
+            Logger.getLogger(VentanaRegistrarPagoAlumno.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/InterfazGrafica/Pagos/VentanaRegistrarPagoAlumno.fxml"));
@@ -35,6 +46,9 @@ public class VentanaRegistrarPagoAlumno extends Application {
         VentanaRegistrarPagoAlumnoController controller = loader.getController();
         controller.setIdProfesor(this.idProfesor);
         controller.inicializarCombo();
+        if (this.nombreAlumno != null){
+            controller.setAlumnoSeleccionado(this.nombreAlumno);
+        }
         Scene scene = new Scene(root, 471, 231);
         primaryStage.setTitle("Registrar pago alumno");
         primaryStage.setScene(scene);

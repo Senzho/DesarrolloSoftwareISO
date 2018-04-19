@@ -9,9 +9,9 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="397.9999000000025" prefWidth="774.0041845703124" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="LogicaNegocio.Egresos.PanelConsultarPromocionesEgresosController">
+<AnchorPane id="AnchorPane" prefHeight="397.9999000000025" prefWidth="774.0041845703124" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LogicaNegocio.Egresos.PanelConsultarPromocionesEgresosController">
   <children>
-    <ComboBox fx:id="comboMes" prefHeight="26.0" prefWidth="166.0" AnchorPane.leftAnchor="112.0" AnchorPane.topAnchor="16.0">
+    <ComboBox fx:id="comboMes" layoutX="87.0" layoutY="11.0" prefHeight="26.0" prefWidth="166.0" AnchorPane.leftAnchor="87.0" AnchorPane.topAnchor="11.0">
       <items>
         <FXCollections fx:factory="observableArrayList">
           <String fx:value="Item 1" />
@@ -20,12 +20,12 @@
         </FXCollections>
       </items>
     </ComboBox>
-    <Label text="Periodo:" AnchorPane.leftAnchor="33.0" AnchorPane.topAnchor="20.0">
+    <Label layoutX="14.0" layoutY="14.0" text="Periodo:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
       <font>
         <Font name="Arial" size="16.0" fx:id="x1" />
       </font>
     </Label>
-    <ComboBox fx:id="comboAño" prefHeight="27.0" prefWidth="126.0" AnchorPane.leftAnchor="291.0" AnchorPane.topAnchor="16.0">
+    <ComboBox fx:id="comboAño" layoutX="263.0" layoutY="11.0" prefHeight="27.0" prefWidth="126.0" AnchorPane.leftAnchor="263.0" AnchorPane.topAnchor="11.0">
       <items>
         <FXCollections fx:factory="observableArrayList">
           <String fx:value="Item 1" />
@@ -34,7 +34,7 @@
         </FXCollections>
       </items>
     </ComboBox>
-    <GridPane prefHeight="288.9999000000025" prefWidth="755.7141845703125" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="11.29" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="95.0">
+    <GridPane hgap="5.0" prefHeight="288.9999000000025" prefWidth="755.7141845703125" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="11.29" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="95.0">
       <children>
         <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
           <content>
@@ -55,7 +55,7 @@
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       </rowConstraints>
     </GridPane>
-    <GridPane layoutY="66.0" prefHeight="26.0" prefWidth="748.7141845703125" AnchorPane.leftAnchor="11.29" AnchorPane.rightAnchor="14.0">
+    <GridPane hgap="5.0" layoutX="15.0" layoutY="69.0" prefHeight="26.0" prefWidth="748.7141845703125" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="10.289999999999964" AnchorPane.topAnchor="69.0">
       <children>
         <Label font="$x1" text="Promociones:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
         <Label font="$x1" text="Egresos:" GridPane.columnIndex="1" GridPane.rowIndex="0" />
@@ -68,7 +68,7 @@
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       </rowConstraints>
     </GridPane>
-    <Line endX="778.4951782226562" endY="2.0" layoutY="50.0" startX="34.49229431152344" startY="3.0" stroke="GREY" AnchorPane.leftAnchor="11.29" AnchorPane.rightAnchor="8.3" />
-    <Button fx:id="btnBuscar" font="$x1" layoutX="437.0" layoutY="16.0" mnemonicParsing="false" onMouseClicked="#btnBuscar_onClick" text="Buscar" />
+    <Line endX="778.4951782226562" endY="2.0" layoutX="-22.495186767578126" layoutY="46.0" startX="34.49229431152344" startY="3.0" stroke="GREY" AnchorPane.leftAnchor="11.29" AnchorPane.rightAnchor="17.297070312499955" AnchorPane.topAnchor="47.292893171310425" />
+      <Button fx:id="btnBuscar" layoutX="399.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#btnBuscar_onClick" prefHeight="27.0" prefWidth="52.0" text="Buscar" AnchorPane.leftAnchor="399.0" AnchorPane.topAnchor="11.0" />
   </children>
 </AnchorPane>

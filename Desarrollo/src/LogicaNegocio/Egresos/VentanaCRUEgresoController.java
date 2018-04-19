@@ -11,6 +11,7 @@ import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
@@ -49,10 +50,6 @@ public class VentanaCRUEgresoController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }
-
-    public void inicializarComponentes() {
         this.fecha.setValue(LocalDate.now());
     }
 
@@ -68,6 +65,8 @@ public class VentanaCRUEgresoController implements Initializable {
     public void cargarDatosEgreso() {
         this.txtCosto.setText(egreso.getMonto());
         this.txtDescripcion.setText(egreso.getDescripcion());
+        Date fechaEgreso = this.egreso.getFecha();
+        this.fecha.setValue(LocalDate.of(Dates.getYear(fechaEgreso), Dates.getMonth(fechaEgreso), Dates.getDay(fechaEgreso)));
     }
 
     public void setEgreso(Egreso egreso) {
@@ -76,7 +75,6 @@ public class VentanaCRUEgresoController implements Initializable {
             cargarDatosEgreso();
             this.btnRegistrar.setText("Guardar");
         }
-        inicializarComponentes();
     }
 
     public void editarEgreso() {

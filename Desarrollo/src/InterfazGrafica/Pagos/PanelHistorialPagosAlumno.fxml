@@ -11,7 +11,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="456.0" prefWidth="601.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LogicaNegocio.Pagos.PanelHistorialPagosAlumnoController">
    <children>
-      <ImageView fx:id="ImagenAlumno" fitHeight="102.0" fitWidth="97.0" layoutX="489.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />
+      <ImageView fx:id="imagenAlumno" fitHeight="86.0" fitWidth="86.0" layoutX="489.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />
       <Label fx:id="lblNombre" layoutX="17.0" layoutY="14.0" text="Nombre apellido1 apellido2" AnchorPane.leftAnchor="17.0" AnchorPane.topAnchor="14.0">
          <font>
             <Font name="Arial" size="16.0" />
@@ -27,7 +27,7 @@
             <Font name="Arial" size="16.0" />
          </font>
       </Button>
-      <ScrollPane layoutX="17.0" layoutY="86.0" prefHeight="315.0" prefWidth="574.0">
+      <ScrollPane layoutX="17.0" layoutY="112.0" prefHeight="289.0" prefWidth="574.0" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="112.0">
          <content>
             <FlowPane fx:id="panelPagos" prefHeight="312.0" prefWidth="573.0" />
          </content>

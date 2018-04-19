@@ -90,6 +90,9 @@ public class VentanaRegistrarPagoAlumnoController implements Initializable {
     public void setIdProfesor(int idProfesor) {
         this.idProfesor = idProfesor;
     }
+    public void setAlumnoSeleccionado(String nombre){
+        this.comboAlumno.setValue(nombre);
+    }
 
     public void btnPromocion_onClick() {
         VentanaConsultarPromociones ventana = new VentanaConsultarPromociones(idProfesor, this);

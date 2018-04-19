@@ -16,6 +16,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
@@ -35,6 +37,9 @@ public class PanelHistorialPagosAlumnoController implements Initializable {
     private Label lblCorreo;
     @FXML
     private FlowPane panelPagos;
+    @FXML
+    private ImageView imagenAlumno;
+    
     private List<PagoAlumno> pagos;
     /**
      * Initializes the controller class.
@@ -52,6 +57,7 @@ public class PanelHistorialPagosAlumnoController implements Initializable {
     public void inicializarPanelPagos() {
         lblNombre.setText(alumno.getNombre());
         lblCorreo.setText(alumno.getCorreo());
+        this.imagenAlumno.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkPersonIcon.png")));
         pagos = new PagoAlumno().obtenerPagos(alumno.getIdAlumno());
         this.panelPagos.getChildren().clear();
         pagos.forEach((pago) -> {

@@ -45,6 +45,7 @@ public class PanelGrupoProfesorController implements Initializable {
     public void verAlumnos_onClick(){
         lanzador.lanzar("/InterfazGrafica/Grupos/PanelAlumnosGrupoProfesor.fxml");
         PanelAlumnosGrupoProfesorController controller = this.lanzador.getCargador().getController();
+        controller.setLanzador(this.lanzador);
         controller.setIdProfesor(this.grupo.getProfesor().getIdProfesor());
         controller.setIdGrupo(grupo.getId());
     }

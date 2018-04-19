@@ -41,7 +41,7 @@ public class PanelEgresoController implements Initializable {
     public void cargarEgreso(){
         this.imagenEditar.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkPencilIcon.png")));
         this.lblDescripcion.setText(this.egreso.getDescripcion());
-        this.lblFecha.setText(this.egreso.getFecha().toGMTString());
+        this.lblFecha.setText(Dates.getSentence(this.egreso.getFecha()));
         //cambiar metodo de arriba
         this.lblCosto.setText(this.egreso.getMonto());
     }

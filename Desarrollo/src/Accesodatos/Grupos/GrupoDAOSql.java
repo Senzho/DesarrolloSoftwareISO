@@ -97,6 +97,7 @@ public class GrupoDAOSql implements GrupoDAO{
         ProfesorJpaController profesorController = new ProfesorJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
         for (Accesodatos.Entidades.Grupo grupoJpa : profesorController.findProfesor(idProfesor).getGrupoCollection()){
             Grupo grupo = this.obtenerEntidad(grupoJpa);
+            grupo.setProfesor(ProfesorDAOSql.obtenerEntidad(grupoJpa.getIdProfesor()));
             grupo.setHorario(new Horario(grupo.getId()));
             grupos.add(grupo);
         }

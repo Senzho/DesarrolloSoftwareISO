@@ -17,6 +17,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import LogicaNegocio.Catalogos.OperacionesString;
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import javafx.scene.control.DatePicker;
 /**
@@ -62,6 +63,10 @@ public class VentanaCRUGastoPromocionalController implements Initializable {
         this.txtEnlace.setText(gastoPromocional.getMonto());
         this.txtDescripcion.setText(this.gastoPromocional.getDescripcion());
         this.txtMonto.setText(gastoPromocional.getMonto());
+        Date fechaInicioGasto = this.gastoPromocional.getFechaInicio();
+        Date fechaFinGasto = this.gastoPromocional.getFechaFin();
+        this.fechaInicioPick.setValue(LocalDate.of(Dates.getYear(fechaInicioGasto), Dates.getMonth(fechaInicioGasto), Dates.getDay(fechaInicioGasto)));
+        this.fechaFinPick.setValue(LocalDate.of(Dates.getYear(fechaFinGasto), Dates.getMonth(fechaFinGasto), Dates.getDay(fechaFinGasto)));
     }
 
     public void setGastoPromocional(GastoPromocional gastoPromocional) {

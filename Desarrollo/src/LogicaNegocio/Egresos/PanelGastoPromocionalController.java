@@ -42,8 +42,8 @@ public class PanelGastoPromocionalController implements Initializable {
     public void cargarGasto(){
         this.imagenEditar.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkPencilIcon.png")));
         this.lblDescripcion.setText(this.gasto.getDescripcion());
-        this.lblFechaInicio.setText(this.gasto.getFechaInicio().toGMTString());
-         this.lblFechaFin.setText(this.gasto.getFechaFin().toGMTString());
+        this.lblFechaInicio.setText(Dates.getSentence(this.gasto.getFechaInicio()));
+         this.lblFechaFin.setText(Dates.getSentence(this.gasto.getFechaFin()));
         this.lblCosto.setText(this.gasto.getMonto());
     }
     public void imagenEditar_onClick(){
