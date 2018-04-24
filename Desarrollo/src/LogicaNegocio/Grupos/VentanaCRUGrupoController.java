@@ -125,13 +125,15 @@ public class VentanaCRUGrupoController implements Initializable {
     }
     public GrupoEnum validarDatos(){
         GrupoEnum grupoEnum = GrupoEnum.DATOS_VALIDOS;
-        if (this.nombre.getText().trim().length() == 0){
+        String nombre = this.nombre.getText().trim();
+        String danza = this.danza.getText().trim();
+        if (nombre.length() == 0){
             grupoEnum = GrupoEnum.NOMBRE_VACIO;
-        }else if (this.nombre.getText().trim().length() > 50){
+        }else if (nombre.length() > 50){
             grupoEnum = GrupoEnum.NOMBRE_LARGO;
-        }else if (this.danza.getText().trim().length() == 0){
+        }else if (danza.length() == 0){
             grupoEnum = GrupoEnum.DANZA_VACIA;
-        }else if (this.danza.getText().trim().length() > 50){
+        }else if (danza.length() > 50){
             grupoEnum = GrupoEnum.DANZA_LARGA;
         }else if (this.dias.isEmpty()){
             grupoEnum = GrupoEnum.HORARIO_VACIO;

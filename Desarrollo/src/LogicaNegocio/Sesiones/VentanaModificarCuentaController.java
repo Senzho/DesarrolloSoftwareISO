@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package LogicaNegocio.Sesiones;
 
 import InterfazGrafica.MessageFactory;
@@ -18,13 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-/**
- * FXML Controller class
- *
- * @author Marioolopez
- */
 public class VentanaModificarCuentaController implements Initializable {
-
     private Usuario usuario;
     private Profesor profesor;
     @FXML
@@ -45,30 +34,36 @@ public class VentanaModificarCuentaController implements Initializable {
         this.profesor = profesor;
         this.cargarDatosUsuario();
     }
-
     public void cargarDatosUsuario() {
         Profesor profesor = new Usuario().obtenerProfesor(this.usuario.getIdTipoUsuario());
         this.imagenUsuario.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkPersonIcon.png")));
         this.lblNombreUsuario.setText(this.profesor.getNombre());
         this.txtNombre.setText(this.usuario.getNombre());
-
+    }
+    public boolean validarCampos(){
+        boolean valido = true;
+        String nombre = this.txtNombre.getText().trim();
+        if (nombre.length() > 20 || nombre.equals("") || txtContraseña.getText().trim().equals("") || txtRepetirContraseña.getText().trim().equals("")) {
+            valido = false;
+        }
+        return valido;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
     }
 
     public void btnGuardar_onClick() {
-        if (txtNombre.getText().equals("") || txtContraseña.getText().equals("") || txtRepetirContraseña.getText().equals("")) {
+        if (this.validarCampos()) {
             MessageFactory.showMessage("Información", "Datos invalidos", "Faltan datos del usuario", AlertType.INFORMATION);
         } else {
-            if (!txtContraseña.getText().equals(txtRepetirContraseña.getText())) {
+            if (!txtContraseña.getText().trim().equals(txtRepetirContraseña.getText().trim())) {
                 MessageFactory.showMessage("Información", "Datos invalidos", "Las contraseñas no coinciden", AlertType.INFORMATION);
             } else {
-                String contraseña = Hasher.hash(this.txtContraseña.getText());
+                String contraseña = Hasher.hash(this.txtContraseña.getText().trim());
                 usuario.setContraseña(contraseña);
-                usuario.setNombre(this.txtNombre.getText());
+                usuario.setNombre(this.txtNombre.getText().trim());
                 if (this.usuario.buscarUsuario(this.txtNombre.getText())) {
                     MessageFactory.showMessage("Información", "Datos invalidos", "El usuario seleccionado existe en el sistema", AlertType.ERROR);
                 } else {
@@ -77,7 +72,5 @@ public class VentanaModificarCuentaController implements Initializable {
                 }
             }
         }
-
     }
-
 }

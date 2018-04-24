@@ -27,21 +27,24 @@ public class VentanaCRUClienteController implements Initializable {
     
     private CatalogoEnum validarDatos(){
         CatalogoEnum validacion = CatalogoEnum.DATOS_VALIDOS;
-        if (this.nombre.getText().isEmpty()){
+        String nombre = this.nombre.getText().trim();
+        String telefono = this.telefono.getText().trim();
+        String correo = this.correo.getText().trim();
+        if (nombre.isEmpty()){
             validacion = CatalogoEnum.NOMBRE_VACIO;
-        }else if (this.nombre.getText().length() > 150){
+        }else if (nombre.length() > 150){
             validacion = CatalogoEnum.NOMBRE_LARGO;
-        }else if (this.telefono.getText().isEmpty()){
+        }else if (telefono.isEmpty()){
             validacion = CatalogoEnum.TELEFONO_VACIO;
-        }else if (this.telefono.getText().length() > 10){
+        }else if (telefono.length() > 10){
             validacion = CatalogoEnum.TELEFONO_LARGO;
-        }else if (!OperacionesString.telefonoValido(this.telefono.getText())){
+        }else if (!OperacionesString.telefonoValido(telefono)){
             validacion = CatalogoEnum.TELEFONO_NO_VALIDO;
-        }else if(this.correo.getText().isEmpty()){
+        }else if(correo.isEmpty()){
             validacion = CatalogoEnum.CORREO_VACIO;
-        }else if (this.correo.getText().length() > 150){
+        }else if (correo.length() > 150){
             validacion = CatalogoEnum.CORREO_LARGO;
-        }else if (!OperacionesString.emailValido(this.correo.getText())){
+        }else if (!OperacionesString.emailValido(correo)){
             validacion = CatalogoEnum.CORREO_NO_VALIDO;
         }
         return validacion;
@@ -103,10 +106,10 @@ public class VentanaCRUClienteController implements Initializable {
     public boolean registrarCliente(){
         boolean realizado = false;
         this.cliente = new Cliente();
-        this.cliente.setNombre(this.nombre.getText());
-        this.cliente.setTelefono(this.telefono.getText());
-        this.cliente.setCorreo(this.correo.getText());
-        this.cliente.setDireccion(this.domicilio.getText());
+        this.cliente.setNombre(this.nombre.getText().trim());
+        this.cliente.setTelefono(this.telefono.getText().trim());
+        this.cliente.setCorreo(this.correo.getText().trim());
+        this.cliente.setDireccion(this.domicilio.getText().trim());
         this.cliente.setFecha(new Date());
         if (this.cliente.registrarCliente()){
             realizado = true;
@@ -116,10 +119,10 @@ public class VentanaCRUClienteController implements Initializable {
     }
     public boolean editarCliente(){
         boolean realizado = false;
-        this.cliente.setNombre(this.nombre.getText());
-        this.cliente.setTelefono(this.telefono.getText());
-        this.cliente.setCorreo(this.correo.getText());
-        this.cliente.setDireccion(this.domicilio.getText());
+        this.cliente.setNombre(this.nombre.getText().trim());
+        this.cliente.setTelefono(this.telefono.getText().trim());
+        this.cliente.setCorreo(this.correo.getText().trim());
+        this.cliente.setDireccion(this.domicilio.getText().trim());
         if (this.cliente.editarCliente())
             realizado = true;
         return realizado;

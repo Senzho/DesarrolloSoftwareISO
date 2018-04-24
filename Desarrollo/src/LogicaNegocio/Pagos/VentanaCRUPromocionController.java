@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package LogicaNegocio.Pagos;
 
 import InterfazGrafica.MessageFactory;
@@ -17,13 +12,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author Desktop
- */
 public class VentanaCRUPromocionController implements Initializable {
-
     @FXML
     private TextField txtNombre;
     @FXML
@@ -36,35 +25,38 @@ public class VentanaCRUPromocionController implements Initializable {
     private Promocion promocion;
     private Stage stage;
 
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
     }
 
     public void setStage(Stage stage) {
         this.stage = stage;
     }
-
     public void setIdProfesor(int idProfesor) {
         this.idProfesor = idProfesor;
     }
-
     public void setPromocion(Promocion promocion) {
         this.promocion = promocion;
         this.txtDescripcion.setText(promocion.getDescripcion());
         this.txtNombre.setText(promocion.getNombre());
         this.txtPorcentaje.setText(Integer.toString(promocion.getPorcentaje()));
     }
-
+    public boolean validarCampos(){
+        boolean valido = false;
+        String nombre = this.txtNombre.getText().trim();
+        if (nombre.length() < 51 && !nombre.equals("") && !txtDescripcion.getText().equals("")
+                    && OperacionesString.porcentajeValido(this.txtPorcentaje.getText())) {
+            valido = true;
+        }
+        return valido;
+    }
+    
     public void btnRegistrar_onClick() {
         if (promocion == null) {
-            if (!txtNombre.getText().equals("") && !txtDescripcion.getText().equals("")
-                    && OperacionesString.porcentajeValido(this.txtPorcentaje.getText())) {
-                Promocion promocionRegistro = new Promocion(txtDescripcion.getText(), 0, idProfesor,
-                        txtNombre.getText(), Integer.parseInt(txtPorcentaje.getText()));
+            if (this.validarCampos()) {
+                Promocion promocionRegistro = new Promocion(txtDescripcion.getText().trim(), 0, idProfesor,
+                        txtNombre.getText().trim(), Integer.parseInt(txtPorcentaje.getText().trim()));
                 boolean registrar = promocionRegistro.registrarPromocion();
                 if (registrar) {
                     MessageFactory.showMessage("Registro exitoso", "Registro realizado", "Promocion creada correctamente", Alert.AlertType.CONFIRMATION);
@@ -79,19 +71,18 @@ public class VentanaCRUPromocionController implements Initializable {
         }
     }
     public void editarPromocion(){
-        if (!txtNombre.getText().equals("") && !txtDescripcion.getText().equals("")
-                    && OperacionesString.porcentajeValido(this.txtPorcentaje.getText())) {
-            promocion.setDescripcion(txtDescripcion.getText());
-            promocion.setNombre(txtNombre.getText());
-            promocion.setPorcentaje(Integer.parseInt(txtPorcentaje.getText()));
-                boolean editar = promocion.editarPromocion();
-                if (editar) {
-                    MessageFactory.showMessage("edicion exitoso", "Registro realizado", "Promocion editar correctamente", Alert.AlertType.CONFIRMATION);
-                } else {
-                    MessageFactory.showMessage("Información", "No se pudo editar el registro", "La promoció no pudo ser editada", Alert.AlertType.ERROR);
-                }
+        if (this.validarCampos()) {
+            promocion.setDescripcion(txtDescripcion.getText().trim());
+            promocion.setNombre(txtNombre.getText().trim());
+            promocion.setPorcentaje(Integer.parseInt(txtPorcentaje.getText().trim()));
+            boolean editar = promocion.editarPromocion();
+            if (editar) {
+                MessageFactory.showMessage("edicion exitoso", "Registro realizado", "Promocion editar correctamente", Alert.AlertType.CONFIRMATION);
             } else {
-                MessageFactory.showMessage("Advertencia", "No se pudo editar", "Algunos datos son incorrectos", Alert.AlertType.INFORMATION);
+                MessageFactory.showMessage("Información", "No se pudo editar el registro", "La promoció no pudo ser editada", Alert.AlertType.ERROR);
             }
+        } else {
+            MessageFactory.showMessage("Advertencia", "No se pudo editar", "Algunos datos son incorrectos", Alert.AlertType.INFORMATION);
+        }
     }
 }

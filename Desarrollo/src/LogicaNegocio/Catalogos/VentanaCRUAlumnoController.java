@@ -36,21 +36,24 @@ public class VentanaCRUAlumnoController implements Initializable {
     
     private CatalogoEnum validarDatos(){
         CatalogoEnum validacion = CatalogoEnum.DATOS_VALIDOS;
-        if (this.nombre.getText().isEmpty()){
+        String nombre = this.nombre.getText().trim();
+        String telefono = this.telefono.getText().trim();
+        String correo = this.correo.getText().trim();
+        if (nombre.isEmpty()){
             validacion = CatalogoEnum.NOMBRE_VACIO;
-        }else if (this.nombre.getText().length() > 150){
+        }else if (nombre.length() > 150){
             validacion = CatalogoEnum.NOMBRE_LARGO;
-        }else if (this.telefono.getText().isEmpty()){
+        }else if (telefono.isEmpty()){
             validacion = CatalogoEnum.TELEFONO_VACIO;
-        }else if (this.telefono.getText().length() > 10){
+        }else if (telefono.length() > 10){
             validacion = CatalogoEnum.TELEFONO_LARGO;
-        }else if (!OperacionesString.telefonoValido(this.telefono.getText())){
+        }else if (!OperacionesString.telefonoValido(telefono)){
             validacion = CatalogoEnum.TELEFONO_NO_VALIDO;
-        }else if(this.correo.getText().isEmpty()){
+        }else if(correo.isEmpty()){
             validacion = CatalogoEnum.CORREO_VACIO;
-        }else if (this.correo.getText().length() > 150){
+        }else if (correo.length() > 150){
             validacion = CatalogoEnum.CORREO_LARGO;
-        }else if (!OperacionesString.emailValido(this.correo.getText())){
+        }else if (!OperacionesString.emailValido(correo)){
             validacion = CatalogoEnum.CORREO_NO_VALIDO;
         }
         return validacion;
@@ -119,12 +122,12 @@ public class VentanaCRUAlumnoController implements Initializable {
         this.imagen.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkPersonIcon.png")));
     }
     public boolean registrarAlumno(){
-		boolean realizado = false;
-		this.alumno = new Alumno();
-        this.alumno.setNombre(this.nombre.getText());
-        this.alumno.setTeléfono(this.telefono.getText());
-        this.alumno.setCorreo(this.correo.getText());
-        this.alumno.setDireccion(this.direccion.getText());
+        boolean realizado = false;
+        this.alumno = new Alumno();
+        this.alumno.setNombre(this.nombre.getText().trim());
+        this.alumno.setTeléfono(this.telefono.getText().trim());
+        this.alumno.setCorreo(this.correo.getText().trim());
+        this.alumno.setDireccion(this.direccion.getText().trim());
         this.alumno.setFecha(new Date());
         this.alumno.setEstado(this.activo.isSelected());
         if (this.alumno.registrarAlumno()){
@@ -135,10 +138,10 @@ public class VentanaCRUAlumnoController implements Initializable {
     }
     public boolean editarAlumno(){
     	boolean realizado = false;
-    	this.alumno.setNombre(this.nombre.getText());
-        this.alumno.setTeléfono(this.telefono.getText());
-        this.alumno.setCorreo(this.correo.getText());
-        this.alumno.setDireccion(this.direccion.getText());
+    	this.alumno.setNombre(this.nombre.getText().trim());
+        this.alumno.setTeléfono(this.telefono.getText().trim());
+        this.alumno.setCorreo(this.correo.getText().trim());
+        this.alumno.setDireccion(this.direccion.getText().trim());
         this.alumno.setEstado(this.activo.isSelected());
         if (this.alumno.editarAlumno())
             realizado = true;

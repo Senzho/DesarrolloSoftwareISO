@@ -48,27 +48,31 @@ public class VentanaCRUProfesorController implements Initializable {
     
     private CatalogoEnum validarDatos(){
         CatalogoEnum validacion = CatalogoEnum.DATOS_VALIDOS;
-        if (this.nombre.getText().isEmpty()){
+        String nombre = this.nombre.getText().trim();
+        String telefono = this.telefono.getText().trim();
+        String correo = this.correo.getText().trim();
+        String monto = this.monto.getText().trim();
+        if (nombre.isEmpty()){
             validacion = CatalogoEnum.NOMBRE_VACIO;
-        }else if (this.nombre.getText().length() > 150){
+        }else if (nombre.length() > 150){
             validacion = CatalogoEnum.NOMBRE_LARGO;
-        }else if (this.telefono.getText().isEmpty()){
+        }else if (telefono.isEmpty()){
             validacion = CatalogoEnum.TELEFONO_VACIO;
-        }else if (this.telefono.getText().length() > 10){
+        }else if (telefono.length() > 10){
             validacion = CatalogoEnum.TELEFONO_LARGO;
-        }else if (!OperacionesString.telefonoValido(this.telefono.getText())){
+        }else if (!OperacionesString.telefonoValido(telefono)){
             validacion = CatalogoEnum.TELEFONO_NO_VALIDO;
-        }else if(this.correo.getText().isEmpty()){
+        }else if(correo.isEmpty()){
             validacion = CatalogoEnum.CORREO_VACIO;
-        }else if (this.correo.getText().length() > 150){
+        }else if (correo.length() > 150){
             validacion = CatalogoEnum.CORREO_LARGO;
-        }else if (!OperacionesString.emailValido(this.correo.getText())){
+        }else if (!OperacionesString.emailValido(correo)){
             validacion = CatalogoEnum.CORREO_NO_VALIDO;
-        }else if (this.monto.getText().isEmpty()){
+        }else if (monto.isEmpty()){
             validacion = CatalogoEnum.MONTO_VACIO;
-        }else if (this.monto.getText().length() > 15){
+        }else if (monto.length() > 15){
             validacion = CatalogoEnum.MONTO_LARGO;
-        }else if (!OperacionesString.montoValido(this.monto.getText())){
+        }else if (!OperacionesString.montoValido(monto)){
             validacion = CatalogoEnum.MONTO_NO_VALIDO;
         }
         return validacion;
@@ -165,12 +169,12 @@ public class VentanaCRUProfesorController implements Initializable {
     public boolean registrarProfesor(){
         boolean realizado = false;
         this.profesor = new Profesor();
-        this.profesor.setNombre(this.nombre.getText());
-        this.profesor.setTelefono(this.telefono.getText());
-        this.profesor.setCorreo(this.correo.getText());
-        this.profesor.setDireccion(this.direccion.getText());
+        this.profesor.setNombre(this.nombre.getText().trim());
+        this.profesor.setTelefono(this.telefono.getText().trim());
+        this.profesor.setCorreo(this.correo.getText().trim());
+        this.profesor.setDireccion(this.direccion.getText().trim());
         this.profesor.setEstado(this.activo.isSelected());
-        this.profesor.setMonto(this.monto.getText());
+        this.profesor.setMonto(this.monto.getText().trim());
         this.profesor.setFecha(new Date());
         this.profesor.setTipoPago(this.tipoPago.getValue().equals(VentanaCRUProfesorController.TIPO_PAGO_MENSUAL));
         if (this.profesor.registrarProfesor()){
@@ -181,12 +185,12 @@ public class VentanaCRUProfesorController implements Initializable {
     }
     public boolean editarProfesor(){
         boolean realizado = false;
-        this.profesor.setNombre(this.nombre.getText());
-        this.profesor.setTelefono(this.telefono.getText());
-        this.profesor.setCorreo(this.correo.getText());
-        this.profesor.setDireccion(this.direccion.getText());
+        this.profesor.setNombre(this.nombre.getText().trim());
+        this.profesor.setTelefono(this.telefono.getText().trim());
+        this.profesor.setCorreo(this.correo.getText().trim());
+        this.profesor.setDireccion(this.direccion.getText().trim());
         this.profesor.setEstado(this.activo.isSelected());
-        this.profesor.setMonto(this.monto.getText());
+        this.profesor.setMonto(this.monto.getText().trim());
         this.profesor.setTipoPago(this.tipoPago.getValue().equals(VentanaCRUProfesorController.TIPO_PAGO_MENSUAL));
         if (this.profesor.editarProfesor())
             realizado = true;

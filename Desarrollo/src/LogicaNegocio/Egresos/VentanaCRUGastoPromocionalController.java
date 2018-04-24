@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package LogicaNegocio.Egresos;
 
 import InterfazGrafica.MessageFactory;
@@ -17,14 +12,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import LogicaNegocio.Catalogos.OperacionesString;
 import java.time.LocalDate;
-import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import javafx.scene.control.DatePicker;
-/**
- * FXML Controller class
- *
- * @author Desktop
- */
+
 public class VentanaCRUGastoPromocionalController implements Initializable {
     @FXML
     private TextField txtEnlace;
@@ -41,9 +31,7 @@ public class VentanaCRUGastoPromocionalController implements Initializable {
     private GastoPromocional gastoPromocional;
     private Date fechaInicio;
     private Date fechaFin;
-    /**
-     * Initializes the controller class.
-     */
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.fechaInicioPick.setValue(LocalDate.now());
@@ -52,13 +40,15 @@ public class VentanaCRUGastoPromocionalController implements Initializable {
 
     public boolean validarCampos() {
         boolean valido = true;
-        if (txtDescripcion.getText().equals("") || !OperacionesString.URLValida(this.txtEnlace.getText())
-                || !OperacionesString.montoValido(this.txtMonto.getText()) || Dates.getDiference(fechaInicio, fechaFin) < 1) {
+        String descripcion = this.txtDescripcion.getText().trim();
+        String monto = this.txtMonto.getText().trim();
+        String enlace = this.txtEnlace.getText().trim();
+        if (descripcion.equals("") || !OperacionesString.URLValida(enlace)
+                || !OperacionesString.montoValido(monto) || Dates.getDiference(fechaInicio, fechaFin) < 1 || enlace.length() > 200) {
                 valido = false;
         }
         return valido;
     }
-
     public void cargarDatosGastoPromocional() {
         this.txtEnlace.setText(gastoPromocional.getMonto());
         this.txtDescripcion.setText(this.gastoPromocional.getDescripcion());
@@ -68,19 +58,17 @@ public class VentanaCRUGastoPromocionalController implements Initializable {
         this.fechaInicioPick.setValue(LocalDate.of(Dates.getYear(fechaInicioGasto), Dates.getMonth(fechaInicioGasto), Dates.getDay(fechaInicioGasto)));
         this.fechaFinPick.setValue(LocalDate.of(Dates.getYear(fechaFinGasto), Dates.getMonth(fechaFinGasto), Dates.getDay(fechaFinGasto)));
     }
-
     public void setGastoPromocional(GastoPromocional gastoPromocional) {
         this.gastoPromocional = gastoPromocional;
         if (gastoPromocional != null) {
             cargarDatosGastoPromocional();
         }
     }
-
     public void editarGastoPromocional() {
         this.fechaInicio = Dates.toDate(this.fechaInicioPick.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE));
         this.fechaFin = Dates.toDate(this.fechaFinPick.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE));
-        GastoPromocional gastoPromocional = new GastoPromocional(this.gastoPromocional.getIdGastoPromocional(), this.txtDescripcion.getText(), this.fechaFin,
-                this.fechaInicio,this.txtMonto.getText(),this.txtEnlace.getText());
+        GastoPromocional gastoPromocional = new GastoPromocional(this.gastoPromocional.getIdGastoPromocional(), this.txtDescripcion.getText().trim(), this.fechaFin,
+                this.fechaInicio,this.txtMonto.getText().trim(),this.txtEnlace.getText().trim());
         boolean registroExitoso = false;
         if (validarCampos()) {//idGastoPromocional,String descripcion, Date fechaFin, Date fechaInicio, String monto, String URL
             registroExitoso = gastoPromocional.editarGasto();
@@ -93,12 +81,11 @@ public class VentanaCRUGastoPromocionalController implements Initializable {
             MessageFactory.showMessage("Aviso", "Registro gasto promocional", "Faltan datos por llenar o algunos son incorrectos", Alert.AlertType.ERROR);
         }
     }
-
     public void agregarGastoPromocional() {
         this.fechaInicio = Dates.toDate(this.fechaInicioPick.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE));
         this.fechaFin = Dates.toDate(this.fechaFinPick.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE));
-        GastoPromocional gasto = new GastoPromocional(0,this.txtDescripcion.getText(), this.fechaFin,
-                this.fechaInicio,this.txtMonto.getText(),this.txtEnlace.getText());
+        GastoPromocional gasto = new GastoPromocional(0,this.txtDescripcion.getText().trim(), this.fechaFin,
+                this.fechaInicio,this.txtMonto.getText().trim(),this.txtEnlace.getText().trim());
         boolean registroExitoso = false;
         if (validarCampos()) {
             registroExitoso = gasto.registrarGasto();
