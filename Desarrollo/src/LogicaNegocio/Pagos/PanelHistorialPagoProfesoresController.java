@@ -5,6 +5,7 @@ import LogicaNegocio.Catalogos.Profesor;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -48,9 +49,10 @@ public class PanelHistorialPagoProfesoresController implements Initializable {
         this.imagen.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkPersonIcon.png")));
     }
     public void cargarPagos(){
-        this.pagoProfesor.obtenerPagos(this.profesor.getIdProfesor()).forEach((pagoObtenido) -> {
-            this.agregarPago(pagoObtenido);
-        });
+        List<PagoProfesor> pagosProfesor = pagoProfesor.obtenerPagos(this.profesor.getIdProfesor());
+        for(int i = pagosProfesor.size() - 1; i > 0; i++){
+            this.agregarPago(pagosProfesor.get(i));
+        }
     }
     public void agregarPago(PagoProfesor pago){
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/InterfazGrafica/Pagos/PanelPagoProfesor.fxml"));

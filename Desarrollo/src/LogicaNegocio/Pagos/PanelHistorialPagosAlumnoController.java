@@ -60,19 +60,21 @@ public class PanelHistorialPagosAlumnoController implements Initializable {
         this.imagenAlumno.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkPersonIcon.png")));
         pagos = new PagoAlumno().obtenerPagos(alumno.getIdAlumno());
         this.panelPagos.getChildren().clear();
-        pagos.forEach((pago) -> {
+        for(int i = pagos.size() - 1; i > 0; i++){
             FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/InterfazGrafica/Pagos/PanelPagoAlumno.fxml"));
             AnchorPane panel;
             try {
                 panel = loader.load();
                 panel.setStyle("-fx-background-color: #DAD9D5;");
                 PanelPagoAlumnoController controller = loader.getController();
-                controller.setPago(pago);
+                controller.setPago(pagos.get(i));
                 this.panelPagos.getChildren().add(panel);
             } catch (IOException ex) {
                 Logger.getLogger(PanelPromocionController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        });
+        }
+        
+        
     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
