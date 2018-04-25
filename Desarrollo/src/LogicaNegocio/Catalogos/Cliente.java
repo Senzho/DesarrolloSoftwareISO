@@ -4,7 +4,7 @@ import Accesodatos.Catalogos.ClienteDAOSql;
 import java.util.Date;
 import java.util.List;
 
-public class Cliente {
+public class Cliente implements Comparable<Cliente>{
     private int idCliente;
     private String nombre;
     private String correo;
@@ -62,6 +62,11 @@ public class Cliente {
     }
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+    
+    @Override
+    public int compareTo(Cliente cliente) {
+        return this.nombre.compareTo(cliente.getNombre());
     }
     
     public boolean registrarCliente(){

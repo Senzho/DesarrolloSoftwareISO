@@ -4,7 +4,7 @@ import Accesodatos.Catalogos.AlumnoDAOSql;
 import java.util.Date;
 import java.util.List;
 
-public class Alumno {
+public class Alumno implements Comparable<Alumno>{
     private int idAlumno;
     private String nombre;
     private String correo;
@@ -69,6 +69,11 @@ public class Alumno {
     }
     public void setEstado(boolean estado) {
         this.estado = estado;
+    }
+    
+    @Override
+    public int compareTo(Alumno alumno) {
+        return this.nombre.compareTo(alumno.getNombre());
     }
 
     public boolean registrarAlumno() {

@@ -6,6 +6,7 @@ import Accesodatos.Grupos.GrupoDAOSql;
 import LogicaNegocio.Lanzador;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -48,9 +49,11 @@ public class PanelAlumnosGrupoProfesorController implements Initializable {
     }
     public void cargarAlumnos(int idGrupo){
         this.panelAlumnos.getChildren().clear();
-        for(Alumno alumno : new AlumnoDAOSql().obtenerAlumnos(idGrupo)){
+        List<Alumno> alumnos = new AlumnoDAOSql().obtenerAlumnos(idGrupo);
+        Collections.sort(alumnos);
+        alumnos.forEach((alumno) -> {
             this.agregarAlumno(alumno);
-        }
+        });
     }
     public void agregarAlumno(Alumno alumno){
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/InterfazGrafica/Grupos/PanelAlumnoProfesor.fxml"));

@@ -4,6 +4,7 @@ import InterfazGrafica.MessageFactory;
 import LogicaNegocio.Lanzador;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -36,6 +37,7 @@ public class PanelCatalogoProfesoresController implements Initializable {
     
     public void cargarProfesores(List<Profesor> profesores){
         this.panelProfesores.getChildren().clear();
+        Collections.sort(profesores);
         profesores.forEach((profesorObtenido) -> {
             FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/InterfazGrafica/Catalogos/PanelProfesor.fxml"));
             AnchorPane panel;

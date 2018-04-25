@@ -4,7 +4,7 @@ import Accesodatos.Catalogos.ProfesorDAOSql;
 import java.util.Date;
 import java.util.List;
 
-public class Profesor {
+public class Profesor implements Comparable<Profesor>{
     private int idProfesor;
     private boolean estado;
     private boolean tipoPago;
@@ -84,6 +84,11 @@ public class Profesor {
     }
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+    
+    @Override
+    public int compareTo(Profesor profesor) {
+        return this.nombre.compareTo(profesor.getNombre());
     }
     
     public boolean registrarProfesor(){

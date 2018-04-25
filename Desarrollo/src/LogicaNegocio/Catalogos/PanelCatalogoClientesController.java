@@ -3,6 +3,7 @@ package LogicaNegocio.Catalogos;
 import InterfazGrafica.MessageFactory;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -30,6 +31,7 @@ public class PanelCatalogoClientesController implements Initializable {
     }
     public void cargarClientes(List<Cliente> clientes){
         this.panelClientes.getChildren().clear();
+        Collections.sort(clientes);
         clientes.forEach((clienteObtenido) -> {
             FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/InterfazGrafica/Catalogos/PanelCliente.fxml"));
             AnchorPane panel;
