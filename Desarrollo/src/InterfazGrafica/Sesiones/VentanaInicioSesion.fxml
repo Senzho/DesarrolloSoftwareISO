@@ -9,14 +9,14 @@
 
 <AnchorPane id="AnchorPane" prefHeight="165.0" prefWidth="370.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LogicaNegocio.Sesiones.VentanaInicioSesionController">
   <children>
-    <Label fx:id="lblUsuario" text="Usuario:" AnchorPane.leftAnchor="18.0" AnchorPane.topAnchor="37.0">
+    <Label fx:id="lblUsuario" layoutX="18.0" layoutY="19.0" text="Usuario:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="19.0">
       <font>
         <Font name="Arial" size="16.0" fx:id="x1" />
       </font>
     </Label>
-    <Label fx:id="lblContraseña" font="$x1" text="Contraseña:" AnchorPane.leftAnchor="18.0" AnchorPane.topAnchor="73.0" />
-    <TextField fx:id="txtUsuario" prefHeight="30.0" prefWidth="238.0" AnchorPane.leftAnchor="118.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="26.0" />
-    <PasswordField fx:id="txtContraseña" prefHeight="30.0" prefWidth="238.0" AnchorPane.leftAnchor="118.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="62.0" />
-    <Button id="btnRegistrar" fx:id="btnIniciarSesion" font="$x1" mnemonicParsing="false" onMouseClicked="#btnIniciarSesion_onClick" prefWidth="108.0" text="Inicio" AnchorPane.bottomAnchor="16.4" AnchorPane.rightAnchor="14.0" />
+    <Label fx:id="lblContraseña" font="$x1" layoutX="18.0" layoutY="57.0" text="Contraseña:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="57.0" />
+    <TextField fx:id="txtUsuario" prefHeight="30.0" prefWidth="238.0" AnchorPane.leftAnchor="118.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />
+    <PasswordField fx:id="txtContraseña" layoutX="118.0" layoutY="52.0" prefHeight="30.0" prefWidth="238.0" AnchorPane.leftAnchor="118.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="52.0" />
+    <Button id="btnRegistrar" fx:id="btnIniciarSesion" font="$x1" mnemonicParsing="false" onMouseClicked="#btnIniciarSesion_onClick" prefWidth="108.0" text="Inicio" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
   </children>
 </AnchorPane>

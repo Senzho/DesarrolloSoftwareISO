@@ -4,6 +4,7 @@ import InterfazGrafica.MessageFactory;
 import LogicaNegocio.Sesiones.Hasher;
 import LogicaNegocio.Sesiones.Usuario;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -13,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -40,6 +42,8 @@ public class VentanaCRUProfesorController implements Initializable {
     private ComboBox tipoPago;
     @FXML
     private TextField monto;
+    @FXML
+    private DatePicker fechaInicio;
     
     private Profesor profesor;
     
@@ -124,6 +128,7 @@ public class VentanaCRUProfesorController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         this.cargarComboPago();
         this.cargarImagen();
+        this.fechaInicio.setValue(LocalDate.now());
     }
     
     public void cargarComboPago(){

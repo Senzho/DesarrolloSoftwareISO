@@ -10,6 +10,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class VentanaCRUClienteController implements Initializable {
     @FXML
@@ -22,6 +24,8 @@ public class VentanaCRUClienteController implements Initializable {
     private TextArea domicilio;
     @FXML
     private Button registrar;
+    @FXML
+    private ImageView imagen;
     
     private Cliente cliente;
     
@@ -85,13 +89,14 @@ public class VentanaCRUClienteController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        this.cargarImagen();
     }
     
     public void setCliente(Cliente cliente){
         this.cliente = cliente;
         if (cliente != null){
             this.cargarCliente();
+            this.cargarImagen();
             this.registrar.setText("Guardar");
         }else{
             this.registrar.setText("Registrar");
@@ -102,6 +107,9 @@ public class VentanaCRUClienteController implements Initializable {
         this.correo.setText(this.cliente.getCorreo());
         this.telefono.setText(this.cliente.getTelefono());
         this.domicilio.setText(this.cliente.getDireccion());
+    }
+    public void cargarImagen(){
+        this.imagen.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkPersonIcon.png")));
     }
     public boolean registrarCliente(){
         boolean realizado = false;

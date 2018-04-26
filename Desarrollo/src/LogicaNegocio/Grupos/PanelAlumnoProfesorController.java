@@ -4,7 +4,6 @@ import LogicaNegocio.Catalogos.Alumno;
 import LogicaNegocio.Lanzador;
 import LogicaNegocio.Pagos.PanelHistorialPagosAlumnoController;
 import LogicaNegocio.Pagos.VentanaRegistrarPagoAlumno;
-import LogicaNegocio.Pagos.VentanaRegistrarPagoAlumnoController;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;

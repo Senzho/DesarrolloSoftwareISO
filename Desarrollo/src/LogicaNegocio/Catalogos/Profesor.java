@@ -14,6 +14,7 @@ public class Profesor implements Comparable<Profesor>{
     private String direccion;
     private String monto;
     private Date fecha;
+    private Date fechaInicio;
     
     private ProfesorDAOSql profesorDAO;
 
@@ -84,6 +85,12 @@ public class Profesor implements Comparable<Profesor>{
     }
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+    public Date getFechaInicio(){
+        return this.fechaInicio;
+    }
+    public void setFechaInicio(Date fechaInicio){
+        this.fechaInicio = fechaInicio;
     }
     
     @Override
