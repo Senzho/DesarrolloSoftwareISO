@@ -17,11 +17,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.VBox;
 
 public class PanelAlumnosGrupoProfesorController implements Initializable {
     @FXML
-    private FlowPane panelAlumnos;
+    private VBox panelAlumnos;
     @FXML
     private ComboBox comboGrupos;
     @FXML

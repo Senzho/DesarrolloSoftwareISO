@@ -16,7 +16,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.VBox;
 
 public class PanelCatalogoProfesoresController implements Initializable {
     @FXML
@@ -24,7 +24,7 @@ public class PanelCatalogoProfesoresController implements Initializable {
     @FXML
     private Button buscar;
     @FXML
-    private FlowPane panelProfesores;
+    private VBox panelProfesores;
     private Lanzador lanzador;
     
     @Override

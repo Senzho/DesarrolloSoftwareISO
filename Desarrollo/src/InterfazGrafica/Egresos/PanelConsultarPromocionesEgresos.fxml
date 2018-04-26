@@ -36,15 +36,15 @@
     </ComboBox>
     <GridPane hgap="5.0" prefHeight="288.9999000000025" prefWidth="755.7141845703125" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="11.29" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="95.0">
       <children>
-        <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
-          <content>
-            <FlowPane fx:id="panelPromociones" prefHeight="301.0" prefWidth="378.0" />
-          </content>
+        <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+               <content>
+                  <VBox fx:id="panelPromociones" prefHeight="200.0" prefWidth="100.0" spacing="5.0" />
+               </content>
         </ScrollPane>
-        <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
-          <content>
-            <FlowPane fx:id="panelEgresos" prefHeight="301.0" prefWidth="386.0" />
-          </content>
+        <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+               <content>
+                  <VBox fx:id="panelEgresos" prefHeight="200.0" prefWidth="100.0" spacing="5.0" />
+               </content>
         </ScrollPane>
       </children>
       <columnConstraints>

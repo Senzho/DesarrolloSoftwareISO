@@ -18,7 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.VBox;
 
 public class PanelHistorialPagoProfesoresController implements Initializable {
     @FXML
@@ -26,7 +26,7 @@ public class PanelHistorialPagoProfesoresController implements Initializable {
     @FXML
     private ImageView imagen;
     @FXML
-    private FlowPane panelPagos;
+    private VBox panelPagos;
     @FXML
     private Button registrar;
     
@@ -50,9 +50,9 @@ public class PanelHistorialPagoProfesoresController implements Initializable {
     }
     public void cargarPagos(){
         List<PagoProfesor> pagosProfesor = pagoProfesor.obtenerPagos(this.profesor.getIdProfesor());
-        for(int i = pagosProfesor.size() - 1; i > 0; i++){
-            this.agregarPago(pagosProfesor.get(i));
-        }
+        pagosProfesor.forEach((pago) -> {
+            this.agregarPago(pago);
+        });
     }
     public void agregarPago(PagoProfesor pago){
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/InterfazGrafica/Pagos/PanelPagoProfesor.fxml"));

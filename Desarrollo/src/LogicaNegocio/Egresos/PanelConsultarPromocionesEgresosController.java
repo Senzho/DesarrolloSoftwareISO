@@ -1,14 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package LogicaNegocio.Egresos;
 
 import InterfazGrafica.MessageFactory;
 import java.io.IOException;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -21,19 +15,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.VBox;
 
-/**
- * FXML Controller class
- *
- * @author Desktop
- */
 public class PanelConsultarPromocionesEgresosController implements Initializable {
-
     @FXML
-    private FlowPane panelEgresos;
+    private VBox panelEgresos;
     @FXML
-    private FlowPane panelPromociones;
+    private VBox panelPromociones;
     @FXML
     private ComboBox comboMes;
     @FXML
@@ -44,8 +32,6 @@ public class PanelConsultarPromocionesEgresosController implements Initializable
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        this.panelEgresos.setVgap(5);
-        this.panelPromociones.setVgap(5);
         listaGastos = new GastoPromocional().obtenerGastos();
         listaEgresos = new Egreso().obtenerEgresos();
         cargarCombos();
@@ -67,14 +53,11 @@ public class PanelConsultarPromocionesEgresosController implements Initializable
         }
         int año = 2014;//solo para que funcione el metodo de busqueda
         this.comboAño.getItems().clear();
-        
         for (int i = 0; i < 10; i++) {
             this.comboAño.getItems().add(año);
             año++;
         }
-        
     }
-
     public void cargarEgresos(List<Egreso> listaEgresos) {
         this.panelEgresos.getChildren().clear();
         listaEgresos.forEach((egresoObtenido) -> {

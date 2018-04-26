@@ -27,9 +27,9 @@
             <Font name="Arial" size="16.0" />
          </font>
       </Button>
-      <ScrollPane layoutX="17.0" layoutY="112.0" prefHeight="289.0" prefWidth="574.0" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="112.0">
+      <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="17.0" layoutY="112.0" prefHeight="289.0" prefWidth="574.0" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="112.0">
          <content>
-            <FlowPane fx:id="panelPagos" prefHeight="312.0" prefWidth="573.0" />
+            <VBox fx:id="panelPagos" prefHeight="200.0" prefWidth="100.0" spacing="5.0" />
          </content>
       </ScrollPane>
    </children>

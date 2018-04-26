@@ -18,17 +18,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author Desktop
- */
 public class VentanaConsultarPromocionesController implements Initializable {
     @FXML
-    private FlowPane srollPromociones;
+    private VBox srollPromociones;
     @FXML
     private Button btnCrearPromocion;
     private int idProfesor;
@@ -76,8 +71,7 @@ public class VentanaConsultarPromocionesController implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       this.srollPromociones.setVgap(5);
-        this.srollPromociones.setVgap(5);
+       
     }    
     public void btnCrearPromocion_onClick(){
         new VentanaCRUPromocion(this.idProfesor);

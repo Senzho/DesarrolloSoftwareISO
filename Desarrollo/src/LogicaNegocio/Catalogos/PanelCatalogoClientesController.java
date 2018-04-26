@@ -15,7 +15,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.VBox;
 
 public class PanelCatalogoClientesController implements Initializable {
     @FXML
@@ -23,7 +23,7 @@ public class PanelCatalogoClientesController implements Initializable {
     @FXML
     private Button buscar;
     @FXML
-    private FlowPane panelClientes;
+    private VBox panelClientes;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {

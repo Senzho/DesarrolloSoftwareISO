@@ -3,7 +3,6 @@ package LogicaNegocio.Catalogos;
 import InterfazGrafica.MessageFactory;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -12,13 +11,11 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Orientation;
-import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.VBox;
 
 public class PanelCatalogoAlumnosController implements Initializable {
     @FXML
@@ -26,7 +23,7 @@ public class PanelCatalogoAlumnosController implements Initializable {
     @FXML
     private Button buscar;
     @FXML
-    private FlowPane panelAlumnos;
+    private VBox panelAlumnos;
 
     public void initialize(URL url, ResourceBundle rb) {
         this.cargarAlumnos(new Alumno().obtenerAlumnos());

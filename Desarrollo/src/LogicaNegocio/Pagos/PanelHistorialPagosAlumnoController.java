@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package LogicaNegocio.Pagos;
 
 import LogicaNegocio.Catalogos.Alumno;
@@ -19,16 +14,10 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author Desktop
- */
 public class PanelHistorialPagosAlumnoController implements Initializable {
-
     private Stage stage;
     private Alumno alumno;
     @FXML
@@ -36,16 +25,12 @@ public class PanelHistorialPagosAlumnoController implements Initializable {
     @FXML
     private Label lblCorreo;
     @FXML
-    private FlowPane panelPagos;
+    private VBox panelPagos;
     @FXML
     private ImageView imagenAlumno;
     
     private List<PagoAlumno> pagos;
-    /**
-     * Initializes the controller class.
-     */
     
-
     public void setStage(Stage stage) {
         this.stage = stage;
     }
@@ -60,7 +45,7 @@ public class PanelHistorialPagosAlumnoController implements Initializable {
         this.imagenAlumno.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkPersonIcon.png")));
         pagos = new PagoAlumno().obtenerPagos(alumno.getIdAlumno());
         this.panelPagos.getChildren().clear();
-        for(int i = pagos.size() - 1; i > 0; i++){
+        for(int i = pagos.size() - 1; i > - 1; i--){
             FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/InterfazGrafica/Pagos/PanelPagoAlumno.fxml"));
             AnchorPane panel;
             try {
@@ -78,7 +63,6 @@ public class PanelHistorialPagosAlumnoController implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        this.panelPagos.setVgap(5);
-        this.panelPagos.setHgap(5);
+        
     }
 }
