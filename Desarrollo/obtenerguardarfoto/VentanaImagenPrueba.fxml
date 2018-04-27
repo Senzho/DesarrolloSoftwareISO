@@ -11,6 +11,6 @@
    <children>
       <ImageView fx:id="imagenUsuario" fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
       <Button fx:id="btnCargarImagen" layoutX="68.0" layoutY="188.0" mnemonicParsing="false" onMouseClicked="#btnCargarImagen_onClick" text="cargar imagen" />
-      <TextField fx:id="txtTipoUsuario" layoutX="40.0" layoutY="244.0" />
+      <Button fx:id="btnGuardar" layoutX="88.0" layoutY="232.0" mnemonicParsing="false" onMouseClicked="#btnGuardar_onClick" text="Guardar" />
    </children>
 </AnchorPane>
