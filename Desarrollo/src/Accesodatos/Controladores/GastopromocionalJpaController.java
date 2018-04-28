@@ -8,18 +8,17 @@ package Accesodatos.Controladores;
 import Accesodatos.Controladores.exceptions.NonexistentEntityException;
 import Accesodatos.Entidades.Gastopromocional;
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import Accesodatos.Entidades.Profesor;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author Victor Javier
+ * @author Desktop
  */
 public class GastopromocionalJpaController implements Serializable {
 
@@ -37,16 +36,7 @@ public class GastopromocionalJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Profesor idProfesor = gastopromocional.getIdProfesor();
-            if (idProfesor != null) {
-                idProfesor = em.getReference(idProfesor.getClass(), idProfesor.getIdProfesor());
-                gastopromocional.setIdProfesor(idProfesor);
-            }
             em.persist(gastopromocional);
-            if (idProfesor != null) {
-                idProfesor.getGastopromocionalCollection().add(gastopromocional);
-                idProfesor = em.merge(idProfesor);
-            }
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -60,22 +50,7 @@ public class GastopromocionalJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Gastopromocional persistentGastopromocional = em.find(Gastopromocional.class, gastopromocional.getIdGasto());
-            Profesor idProfesorOld = persistentGastopromocional.getIdProfesor();
-            Profesor idProfesorNew = gastopromocional.getIdProfesor();
-            if (idProfesorNew != null) {
-                idProfesorNew = em.getReference(idProfesorNew.getClass(), idProfesorNew.getIdProfesor());
-                gastopromocional.setIdProfesor(idProfesorNew);
-            }
             gastopromocional = em.merge(gastopromocional);
-            if (idProfesorOld != null && !idProfesorOld.equals(idProfesorNew)) {
-                idProfesorOld.getGastopromocionalCollection().remove(gastopromocional);
-                idProfesorOld = em.merge(idProfesorOld);
-            }
-            if (idProfesorNew != null && !idProfesorNew.equals(idProfesorOld)) {
-                idProfesorNew.getGastopromocionalCollection().add(gastopromocional);
-                idProfesorNew = em.merge(idProfesorNew);
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -104,11 +79,6 @@ public class GastopromocionalJpaController implements Serializable {
                 gastopromocional.getIdGasto();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The gastopromocional with id " + id + " no longer exists.", enfe);
-            }
-            Profesor idProfesor = gastopromocional.getIdProfesor();
-            if (idProfesor != null) {
-                idProfesor.getGastopromocionalCollection().remove(gastopromocional);
-                idProfesor = em.merge(idProfesor);
             }
             em.remove(gastopromocional);
             em.getTransaction().commit();
