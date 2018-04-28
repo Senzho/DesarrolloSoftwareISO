@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.21, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
--- Host: localhost    Database: Ared
+-- Host: localhost    Database: ared
 -- ------------------------------------------------------
--- Server version	5.7.21-log
+-- Server version	5.7.17-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -31,7 +31,7 @@ CREATE TABLE `alumno` (
   `estado` int(11) DEFAULT NULL,
   `telefono` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`idAlumno`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `alumno` (
 
 LOCK TABLES `alumno` WRITE;
 /*!40000 ALTER TABLE `alumno` DISABLE KEYS */;
-INSERT INTO `alumno` VALUES (1,'2018-03-20','Víctor Javier García Mascareñas','Camino Mata Obscura S/N, Municipio de El Lencero, Veracruz','vijagama@outlook.es',1,'2281843459'),(2,'2018-03-20','Mario Hurtado López','Caxa # 23, Colonia Villa de las Margaritas, Xalapa Veracruz','mario@gmail.com',1,'2281765434');
+INSERT INTO `alumno` VALUES (3,'2018-04-18','Ana Elvia López López','Calle Francisco Esteban Mascareñas #15. Col. Rébsamen. Xalapa, Ver.','anelolo@yahoo.com',1,'2281767754'),(4,'2018-04-18','Juan Luis Muñóz Sánchez','Av. Lucio Vega #554. Col. Rodriguez Clara. Xalapa. Ver.','julumusa@outlook.es',1,'2281977734'),(5,'2018-04-18','Maria Violeta Magaña Castelán','Calle 3. Col. 21 de Marzo. Xalapa, Ver.','mavimaca@gmail.com',1,'2281654321'),(6,'2018-04-18','Zianya García Márquez','Av. 20 de Noviembre #35. Col. Centro. Xalapa, Ver.','zigama@outlook.com',1,'2281102534'),(7,'2018-04-18','Elton Roberto Hurtado Herrera','Calle Justo Sierra #1. Col. Progreso. Xalapa, Ver.','elrohuhe@gmail.com',1,'2281765590'),(8,'2018-04-18','Karla Mariana García Pozos','Av. Universidad #11. Col. Jacarandas. Xalapa, Ver.','kamagapo@outlook.es',1,'2281769922'),(9,'2018-04-18','Carolina Herrera Morales','Calle Juarez # 45. Col. Centro. Xalapa, Ver.','cahemo@yahoo.com',1,'2281654472'),(10,'2018-04-18','Rosa Grecia Mora López','Av. Américas #37. Col. Benito Juárez.','rogrmolo@outlook.es',1,'2281769009'),(11,'2018-04-18','Javier Antonio Mendoza García','Calle Santos Degollado # 5. Col. Centro. Xalapa, Ver.','janmega@gmail.com',1,'2281764930'),(12,'2018-04-19','Adrian Pérez','Calle Justo sierra #4','adpe@gmail.com',1,'2281765432');
 /*!40000 ALTER TABLE `alumno` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -88,7 +88,7 @@ CREATE TABLE `cliente` (
   `nombre` varchar(150) DEFAULT NULL,
   `direccion` text,
   PRIMARY KEY (`idCliente`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -97,6 +97,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
+INSERT INTO `cliente` VALUES (1,'2018-03-29','edmasazu@gmail.com','2281917765','Edna María Sanchez Zurita','Av. Murillo Vidál #22. Col. Progreso. Xalapa, Ver.');
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -116,7 +117,7 @@ CREATE TABLE `dia` (
   `horaInicio` varchar(5) DEFAULT NULL,
   `horaFin` varchar(5) DEFAULT NULL,
   PRIMARY KEY (`idDia`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -125,6 +126,7 @@ CREATE TABLE `dia` (
 
 LOCK TABLES `dia` WRITE;
 /*!40000 ALTER TABLE `dia` DISABLE KEYS */;
+INSERT INTO `dia` VALUES (40,'X',1,21,'Lunes','09:00','11:00'),(41,'X',1,21,'Miercoles','11:30','14:30'),(42,'X',1,21,'Sabado','18:30','19:00'),(43,'X',1,21,'Domingo','09:00','09:30'),(44,'X',1,22,'Martes','20:00','21:30'),(45,'X',1,22,'Jueves','16:00','16:30'),(46,'X',1,22,'Sabado','09:00','12:00'),(47,'X',1,23,'Lunes','15:00','17:00'),(48,'X',1,23,'Martes','10:00','11:00'),(49,'X',1,23,'Miercoles','09:00','10:00'),(50,'X',1,23,'Jueves','12:30','15:00'),(51,'X',1,23,'Viernes','20:00','20:30'),(52,'X',1,23,'Sabado','12:30','13:30'),(53,'X',1,23,'Domingo','10:00','10:30'),(54,'X',1,24,'Miercoles','20:00','20:30'),(55,'X',1,24,'Jueves','09:00','10:30'),(56,'X',1,24,'Viernes','09:00','11:00'),(57,'X',1,25,'Lunes','17:30','19:30'),(58,'X',1,25,'Martes','11:30','12:30');
 /*!40000 ALTER TABLE `dia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -141,7 +143,7 @@ CREATE TABLE `egreso` (
   `descripcion` text,
   `fecha` date DEFAULT NULL,
   PRIMARY KEY (`idEgreso`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -150,6 +152,7 @@ CREATE TABLE `egreso` (
 
 LOCK TABLES `egreso` WRITE;
 /*!40000 ALTER TABLE `egreso` DISABLE KEYS */;
+INSERT INTO `egreso` VALUES (3,'50.0','Escoba.','2018-04-11'),(4,'140','Paquete de 100 hojas para impresora.','2018-04-19'),(5,'100','Hojas de papel para impresión','2018-04-19');
 /*!40000 ALTER TABLE `egreso` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -168,7 +171,7 @@ CREATE TABLE `gastopromocional` (
   `url` varchar(200) DEFAULT NULL,
   `descripcion` text,
   PRIMARY KEY (`idGasto`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -177,6 +180,7 @@ CREATE TABLE `gastopromocional` (
 
 LOCK TABLES `gastopromocional` WRITE;
 /*!40000 ALTER TABLE `gastopromocional` DISABLE KEYS */;
+INSERT INTO `gastopromocional` VALUES (4,'2018-04-15','2018-04-30','280','www.facebook.com/ared_espacio/pp01','Inscribete del 15 al 30 de abril y paga solo la mitad.'),(5,'2018-04-19','2018-05-05','1000','www.facebook.com','Paga la mitad de la inscripción');
 /*!40000 ALTER TABLE `gastopromocional` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -195,7 +199,7 @@ CREATE TABLE `grupo` (
   PRIMARY KEY (`idGrupo`),
   KEY `idProfesor` (`idProfesor`),
   CONSTRAINT `grupo_ibfk_1` FOREIGN KEY (`idProfesor`) REFERENCES `profesor` (`idProfesor`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -204,6 +208,7 @@ CREATE TABLE `grupo` (
 
 LOCK TABLES `grupo` WRITE;
 /*!40000 ALTER TABLE `grupo` DISABLE KEYS */;
+INSERT INTO `grupo` VALUES (21,'Hip Hop','HIPHOP_LDMJ',11),(22,'Techno','TECHNO_LDMJ',11),(23,'Ballet','BALLET_DIREC',10),(24,'Folklorica','FOLKLORICA_DIREC',10),(25,'Clasica','CLASICA_DIREC',10);
 /*!40000 ALTER TABLE `grupo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -223,7 +228,7 @@ CREATE TABLE `inscripcion` (
   KEY `idAlumno` (`idAlumno`),
   CONSTRAINT `inscripcion_ibfk_1` FOREIGN KEY (`idGrupo`) REFERENCES `grupo` (`idGrupo`),
   CONSTRAINT `inscripcion_ibfk_2` FOREIGN KEY (`idAlumno`) REFERENCES `alumno` (`idAlumno`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -232,6 +237,7 @@ CREATE TABLE `inscripcion` (
 
 LOCK TABLES `inscripcion` WRITE;
 /*!40000 ALTER TABLE `inscripcion` DISABLE KEYS */;
+INSERT INTO `inscripcion` VALUES (3,21,3),(4,21,4),(5,22,5),(6,22,6),(7,23,7),(8,23,8),(9,24,9),(10,24,10),(11,25,11);
 /*!40000 ALTER TABLE `inscripcion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -254,7 +260,7 @@ CREATE TABLE `pagoalumno` (
   KEY `idPromocion` (`idPromocion`),
   CONSTRAINT `pagoalumno_ibfk_1` FOREIGN KEY (`idAlumno`) REFERENCES `alumno` (`idAlumno`),
   CONSTRAINT `pagoalumno_ibfk_2` FOREIGN KEY (`idPromocion`) REFERENCES `promocion` (`idPromocion`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -263,6 +269,7 @@ CREATE TABLE `pagoalumno` (
 
 LOCK TABLES `pagoalumno` WRITE;
 /*!40000 ALTER TABLE `pagoalumno` DISABLE KEYS */;
+INSERT INTO `pagoalumno` VALUES (1,0,11,1,'2018-04-18','1500'),(2,1,11,NULL,'2018-04-18','500'),(3,0,7,NULL,'2018-04-18','2000'),(4,1,7,2,'2018-04-18','650'),(5,0,8,NULL,'2018-04-18','1200'),(6,1,8,NULL,'2018-04-18','500'),(7,0,9,NULL,'2018-04-18','2300'),(8,1,9,NULL,'2018-04-18','680'),(9,0,10,1,'2018-04-18','750'),(10,1,10,NULL,'2018-04-18','300'),(11,0,3,NULL,'2018-04-18','1500'),(12,1,3,NULL,'2018-04-18','500'),(13,0,4,3,'2018-04-18','2150'),(14,1,4,NULL,'2018-04-18','750'),(15,0,5,NULL,'2018-04-18','2000'),(16,1,5,NULL,'2018-04-18','500'),(17,0,6,NULL,'2018-04-18','200'),(18,1,6,4,'2018-04-18','250');
 /*!40000 ALTER TABLE `pagoalumno` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -309,7 +316,7 @@ CREATE TABLE `pagoprofesor` (
   PRIMARY KEY (`idPago`),
   KEY `idProfesor` (`idProfesor`),
   CONSTRAINT `pagoprofesor_ibfk_1` FOREIGN KEY (`idProfesor`) REFERENCES `profesor` (`idProfesor`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -318,6 +325,7 @@ CREATE TABLE `pagoprofesor` (
 
 LOCK TABLES `pagoprofesor` WRITE;
 /*!40000 ALTER TABLE `pagoprofesor` DISABLE KEYS */;
+INSERT INTO `pagoprofesor` VALUES (17,1,'1850','2018-04-18',11),(18,0,'2600','2018-04-18',10);
 /*!40000 ALTER TABLE `pagoprofesor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -338,8 +346,9 @@ CREATE TABLE `profesor` (
   `fecha` date DEFAULT NULL,
   `direccion` text,
   `monto` varchar(15) DEFAULT NULL,
+  `fechaInicio` date DEFAULT NULL,
   PRIMARY KEY (`idProfesor`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -348,7 +357,7 @@ CREATE TABLE `profesor` (
 
 LOCK TABLES `profesor` WRITE;
 /*!40000 ALTER TABLE `profesor` DISABLE KEYS */;
-INSERT INTO `profesor` VALUES (1,1,'Laura Gabriela Sosa Martínez','2281976654',0,'lagasoma@gmail.com','2018-03-22','Mi dirección','2500'),(4,1,'Angel David Revilla','2267453728',1,'reanda@outlook.es','2018-03-22','','2345');
+INSERT INTO `profesor` VALUES (10,0,'Gabriela Sosa Martínez','2281916676',0,'gasoma@gmail.com','2018-04-18','Av. Américas #45. Col. Centro. Xalapa, Ver.','2600','2018-04-23'),(11,1,'Luis Daniel Montoya Jiménez','2281765542',1,'ludamoji@outlook.es','2018-04-18','Calle Justino Sarmiento #03. Col. Revolución. Xalapa, Ver.','1850','2018-02-01');
 /*!40000 ALTER TABLE `profesor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -368,7 +377,7 @@ CREATE TABLE `promocion` (
   PRIMARY KEY (`idPromocion`),
   KEY `idProfesor` (`idProfesor`),
   CONSTRAINT `promocion_ibfk_1` FOREIGN KEY (`idProfesor`) REFERENCES `profesor` (`idProfesor`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -377,6 +386,7 @@ CREATE TABLE `promocion` (
 
 LOCK TABLES `promocion` WRITE;
 /*!40000 ALTER TABLE `promocion` DISABLE KEYS */;
+INSERT INTO `promocion` VALUES (1,'Inscripción / 2','Se paga solamente el 50% del costo de la inscripción.',50,10),(2,'Solo 20% al mes','Se paga únicamente el 20% en la mensualidad.',20,10),(3,'Inscripción 1/4','Solo se paga 1/4 de la inscripción.',75,11),(4,'Medio mes','Solo se paga la mitad de la mensualidad.',50,11),(5,'Promoción X','25% menos',25,10);
 /*!40000 ALTER TABLE `promocion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -420,7 +430,7 @@ CREATE TABLE `usuario` (
   `tipoUsuario` int(11) DEFAULT NULL,
   `idTipoUsuario` int(11) DEFAULT NULL,
   PRIMARY KEY (`idUsuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -429,7 +439,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (14,'Gabriela','59606609c6f2b0f4ac81167fe123c3f1',1,1),(17,'jose','c5c85ff214e6363fb656c18d2171db22',0,4);
+INSERT INTO `usuario` VALUES (23,'direc_gaby','5b7b165ce98eceda3f4ca2740d061dca',0,10),(24,'profe_luis','502ff82f7f1f8218dd41201fe4353687',1,11),(25,'abcde@abcd.com','66a4cc20eb6fe3251a256f02b5623630',1,12);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -442,4 +452,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-03-25 22:06:08
+-- Dump completed on 2018-04-27 19:20:30

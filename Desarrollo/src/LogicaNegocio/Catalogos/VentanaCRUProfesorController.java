@@ -1,10 +1,12 @@
 package LogicaNegocio.Catalogos;
 
 import InterfazGrafica.MessageFactory;
+import LogicaNegocio.Egresos.Dates;
 import LogicaNegocio.Sesiones.Hasher;
 import LogicaNegocio.Sesiones.Usuario;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -149,6 +151,8 @@ public class VentanaCRUProfesorController implements Initializable {
         }else{
             this.tipoPago.setValue(VentanaCRUProfesorController.TIPO_PAGO_QUINCENAL);
         }
+        Date fechaInicioPago = this.profesor.getFechaInicio();
+        this.fechaInicio.setValue(LocalDate.of(Dates.getYear(fechaInicioPago), Dates.getMonth(fechaInicioPago), Dates.getDay(fechaInicioPago)));
     }
     public void setProfesor(Profesor profesor){
         this.profesor = profesor;
@@ -182,6 +186,7 @@ public class VentanaCRUProfesorController implements Initializable {
         this.profesor.setMonto(this.monto.getText().trim());
         this.profesor.setFecha(new Date());
         this.profesor.setTipoPago(this.tipoPago.getValue().equals(VentanaCRUProfesorController.TIPO_PAGO_MENSUAL));
+        this.profesor.setFechaInicio(Dates.toDate(this.fechaInicio.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE)));
         if (this.profesor.registrarProfesor()){
             realizado = true;
             this.registrar.setText("Guardar");
@@ -197,6 +202,7 @@ public class VentanaCRUProfesorController implements Initializable {
         this.profesor.setEstado(this.activo.isSelected());
         this.profesor.setMonto(this.monto.getText().trim());
         this.profesor.setTipoPago(this.tipoPago.getValue().equals(VentanaCRUProfesorController.TIPO_PAGO_MENSUAL));
+        this.profesor.setFechaInicio(Dates.toDate(this.fechaInicio.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE)));
         if (this.profesor.editarProfesor())
             realizado = true;
         return realizado;

@@ -33,6 +33,7 @@ public class ProfesorDAOSql implements ProfesorDAO{
         }
         profesorJpa.setTipoPago(tipoPago);
         profesorJpa.setMonto(profesor.getMonto());
+        profesorJpa.setFechaInicio(profesor.getFechaInicio());
         return profesorJpa;
     }
     public static Profesor obtenerEntidad(Accesodatos.Entidades.Profesor profesorJpa){
@@ -46,6 +47,7 @@ public class ProfesorDAOSql implements ProfesorDAO{
         profesor.setNombre(profesorJpa.getNombre());
         profesor.setTelefono(profesorJpa.getTelefono());
         profesor.setTipoPago(profesorJpa.getTipoPago() != 0);
+        profesor.setFechaInicio(profesorJpa.getFechaInicio());
         return profesor;
     }
     
@@ -96,6 +98,7 @@ public class ProfesorDAOSql implements ProfesorDAO{
                     tipoPago = 0;
                 }
                 profesorJpa.setTipoPago(tipoPago);
+                profesorJpa.setFechaInicio(profesor.getFechaInicio());
                 controller.edit(profesorJpa);
                 editado = true;
             } catch (Exception ex) {

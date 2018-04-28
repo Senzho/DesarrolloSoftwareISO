@@ -40,7 +40,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Profesor.findByTipoPago", query = "SELECT p FROM Profesor p WHERE p.tipoPago = :tipoPago")
     , @NamedQuery(name = "Profesor.findByCorreo", query = "SELECT p FROM Profesor p WHERE p.correo = :correo")
     , @NamedQuery(name = "Profesor.findByFecha", query = "SELECT p FROM Profesor p WHERE p.fecha = :fecha")
-    , @NamedQuery(name = "Profesor.findByMonto", query = "SELECT p FROM Profesor p WHERE p.monto = :monto")})
+    , @NamedQuery(name = "Profesor.findByMonto", query = "SELECT p FROM Profesor p WHERE p.monto = :monto")
+    , @NamedQuery(name = "Profesor.findByFechaInicio", query = "SELECT p FROM Profesor p WHERE p.fechaInicio = :fechaInicio")})
 public class Profesor implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -67,6 +68,9 @@ public class Profesor implements Serializable {
     private String direccion;
     @Column(name = "monto")
     private String monto;
+    @Column(name = "fechaInicio")
+    @Temporal(TemporalType.DATE)
+    private Date fechaInicio;
     @OneToMany(mappedBy = "idProfesor")
     private Collection<Promocion> promocionCollection;
     @OneToMany(mappedBy = "idProfesor")
@@ -151,6 +155,14 @@ public class Profesor implements Serializable {
 
     public void setMonto(String monto) {
         this.monto = monto;
+    }
+
+    public Date getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public void setFechaInicio(Date fechaInicio) {
+        this.fechaInicio = fechaInicio;
     }
 
     @XmlTransient

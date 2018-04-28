@@ -23,7 +23,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author Desktop
+ * @author Victor Javier
  */
 public class ProfesorJpaController implements Serializable {
 
