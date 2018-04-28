@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package LogicaNegocio.Egresos;
 
 import java.util.logging.Level;
@@ -13,10 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-/**
- *
- * @author Desktop
- */
 public class VentanaCRUGastoPromocional extends Application {
     private GastoPromocional gastoPromocional;
     
@@ -42,7 +33,7 @@ public class VentanaCRUGastoPromocional extends Application {
         AnchorPane root = loader.load();
         VentanaCRUGastoPromocionalController controller = loader.getController();
         controller.setGastoPromocional(this.gastoPromocional);
-        Scene scene = new Scene(root, 337, 385);
+        Scene scene = new Scene(root, 337, 420);
         primaryStage.setTitle("Registro gasto promocional");
         primaryStage.setScene(scene);
         primaryStage.show();

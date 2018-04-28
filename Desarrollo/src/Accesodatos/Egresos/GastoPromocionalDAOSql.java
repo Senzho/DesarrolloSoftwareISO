@@ -1,21 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Accesodatos.Egresos;
 
 import Accesodatos.Controladores.GastopromocionalJpaController;
+import Accesodatos.Controladores.ProfesorJpaController;
 import LogicaNegocio.Catalogos.OperacionesString;
 import LogicaNegocio.Egresos.GastoPromocional;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Persistence;
 
-/**
- *
- * @author Desktop
- */
 public class GastoPromocionalDAOSql implements GastoPromocionalDAO {
 
     public GastoPromocionalDAOSql() {
@@ -32,6 +24,8 @@ public class GastoPromocionalDAOSql implements GastoPromocionalDAO {
             gastoJpa.setFechaInicio(gastoPromocional.getFechaInicio());
             gastoJpa.setMonto(gastoPromocional.getMonto());
             gastoJpa.setUrl(gastoPromocional.getURL());
+            ProfesorJpaController profesorController = new ProfesorJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
+            gastoJpa.setIdProfesor(profesorController.findProfesor(gastoPromocional.getIdProfesor()));
             try {
                 gastoController.edit(gastoJpa);
                 gastoEditado = true;
@@ -60,6 +54,7 @@ public class GastoPromocionalDAOSql implements GastoPromocionalDAO {
         gastoPromocional.setIdGastoPromocional(egresoJpa.getIdGasto());
         gastoPromocional.setMonto(egresoJpa.getMonto());
         gastoPromocional.setURL(egresoJpa.getUrl());
+        gastoPromocional.setIdProfesor(egresoJpa.getIdProfesor().getIdProfesor());
         return gastoPromocional;
     }
 
@@ -75,6 +70,8 @@ public class GastoPromocionalDAOSql implements GastoPromocionalDAO {
             gastoJpa.setIdGasto(gastoPromocional.getIdGastoPromocional());
             gastoJpa.setMonto(gastoPromocional.getMonto());
             gastoJpa.setUrl(gastoPromocional.getURL());
+            ProfesorJpaController profesorController = new ProfesorJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
+            gastoJpa.setIdProfesor(profesorController.findProfesor(gastoPromocional.getIdProfesor()));
             try {
                 gastoController.create(gastoJpa);
                 gastoPromocional.setIdGastoPromocional(gastoJpa.getIdGasto());
