@@ -52,7 +52,9 @@ public class PanelAlumnosGrupoProfesorController implements Initializable {
         List<Alumno> alumnos = new AlumnoDAOSql().obtenerAlumnos(idGrupo);
         Collections.sort(alumnos);
         alumnos.forEach((alumno) -> {
-            this.agregarAlumno(alumno);
+            if(alumno.isEstado()){
+                this.agregarAlumno(alumno);
+            }
         });
     }
     public void agregarAlumno(Alumno alumno){
