@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package obtenerguardarfoto;
+package LogicaNegocio.Catalogos;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -34,17 +34,29 @@ public class CopiarArchivo {
         setRuta(origen);
         return imagen;
     }
-    public static Image obtenerFotoUsuario(String tipoUsuario, int idUsuario){
+
+    public static Image obtenerFotoUsuario(String tipoUsuario, int idUsuario) {
         Image imagen = null;
+        File directorio = null;
         if (tipoUsuario.equalsIgnoreCase("alumno")) {
-           imagen = new Image("file:"+"C:\\Ared\\Alumnos\\"+idUsuario+".jpg");
+            directorio = new File("C:\\Ared\\Alumnos\\" + idUsuario + ".jpg");
+            if (directorio.exists()) {
+                imagen = new Image("file:" + directorio.getAbsolutePath());
+            }
         } else if (tipoUsuario.equalsIgnoreCase("profesor")) {
-           imagen = new Image("file:"+"C:\\Ared\\Profesores\\"+idUsuario+".jpg");
+            directorio = new File("C:\\Ared\\profesor\\" + idUsuario + ".jpg");
+            if (directorio.exists()) {
+                imagen = new Image("file:" + directorio.getAbsolutePath());
+            }
         } else if (tipoUsuario.equalsIgnoreCase("cliente")) {
-           imagen = new Image("file:"+"C:\\Ared\\Clientes\\"+idUsuario+".jpg");
+            directorio = new File("C:\\Ared\\profesor\\" + idUsuario + ".jpg");
+            if (directorio.exists()) {
+                imagen = new Image("file:" + directorio.getAbsolutePath());
+            }
         }
         return imagen;
     }
+
     private static void setRuta(String ruta) {
         rutaImagen = ruta;
     }
@@ -57,7 +69,7 @@ public class CopiarArchivo {
         boolean guardado = false;
         File directorio = null;
         File fotos = new File("C:\\Ared");
-        if(!fotos.exists()){
+        if (!fotos.exists()) {
             fotos.mkdir();
         }
         if (tipoUsuario.equalsIgnoreCase("alumno")) {
@@ -65,20 +77,20 @@ public class CopiarArchivo {
             if (!directorio.exists()) {
                 directorio.mkdir();
             }
-            guardado = copiar(rutaOrigen,directorio.getAbsolutePath(), idUsuario);
+            guardado = copiar(rutaOrigen, directorio.getAbsolutePath(), idUsuario);
         } else if (tipoUsuario.equalsIgnoreCase("profesor")) {
             directorio = new File("C:\\Ared\\Profesores");
             if (!directorio.exists()) {
                 directorio.mkdir();
             }
-            guardado = copiar(rutaOrigen,directorio.getAbsolutePath(), idUsuario);
+            guardado = copiar(rutaOrigen, directorio.getAbsolutePath(), idUsuario);
 
         } else if (tipoUsuario.equalsIgnoreCase("cliente")) {
             directorio = new File("C:\\Ared\\Clientes");
             if (!directorio.exists()) {
                 directorio.mkdir();
             }
-            guardado = copiar(rutaOrigen,directorio.getAbsolutePath(), idUsuario);
+            guardado = copiar(rutaOrigen, directorio.getAbsolutePath(), idUsuario);
         }
         return guardado;
     }
@@ -95,7 +107,7 @@ public class CopiarArchivo {
             if (copiado = archivoOrigen.exists()) {
                 if (copiado = archivoOrigen.canRead()) {
                     entrada = new FileInputStream(archivoOrigen);
-                    salida = new FileOutputStream(archivoDestino+"\\"+idUsuario+".jpg");
+                    salida = new FileOutputStream(archivoDestino + "\\" + idUsuario + ".jpg");
                     int i;
                     while ((i = entrada.read()) != -1) {
                         salida.write(i);
