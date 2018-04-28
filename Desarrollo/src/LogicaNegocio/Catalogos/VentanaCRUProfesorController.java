@@ -4,11 +4,14 @@ import InterfazGrafica.MessageFactory;
 import LogicaNegocio.Egresos.Dates;
 import LogicaNegocio.Sesiones.Hasher;
 import LogicaNegocio.Sesiones.Usuario;
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -24,6 +27,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class VentanaCRUProfesorController implements Initializable {
+
     @FXML
     private ImageView imagen;
     @FXML
@@ -46,46 +50,48 @@ public class VentanaCRUProfesorController implements Initializable {
     private TextField monto;
     @FXML
     private DatePicker fechaInicio;
-    
+
     private Profesor profesor;
-    
+    private String rutaImagen;
+
     private static final String TIPO_PAGO_MENSUAL = "Mensual";
     private static final String TIPO_PAGO_QUINCENAL = "Quincenal";
-    
-    private CatalogoEnum validarDatos(){
+
+    private CatalogoEnum validarDatos() {
         CatalogoEnum validacion = CatalogoEnum.DATOS_VALIDOS;
         String nombre = this.nombre.getText().trim();
         String telefono = this.telefono.getText().trim();
         String correo = this.correo.getText().trim();
         String monto = this.monto.getText().trim();
-        if (nombre.isEmpty()){
+        if (nombre.isEmpty()) {
             validacion = CatalogoEnum.NOMBRE_VACIO;
-        }else if (nombre.length() > 150){
+        } else if (nombre.length() > 150) {
             validacion = CatalogoEnum.NOMBRE_LARGO;
-        }else if (telefono.isEmpty()){
+        } else if (telefono.isEmpty()) {
             validacion = CatalogoEnum.TELEFONO_VACIO;
-        }else if (telefono.length() > 10){
+        } else if (telefono.length() > 10) {
             validacion = CatalogoEnum.TELEFONO_LARGO;
-        }else if (!OperacionesString.telefonoValido(telefono)){
+        } else if (!OperacionesString.telefonoValido(telefono)) {
             validacion = CatalogoEnum.TELEFONO_NO_VALIDO;
-        }else if(correo.isEmpty()){
+        } else if (correo.isEmpty()) {
             validacion = CatalogoEnum.CORREO_VACIO;
-        }else if (correo.length() > 150){
+        } else if (correo.length() > 150) {
             validacion = CatalogoEnum.CORREO_LARGO;
-        }else if (!OperacionesString.emailValido(correo)){
+        } else if (!OperacionesString.emailValido(correo)) {
             validacion = CatalogoEnum.CORREO_NO_VALIDO;
-        }else if (monto.isEmpty()){
+        } else if (monto.isEmpty()) {
             validacion = CatalogoEnum.MONTO_VACIO;
-        }else if (monto.length() > 15){
+        } else if (monto.length() > 15) {
             validacion = CatalogoEnum.MONTO_LARGO;
-        }else if (!OperacionesString.montoValido(monto)){
+        } else if (!OperacionesString.montoValido(monto)) {
             validacion = CatalogoEnum.MONTO_NO_VALIDO;
         }
         return validacion;
     }
-    private void mostrarMensajeError(CatalogoEnum profesorEnum){
+
+    private void mostrarMensajeError(CatalogoEnum profesorEnum) {
         String mensaje;
-        switch(profesorEnum){
+        switch (profesorEnum) {
             default:
                 mensaje = "";
                 break;
@@ -125,57 +131,63 @@ public class VentanaCRUProfesorController implements Initializable {
         }
         MessageFactory.showMessage("Error", "Datos no válidos", mensaje, Alert.AlertType.ERROR);
     }
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.cargarComboPago();
         this.cargarImagen();
         this.fechaInicio.setValue(LocalDate.now());
     }
-    
-    public void cargarComboPago(){
+
+    public void cargarComboPago() {
         ObservableList lista = FXCollections.observableArrayList();
         lista.add(VentanaCRUProfesorController.TIPO_PAGO_MENSUAL);
         lista.add(VentanaCRUProfesorController.TIPO_PAGO_QUINCENAL);
         this.tipoPago.setItems(lista);
         this.tipoPago.setValue(VentanaCRUProfesorController.TIPO_PAGO_MENSUAL);
     }
-    public void cargarProfesor(){
+
+    public void cargarProfesor() {
         this.nombre.setText(this.profesor.getNombre());
         this.telefono.setText(this.profesor.getTelefono());
         this.correo.setText(this.profesor.getCorreo());
         this.direccion.setText(this.profesor.getDireccion());
         this.monto.setText(this.profesor.getMonto());
-        if (this.profesor.isTipoPago()){
+        if (this.profesor.isTipoPago()) {
             this.tipoPago.setValue(VentanaCRUProfesorController.TIPO_PAGO_MENSUAL);
-        }else{
+        } else {
             this.tipoPago.setValue(VentanaCRUProfesorController.TIPO_PAGO_QUINCENAL);
         }
         Date fechaInicioPago = this.profesor.getFechaInicio();
         this.fechaInicio.setValue(LocalDate.of(Dates.getYear(fechaInicioPago), Dates.getMonth(fechaInicioPago), Dates.getDay(fechaInicioPago)));
     }
-    public void setProfesor(Profesor profesor){
+
+    public void setProfesor(Profesor profesor) {
         this.profesor = profesor;
-        if (profesor != null){
+        if (profesor != null) {
             this.cargarProfesor();
             this.registrar.setText("Guardar");
-            if (this.profesor.isEstado()){
+            if (this.profesor.isEstado()) {
                 this.activo.setSelected(true);
-            }else{
+            } else {
                 this.inactivo.setSelected(true);
             }
-        }else{
+            Image imagenProfesor = CopiarArchivo.obtenerFotoUsuario("profesor", profesor.getIdProfesor());
+            if (imagenProfesor != null) {
+                this.imagen.setImage(imagenProfesor);
+            }
+        } else {
             this.tipoPago.setValue(VentanaCRUProfesorController.TIPO_PAGO_MENSUAL);
             this.inactivo.setSelected(true);
             this.registrar.setText("Registrar");
         }
-        this.cargarImagen();
     }
-    public void cargarImagen(){
-        //Validar si existe una imágen, en caso contrario:
+
+    public void cargarImagen() {
         this.imagen.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkPersonIcon.png")));
     }
-    public boolean registrarProfesor(){
+
+    public boolean registrarProfesor() {
         boolean realizado = false;
         this.profesor = new Profesor();
         this.profesor.setNombre(this.nombre.getText().trim());
@@ -187,13 +199,14 @@ public class VentanaCRUProfesorController implements Initializable {
         this.profesor.setFecha(new Date());
         this.profesor.setTipoPago(this.tipoPago.getValue().equals(VentanaCRUProfesorController.TIPO_PAGO_MENSUAL));
         this.profesor.setFechaInicio(Dates.toDate(this.fechaInicio.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE)));
-        if (this.profesor.registrarProfesor()){
+        if (this.profesor.registrarProfesor()) {
             realizado = true;
             this.registrar.setText("Guardar");
         }
         return realizado;
     }
-    public boolean editarProfesor(){
+
+    public boolean editarProfesor() {
         boolean realizado = false;
         this.profesor.setNombre(this.nombre.getText().trim());
         this.profesor.setTelefono(this.telefono.getText().trim());
@@ -203,44 +216,60 @@ public class VentanaCRUProfesorController implements Initializable {
         this.profesor.setMonto(this.monto.getText().trim());
         this.profesor.setTipoPago(this.tipoPago.getValue().equals(VentanaCRUProfesorController.TIPO_PAGO_MENSUAL));
         this.profesor.setFechaInicio(Dates.toDate(this.fechaInicio.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE)));
-        if (this.profesor.editarProfesor())
+        if (this.profesor.editarProfesor()) {
             realizado = true;
+        }
         return realizado;
     }
-    
-    public void registrar_OnClick(){
+
+    public void registrar_OnClick() {
         CatalogoEnum catalogoEnum = this.validarDatos();
-        if (catalogoEnum.equals(CatalogoEnum.DATOS_VALIDOS)){
+        if (catalogoEnum.equals(CatalogoEnum.DATOS_VALIDOS)) {
             boolean realizado = false;
             String mensajeUsuario = "";
-            if (this.profesor != null){
+            if (this.profesor != null) {
                 realizado = this.editarProfesor();
-            }else{
-                if (this.registrarProfesor()){
+            } else {
+                if (this.registrarProfesor()) {
                     String contraseña = Hasher.hash(OperacionesString.sinAcentosYMayusculas(this.profesor.getNombre()));
                     String usuario = OperacionesString.obtenerNombreUsuario(this.profesor.getCorreo());
-                    if (!new Usuario(1, contraseña, this.profesor.getIdProfesor(), usuario, 1).crearUsuario()){
+                    if (!new Usuario(1, contraseña, this.profesor.getIdProfesor(), usuario, 1).crearUsuario()) {
                         mensajeUsuario = ". No se pudo crear un usuario para el profesor, deberá crearse manualmente";
                     }
                     realizado = true;
                 }
             }
-            if (!realizado){
+            if (!realizado) {
                 MessageFactory.showMessage("Error", "Registro", "No se pudo guardar el profesor", Alert.AlertType.ERROR);
-            }else{
+            } else {
+                try {
+                    CopiarArchivo.guardar("profesor", rutaImagen, profesor.getIdProfesor());
+                } catch (IOException ex) {
+                    Logger.getLogger(VentanaCRUProfesorController.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 MessageFactory.showMessage("Éxito", "Registro", "El profesor se guardó exitosamente" + mensajeUsuario, Alert.AlertType.INFORMATION);
             }
-        }else{
+        } else {
             this.mostrarMensajeError(catalogoEnum);
         }
     }
-    public void activo_OnClick(){
-        if (this.activo.isSelected()){
+
+    public void imagenUsuario_onClick() {
+        Image imagenUsuario = CopiarArchivo.buscarFoto();
+        if (imagenUsuario != null) {
+            this.rutaImagen = CopiarArchivo.rutaImagen();
+            this.imagen.setImage(imagenUsuario);
+        }
+    }
+
+    public void activo_OnClick() {
+        if (this.activo.isSelected()) {
             this.inactivo.setSelected(false);
         }
     }
-    public void inactivo_OnClick(){
-        if (this.inactivo.isSelected()){
+
+    public void inactivo_OnClick() {
+        if (this.inactivo.isSelected()) {
             this.activo.setSelected(false);
         }
     }

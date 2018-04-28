@@ -1,9 +1,12 @@
 package LogicaNegocio.Catalogos;
 
 import InterfazGrafica.MessageFactory;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -15,6 +18,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class VentanaCRUAlumnoController implements Initializable {
+
     @FXML
     private ImageView imagen;
     @FXML
@@ -31,36 +35,38 @@ public class VentanaCRUAlumnoController implements Initializable {
     private RadioButton activo;
     @FXML
     private RadioButton inactivo;
-    
+    private String rutaImagen;
+
     private Alumno alumno;
-    
-    private CatalogoEnum validarDatos(){
+
+    private CatalogoEnum validarDatos() {
         CatalogoEnum validacion = CatalogoEnum.DATOS_VALIDOS;
         String nombre = this.nombre.getText().trim();
         String telefono = this.telefono.getText().trim();
         String correo = this.correo.getText().trim();
-        if (nombre.isEmpty()){
+        if (nombre.isEmpty()) {
             validacion = CatalogoEnum.NOMBRE_VACIO;
-        }else if (nombre.length() > 150){
+        } else if (nombre.length() > 150) {
             validacion = CatalogoEnum.NOMBRE_LARGO;
-        }else if (telefono.isEmpty()){
+        } else if (telefono.isEmpty()) {
             validacion = CatalogoEnum.TELEFONO_VACIO;
-        }else if (telefono.length() > 10){
+        } else if (telefono.length() > 10) {
             validacion = CatalogoEnum.TELEFONO_LARGO;
-        }else if (!OperacionesString.telefonoValido(telefono)){
+        } else if (!OperacionesString.telefonoValido(telefono)) {
             validacion = CatalogoEnum.TELEFONO_NO_VALIDO;
-        }else if(correo.isEmpty()){
+        } else if (correo.isEmpty()) {
             validacion = CatalogoEnum.CORREO_VACIO;
-        }else if (correo.length() > 150){
+        } else if (correo.length() > 150) {
             validacion = CatalogoEnum.CORREO_LARGO;
-        }else if (!OperacionesString.emailValido(correo)){
+        } else if (!OperacionesString.emailValido(correo)) {
             validacion = CatalogoEnum.CORREO_NO_VALIDO;
         }
         return validacion;
     }
-    private void mostrarMensajeError(CatalogoEnum catalogoEnum){
+
+    private void mostrarMensajeError(CatalogoEnum catalogoEnum) {
         String mensaje;
-        switch(catalogoEnum){
+        switch (catalogoEnum) {
             default:
                 mensaje = "";
                 break;
@@ -91,37 +97,43 @@ public class VentanaCRUAlumnoController implements Initializable {
         }
         MessageFactory.showMessage("Error", "Datos no válidos", mensaje, Alert.AlertType.ERROR);
     }
-    
+
     public void initialize(URL url, ResourceBundle rb) {
         this.cargarImagen();
     }
-    
-    public void cargarAlumno(){
+
+    public void cargarAlumno() {
         this.nombre.setText(this.alumno.getNombre());
         this.telefono.setText(this.alumno.getTeléfono());
         this.correo.setText(this.alumno.getCorreo());
         this.direccion.setText(this.alumno.getDireccion());
+        Image imagenUsuario = CopiarArchivo.obtenerFotoUsuario("alumno", alumno.getIdAlumno());
+        if (imagenUsuario != null) {
+            this.imagen.setImage(imagenUsuario);
+        }
     }
-    public void setAlumno(Alumno alumno){
+
+    public void setAlumno(Alumno alumno) {
         this.alumno = alumno;
-        if (alumno != null){
+        if (alumno != null) {
             this.cargarAlumno();
             this.registrar.setText("Guardar");
-            if (this.alumno.isEstado()){
+            if (this.alumno.isEstado()) {
                 this.activo.setSelected(true);
-            }else{
+            } else {
                 this.inactivo.setSelected(true);
             }
-        }else{
+        } else {
             this.inactivo.setSelected(true);
             this.registrar.setText("Registrar");
         }
     }
-    public void cargarImagen(){
-        //Validar si existe una imágen, en caso contrario:
+
+    public void cargarImagen() {
         this.imagen.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkPersonIcon.png")));
     }
-    public boolean registrarAlumno(){
+
+    public boolean registrarAlumno() {
         boolean realizado = false;
         this.alumno = new Alumno();
         this.alumno.setNombre(this.nombre.getText().trim());
@@ -130,50 +142,70 @@ public class VentanaCRUAlumnoController implements Initializable {
         this.alumno.setDireccion(this.direccion.getText().trim());
         this.alumno.setFecha(new Date());
         this.alumno.setEstado(this.activo.isSelected());
-        if (this.alumno.registrarAlumno()){
+        if (this.alumno.registrarAlumno()) {
             realizado = true;
             this.registrar.setText("Guardar");
         }
         return realizado;
     }
-    public boolean editarAlumno(){
-    	boolean realizado = false;
-    	this.alumno.setNombre(this.nombre.getText().trim());
+
+    public boolean editarAlumno() {
+        boolean realizado = false;
+        this.alumno.setNombre(this.nombre.getText().trim());
         this.alumno.setTeléfono(this.telefono.getText().trim());
         this.alumno.setCorreo(this.correo.getText().trim());
         this.alumno.setDireccion(this.direccion.getText().trim());
         this.alumno.setEstado(this.activo.isSelected());
-        if (this.alumno.editarAlumno())
+        if (this.alumno.editarAlumno()) {
             realizado = true;
+        }
         return realizado;
     }
-    
-    public void registrar_OnClick(){
+
+    public void registrar_OnClick() {
         CatalogoEnum alumnoEnum = this.validarDatos();
-        if (alumnoEnum.equals(CatalogoEnum.DATOS_VALIDOS)){
+        if (alumnoEnum.equals(CatalogoEnum.DATOS_VALIDOS)) {
             boolean realizado = false;
-            if (this.alumno != null){
+            if (this.alumno != null) {
                 realizado = this.editarAlumno();
-            }else{
+            } else {
                 realizado = this.registrarAlumno();
             }
-            if (!realizado){
+            if (!realizado) {
                 MessageFactory.showMessage("Error", "Registro", "No se pudo guardar el alumno", Alert.AlertType.ERROR);
-            }else{
+            } else {
+                try {
+                    if (rutaImagen != null) {
+                        CopiarArchivo.guardar("Alumno", rutaImagen, this.alumno.getIdAlumno());
+                    }
+
+                } catch (IOException ex) {
+                    Logger.getLogger(VentanaCRUAlumnoController.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 MessageFactory.showMessage("Éxito", "Registro", "El alumno se guardó exitosamente", Alert.AlertType.INFORMATION);
             }
-        }else{
+        } else {
             this.mostrarMensajeError(alumnoEnum);
-        }   
+        }
     }
-    public void activo_OnClick(){
-        if (this.activo.isSelected()){
+
+    public void activo_OnClick() {
+        if (this.activo.isSelected()) {
             this.inactivo.setSelected(false);
         }
     }
-    public void inactivo_OnClick(){
-        if (this.inactivo.isSelected()){
+
+    public void inactivo_OnClick() {
+        if (this.inactivo.isSelected()) {
             this.activo.setSelected(false);
+        }
+    }
+
+    public void imagenUsuario_onClick() {
+        Image imagenBusqueda = CopiarArchivo.buscarFoto();
+        if (imagenBusqueda != null) {
+            this.imagen.setImage(imagenBusqueda);
+            rutaImagen = CopiarArchivo.rutaImagen();
         }
     }
 }

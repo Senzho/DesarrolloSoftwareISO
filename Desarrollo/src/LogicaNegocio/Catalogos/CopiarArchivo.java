@@ -22,6 +22,7 @@ public class CopiarArchivo {
     private static String rutaImagen;
 
     public static Image buscarFoto() {
+        Image imagen = null;
         File ArchivoImagen = null;
         FileChooser buscador = new FileChooser();
         buscador.setTitle("imagenes");
@@ -29,9 +30,13 @@ public class CopiarArchivo {
                 new FileChooser.ExtensionFilter("JPG", "*.jpg")
         );
         ArchivoImagen = buscador.showOpenDialog(new Stage());
-        String origen = ArchivoImagen.getAbsolutePath();
-        Image imagen = new Image("file:" + origen);
-        setRuta(origen);
+        if (ArchivoImagen != null) {
+            String origen = ArchivoImagen.getAbsolutePath();
+            if (origen != null) {
+                imagen = new Image("file:" + origen);
+                setRuta(origen);
+            }
+        }
         return imagen;
     }
 
@@ -44,12 +49,12 @@ public class CopiarArchivo {
                 imagen = new Image("file:" + directorio.getAbsolutePath());
             }
         } else if (tipoUsuario.equalsIgnoreCase("profesor")) {
-            directorio = new File("C:\\Ared\\profesor\\" + idUsuario + ".jpg");
+            directorio = new File("C:\\Ared\\Profesores\\" + idUsuario + ".jpg");
             if (directorio.exists()) {
                 imagen = new Image("file:" + directorio.getAbsolutePath());
             }
         } else if (tipoUsuario.equalsIgnoreCase("cliente")) {
-            directorio = new File("C:\\Ared\\profesor\\" + idUsuario + ".jpg");
+            directorio = new File("C:\\Ared\\Clientes\\" + idUsuario + ".jpg");
             if (directorio.exists()) {
                 imagen = new Image("file:" + directorio.getAbsolutePath());
             }
@@ -67,7 +72,7 @@ public class CopiarArchivo {
 
     public static boolean guardar(String tipoUsuario, String rutaOrigen, int idUsuario) throws IOException {
         boolean guardado = false;
-        File directorio = null;
+        File directorio;
         File fotos = new File("C:\\Ared");
         if (!fotos.exists()) {
             fotos.mkdir();

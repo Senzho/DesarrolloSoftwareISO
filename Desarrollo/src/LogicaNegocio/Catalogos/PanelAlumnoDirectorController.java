@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class PanelAlumnoDirectorController implements Initializable {
+
     @FXML
     private ImageView imagen;
     @FXML
@@ -23,13 +24,13 @@ public class PanelAlumnoDirectorController implements Initializable {
     private ImageView baja;
     @FXML
     private ImageView editar;
-    
+
     private Alumno alumno;
-    
-    private void establecerIconos(){
-        if (this.alumno.isEstado()){
+
+    private void establecerIconos() {
+        if (this.alumno.isEstado()) {
             this.baja.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkCrossIcon.png")));
-        }else{
+        } else {
             this.baja.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkPlusIcon.png")));
         }
         this.editar.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkPencilIcon.png")));
@@ -37,40 +38,47 @@ public class PanelAlumnoDirectorController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-    }    
-    
-    public void setAlumno(Alumno alumno){
+
+    }
+
+    public void setAlumno(Alumno alumno) {
         this.alumno = alumno;
         this.cargarAlumno();
         this.establecerIconos();
         this.cargarImagen();
     }
-    public void cargarAlumno(){
+
+    public void cargarAlumno() {
         this.nombre.setText(this.alumno.getNombre());
         this.telefono.setText(this.alumno.getTeléfono());
         this.correo.setText(this.alumno.getCorreo());
     }
-    public void cargarImagen(){
-        //Validar si existe una imágen, en caso contrario:
-        this.imagen.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkPersonIcon.png")));
+
+    public void cargarImagen() {
+        Image imagenAlumno = CopiarArchivo.obtenerFotoUsuario("alumno", alumno.getIdAlumno());
+        if (imagenAlumno != null) {
+            this.imagen.setImage(imagenAlumno);
+        } else {
+            this.imagen.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkPersonIcon.png")));
+        }
     }
-    
-    public void editar_OnClick(){
+
+    public void editar_OnClick() {
         new VentanaCRUAlumno(this.alumno);
     }
-    public void baja_OnClick(){
+
+    public void baja_OnClick() {
         this.alumno.setEstado(!this.alumno.isEstado());
-        if (this.alumno.editarAlumno()){
+        if (this.alumno.editarAlumno()) {
             this.establecerIconos();
             String estado;
-            if (this.alumno.isEstado()){
+            if (this.alumno.isEstado()) {
                 estado = "activo";
-            }else{
+            } else {
                 estado = "inactivo";
             }
-            MessageFactory.showMessage("Éxito", "Registro", "El estado del alumno cambió a " +  estado, Alert.AlertType.INFORMATION);
-        }else{
+            MessageFactory.showMessage("Éxito", "Registro", "El estado del alumno cambió a " + estado, Alert.AlertType.INFORMATION);
+        } else {
             MessageFactory.showMessage("Error", "Registro", "No se pudo cambiar el estado del alumno", Alert.AlertType.ERROR);
         }
     }

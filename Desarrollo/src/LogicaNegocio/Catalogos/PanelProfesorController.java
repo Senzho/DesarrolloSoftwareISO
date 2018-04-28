@@ -14,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class PanelProfesorController implements Initializable {
+
     @FXML
     private ImageView imagen;
     @FXML
@@ -28,64 +29,73 @@ public class PanelProfesorController implements Initializable {
     private ImageView editar;
     @FXML
     private Button pagos;
-    
+
     private Profesor profesor;
     private Lanzador lanzador;
-    
-    private void establecerIconos(){
-        if (this.profesor.isEstado()){
+
+    private void establecerIconos() {
+        if (this.profesor.isEstado()) {
             this.baja.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkCrossIcon.png")));
-        }else{
+        } else {
             this.baja.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkPlusIcon.png")));
         }
         this.editar.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkPencilIcon.png")));
     }
-    public void setLanzador(Lanzador lanzador){
+
+    public void setLanzador(Lanzador lanzador) {
         this.lanzador = lanzador;
     }
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
     }
-    
-    public void setProfesor(Profesor profesor){
+
+    public void setProfesor(Profesor profesor) {
         this.profesor = profesor;
         this.cargarProfesor();
         this.establecerIconos();
         this.cargarImagen();
     }
-    public void cargarProfesor(){
+
+    public void cargarProfesor() {
         this.nombre.setText(this.profesor.getNombre());
         this.correo.setText(this.profesor.getCorreo());
         this.telefono.setText(this.profesor.getTelefono());
     }
-    public void cargarImagen(){
-        //Validar si existe una imágen, en caso contrario:
-        this.imagen.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkPersonIcon.png")));
+
+    public void cargarImagen() {
+        Image imagenProfesor = CopiarArchivo.obtenerFotoUsuario("profesor", profesor.getIdProfesor());
+        if (imagenProfesor != null) {
+            this.imagen.setImage(imagenProfesor);
+        } else {
+            this.imagen.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkPersonIcon.png")));
+        }
     }
-    
-    public void baja_OnClick(){
+
+    public void baja_OnClick() {
         this.profesor.setEstado(!this.profesor.isEstado());
-        if (this.profesor.editarProfesor()){
+        if (this.profesor.editarProfesor()) {
             this.establecerIconos();
             String estado;
-            if (this.profesor.isEstado()){
+            if (this.profesor.isEstado()) {
                 estado = "activo";
-            }else{
+            } else {
                 estado = "inactivo";
             }
-            MessageFactory.showMessage("Éxito", "Registro", "El estado del profesor cambió a " +  estado, Alert.AlertType.INFORMATION);
-        }else{
+            MessageFactory.showMessage("Éxito", "Registro", "El estado del profesor cambió a " + estado, Alert.AlertType.INFORMATION);
+        } else {
             MessageFactory.showMessage("Error", "Registro", "No se pudo cambiar el estado del profesor", Alert.AlertType.ERROR);
         }
     }
-    public void editar_OnClick(){
+
+    public void editar_OnClick() {
         new VentanaCRUProfesor(this.profesor);
     }
-    public void pagos_OnClick(){
+
+    public void pagos_OnClick() {
         lanzador.lanzar("/InterfazGrafica/Pagos/PanelHistorialPagoProfesores.fxml");
-        PanelHistorialPagoProfesoresController controller =  lanzador.getCargador().getController();
+        PanelHistorialPagoProfesoresController controller = lanzador.getCargador().getController();
         controller.setProfesor(this.profesor);
     }
 }

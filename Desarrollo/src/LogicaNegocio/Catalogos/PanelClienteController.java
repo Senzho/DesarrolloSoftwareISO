@@ -17,12 +17,14 @@ public class PanelClienteController implements Initializable {
     private Label correo;
     @FXML
     private ImageView editar;
-    
+    @FXML
+    private ImageView imagen;
     private Cliente cliente;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.editar.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkPencilIcon.png")));
+        this.cargarImagen();
     }
     
     public void setCliente(Cliente cliente){
@@ -33,9 +35,16 @@ public class PanelClienteController implements Initializable {
         this.nombre.setText(this.cliente.getNombre());
         this.correo.setText(this.cliente.getCorreo());
         this.telefono.setText(this.cliente.getTelefono());
+        Image imagenCliente = CopiarArchivo.obtenerFotoUsuario("cliente", cliente.getIdCliente());
+        if(imagenCliente != null){
+            this.imagen.setImage(imagenCliente);
+        }
     }
     
     public void editar_OnClick(){
         new VentanaCRUCliente(this.cliente);
+    }
+    public void cargarImagen() {
+        this.imagen.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkPersonIcon.png")));
     }
 }

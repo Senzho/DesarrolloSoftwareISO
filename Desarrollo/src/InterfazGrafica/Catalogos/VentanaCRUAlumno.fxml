@@ -10,7 +10,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="404.0" prefWidth="489.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LogicaNegocio.Catalogos.VentanaCRUAlumnoController">
   <children>
-    <ImageView fx:id="imagen" fitHeight="110.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
+    <ImageView fx:id="imagen" fitHeight="110.0" fitWidth="110.0" onMouseClicked="#imagenUsuario_onClick" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
     <Label text="Nombre:" AnchorPane.leftAnchor="144.0" AnchorPane.topAnchor="22.0">
       <font>
         <Font name="Arial" size="16.0" fx:id="x1" />
