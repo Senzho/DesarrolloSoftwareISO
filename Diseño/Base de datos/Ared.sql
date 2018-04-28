@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
--- Host: localhost    Database: ared
+-- Host: localhost    Database: Ared
 -- ------------------------------------------------------
 -- Server version	5.7.17-log
 
@@ -170,7 +170,10 @@ CREATE TABLE `gastopromocional` (
   `monto` varchar(15) DEFAULT NULL,
   `url` varchar(200) DEFAULT NULL,
   `descripcion` text,
-  PRIMARY KEY (`idGasto`)
+  `idProfesor` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idGasto`),
+  KEY `idProfesor` (`idProfesor`),
+  CONSTRAINT `gastopromocional_ibfk_1` FOREIGN KEY (`idProfesor`) REFERENCES `profesor` (`idProfesor`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -180,7 +183,7 @@ CREATE TABLE `gastopromocional` (
 
 LOCK TABLES `gastopromocional` WRITE;
 /*!40000 ALTER TABLE `gastopromocional` DISABLE KEYS */;
-INSERT INTO `gastopromocional` VALUES (4,'2018-04-15','2018-04-30','280','www.facebook.com/ared_espacio/pp01','Inscribete del 15 al 30 de abril y paga solo la mitad.'),(5,'2018-04-19','2018-05-05','1000','www.facebook.com','Paga la mitad de la inscripción');
+INSERT INTO `gastopromocional` VALUES (4,'2018-04-15','2018-04-30','280','www.google.com','Inscribete del 15 al 30 de abril y paga solo la mitad.',10),(5,'2018-04-19','2018-05-05','1000','www.facebook.com','Paga la mitad de la inscripción',11);
 /*!40000 ALTER TABLE `gastopromocional` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -348,7 +351,7 @@ CREATE TABLE `profesor` (
   `monto` varchar(15) DEFAULT NULL,
   `fechaInicio` date DEFAULT NULL,
   PRIMARY KEY (`idProfesor`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -452,4 +455,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-04-27 19:20:30
+-- Dump completed on 2018-04-28 13:55:48

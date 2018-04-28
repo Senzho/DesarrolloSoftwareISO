@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="397.0" prefWidth="337.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LogicaNegocio.Egresos.VentanaCRUGastoPromocionalController">
+<AnchorPane id="AnchorPane" prefHeight="468.0" prefWidth="339.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LogicaNegocio.Egresos.VentanaCRUGastoPromocionalController">
   <children>
     <Label layoutX="12.0" layoutY="15.0" text="URL o enlace:" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="15.0">
       <font>
@@ -27,5 +27,11 @@
     <Button fx:id="btnRegistrar" font="$x1" layoutX="239.0" layoutY="328.0" mnemonicParsing="false" onMouseClicked="#btnRegistrar_onClick" text="Registrar" AnchorPane.bottomAnchor="14.000099999997474" AnchorPane.rightAnchor="11.0" />
       <DatePicker fx:id="fechaInicioPick" layoutX="128.0" layoutY="256.0" prefHeight="25.0" prefWidth="200.0" AnchorPane.leftAnchor="128.0" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="256.0" />
       <DatePicker fx:id="fechaFinPick" layoutX="128.0" layoutY="289.0" prefHeight="25.0" prefWidth="200.0" AnchorPane.leftAnchor="128.0" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="289.0" />
+      <Label layoutX="15.0" layoutY="324.0" text="Profesor:">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="profesores" layoutX="128.0" layoutY="322.0" prefHeight="25.0" prefWidth="202.0" AnchorPane.leftAnchor="128.0" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="322.0" />
   </children>
 </AnchorPane>

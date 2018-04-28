@@ -13,7 +13,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -23,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Desktop
+ * @author Victor Javier
  */
 @Entity
 @Table(name = "gastopromocional")
@@ -56,6 +58,9 @@ public class Gastopromocional implements Serializable {
     @Lob
     @Column(name = "descripcion")
     private String descripcion;
+    @JoinColumn(name = "idProfesor", referencedColumnName = "idProfesor")
+    @ManyToOne
+    private Profesor idProfesor;
 
     public Gastopromocional() {
     }
@@ -110,6 +115,14 @@ public class Gastopromocional implements Serializable {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public Profesor getIdProfesor() {
+        return idProfesor;
+    }
+
+    public void setIdProfesor(Profesor idProfesor) {
+        this.idProfesor = idProfesor;
     }
 
     @Override
