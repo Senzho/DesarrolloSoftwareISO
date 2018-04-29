@@ -1,11 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package LogicaNegocio.Sesiones;
 
-import InterfazGrafica.Grupos.VentanaCRUGrupo;
+import InterfazGrafica.Inscripciones.VentanaInscribirAlumno;
 import LogicaNegocio.Catalogos.Profesor;
 import LogicaNegocio.Grupos.PanelGruposProfesorController;
 import LogicaNegocio.Lanzador;
@@ -55,5 +50,8 @@ public class VentanaPrincipalProfesorController implements Initializable {
     }
     public void menuRegistrarPago_onClick(){
         new VentanaRegistrarPagoAlumno(this.profesor.getIdProfesor());
+    }
+    public void menuInscripcion_onClick(){
+        new VentanaInscribirAlumno(this.profesor.getIdProfesor());
     }
 }

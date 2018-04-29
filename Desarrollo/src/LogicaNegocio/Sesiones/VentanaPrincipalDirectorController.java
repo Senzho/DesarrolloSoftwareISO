@@ -1,6 +1,7 @@
 package LogicaNegocio.Sesiones;
 
 import InterfazGrafica.Grupos.VentanaCRUGrupo;
+import InterfazGrafica.Inscripciones.VentanaInscribirAlumno;
 import LogicaNegocio.Catalogos.PanelCatalogoProfesoresController;
 import LogicaNegocio.Catalogos.Profesor;
 import LogicaNegocio.Catalogos.VentanaCRUAlumno;
@@ -88,5 +89,8 @@ public class VentanaPrincipalDirectorController implements Initializable {
     }
     public void menuConsultarEgresos_onClick(){
         this.lanzador.lanzar("/InterfazGrafica/Egresos/PanelConsultarPromocionesEgresos.fxml");
+    }
+    public void menuInscripcion_onClick(){
+        new VentanaInscribirAlumno(this.profesor.getIdProfesor());
     }
 }

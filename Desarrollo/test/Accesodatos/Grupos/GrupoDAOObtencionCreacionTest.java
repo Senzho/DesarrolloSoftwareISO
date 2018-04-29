@@ -1,5 +1,6 @@
 package Accesodatos.Grupos;
 
+import Accesodatos.Catalogos.AlumnoDAOSql;
 import Accesodatos.Catalogos.ProfesorDAOSql;
 import LogicaNegocio.Catalogos.Profesor;
 import LogicaNegocio.Grupos.Dia;
@@ -13,10 +14,6 @@ import java.util.logging.Logger;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author Victor Javier
- */
 public class GrupoDAOObtencionCreacionTest {
     private GrupoDAOSql grupoDAO;
     private Grupo grupo;
@@ -51,6 +48,14 @@ public class GrupoDAOObtencionCreacionTest {
     @Test (expected = NullPointerException.class)
     public void obtenerGruposProfesorExcepcion(){
         this.grupoDAO.obtenerGruposProfesor(0);
+    }
+    @Test
+    public void obtenerGruposAlumnoNoExcepcion(){
+        try{
+            this.grupoDAO.obtenerGruposAlumno(new AlumnoDAOSql().obtenerAlumnos().get(0).getIdAlumno());
+        }catch(Exception excepcion){
+            fail();
+        }
     }
     @Test
     public void obtenerGruposNoExcepcion(){

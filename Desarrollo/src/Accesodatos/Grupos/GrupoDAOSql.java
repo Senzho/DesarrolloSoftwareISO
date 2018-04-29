@@ -1,6 +1,7 @@
 package Accesodatos.Grupos;
 
 import Accesodatos.Catalogos.ProfesorDAOSql;
+import Accesodatos.Controladores.AlumnoJpaController;
 import Accesodatos.Controladores.DiaJpaController;
 import Accesodatos.Controladores.GrupoJpaController;
 import Accesodatos.Controladores.ProfesorJpaController;
@@ -11,7 +12,9 @@ import LogicaNegocio.Grupos.HorarioException;
 import LogicaNegocio.Grupos.Horas;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 public class GrupoDAOSql implements GrupoDAO{
     private Grupo obtenerEntidad(Accesodatos.Entidades.Grupo grupoJpa){
@@ -105,7 +108,14 @@ public class GrupoDAOSql implements GrupoDAO{
     }
     @Override
     public List<Grupo> obtenerGruposAlumno(int idAlumnos) {
-        return new ArrayList();
+        List<Grupo> grupos = new ArrayList();
+        EntityManager entityManager = Persistence.createEntityManagerFactory("CentroDeControlAredPU").createEntityManager();
+        Query query = entityManager.createNamedQuery("Grupo.findByAlumno");
+        query.setParameter("idAlumno", idAlumnos);
+        query.getResultList().forEach((grupoJpa) -> {
+            grupos.add(this.obtenerEntidad((Accesodatos.Entidades.Grupo) grupoJpa));
+        });
+        return grupos;
     }
     @Override
     public List<Grupo> obtenerGrupos(){

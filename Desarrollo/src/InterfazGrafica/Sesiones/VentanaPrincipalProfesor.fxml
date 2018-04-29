@@ -12,7 +12,10 @@
     <MenuBar prefWidth="741.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="27.0" AnchorPane.topAnchor="0.0">
       <menus>
         <Menu mnemonicParsing="false" text="Asistencia" />
-        <Menu mnemonicParsing="false" text="Inscripción" />
+        <Menu mnemonicParsing="false" text="Inscripción">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#menuInscripcion_onClick" text="Inscribir alumno" />
+               </items></Menu>
         <Menu mnemonicParsing="false" text="Proximos pagos" />
         <Menu mnemonicParsing="false" text="Mis grupos">
                <items>
