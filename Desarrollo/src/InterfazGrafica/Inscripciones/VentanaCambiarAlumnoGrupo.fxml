@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="271.0" prefWidth="433.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LogicaNegocio.Inscripciones.VentanaCambiarAlumnoGrupoController">
+   <children>
+      <Label fx:id="txtNombre" layoutX="26.0" layoutY="14.0" text="Nombre del alumno" AnchorPane.leftAnchor="26.0" AnchorPane.topAnchor="14.0">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="imagenUsuario" fitHeight="106.0" fitWidth="115.0" layoutX="305.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="14.0" />
+      <Label layoutX="26.0" layoutY="134.0" text="Grupo inscrito:" AnchorPane.leftAnchor="26.0" AnchorPane.topAnchor="134.0">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="26.0" layoutY="164.0" text="Grupo a cambiar:" AnchorPane.leftAnchor="26.0" AnchorPane.topAnchor="164.0">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="comboGruposInscritos" layoutX="169.0" layoutY="132.0" prefHeight="25.0" prefWidth="254.0" AnchorPane.leftAnchor="169.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="132.0" />
+      <ComboBox fx:id="comboGruposDisponibles" layoutX="169.0" layoutY="162.0" prefHeight="25.0" prefWidth="254.0" AnchorPane.leftAnchor="169.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="162.0" />
+      <Line endX="330.0" layoutX="101.0" layoutY="213.0" startX="-100.0" stroke="#807e7e" AnchorPane.leftAnchor="0.5" AnchorPane.rightAnchor="1.5" />
+      <Button fx:id="btnCambiarCurso" layoutX="299.0" layoutY="225.0" mnemonicParsing="false" onMouseClicked="#btnCambiarCurso_onClick" text="Cambiar curso" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="7.0">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
