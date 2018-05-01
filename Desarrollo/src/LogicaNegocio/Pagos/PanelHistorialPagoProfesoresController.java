@@ -1,6 +1,7 @@
 package LogicaNegocio.Pagos;
 
 import InterfazGrafica.MessageFactory;
+import LogicaNegocio.Catalogos.CopiarArchivo;
 import LogicaNegocio.Catalogos.Profesor;
 import java.io.IOException;
 import java.net.URL;
@@ -45,8 +46,12 @@ public class PanelHistorialPagoProfesoresController implements Initializable {
         this.cargarPagos();
     }
     public void cargarImagen(){
-        //Validar si existe una imágen, en caso contrario:
-        this.imagen.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkPersonIcon.png")));
+        Image imagenProfesor = CopiarArchivo.obtenerFotoUsuario("profesor", this.profesor.getIdProfesor());
+        if (imagenProfesor != null) {
+            this.imagen.setImage(imagenProfesor);
+        } else {
+            this.imagen.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkPersonIcon.png")));
+        }
     }
     public void cargarPagos(){
         List<PagoProfesor> pagosProfesor = pagoProfesor.obtenerPagos(this.profesor.getIdProfesor());

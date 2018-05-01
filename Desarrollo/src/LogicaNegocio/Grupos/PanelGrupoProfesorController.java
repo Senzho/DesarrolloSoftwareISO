@@ -28,7 +28,7 @@ public class PanelGrupoProfesorController implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        this.verAlumnos.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkPersonIcon.png")));
+        this.verAlumnos.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkGroupIcon.png")));
     }
     
     public void setGrupo(Grupo grupo){

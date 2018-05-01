@@ -1,6 +1,7 @@
 package LogicaNegocio.Pagos;
 
 import LogicaNegocio.Catalogos.Alumno;
+import LogicaNegocio.Catalogos.CopiarArchivo;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -37,12 +38,17 @@ public class PanelHistorialPagosAlumnoController implements Initializable {
 
     public void setAlumno(Alumno alumno) {
         this.alumno = alumno;
+        Image imagenAlumno = CopiarArchivo.obtenerFotoUsuario("alumno", alumno.getIdAlumno());
+        if (imagenAlumno != null) {
+            this.imagenAlumno.setImage(imagenAlumno);
+        } else {
+            this.imagenAlumno.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkPersonIcon.png")));
+        }
     }
 
     public void inicializarPanelPagos() {
         lblNombre.setText(alumno.getNombre());
         lblCorreo.setText(alumno.getCorreo());
-        this.imagenAlumno.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkPersonIcon.png")));
         pagos = new PagoAlumno().obtenerPagos(alumno.getIdAlumno());
         this.panelPagos.getChildren().clear();
         for(int i = pagos.size() - 1; i > - 1; i--){

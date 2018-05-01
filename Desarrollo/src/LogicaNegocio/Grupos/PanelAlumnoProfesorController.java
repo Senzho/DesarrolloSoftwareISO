@@ -1,6 +1,7 @@
 package LogicaNegocio.Grupos;
 
 import LogicaNegocio.Catalogos.Alumno;
+import LogicaNegocio.Catalogos.CopiarArchivo;
 import LogicaNegocio.Lanzador;
 import LogicaNegocio.Pagos.PanelHistorialPagosAlumnoController;
 import LogicaNegocio.Pagos.VentanaRegistrarPagoAlumno;
@@ -47,6 +48,12 @@ public class PanelAlumnoProfesorController implements Initializable {
         this.nombre.setText(this.alumno.getNombre());
         this.telefono.setText(this.alumno.getTeléfono());
         this.correo.setText(this.alumno.getCorreo());
+        Image imagenAlumno = CopiarArchivo.obtenerFotoUsuario("alumno", alumno.getIdAlumno());
+        if (imagenAlumno != null) {
+            this.imagen.setImage(imagenAlumno);
+        } else {
+            this.imagen.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkPersonIcon.png")));
+        }
     }
     public void cargarImagen(){
         this.imagen.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkPersonIcon.png")));
