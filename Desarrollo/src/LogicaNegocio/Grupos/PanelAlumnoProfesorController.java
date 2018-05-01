@@ -2,6 +2,7 @@ package LogicaNegocio.Grupos;
 
 import LogicaNegocio.Catalogos.Alumno;
 import LogicaNegocio.Catalogos.CopiarArchivo;
+import LogicaNegocio.Inscripciones.VentanaCambiarAlumnoGrupo;
 import LogicaNegocio.Lanzador;
 import LogicaNegocio.Pagos.PanelHistorialPagosAlumnoController;
 import LogicaNegocio.Pagos.VentanaRegistrarPagoAlumno;
@@ -66,7 +67,7 @@ public class PanelAlumnoProfesorController implements Initializable {
     }
     
     public void cambiarGrupo_onClick(){
-        
+        new VentanaCambiarAlumnoGrupo(this.alumno, this.idProfesor);
     }
     public void pagos_onClick(){
         this.lanzador.lanzar("/InterfazGrafica/Pagos/PanelHistorialPagosAlumno.fxml");
