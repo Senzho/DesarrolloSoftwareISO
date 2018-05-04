@@ -113,7 +113,7 @@ public class VentanaRegistrarPagoAlumnoController implements Initializable {
             }
         }
         if (OperacionesString.montoValido(this.txtMonto.getText())) {
-            pagoAlumno = new PagoAlumno(new Date(), 0, this.txtMonto.getText(), tipoPago);
+            pagoAlumno = new PagoAlumno(new Date(), 0, this.txtMonto.getText(), tipoPago,this.idProfesor);
             
             if (this.promocion != null) {
                 System.out.println(promocion.getDescripcion());

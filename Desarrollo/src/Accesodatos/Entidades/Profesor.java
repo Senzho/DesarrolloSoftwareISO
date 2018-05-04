@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Victor Javier
+ * @author Desktop
  */
 @Entity
 @Table(name = "profesor")
@@ -43,6 +43,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Profesor.findByMonto", query = "SELECT p FROM Profesor p WHERE p.monto = :monto")
     , @NamedQuery(name = "Profesor.findByFechaInicio", query = "SELECT p FROM Profesor p WHERE p.fechaInicio = :fechaInicio")})
 public class Profesor implements Serializable {
+
+    @OneToMany(mappedBy = "idProfesor")
+    private Collection<Pagoalumno> pagoalumnoCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -73,6 +76,8 @@ public class Profesor implements Serializable {
     private Date fechaInicio;
     @OneToMany(mappedBy = "idProfesor")
     private Collection<Promocion> promocionCollection;
+    @OneToMany(mappedBy = "idProfesor")
+    private Collection<Gastopromocional> gastopromocionalCollection;
     @OneToMany(mappedBy = "idProfesor")
     private Collection<Grupo> grupoCollection;
     @OneToMany(mappedBy = "idProfesor")
@@ -175,6 +180,15 @@ public class Profesor implements Serializable {
     }
 
     @XmlTransient
+    public Collection<Gastopromocional> getGastopromocionalCollection() {
+        return gastopromocionalCollection;
+    }
+
+    public void setGastopromocionalCollection(Collection<Gastopromocional> gastopromocionalCollection) {
+        this.gastopromocionalCollection = gastopromocionalCollection;
+    }
+
+    @XmlTransient
     public Collection<Grupo> getGrupoCollection() {
         return grupoCollection;
     }
@@ -215,6 +229,15 @@ public class Profesor implements Serializable {
     @Override
     public String toString() {
         return "Accesodatos.Entidades.Profesor[ idProfesor=" + idProfesor + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Pagoalumno> getPagoalumnoCollection() {
+        return pagoalumnoCollection;
+    }
+
+    public void setPagoalumnoCollection(Collection<Pagoalumno> pagoalumnoCollection) {
+        this.pagoalumnoCollection = pagoalumnoCollection;
     }
     
 }

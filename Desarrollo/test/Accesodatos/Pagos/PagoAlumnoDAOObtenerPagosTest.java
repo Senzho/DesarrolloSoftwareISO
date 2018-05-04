@@ -5,11 +5,11 @@
  */
 package Accesodatos.Pagos;
 
-import Accesodatos.Controladores.PromocionJpaController;
+import LogicaNegocio.Catalogos.Alumno;
+import LogicaNegocio.Catalogos.Profesor;
 import LogicaNegocio.Pagos.PagoAlumno;
 import LogicaNegocio.Pagos.Promocion;
 import java.util.Date;
-import javax.persistence.Persistence;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -21,17 +21,22 @@ public class PagoAlumnoDAOObtenerPagosTest {
 
     private PagoAlumnoDAOSql pagoAlumnoDao;
     private PagoAlumno pagoAlumno;
+    private Profesor profesor;
+    private Alumno alumno;
     private Promocion promocion;
 
     public PagoAlumnoDAOObtenerPagosTest() {
         pagoAlumnoDao = new PagoAlumnoDAOSql();
-        pagoAlumno = new PagoAlumno(new Date(), 0, "500", 1);
+        profesor = new Profesor().obtenerProfesores().get(0);
+        alumno = new Alumno().obtenerAlumnos().get(0);
+        promocion = new Promocion().obtenerPromociones(profesor.getIdProfesor()).get(0);
+        pagoAlumno = new PagoAlumno(new Date(), 0, "500", 1, profesor.getIdProfesor());
     }
 
     @Test
     public void obtenerPagosExcepcionTest() {
         try {
-            this.pagoAlumnoDao.obtenerPagos(1);
+            this.pagoAlumnoDao.obtenerPagos(alumno.getIdAlumno(),profesor.getIdProfesor());
         } catch (Exception excepcion) {
             fail();
         }
@@ -39,23 +44,22 @@ public class PagoAlumnoDAOObtenerPagosTest {
 
     @Test(expected = NullPointerException.class)
     public void obtenerPagosTest() {
-        this.pagoAlumnoDao.obtenerPagos(0);
+        this.pagoAlumnoDao.obtenerPagos(0,profesor.getIdProfesor());
     }
     @Test 
     public void registrarPagoTest(){
-        boolean registrado = pagoAlumnoDao.registrarPago(pagoAlumno, 1, 1);
+        boolean registrado = pagoAlumnoDao.registrarPago(pagoAlumno, alumno.getIdAlumno(), promocion.getIdPromocion());
         assertTrue(registrado);
     }
     @Test 
     public void registrarPagoMontoInvalidoTest(){
-        PagoAlumno pago = new PagoAlumno(new Date(), 0, "no es un pago", 1);
-        boolean registrado = pagoAlumnoDao.registrarPago(pago, 1, 1);
+        PagoAlumno pago = new PagoAlumno(new Date(), 0, "no es un pago", 1, profesor.getIdProfesor());
+        boolean registrado = pagoAlumnoDao.registrarPago(pago, alumno.getIdAlumno(), promocion.getIdPromocion());
         assertFalse(registrado);
     }
     @Test
     public void registrarPagoPromocionTest(){
-        boolean registrado = pagoAlumnoDao.registrarPago(pagoAlumno, 1, 0);
+        boolean registrado = pagoAlumnoDao.registrarPago(pagoAlumno, alumno.getIdAlumno(), promocion.getIdPromocion());
         assertTrue(registrado);
-    }
-    
+    }  
 }

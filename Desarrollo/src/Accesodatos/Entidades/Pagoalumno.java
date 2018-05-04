@@ -56,6 +56,9 @@ public class Pagoalumno implements Serializable {
     @JoinColumn(name = "idPromocion", referencedColumnName = "idPromocion")
     @ManyToOne
     private Promocion idPromocion;
+    @JoinColumn(name = "idProfesor", referencedColumnName = "idProfesor")
+    @ManyToOne
+    private Profesor idProfesor;
 
     public Pagoalumno() {
     }
@@ -110,6 +113,14 @@ public class Pagoalumno implements Serializable {
 
     public void setIdPromocion(Promocion idPromocion) {
         this.idPromocion = idPromocion;
+    }
+
+    public Profesor getIdProfesor() {
+        return idProfesor;
+    }
+
+    public void setIdProfesor(Profesor idProfesor) {
+        this.idProfesor = idProfesor;
     }
 
     @Override

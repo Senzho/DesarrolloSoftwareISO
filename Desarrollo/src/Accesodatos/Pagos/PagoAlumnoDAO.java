@@ -13,6 +13,6 @@ import java.util.List;
  * @author Desktop
  */
 public interface PagoAlumnoDAO {
-    public List<PagoAlumno> obtenerPagos(int idAlumno);
+    public List<PagoAlumno> obtenerPagos(int idAlumno, int idProfesor);
     public boolean registrarPago(PagoAlumno pagoAlumno, int idAlumno, int idPromocion);
 }

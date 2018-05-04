@@ -73,6 +73,7 @@ public class PanelAlumnoProfesorController implements Initializable {
         this.lanzador.lanzar("/InterfazGrafica/Pagos/PanelHistorialPagosAlumno.fxml");
         PanelHistorialPagosAlumnoController controller = this.lanzador.getCargador().getController();
         controller.setAlumno(this.alumno);
+        controller.setIdProfesor(idProfesor);
         controller.inicializarPanelPagos();
     }
     public void registrarPago_onClick(){

@@ -31,9 +31,13 @@ public class PanelHistorialPagosAlumnoController implements Initializable {
     private ImageView imagenAlumno;
     
     private List<PagoAlumno> pagos;
+    private int idProfesor;
     
     public void setStage(Stage stage) {
         this.stage = stage;
+    }
+    public void setIdProfesor(int idProfesor){
+        this.idProfesor = idProfesor;
     }
 
     public void setAlumno(Alumno alumno) {
@@ -49,7 +53,7 @@ public class PanelHistorialPagosAlumnoController implements Initializable {
     public void inicializarPanelPagos() {
         lblNombre.setText(alumno.getNombre());
         lblCorreo.setText(alumno.getCorreo());
-        pagos = new PagoAlumno().obtenerPagos(alumno.getIdAlumno());
+        pagos = new PagoAlumno().obtenerPagos(alumno.getIdAlumno(), this.idProfesor);
         this.panelPagos.getChildren().clear();
         for(int i = pagos.size() - 1; i > - 1; i--){
             FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/InterfazGrafica/Pagos/PanelPagoAlumno.fxml"));

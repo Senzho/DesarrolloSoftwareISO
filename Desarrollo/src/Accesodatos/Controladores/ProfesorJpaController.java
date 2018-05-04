@@ -14,6 +14,7 @@ import javax.persistence.criteria.Root;
 import Accesodatos.Entidades.Promocion;
 import java.util.ArrayList;
 import java.util.Collection;
+import Accesodatos.Entidades.Gastopromocional;
 import Accesodatos.Entidades.Grupo;
 import Accesodatos.Entidades.Pagoprofesor;
 import Accesodatos.Entidades.Profesor;
@@ -23,7 +24,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author Victor Javier
+ * @author Desktop
  */
 public class ProfesorJpaController implements Serializable {
 
@@ -39,6 +40,9 @@ public class ProfesorJpaController implements Serializable {
     public void create(Profesor profesor) {
         if (profesor.getPromocionCollection() == null) {
             profesor.setPromocionCollection(new ArrayList<Promocion>());
+        }
+        if (profesor.getGastopromocionalCollection() == null) {
+            profesor.setGastopromocionalCollection(new ArrayList<Gastopromocional>());
         }
         if (profesor.getGrupoCollection() == null) {
             profesor.setGrupoCollection(new ArrayList<Grupo>());
@@ -56,6 +60,12 @@ public class ProfesorJpaController implements Serializable {
                 attachedPromocionCollection.add(promocionCollectionPromocionToAttach);
             }
             profesor.setPromocionCollection(attachedPromocionCollection);
+            Collection<Gastopromocional> attachedGastopromocionalCollection = new ArrayList<Gastopromocional>();
+            for (Gastopromocional gastopromocionalCollectionGastopromocionalToAttach : profesor.getGastopromocionalCollection()) {
+                gastopromocionalCollectionGastopromocionalToAttach = em.getReference(gastopromocionalCollectionGastopromocionalToAttach.getClass(), gastopromocionalCollectionGastopromocionalToAttach.getIdGasto());
+                attachedGastopromocionalCollection.add(gastopromocionalCollectionGastopromocionalToAttach);
+            }
+            profesor.setGastopromocionalCollection(attachedGastopromocionalCollection);
             Collection<Grupo> attachedGrupoCollection = new ArrayList<Grupo>();
             for (Grupo grupoCollectionGrupoToAttach : profesor.getGrupoCollection()) {
                 grupoCollectionGrupoToAttach = em.getReference(grupoCollectionGrupoToAttach.getClass(), grupoCollectionGrupoToAttach.getIdGrupo());
@@ -76,6 +86,15 @@ public class ProfesorJpaController implements Serializable {
                 if (oldIdProfesorOfPromocionCollectionPromocion != null) {
                     oldIdProfesorOfPromocionCollectionPromocion.getPromocionCollection().remove(promocionCollectionPromocion);
                     oldIdProfesorOfPromocionCollectionPromocion = em.merge(oldIdProfesorOfPromocionCollectionPromocion);
+                }
+            }
+            for (Gastopromocional gastopromocionalCollectionGastopromocional : profesor.getGastopromocionalCollection()) {
+                Profesor oldIdProfesorOfGastopromocionalCollectionGastopromocional = gastopromocionalCollectionGastopromocional.getIdProfesor();
+                gastopromocionalCollectionGastopromocional.setIdProfesor(profesor);
+                gastopromocionalCollectionGastopromocional = em.merge(gastopromocionalCollectionGastopromocional);
+                if (oldIdProfesorOfGastopromocionalCollectionGastopromocional != null) {
+                    oldIdProfesorOfGastopromocionalCollectionGastopromocional.getGastopromocionalCollection().remove(gastopromocionalCollectionGastopromocional);
+                    oldIdProfesorOfGastopromocionalCollectionGastopromocional = em.merge(oldIdProfesorOfGastopromocionalCollectionGastopromocional);
                 }
             }
             for (Grupo grupoCollectionGrupo : profesor.getGrupoCollection()) {
@@ -112,6 +131,8 @@ public class ProfesorJpaController implements Serializable {
             Profesor persistentProfesor = em.find(Profesor.class, profesor.getIdProfesor());
             Collection<Promocion> promocionCollectionOld = persistentProfesor.getPromocionCollection();
             Collection<Promocion> promocionCollectionNew = profesor.getPromocionCollection();
+            Collection<Gastopromocional> gastopromocionalCollectionOld = persistentProfesor.getGastopromocionalCollection();
+            Collection<Gastopromocional> gastopromocionalCollectionNew = profesor.getGastopromocionalCollection();
             Collection<Grupo> grupoCollectionOld = persistentProfesor.getGrupoCollection();
             Collection<Grupo> grupoCollectionNew = profesor.getGrupoCollection();
             Collection<Pagoprofesor> pagoprofesorCollectionOld = persistentProfesor.getPagoprofesorCollection();
@@ -123,6 +144,13 @@ public class ProfesorJpaController implements Serializable {
             }
             promocionCollectionNew = attachedPromocionCollectionNew;
             profesor.setPromocionCollection(promocionCollectionNew);
+            Collection<Gastopromocional> attachedGastopromocionalCollectionNew = new ArrayList<Gastopromocional>();
+            for (Gastopromocional gastopromocionalCollectionNewGastopromocionalToAttach : gastopromocionalCollectionNew) {
+                gastopromocionalCollectionNewGastopromocionalToAttach = em.getReference(gastopromocionalCollectionNewGastopromocionalToAttach.getClass(), gastopromocionalCollectionNewGastopromocionalToAttach.getIdGasto());
+                attachedGastopromocionalCollectionNew.add(gastopromocionalCollectionNewGastopromocionalToAttach);
+            }
+            gastopromocionalCollectionNew = attachedGastopromocionalCollectionNew;
+            profesor.setGastopromocionalCollection(gastopromocionalCollectionNew);
             Collection<Grupo> attachedGrupoCollectionNew = new ArrayList<Grupo>();
             for (Grupo grupoCollectionNewGrupoToAttach : grupoCollectionNew) {
                 grupoCollectionNewGrupoToAttach = em.getReference(grupoCollectionNewGrupoToAttach.getClass(), grupoCollectionNewGrupoToAttach.getIdGrupo());
@@ -152,6 +180,23 @@ public class ProfesorJpaController implements Serializable {
                     if (oldIdProfesorOfPromocionCollectionNewPromocion != null && !oldIdProfesorOfPromocionCollectionNewPromocion.equals(profesor)) {
                         oldIdProfesorOfPromocionCollectionNewPromocion.getPromocionCollection().remove(promocionCollectionNewPromocion);
                         oldIdProfesorOfPromocionCollectionNewPromocion = em.merge(oldIdProfesorOfPromocionCollectionNewPromocion);
+                    }
+                }
+            }
+            for (Gastopromocional gastopromocionalCollectionOldGastopromocional : gastopromocionalCollectionOld) {
+                if (!gastopromocionalCollectionNew.contains(gastopromocionalCollectionOldGastopromocional)) {
+                    gastopromocionalCollectionOldGastopromocional.setIdProfesor(null);
+                    gastopromocionalCollectionOldGastopromocional = em.merge(gastopromocionalCollectionOldGastopromocional);
+                }
+            }
+            for (Gastopromocional gastopromocionalCollectionNewGastopromocional : gastopromocionalCollectionNew) {
+                if (!gastopromocionalCollectionOld.contains(gastopromocionalCollectionNewGastopromocional)) {
+                    Profesor oldIdProfesorOfGastopromocionalCollectionNewGastopromocional = gastopromocionalCollectionNewGastopromocional.getIdProfesor();
+                    gastopromocionalCollectionNewGastopromocional.setIdProfesor(profesor);
+                    gastopromocionalCollectionNewGastopromocional = em.merge(gastopromocionalCollectionNewGastopromocional);
+                    if (oldIdProfesorOfGastopromocionalCollectionNewGastopromocional != null && !oldIdProfesorOfGastopromocionalCollectionNewGastopromocional.equals(profesor)) {
+                        oldIdProfesorOfGastopromocionalCollectionNewGastopromocional.getGastopromocionalCollection().remove(gastopromocionalCollectionNewGastopromocional);
+                        oldIdProfesorOfGastopromocionalCollectionNewGastopromocional = em.merge(oldIdProfesorOfGastopromocionalCollectionNewGastopromocional);
                     }
                 }
             }
@@ -222,6 +267,11 @@ public class ProfesorJpaController implements Serializable {
             for (Promocion promocionCollectionPromocion : promocionCollection) {
                 promocionCollectionPromocion.setIdProfesor(null);
                 promocionCollectionPromocion = em.merge(promocionCollectionPromocion);
+            }
+            Collection<Gastopromocional> gastopromocionalCollection = profesor.getGastopromocionalCollection();
+            for (Gastopromocional gastopromocionalCollectionGastopromocional : gastopromocionalCollection) {
+                gastopromocionalCollectionGastopromocional.setIdProfesor(null);
+                gastopromocionalCollectionGastopromocional = em.merge(gastopromocionalCollectionGastopromocional);
             }
             Collection<Grupo> grupoCollection = profesor.getGrupoCollection();
             for (Grupo grupoCollectionGrupo : grupoCollection) {
