@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="285.0" prefWidth="583.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LogicaNegocio.Pagos.VentanaEditarRentaController">
+   <children>
+      <Label fx:id="nombre" layoutX="14.0" layoutY="14.0" prefHeight="20.0" prefWidth="272.0" text="Nombre cliente" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="157.0" AnchorPane.topAnchor="14.0">
+         <font>
+            <Font name="Arial Bold" size="16.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="imagen" fitHeight="86.0" fitWidth="86.0" layoutX="343.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />
+      <Label layoutX="14.0" layoutY="123.0" text="Dia:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="123.0">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="dias" layoutX="73.0" layoutY="121.0" prefHeight="25.0" prefWidth="111.0" AnchorPane.leftAnchor="73.0" AnchorPane.rightAnchor="226.0" AnchorPane.topAnchor="121.0" />
+      <ComboBox fx:id="horaInicio" layoutX="196.0" layoutY="121.0" prefHeight="25.0" prefWidth="86.0" AnchorPane.rightAnchor="128.0" AnchorPane.topAnchor="121.0" />
+      <Label layoutX="295.0" layoutY="125.0" text="-" AnchorPane.rightAnchor="110.0" AnchorPane.topAnchor="125.0" />
+      <ComboBox fx:id="horaFin" layoutX="314.0" layoutY="121.0" prefHeight="25.0" prefWidth="86.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="121.0" />
+      <Label layoutX="14.0" layoutY="158.0" text="Salon:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="158.0">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="salon" layoutX="73.0" layoutY="156.0" prefHeight="25.0" prefWidth="111.0" AnchorPane.leftAnchor="73.0" AnchorPane.topAnchor="156.0" />
+      <Label layoutX="196.0" layoutY="159.0" text="Monto:" AnchorPane.leftAnchor="196.0" AnchorPane.topAnchor="159.0">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="monto" layoutX="253.0" layoutY="156.0" prefHeight="25.0" prefWidth="147.0" AnchorPane.leftAnchor="253.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="156.0" />
+      <Button layoutX="341.0" layoutY="246.0" mnemonicParsing="false" onMouseClicked="#guardar_onClick" text="Guardar" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+      <Separator layoutX="12.0" layoutY="231.0" prefHeight="3.0" prefWidth="382.0" AnchorPane.bottomAnchor="51.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+   </children>
+</AnchorPane>

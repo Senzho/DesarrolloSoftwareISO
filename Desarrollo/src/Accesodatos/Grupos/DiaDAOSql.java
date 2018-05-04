@@ -65,8 +65,8 @@ public class DiaDAOSql implements DiaDAO{
     public List<Dia> obtenerDias(int idGrupo) {
         List<Dia> dias = new ArrayList();
         EntityManager entityManager = Persistence.createEntityManagerFactory("CentroDeControlAredPU").createEntityManager();
-        Query query = entityManager.createNamedQuery("Dia.findByIdTipo");
-        query.setParameter("idTipo", idGrupo);
+        Query query = entityManager.createNamedQuery("Dia.findByGrupo");
+        query.setParameter("idGrupo", idGrupo);
         query.getResultList().forEach((diaJpa) -> {
             dias.add(this.obtenerEntidad((Accesodatos.Entidades.Dia) diaJpa));
         });
@@ -74,6 +74,14 @@ public class DiaDAOSql implements DiaDAO{
     }
     @Override
     public Dia obtenerDia(int idRenta) {
-        return new Dia();
+        Dia dia = null;
+        EntityManager entityManager = Persistence.createEntityManagerFactory("CentroDeControlAredPU").createEntityManager();
+        Query query = entityManager.createNamedQuery("Dia.findByRenta");
+        query.setParameter("idRenta", idRenta);
+        Object resultado = query.getSingleResult();
+        if (resultado != null){
+            dia = this.obtenerEntidad((Accesodatos.Entidades.Dia) resultado);
+        }
+        return dia;
     }
 }

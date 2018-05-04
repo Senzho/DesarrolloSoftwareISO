@@ -1,7 +1,6 @@
 package Accesodatos.Grupos;
 
 import Accesodatos.Catalogos.ProfesorDAOSql;
-import Accesodatos.Controladores.AlumnoJpaController;
 import Accesodatos.Controladores.DiaJpaController;
 import Accesodatos.Controladores.GrupoJpaController;
 import Accesodatos.Controladores.ProfesorJpaController;
@@ -43,7 +42,7 @@ public class GrupoDAOSql implements GrupoDAO{
                         int miliIniJpa = Horas.getSegundos(diaJpa.getHoraInicio());
                         int miliIni = Horas.getSegundos(dia.getHoraInicio());
                         int miliFinJpa = Horas.getSegundos(diaJpa.getHoraFin());
-                        int miliFin = Horas.getSegundos(dia.getHoraFin());;
+                        int miliFin = Horas.getSegundos(dia.getHoraFin());
                         if ((miliIni >= miliIniJpa && miliIni <= miliFinJpa) || (miliFin >= miliIniJpa && miliFin <= miliFinJpa)){
                             diaError = dia;
                             break fors;
