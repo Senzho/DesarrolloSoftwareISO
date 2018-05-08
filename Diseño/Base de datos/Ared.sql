@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
--- Host: localhost    Database: Ared
+-- Host: localhost    Database: ared
 -- ------------------------------------------------------
 -- Server version	5.7.17-log
 
@@ -117,7 +117,7 @@ CREATE TABLE `dia` (
   `horaInicio` varchar(5) DEFAULT NULL,
   `horaFin` varchar(5) DEFAULT NULL,
   PRIMARY KEY (`idDia`)
-) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -231,7 +231,7 @@ CREATE TABLE `inscripcion` (
   KEY `idAlumno` (`idAlumno`),
   CONSTRAINT `inscripcion_ibfk_1` FOREIGN KEY (`idGrupo`) REFERENCES `grupo` (`idGrupo`),
   CONSTRAINT `inscripcion_ibfk_2` FOREIGN KEY (`idAlumno`) REFERENCES `alumno` (`idAlumno`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -240,7 +240,7 @@ CREATE TABLE `inscripcion` (
 
 LOCK TABLES `inscripcion` WRITE;
 /*!40000 ALTER TABLE `inscripcion` DISABLE KEYS */;
-INSERT INTO `inscripcion` VALUES (3,21,3),(4,21,4),(5,22,5),(6,22,6),(7,23,7),(8,23,8),(9,24,9),(10,24,10),(11,25,11);
+INSERT INTO `inscripcion` VALUES (16,22,4),(17,21,5),(18,21,6),(19,23,7),(20,23,8),(21,24,9),(22,24,10),(23,25,11),(24,25,12),(25,22,8),(27,22,3);
 /*!40000 ALTER TABLE `inscripcion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -258,12 +258,15 @@ CREATE TABLE `pagoalumno` (
   `idPromocion` int(11) DEFAULT NULL,
   `fecha` date DEFAULT NULL,
   `monto` varchar(15) DEFAULT NULL,
+  `idProfesor` int(11) DEFAULT NULL,
   PRIMARY KEY (`idPago`),
   KEY `idAlumno` (`idAlumno`),
   KEY `idPromocion` (`idPromocion`),
+  KEY `idProfesor` (`idProfesor`),
   CONSTRAINT `pagoalumno_ibfk_1` FOREIGN KEY (`idAlumno`) REFERENCES `alumno` (`idAlumno`),
-  CONSTRAINT `pagoalumno_ibfk_2` FOREIGN KEY (`idPromocion`) REFERENCES `promocion` (`idPromocion`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+  CONSTRAINT `pagoalumno_ibfk_2` FOREIGN KEY (`idPromocion`) REFERENCES `promocion` (`idPromocion`),
+  CONSTRAINT `pagoalumno_ibfk_3` FOREIGN KEY (`idProfesor`) REFERENCES `profesor` (`idProfesor`)
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -272,35 +275,8 @@ CREATE TABLE `pagoalumno` (
 
 LOCK TABLES `pagoalumno` WRITE;
 /*!40000 ALTER TABLE `pagoalumno` DISABLE KEYS */;
-INSERT INTO `pagoalumno` VALUES (1,0,11,1,'2018-04-18','1500'),(2,1,11,NULL,'2018-04-18','500'),(3,0,7,NULL,'2018-04-18','2000'),(4,1,7,2,'2018-04-18','650'),(5,0,8,NULL,'2018-04-18','1200'),(6,1,8,NULL,'2018-04-18','500'),(7,0,9,NULL,'2018-04-18','2300'),(8,1,9,NULL,'2018-04-18','680'),(9,0,10,1,'2018-04-18','750'),(10,1,10,NULL,'2018-04-18','300'),(11,0,3,NULL,'2018-04-18','1500'),(12,1,3,NULL,'2018-04-18','500'),(13,0,4,3,'2018-04-18','2150'),(14,1,4,NULL,'2018-04-18','750'),(15,0,5,NULL,'2018-04-18','2000'),(16,1,5,NULL,'2018-04-18','500'),(17,0,6,NULL,'2018-04-18','200'),(18,1,6,4,'2018-04-18','250');
+INSERT INTO `pagoalumno` VALUES (36,0,5,NULL,'2018-05-04','2500',11),(37,1,5,NULL,'2018-05-04','650',11),(38,0,6,NULL,'2018-05-04','2000',11),(39,1,6,NULL,'2018-05-04','500',11),(40,0,3,3,'2018-05-04','750',11),(41,1,3,NULL,'2018-05-04','260',11),(42,0,4,NULL,'2018-05-04','3000',11),(43,1,4,NULL,'2018-05-04','890',11),(44,0,7,NULL,'2018-05-04','2000',10),(45,1,7,NULL,'2018-05-04','900',10),(46,0,8,NULL,'2018-05-04','1200',10),(47,1,8,NULL,'2018-05-04','600',10),(48,0,9,NULL,'2018-05-04','2000',10),(49,1,9,NULL,'2018-05-04','765',10),(50,0,10,NULL,'2018-05-04','1500',10),(51,1,10,NULL,'2018-05-04','600',10),(52,0,12,NULL,'2018-05-04','1000',10),(53,1,12,NULL,'2018-05-04','450',10),(54,0,11,NULL,'2018-05-04','3200',10),(55,1,11,5,'2018-05-04','800',10),(56,0,8,NULL,'2018-05-04','2150',11),(57,1,8,NULL,'2018-05-04','700',11);
 /*!40000 ALTER TABLE `pagoalumno` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `pagocliente`
---
-
-DROP TABLE IF EXISTS `pagocliente`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `pagocliente` (
-  `idPago` int(11) NOT NULL AUTO_INCREMENT,
-  `fecha` date DEFAULT NULL,
-  `idCliente` int(11) DEFAULT NULL,
-  `monto` varchar(15) DEFAULT NULL,
-  PRIMARY KEY (`idPago`),
-  KEY `idCliente` (`idCliente`),
-  CONSTRAINT `pagocliente_ibfk_1` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idCliente`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `pagocliente`
---
-
-LOCK TABLES `pagocliente` WRITE;
-/*!40000 ALTER TABLE `pagocliente` DISABLE KEYS */;
-/*!40000 ALTER TABLE `pagocliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -404,10 +380,11 @@ CREATE TABLE `renta` (
   `idRenta` int(11) NOT NULL AUTO_INCREMENT,
   `fecha` date DEFAULT NULL,
   `idCliente` int(11) DEFAULT NULL,
+  `monto` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`idRenta`),
   KEY `idCliente` (`idCliente`),
   CONSTRAINT `renta_ibfk_1` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idCliente`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -455,4 +432,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-04-28 14:13:40
+-- Dump completed on 2018-05-08 18:12:56

@@ -59,8 +59,6 @@ public class Cliente implements Serializable {
     @Column(name = "direccion")
     private String direccion;
     @OneToMany(mappedBy = "idCliente")
-    private Collection<Pagocliente> pagoclienteCollection;
-    @OneToMany(mappedBy = "idCliente")
     private Collection<Renta> rentaCollection;
 
     public Cliente() {
@@ -116,15 +114,6 @@ public class Cliente implements Serializable {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
-    }
-
-    @XmlTransient
-    public Collection<Pagocliente> getPagoclienteCollection() {
-        return pagoclienteCollection;
-    }
-
-    public void setPagoclienteCollection(Collection<Pagocliente> pagoclienteCollection) {
-        this.pagoclienteCollection = pagoclienteCollection;
     }
 
     @XmlTransient

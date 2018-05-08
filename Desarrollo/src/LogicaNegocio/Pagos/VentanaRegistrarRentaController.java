@@ -8,12 +8,10 @@ import LogicaNegocio.Egresos.Dates;
 import LogicaNegocio.Grupos.Dia;
 import LogicaNegocio.Grupos.HorarioException;
 import java.net.URL;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -121,31 +119,37 @@ public class VentanaRegistrarRentaController implements Initializable {
     }
     public void rentar(){
         String monto = this.monto.getText().trim();
+        Date fecha = Dates.toDate(this.fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE));
         if (OperacionesString.montoValido(monto)){
-            this.renta = new Renta();
-            this.renta.setIdRenta(0);
-            this.renta.setIdCliente(this.obtenerIdCliente());
-            this.renta.setFecha(Dates.toDate(this.fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE)));
-            Dia dia = new Dia();
-            dia.setDia(this.getDia());
-            dia.setHoraFin(this.horaFin.getValue().toString());
-            dia.setHoraInicio(this.horaInicio.getValue().toString());
-            dia.setId(0);
-            dia.setTipo(false);
-            dia.setSalon(this.salon.getValue().toString());
-            this.renta.setDia(dia);
-            try {
-                if (this.renta.rentar()){
-                    MessageFactory.showMessage("Exito", "Renta", "La renta fue registrada con éxito", Alert.AlertType.INFORMATION);
-                }else{
-                    MessageFactory.showMessage("Error", "Renta", "La renta no fue registrada", Alert.AlertType.ERROR);
+            if (Dates.getDiference(new Date(), fecha) > 0){
+                this.renta = new Renta();
+                this.renta.setIdRenta(0);
+                this.renta.setIdCliente(this.obtenerIdCliente());
+                this.renta.setFecha(fecha);
+                this.renta.setMonto(monto);
+                Dia dia = new Dia();
+                dia.setDia(this.getDia());
+                dia.setHoraFin(this.horaFin.getValue().toString());
+                dia.setHoraInicio(this.horaInicio.getValue().toString());
+                dia.setId(0);
+                dia.setTipo(false);
+                dia.setSalon(this.salon.getValue().toString());
+                this.renta.setDia(dia);
+                try {
+                    if (this.renta.rentar()){
+                        MessageFactory.showMessage("Exito", "Renta", "La renta fue registrada con éxito", Alert.AlertType.INFORMATION);
+                    }else{
+                        MessageFactory.showMessage("Error", "Renta", "La renta no fue registrada", Alert.AlertType.ERROR);
+                    }
+                    this.stage.close();
+                } catch (HorarioException ex) {
+                    MessageFactory.showMessage("Advertencia", "Día", ex.getMessage(), Alert.AlertType.WARNING);
                 }
-                this.stage.close();
-            } catch (HorarioException ex) {
-                MessageFactory.showMessage("Advertencia", "Día", ex.getMessage(), Alert.AlertType.WARNING);
+            }else{
+                MessageFactory.showMessage("Error", "Fecha", "La fecha seleccionada no es válida", Alert.AlertType.ERROR);
             }
         }else{
-            MessageFactory.showMessage("Error", "Monto", "El monto de es válido", Alert.AlertType.INFORMATION);
+            MessageFactory.showMessage("Error", "Monto", "El monto no es válido", Alert.AlertType.INFORMATION);
         }
     }
     

@@ -50,6 +50,7 @@ public class RentaDAOSql implements RentaDAO{
         Accesodatos.Entidades.Renta rentaJpa = new Accesodatos.Entidades.Renta();
         rentaJpa.setIdRenta(renta.getIdRenta());
         rentaJpa.setFecha(renta.getFecha());
+        rentaJpa.setMonto(renta.getMonto());
         if (this.diaValido(renta.getDia()) == null){
             try{
                 rentaJpa.setIdCliente(clienteController.findCliente(renta.getIdCliente()));
@@ -76,6 +77,7 @@ public class RentaDAOSql implements RentaDAO{
             try {
                 Accesodatos.Entidades.Renta rentaJpa = rentaController.findRenta(renta.getIdRenta());
                 rentaJpa.setFecha(renta.getFecha());
+                rentaJpa.setMonto(renta.getMonto());
                 rentaController.edit(rentaJpa);
                 DiaDAOSql diaDAO = new DiaDAOSql();
                 diaDAO.editarDia(renta.getDia());

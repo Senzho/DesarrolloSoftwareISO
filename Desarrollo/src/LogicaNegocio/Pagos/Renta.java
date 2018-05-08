@@ -12,15 +12,17 @@ public class Renta {
     private Date fecha;
     private int idCliente;
     private Dia dia;
+    private String monto;
     private RentaDAOSql rentaDAO;
     
     public Renta(){
         this.rentaDAO = new RentaDAOSql();
     }
-    public Renta(int idRenta, Date fecha, int idCliente){
+    public Renta(int idRenta, Date fecha, int idCliente, String monto){
         this.idRenta = idRenta;
         this.fecha = fecha;
         this.idCliente = idCliente;
+        this.monto = monto;
         this.dia = new DiaDAOSql().obtenerDia(this.idRenta);
         this.rentaDAO = new RentaDAOSql();
     }
@@ -48,6 +50,12 @@ public class Renta {
     }
     public void setDia(Dia dia) {
         this.dia = dia;
+    }
+    public String getMonto(){
+        return this.monto;
+    }
+    public void setMonto(String monto){
+        this.monto = monto;
     }
     
     public boolean rentar() throws HorarioException{

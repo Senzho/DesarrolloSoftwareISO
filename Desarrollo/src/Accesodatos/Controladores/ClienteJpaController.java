@@ -12,17 +12,16 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import Accesodatos.Entidades.Pagocliente;
+import Accesodatos.Entidades.Renta;
 import java.util.ArrayList;
 import java.util.Collection;
-import Accesodatos.Entidades.Renta;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author Desktop
+ * @author Victor Javier
  */
 public class ClienteJpaController implements Serializable {
 
@@ -36,9 +35,6 @@ public class ClienteJpaController implements Serializable {
     }
 
     public void create(Cliente cliente) {
-        if (cliente.getPagoclienteCollection() == null) {
-            cliente.setPagoclienteCollection(new ArrayList<Pagocliente>());
-        }
         if (cliente.getRentaCollection() == null) {
             cliente.setRentaCollection(new ArrayList<Renta>());
         }
@@ -46,12 +42,6 @@ public class ClienteJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Collection<Pagocliente> attachedPagoclienteCollection = new ArrayList<Pagocliente>();
-            for (Pagocliente pagoclienteCollectionPagoclienteToAttach : cliente.getPagoclienteCollection()) {
-                pagoclienteCollectionPagoclienteToAttach = em.getReference(pagoclienteCollectionPagoclienteToAttach.getClass(), pagoclienteCollectionPagoclienteToAttach.getIdPago());
-                attachedPagoclienteCollection.add(pagoclienteCollectionPagoclienteToAttach);
-            }
-            cliente.setPagoclienteCollection(attachedPagoclienteCollection);
             Collection<Renta> attachedRentaCollection = new ArrayList<Renta>();
             for (Renta rentaCollectionRentaToAttach : cliente.getRentaCollection()) {
                 rentaCollectionRentaToAttach = em.getReference(rentaCollectionRentaToAttach.getClass(), rentaCollectionRentaToAttach.getIdRenta());
@@ -59,15 +49,6 @@ public class ClienteJpaController implements Serializable {
             }
             cliente.setRentaCollection(attachedRentaCollection);
             em.persist(cliente);
-            for (Pagocliente pagoclienteCollectionPagocliente : cliente.getPagoclienteCollection()) {
-                Cliente oldIdClienteOfPagoclienteCollectionPagocliente = pagoclienteCollectionPagocliente.getIdCliente();
-                pagoclienteCollectionPagocliente.setIdCliente(cliente);
-                pagoclienteCollectionPagocliente = em.merge(pagoclienteCollectionPagocliente);
-                if (oldIdClienteOfPagoclienteCollectionPagocliente != null) {
-                    oldIdClienteOfPagoclienteCollectionPagocliente.getPagoclienteCollection().remove(pagoclienteCollectionPagocliente);
-                    oldIdClienteOfPagoclienteCollectionPagocliente = em.merge(oldIdClienteOfPagoclienteCollectionPagocliente);
-                }
-            }
             for (Renta rentaCollectionRenta : cliente.getRentaCollection()) {
                 Cliente oldIdClienteOfRentaCollectionRenta = rentaCollectionRenta.getIdCliente();
                 rentaCollectionRenta.setIdCliente(cliente);
@@ -91,17 +72,8 @@ public class ClienteJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             Cliente persistentCliente = em.find(Cliente.class, cliente.getIdCliente());
-            Collection<Pagocliente> pagoclienteCollectionOld = persistentCliente.getPagoclienteCollection();
-            Collection<Pagocliente> pagoclienteCollectionNew = cliente.getPagoclienteCollection();
             Collection<Renta> rentaCollectionOld = persistentCliente.getRentaCollection();
             Collection<Renta> rentaCollectionNew = cliente.getRentaCollection();
-            Collection<Pagocliente> attachedPagoclienteCollectionNew = new ArrayList<Pagocliente>();
-            for (Pagocliente pagoclienteCollectionNewPagoclienteToAttach : pagoclienteCollectionNew) {
-                pagoclienteCollectionNewPagoclienteToAttach = em.getReference(pagoclienteCollectionNewPagoclienteToAttach.getClass(), pagoclienteCollectionNewPagoclienteToAttach.getIdPago());
-                attachedPagoclienteCollectionNew.add(pagoclienteCollectionNewPagoclienteToAttach);
-            }
-            pagoclienteCollectionNew = attachedPagoclienteCollectionNew;
-            cliente.setPagoclienteCollection(pagoclienteCollectionNew);
             Collection<Renta> attachedRentaCollectionNew = new ArrayList<Renta>();
             for (Renta rentaCollectionNewRentaToAttach : rentaCollectionNew) {
                 rentaCollectionNewRentaToAttach = em.getReference(rentaCollectionNewRentaToAttach.getClass(), rentaCollectionNewRentaToAttach.getIdRenta());
@@ -110,23 +82,6 @@ public class ClienteJpaController implements Serializable {
             rentaCollectionNew = attachedRentaCollectionNew;
             cliente.setRentaCollection(rentaCollectionNew);
             cliente = em.merge(cliente);
-            for (Pagocliente pagoclienteCollectionOldPagocliente : pagoclienteCollectionOld) {
-                if (!pagoclienteCollectionNew.contains(pagoclienteCollectionOldPagocliente)) {
-                    pagoclienteCollectionOldPagocliente.setIdCliente(null);
-                    pagoclienteCollectionOldPagocliente = em.merge(pagoclienteCollectionOldPagocliente);
-                }
-            }
-            for (Pagocliente pagoclienteCollectionNewPagocliente : pagoclienteCollectionNew) {
-                if (!pagoclienteCollectionOld.contains(pagoclienteCollectionNewPagocliente)) {
-                    Cliente oldIdClienteOfPagoclienteCollectionNewPagocliente = pagoclienteCollectionNewPagocliente.getIdCliente();
-                    pagoclienteCollectionNewPagocliente.setIdCliente(cliente);
-                    pagoclienteCollectionNewPagocliente = em.merge(pagoclienteCollectionNewPagocliente);
-                    if (oldIdClienteOfPagoclienteCollectionNewPagocliente != null && !oldIdClienteOfPagoclienteCollectionNewPagocliente.equals(cliente)) {
-                        oldIdClienteOfPagoclienteCollectionNewPagocliente.getPagoclienteCollection().remove(pagoclienteCollectionNewPagocliente);
-                        oldIdClienteOfPagoclienteCollectionNewPagocliente = em.merge(oldIdClienteOfPagoclienteCollectionNewPagocliente);
-                    }
-                }
-            }
             for (Renta rentaCollectionOldRenta : rentaCollectionOld) {
                 if (!rentaCollectionNew.contains(rentaCollectionOldRenta)) {
                     rentaCollectionOldRenta.setIdCliente(null);
@@ -172,11 +127,6 @@ public class ClienteJpaController implements Serializable {
                 cliente.getIdCliente();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The cliente with id " + id + " no longer exists.", enfe);
-            }
-            Collection<Pagocliente> pagoclienteCollection = cliente.getPagoclienteCollection();
-            for (Pagocliente pagoclienteCollectionPagocliente : pagoclienteCollection) {
-                pagoclienteCollectionPagocliente.setIdCliente(null);
-                pagoclienteCollectionPagocliente = em.merge(pagoclienteCollectionPagocliente);
             }
             Collection<Renta> rentaCollection = cliente.getRentaCollection();
             for (Renta rentaCollectionRenta : rentaCollection) {
