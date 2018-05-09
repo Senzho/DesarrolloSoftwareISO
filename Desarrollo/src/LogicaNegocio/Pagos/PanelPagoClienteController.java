@@ -1,0 +1,52 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package LogicaNegocio.Pagos;
+
+import LogicaNegocio.Catalogos.Cliente;
+import LogicaNegocio.Egresos.Dates;
+import LogicaNegocio.Grupos.Dia;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+
+/**
+ * FXML Controller class
+ *
+ * @author Desktop
+ */
+public class PanelPagoClienteController implements Initializable {
+    private Renta renta;
+    private Cliente cliente;
+    @FXML
+    private Label lblFecha;
+    @FXML
+    private Label lblMonto;
+    @FXML
+    private Label lblHoraInicio;
+    @FXML
+    private Label lblHoraFin;
+    /**
+     * Initializes the controller class.
+     */
+    
+    public void setPago(Renta renta){
+        this.renta = renta;
+        this.lblMonto.setText("No hay");
+        this.lblHoraInicio.setText(this.renta.getDia().getHoraInicio());
+        this.lblHoraFin.setText(this.renta.getDia().getHoraFin());
+        this.lblFecha.setText(Dates.getSentence(this.renta.getFecha()));
+    }
+    public void setCliente(Cliente cliente){
+        this.cliente = cliente;
+    }
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+    }    
+    
+}

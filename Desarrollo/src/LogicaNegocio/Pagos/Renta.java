@@ -67,4 +67,7 @@ public class Renta {
     public List<Renta> obtenerRentas(){
         return this.rentaDAO.obtenerRentas();
     }
+    public List<Renta> obtenerRentas(int idCliente){
+        return this.rentaDAO.obtenerRentas(idCliente);
+    }
 }

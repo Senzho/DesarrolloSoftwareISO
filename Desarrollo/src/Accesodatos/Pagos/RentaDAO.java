@@ -8,4 +8,5 @@ public interface RentaDAO {
     public boolean registrarRenta(Renta renta) throws HorarioException;
     public boolean editarRenta(Renta renta) throws HorarioException;
     public List<Renta> obtenerRentas();
+    public List<Renta> obtenerRentas(int idCliente);
 }
