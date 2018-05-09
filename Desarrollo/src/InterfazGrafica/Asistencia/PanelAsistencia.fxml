@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="402.0" prefWidth="599.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="LogicaNegocio.Asistencia.PanelAsistenciaController">
+   <children>
+      <Label layoutX="14.0" layoutY="14.0" text="Grupo:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="grupos" layoutX="69.0" layoutY="12.0" prefHeight="25.0" prefWidth="202.0" AnchorPane.leftAnchor="69.0" AnchorPane.rightAnchor="329.0" AnchorPane.topAnchor="12.0" onAction="#grupos_onClick" />
+      <Label layoutX="14.0" layoutY="46.0" text="Fecha:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="46.0">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <DatePicker fx:id="fecha" layoutX="69.0" layoutY="44.0" prefHeight="25.0" prefWidth="201.0" AnchorPane.leftAnchor="69.0" AnchorPane.rightAnchor="329.0" AnchorPane.topAnchor="44.0" />
+      <Button layoutX="438.0" layoutY="44.0" mnemonicParsing="false" text="Marcar/Desmarcar todos" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="44.0" onMouseClicked="#marcarTodo_onClick" />
+      <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="14.0" layoutY="80.0" prefHeight="265.0" prefWidth="572.0" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="80.0">
+         <content>
+            <VBox fx:id="panelAlumnos" prefHeight="200.0" prefWidth="100.0" spacing="5" />
+         </content>
+      </ScrollPane>
+      <Button layoutX="527.0" layoutY="361.0" mnemonicParsing="false" text="Guardar" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+   </children>
+</AnchorPane>
