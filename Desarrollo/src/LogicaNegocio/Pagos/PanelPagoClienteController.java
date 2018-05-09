@@ -36,10 +36,10 @@ public class PanelPagoClienteController implements Initializable {
     
     public void setPago(Renta renta){
         this.renta = renta;
-        this.lblMonto.setText("No hay");
-        this.lblHoraInicio.setText(this.renta.getDia().getHoraInicio());
-        this.lblHoraFin.setText(this.renta.getDia().getHoraFin());
-        this.lblFecha.setText(Dates.getSentence(this.renta.getFecha()));
+        this.lblMonto.setText("Monto: "+renta.getMonto());
+        this.lblHoraInicio.setText("Inicio: "+this.renta.getDia().getHoraInicio());
+        this.lblHoraFin.setText("Fin: "+this.renta.getDia().getHoraFin());
+        this.lblFecha.setText("Fecha: "+Dates.getSentence(this.renta.getFecha()));
     }
     public void setCliente(Cliente cliente){
         this.cliente = cliente;

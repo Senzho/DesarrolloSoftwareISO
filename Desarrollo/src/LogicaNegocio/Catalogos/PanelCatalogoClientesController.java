@@ -1,6 +1,7 @@
 package LogicaNegocio.Catalogos;
 
 import InterfazGrafica.MessageFactory;
+import LogicaNegocio.Lanzador;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Collections;
@@ -24,9 +25,14 @@ public class PanelCatalogoClientesController implements Initializable {
     private Button buscar;
     @FXML
     private VBox panelClientes;
+    private Lanzador lanzador;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+    }
+    public void setLanzador(Lanzador lanzador){
+        this.lanzador = lanzador;
         this.cargarClientes(new Cliente().obtenerClientes());
     }
     public void cargarClientes(List<Cliente> clientes){
@@ -40,6 +46,7 @@ public class PanelCatalogoClientesController implements Initializable {
                 panel.setStyle("-fx-background-color: #D8D8D8;");
                 PanelClienteController controller = loader.getController();
                 controller.setCliente(clienteObtenido);
+                controller.setLanzador(lanzador);
                 this.panelClientes.getChildren().add(panel);
             } catch (IOException ex) {
                 Logger.getLogger(PanelCatalogoClientesController.class.getName()).log(Level.SEVERE, null, ex);

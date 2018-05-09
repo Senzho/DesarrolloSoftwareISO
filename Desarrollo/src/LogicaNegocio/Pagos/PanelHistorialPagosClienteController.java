@@ -7,6 +7,7 @@ package LogicaNegocio.Pagos;
 
 import LogicaNegocio.Catalogos.Cliente;
 import LogicaNegocio.Catalogos.CopiarArchivo;
+import LogicaNegocio.Lanzador;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -39,6 +40,7 @@ public class PanelHistorialPagosClienteController implements Initializable {
     private VBox panelPagos;
     private Cliente cliente;
     private List<Renta> pagosCliente;
+    private Lanzador lanzador;
 
     /**
      * Initializes the controller class.
@@ -47,7 +49,9 @@ public class PanelHistorialPagosClienteController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
-
+    public void setLanzador(Lanzador lanzador){
+        this.lanzador = lanzador;
+    }
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
         lblNombre.setText(cliente.getNombre());

@@ -1,5 +1,7 @@
 package LogicaNegocio.Catalogos;
 
+import LogicaNegocio.Lanzador;
+import LogicaNegocio.Pagos.PanelHistorialPagosClienteController;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -20,6 +22,7 @@ public class PanelClienteController implements Initializable {
     @FXML
     private ImageView imagen;
     private Cliente cliente;
+    private Lanzador lanzador;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -27,6 +30,9 @@ public class PanelClienteController implements Initializable {
         this.cargarImagen();
     }
     
+    public void setLanzador(Lanzador lanzador){
+        this.lanzador = lanzador;
+    }
     public void setCliente(Cliente cliente){
         this.cliente = cliente;
         this.cargarCliente();
@@ -47,4 +53,11 @@ public class PanelClienteController implements Initializable {
     public void cargarImagen() {
         this.imagen.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkPersonIcon.png")));
     }
+    public void btnRentas_onClick(){
+        this.lanzador.lanzar("/InterfazGrafica/Pagos/PanelHistorialPagosCliente.fxml");
+        PanelHistorialPagosClienteController controller =  lanzador.getCargador().getController();
+        controller.setLanzador(lanzador);
+        controller.setCliente(this.cliente);
+    }
+    
 }

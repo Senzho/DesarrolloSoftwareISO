@@ -19,17 +19,17 @@
             <Font name="Arial" size="16.0" />
          </font>
       </Label>
-      <Label fx:id="lblMonto" layoutX="41.0" layoutY="46.0" text="monto">
+      <Label fx:id="lblMonto" layoutX="43.0" layoutY="46.0" text="monto">
          <font>
             <Font name="Arial" size="16.0" />
          </font>
       </Label>
-      <Label fx:id="lblHoraFin" layoutX="245.0" layoutY="48.0" text="hora fin">
+      <Label fx:id="lblHoraFin" layoutX="277.0" layoutY="46.0" text="hora fin">
          <font>
             <Font name="Arial" size="16.0" />
          </font>
       </Label>
-      <Label fx:id="lblHoraInicio" layoutX="245.0" layoutY="18.0" text="hora inicio" AnchorPane.topAnchor="18.0">
+      <Label fx:id="lblHoraInicio" layoutX="277.0" layoutY="18.0" text="hora inicio" AnchorPane.topAnchor="18.0">
          <font>
             <Font name="Arial" size="16.0" />
          </font>
