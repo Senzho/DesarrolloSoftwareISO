@@ -58,33 +58,47 @@ public class VentanaCambiarAlumnoGrupoController implements Initializable {
         this.txtNombre.setText(alumno.getNombre());
         this.cargarImagen();
     }
-    public void cargarImagen(){
+
+    public void cargarImagen() {
         Image imagen = CopiarArchivo.obtenerFotoUsuario("Alumno", alumno.getIdAlumno());
-        if(imagen!=null){
+        if (imagen != null) {
             this.imagenUsuario.setImage(imagen);
-        }else{
+        } else {
             this.imagenUsuario.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkPersonIcon.png")));
         }
     }
+
     public void cargarGruposDisponibles() {
         grupoDao = new GrupoDAOSql();
         listaGruposDisponibles = new ArrayList();
         List<Grupo> gruposProfesor = grupoDao.obtenerGruposProfesor(idProfesor);
-        listaGruposInscrito = grupoDao.obtenerGruposAlumno(this.alumno.getIdAlumno());
+        List<Grupo> listaGrupos = grupoDao.obtenerGruposAlumno(this.alumno.getIdAlumno());
+        listaGruposInscrito = new ArrayList();
+        if (!listaGrupos.isEmpty()) {
+            for (Grupo grupo : listaGrupos) {
+                System.out.println(grupo.getProfesor());
+                if (grupo.getProfesor().getIdProfesor() == idProfesor) {
+                    listaGruposInscrito.add(grupo);
+                }
+            }
+        }
         cargarComboGruposDisponibles(gruposProfesor);
         this.cargarCombos();
     }
-    public void cargarComboGruposDisponibles(List<Grupo> gruposProfesor){
-        for(int i = 0; i < gruposProfesor.size(); i++){
+
+    public void cargarComboGruposDisponibles(List<Grupo> gruposProfesor) {
+        listaGruposDisponibles.clear();
+        for (int i = 0; i < gruposProfesor.size(); i++) {
             String nombreDanza = gruposProfesor.get(i).getDanza();
             for (int j = 0; j < listaGruposInscrito.size(); j++) {
                 String nombreInscripcion = listaGruposInscrito.get(j).getDanza();
-                if(!nombreDanza.equals(nombreInscripcion)){
+                if (!nombreDanza.equals(nombreInscripcion)) {
                     listaGruposDisponibles.add(gruposProfesor.get(i));
                 }
             }
         }
     }
+
     public void cargarCombos() {
         for (Grupo grupoAlumno : listaGruposInscrito) {
             this.comboGruposInscritos.getItems().add(grupoAlumno.getDanza());
@@ -113,6 +127,7 @@ public class VentanaCambiarAlumnoGrupoController implements Initializable {
             }
         }
         inscripcionDao = new InscripcionDAOSql();
+        System.out.println(grupo.getId());
         boolean borrado = inscripcionDao.borrarRegistro(this.alumno.getIdAlumno(), grupo.getId());
         if (borrado) {
             Grupo grupoInscripcion = null;
@@ -125,10 +140,11 @@ public class VentanaCambiarAlumnoGrupoController implements Initializable {
             Inscripcion inscripcion = new Inscripcion(0, grupoInscripcion.getId(), this.alumno.getIdAlumno());
             boolean creado = inscripcionDao.registrar(inscripcion);
             if (creado) {
-                MessageFactory.showMessage("registro exitoso", "Creacion de registro", "Regitro creado correctamente", Alert.AlertType.CONFIRMATION);
+                MessageFactory.showMessage("Registro exitoso", "Creacion de registro", "Regitro creado correctamente", Alert.AlertType.CONFIRMATION);
             } else {
                 MessageFactory.showMessage("Error de registro", "Creacion de registro", "El registro no pudo crearse", Alert.AlertType.ERROR);
             }
         }
     }
 }
+

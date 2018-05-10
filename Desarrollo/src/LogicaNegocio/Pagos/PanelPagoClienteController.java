@@ -7,7 +7,6 @@ package LogicaNegocio.Pagos;
 
 import LogicaNegocio.Catalogos.Cliente;
 import LogicaNegocio.Egresos.Dates;
-import LogicaNegocio.Grupos.Dia;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;

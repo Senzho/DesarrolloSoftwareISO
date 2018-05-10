@@ -112,7 +112,10 @@ public class GrupoDAOSql implements GrupoDAO{
         Query query = entityManager.createNamedQuery("Grupo.findByAlumno");
         query.setParameter("idAlumno", idAlumnos);
         query.getResultList().forEach((grupoJpa) -> {
-            grupos.add(this.obtenerEntidad((Accesodatos.Entidades.Grupo) grupoJpa));
+            Accesodatos.Entidades.Grupo grupoJpaCont = (Accesodatos.Entidades.Grupo) grupoJpa;
+            Grupo grupo = this.obtenerEntidad(grupoJpaCont);
+            grupo.setProfesor(ProfesorDAOSql.obtenerEntidad(grupoJpaCont.getIdProfesor()));
+            grupos.add(grupo);
         });
         return grupos;
     }

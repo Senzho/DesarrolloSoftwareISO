@@ -33,8 +33,8 @@ public class VentanaInicioSesionController implements Initializable {
     }
 
     public void btnIniciarSesion_onClick() {
-        String nombreUsuario = this.txtUsuario.getText();
-        String contraseña = Hasher.hash(this.txtContraseña.getText());
+        String nombreUsuario = this.txtUsuario.getText().trim();
+        String contraseña = Hasher.hash(this.txtContraseña.getText().trim());
         this.usuario = new Usuario().buscarUsuarioSesion(nombreUsuario, contraseña);
         if (usuario != null) {
             this.profesor = new Usuario().obtenerProfesor(this.usuario.getIdTipoUsuario());

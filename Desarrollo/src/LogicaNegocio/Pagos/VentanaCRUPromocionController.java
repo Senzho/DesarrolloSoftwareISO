@@ -77,7 +77,7 @@ public class VentanaCRUPromocionController implements Initializable {
             promocion.setPorcentaje(Integer.parseInt(txtPorcentaje.getText().trim()));
             boolean editar = promocion.editarPromocion();
             if (editar) {
-                MessageFactory.showMessage("edicion exitoso", "Registro realizado", "Promocion editar correctamente", Alert.AlertType.CONFIRMATION);
+                MessageFactory.showMessage("Edición exitosa", "Registro realizado", "Promocion editar correctamente", Alert.AlertType.CONFIRMATION);
             } else {
                 MessageFactory.showMessage("Información", "No se pudo editar el registro", "La promoció no pudo ser editada", Alert.AlertType.ERROR);
             }
