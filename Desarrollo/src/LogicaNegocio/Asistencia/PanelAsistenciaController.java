@@ -68,8 +68,10 @@ public class PanelAsistenciaController implements Initializable {
     }
     public void setGrupo(String nombreGrupo){
         this.grupos.setValue(nombreGrupo);
+        this.cargarAlumnos();
     }
     public void cargarAlumnos(){
+        this.todoMarcado = false;
         this.panelesAlumno.clear();
         this.panelAlumnos.getChildren().clear();
         List<Alumno> alumnos = new AlumnoDAOSql().obtenerAlumnos(this.obtenerIdGrupo());

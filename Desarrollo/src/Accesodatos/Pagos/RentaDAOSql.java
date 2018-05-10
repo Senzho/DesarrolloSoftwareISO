@@ -4,6 +4,7 @@ import Accesodatos.Controladores.ClienteJpaController;
 import Accesodatos.Controladores.DiaJpaController;
 import Accesodatos.Controladores.RentaJpaController;
 import Accesodatos.Grupos.DiaDAOSql;
+import LogicaNegocio.Catalogos.OperacionesString;
 import LogicaNegocio.Grupos.Dia;
 import LogicaNegocio.Grupos.HorarioException;
 import LogicaNegocio.Grupos.Horas;
@@ -46,52 +47,56 @@ public class RentaDAOSql implements RentaDAO {
 
     @Override
     public boolean registrarRenta(Renta renta) throws HorarioException {
-        boolean registrada;
-        EntityManagerFactory entityManager = Persistence.createEntityManagerFactory("CentroDeControlAredPU");
-        RentaJpaController rentaController = new RentaJpaController(entityManager);
-        ClienteJpaController clienteController = new ClienteJpaController(entityManager);
-        Accesodatos.Entidades.Renta rentaJpa = new Accesodatos.Entidades.Renta();
-        rentaJpa.setIdRenta(renta.getIdRenta());
-        rentaJpa.setFecha(renta.getFecha());
-        rentaJpa.setMonto(renta.getMonto());
-        if (this.diaValido(renta.getDia()) == null) {
-            try {
-                rentaJpa.setIdCliente(clienteController.findCliente(renta.getIdCliente()));
-                rentaController.create(rentaJpa);
-                renta.setIdRenta(rentaJpa.getIdRenta());
-                renta.getDia().setIdTipo(renta.getIdRenta());
-                DiaDAOSql diaDAO = new DiaDAOSql();
-                diaDAO.agregarDia(renta.getDia());
-                registrada = true;
-            } catch (Exception excepcion) {
-                registrada = false;
+        boolean registrada = false;
+        if (OperacionesString.montoValido(renta.getMonto())){
+            EntityManagerFactory entityManager = Persistence.createEntityManagerFactory("CentroDeControlAredPU");
+            RentaJpaController rentaController = new RentaJpaController(entityManager);
+            ClienteJpaController clienteController = new ClienteJpaController(entityManager);
+            Accesodatos.Entidades.Renta rentaJpa = new Accesodatos.Entidades.Renta();
+            rentaJpa.setIdRenta(renta.getIdRenta());
+            rentaJpa.setFecha(renta.getFecha());
+            rentaJpa.setMonto(renta.getMonto());
+            if (this.diaValido(renta.getDia()) == null) {
+                try {
+                    rentaJpa.setIdCliente(clienteController.findCliente(renta.getIdCliente()));
+                    rentaController.create(rentaJpa);
+                    renta.setIdRenta(rentaJpa.getIdRenta());
+                    renta.getDia().setIdTipo(renta.getIdRenta());
+                    DiaDAOSql diaDAO = new DiaDAOSql();
+                    diaDAO.agregarDia(renta.getDia());
+                    registrada = true;
+                } catch (Exception excepcion) {
+                    registrada = false;
+                }
+            } else {
+                throw new HorarioException(renta.getDia());
             }
-        } else {
-            throw new HorarioException(renta.getDia());
-        }
+        }  
         return registrada;
     }
 
     @Override
     public boolean editarRenta(Renta renta) throws HorarioException {
-        boolean editada;
-        if (this.diaValido(renta.getDia()) == null) {
-            EntityManagerFactory entityManager = Persistence.createEntityManagerFactory("CentroDeControlAredPU");
-            RentaJpaController rentaController = new RentaJpaController(entityManager);
-            try {
-                Accesodatos.Entidades.Renta rentaJpa = rentaController.findRenta(renta.getIdRenta());
-                rentaJpa.setFecha(renta.getFecha());
-                rentaJpa.setMonto(renta.getMonto());
-                rentaController.edit(rentaJpa);
-                DiaDAOSql diaDAO = new DiaDAOSql();
-                diaDAO.editarDia(renta.getDia());
-                editada = true;
-            } catch (Exception ex) {
-                editada = false;
-                Logger.getLogger(RentaDAOSql.class.getName()).log(Level.SEVERE, null, ex);
+        boolean editada = false;
+        if (OperacionesString.montoValido(renta.getMonto())){
+            if (this.diaValido(renta.getDia()) == null) {
+                EntityManagerFactory entityManager = Persistence.createEntityManagerFactory("CentroDeControlAredPU");
+                RentaJpaController rentaController = new RentaJpaController(entityManager);
+                try {
+                    Accesodatos.Entidades.Renta rentaJpa = rentaController.findRenta(renta.getIdRenta());
+                    rentaJpa.setFecha(renta.getFecha());
+                    rentaJpa.setMonto(renta.getMonto());
+                    rentaController.edit(rentaJpa);
+                    DiaDAOSql diaDAO = new DiaDAOSql();
+                    diaDAO.editarDia(renta.getDia());
+                    editada = true;
+                } catch (Exception ex) {
+                    editada = false;
+                    Logger.getLogger(RentaDAOSql.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                throw new HorarioException(renta.getDia());
             }
-        } else {
-            throw new HorarioException(renta.getDia());
         }
         return editada;
     }
@@ -114,7 +119,7 @@ public class RentaDAOSql implements RentaDAO {
 
     @Override
     public List<Renta> obtenerRentas(int idCliente) {
-        List<Accesodatos.Entidades.Renta> rentasJpa = new ArrayList<>();
+        List<Accesodatos.Entidades.Renta> rentasJpa;
         EntityManager entityManager = Persistence.createEntityManagerFactory("CentroDeControlAredPU").createEntityManager();
         Query query = entityManager.createNamedQuery("Renta.findRentasByIdCliente");
         query.setParameter("idCliente", idCliente);
@@ -126,7 +131,6 @@ public class RentaDAOSql implements RentaDAO {
                 rentas.add(obtenerEntidad(rentaJpa));
             }
         }
-
         return rentas;
     }
 }

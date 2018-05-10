@@ -3,6 +3,7 @@ package LogicaNegocio.Grupos;
 import Accesodatos.Catalogos.AlumnoDAOSql;
 import LogicaNegocio.Catalogos.Alumno;
 import Accesodatos.Grupos.GrupoDAOSql;
+import LogicaNegocio.Asistencia.PanelAsistenciaController;
 import LogicaNegocio.Lanzador;
 import java.io.IOException;
 import java.net.URL;
@@ -97,5 +98,11 @@ public class PanelAlumnosGrupoProfesorController implements Initializable {
     
     public void comboGrupos_onAction(){
         this.cargarAlumnos(this.getGrupo().getId());
+    }
+    public void registrarAsistencia_onClick(){
+        this.lanzador.lanzar("/InterfazGrafica/Asistencia/PanelAsistencia.fxml");
+        PanelAsistenciaController controller = this.lanzador.getCargador().getController();
+        controller.setProfesor(this.idProfesor);
+        controller.setGrupo(this.comboGrupos.getValue().toString());
     }
 }

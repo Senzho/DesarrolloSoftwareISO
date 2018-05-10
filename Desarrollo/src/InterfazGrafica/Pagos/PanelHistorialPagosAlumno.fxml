@@ -22,7 +22,7 @@
             <Font name="Arial" size="16.0" />
          </font>
       </Label>
-      <Button fx:id="btnRegistrarPago" layoutX="460.0" layoutY="410.0" mnemonicParsing="false" text="Registrar pago" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
+      <Button fx:id="btnRegistrarPago" layoutX="460.0" layoutY="410.0" mnemonicParsing="false" onMouseClicked="#registrarPago_onClick" text="Registrar pago" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
          <font>
             <Font name="Arial" size="16.0" />
          </font>

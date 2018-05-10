@@ -75,4 +75,8 @@ public class PanelHistorialPagosAlumnoController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         
     }
+    
+    public void registrarPago_onClick(){
+        new VentanaRegistrarPagoAlumno(this.idProfesor, this.alumno.getNombre());
+    }
 }
