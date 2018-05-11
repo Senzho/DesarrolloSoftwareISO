@@ -1,5 +1,6 @@
 package Accesodatos.Grupos;
 
+import LogicaNegocio.Asistencia.Asistencia;
 import LogicaNegocio.Grupos.Grupo;
 import LogicaNegocio.Grupos.HorarioException;
 import java.util.List;
@@ -10,4 +11,5 @@ public interface GrupoDAO {
     public List<Grupo> obtenerGruposProfesor(int idProfesor);
     public List<Grupo> obtenerGruposAlumno(int idAlumnos);
     public List<Grupo> obtenerGrupos();
+    public boolean registrarAsistencia(Asistencia asistencia);
 }

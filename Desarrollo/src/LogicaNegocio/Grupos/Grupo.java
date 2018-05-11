@@ -1,6 +1,7 @@
 package LogicaNegocio.Grupos;
 
 import Accesodatos.Grupos.GrupoDAOSql;
+import LogicaNegocio.Asistencia.Asistencia;
 import LogicaNegocio.Catalogos.Profesor;
 import java.util.List;
 
@@ -67,5 +68,9 @@ public class Grupo {
     }
     public List<Grupo> obtenerGrupos(){
         return this.grupoDAO.obtenerGrupos();
+    }
+    public boolean registrarAsistencia(Asistencia asistencia){
+        asistencia.setIdGrupo(this.id);
+        return this.grupoDAO.registrarAsistencia(asistencia);
     }
 }

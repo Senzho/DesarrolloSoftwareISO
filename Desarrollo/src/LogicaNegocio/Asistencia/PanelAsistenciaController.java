@@ -4,10 +4,12 @@ import Accesodatos.Catalogos.AlumnoDAOSql;
 import Accesodatos.Grupos.GrupoDAOSql;
 import InterfazGrafica.MessageFactory;
 import LogicaNegocio.Catalogos.Alumno;
+import LogicaNegocio.Egresos.Dates;
 import LogicaNegocio.Grupos.Grupo;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -34,16 +36,17 @@ public class PanelAsistenciaController implements Initializable {
     private List<Grupo> listaGrupos;
     private List<PanelAlumnoAsistenciaController> panelesAlumno;
     private boolean todoMarcado;
+    private Asistencia asistencia;
     
-    private int obtenerIdGrupo(){
-        int id = 0;
-        for (Grupo grupo : this.listaGrupos){
-            if (grupo.getNombre().equals(this.grupos.getValue().toString())){
-                id = grupo.getId();
+    private Grupo obtenerGrupo(){
+        Grupo grupo = null;
+        for (Grupo grupoLista : this.listaGrupos){
+            if (grupoLista.getNombre().equals(this.grupos.getValue().toString())){
+                grupo = grupoLista;
                 break;
             }
         }
-        return id;
+        return grupo;
     }
     
     @Override
@@ -52,6 +55,7 @@ public class PanelAsistenciaController implements Initializable {
         this.panelesAlumno = new ArrayList();
         this.fecha.setValue(LocalDate.now());
         this.todoMarcado = false;
+        this.asistencia = new Asistencia();
     }
     
     public void setProfesor(int idProfesor){
@@ -74,7 +78,7 @@ public class PanelAsistenciaController implements Initializable {
         this.todoMarcado = false;
         this.panelesAlumno.clear();
         this.panelAlumnos.getChildren().clear();
-        List<Alumno> alumnos = new AlumnoDAOSql().obtenerAlumnos(this.obtenerIdGrupo());
+        List<Alumno> alumnos = new AlumnoDAOSql().obtenerAlumnos(this.obtenerGrupo().getId());
         Collections.sort(alumnos);
         alumnos.forEach((alumno) -> {
             FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/InterfazGrafica/Asistencia/PanelAlumnoAsistencia.fxml"));
@@ -91,6 +95,24 @@ public class PanelAsistenciaController implements Initializable {
             }
         });
     }
+    public void registrar(Grupo grupoSeleccionado){
+        List<Alumno> alumnos = new ArrayList();
+        this.panelesAlumno.forEach((panel) -> {
+            if (panel.marcado()){
+                alumnos.add(panel.getAlumno());
+            }
+        });
+        if (alumnos.isEmpty()){
+            MessageFactory.showMessage("Error", "Alumnos", "No marcaste ningún alumno", Alert.AlertType.NONE);
+        }else{
+            this.asistencia.setAlumnos(alumnos);
+            if (grupoSeleccionado.registrarAsistencia(this.asistencia)){
+                MessageFactory.showMessage("Éxito", "Registro", "La asistencia fue registrada con éxito", Alert.AlertType.INFORMATION);
+            }else{
+                MessageFactory.showMessage("Error", "Registro", "La asistencia no fue registrada", Alert.AlertType.ERROR);
+            }
+        }
+    }
     
     public void grupos_onClick(){
         if (!this.listaGrupos.isEmpty()){
@@ -102,5 +124,16 @@ public class PanelAsistenciaController implements Initializable {
             controller.marcar(!this.todoMarcado);
         });
         this.todoMarcado = !this.todoMarcado;
+    }
+    public void guardar_onClick(){
+        Grupo grupoSeleccionado = this.obtenerGrupo();
+        this.asistencia.setFecha(Dates.toDate(this.fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE)));
+        this.asistencia.setIdAsistencia(0);
+        this.asistencia.setIdGrupo(grupoSeleccionado.getId());
+        if (this.asistencia.asistenciaRegistrada()){
+            MessageFactory.showMessage("Información", "Fecha", "La asistencia para la fecha seleccionada ya fue registrada", Alert.AlertType.INFORMATION);
+        }else{
+            this.registrar(grupoSeleccionado);
+        }
     }
 }

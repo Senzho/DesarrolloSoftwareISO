@@ -20,7 +20,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author Desktop
+ * @author Victor Javier
  */
 public class AsistenciaJpaController implements Serializable {
 
@@ -33,29 +33,31 @@ public class AsistenciaJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Asistencia asistencia) {
+    public void create(List<Asistencia> asistencias) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Grupo idGrupo = asistencia.getIdGrupo();
-            if (idGrupo != null) {
-                idGrupo = em.getReference(idGrupo.getClass(), idGrupo.getIdGrupo());
-                asistencia.setIdGrupo(idGrupo);
-            }
-            Alumno idAlumno = asistencia.getIdAlumno();
-            if (idAlumno != null) {
-                idAlumno = em.getReference(idAlumno.getClass(), idAlumno.getIdAlumno());
-                asistencia.setIdAlumno(idAlumno);
-            }
-            em.persist(asistencia);
-            if (idGrupo != null) {
-                idGrupo.getAsistenciaCollection().add(asistencia);
-                idGrupo = em.merge(idGrupo);
-            }
-            if (idAlumno != null) {
-                idAlumno.getAsistenciaCollection().add(asistencia);
-                idAlumno = em.merge(idAlumno);
+            for(Asistencia asistencia: asistencias) {
+                Grupo idGrupo = asistencia.getIdGrupo();
+                if (idGrupo != null) {
+                    idGrupo = em.getReference(idGrupo.getClass(), idGrupo.getIdGrupo());
+                    asistencia.setIdGrupo(idGrupo);
+                }
+                Alumno idAlumno = asistencia.getIdAlumno();
+                if (idAlumno != null) {
+                    idAlumno = em.getReference(idAlumno.getClass(), idAlumno.getIdAlumno());
+                    asistencia.setIdAlumno(idAlumno);
+                }
+                em.persist(asistencia);
+                if (idGrupo != null) {
+                    idGrupo.getAsistenciaCollection().add(asistencia);
+                    idGrupo = em.merge(idGrupo);
+                }
+                if (idAlumno != null) {
+                    idAlumno.getAsistenciaCollection().add(asistencia);
+                    idAlumno = em.merge(idAlumno);
+                }
             }
             em.getTransaction().commit();
         } finally {

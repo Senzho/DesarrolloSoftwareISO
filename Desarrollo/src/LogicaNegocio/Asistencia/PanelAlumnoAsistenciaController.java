@@ -39,4 +39,10 @@ public class PanelAlumnoAsistenciaController implements Initializable {
     public void marcar(boolean marcado){
         this.asistio.setSelected(marcado);
     }
+    public Alumno getAlumno(){
+        return this.alumno;
+    }
+    public boolean marcado(){
+        return this.asistio.isSelected();
+    }
 }

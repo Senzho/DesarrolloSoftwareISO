@@ -1,9 +1,13 @@
 package Accesodatos.Grupos;
 
 import Accesodatos.Catalogos.ProfesorDAOSql;
+import Accesodatos.Controladores.AlumnoJpaController;
+import Accesodatos.Controladores.AsistenciaJpaController;
 import Accesodatos.Controladores.DiaJpaController;
 import Accesodatos.Controladores.GrupoJpaController;
 import Accesodatos.Controladores.ProfesorJpaController;
+import LogicaNegocio.Asistencia.Asistencia;
+import LogicaNegocio.Catalogos.Alumno;
 import LogicaNegocio.Grupos.Dia;
 import LogicaNegocio.Grupos.Grupo;
 import LogicaNegocio.Grupos.Horario;
@@ -131,5 +135,37 @@ public class GrupoDAOSql implements GrupoDAO{
             grupos.add(grupo);
         });
         return grupos;
+    }
+    @Override
+    public boolean registrarAsistencia(Asistencia asistencia){
+        boolean registrada;
+        AsistenciaJpaController controller = new AsistenciaJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
+        AlumnoJpaController alumnoController = new AlumnoJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
+        GrupoJpaController grupoController = new GrupoJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
+        try{
+            Accesodatos.Entidades.Grupo grupoJpa = grupoController.findGrupo(asistencia.getIdGrupo());
+            if (grupoJpa != null){
+                List<Accesodatos.Entidades.Asistencia> asistenciasJpa = new ArrayList();
+                for(Alumno alumno : asistencia.getAlumnos()){
+                    Accesodatos.Entidades.Asistencia asistenciaJpa = new Accesodatos.Entidades.Asistencia();
+                    asistenciaJpa.setFecha(asistencia.getFecha());
+                    asistenciaJpa.setIdAlumno(alumnoController.findAlumno(alumno.getIdAlumno()));
+                    asistenciaJpa.setIdAsistencia(0);
+                    asistenciaJpa.setIdGrupo(grupoJpa);
+                    asistenciasJpa.add(asistenciaJpa);
+                }
+                if (asistenciasJpa.isEmpty()){
+                    registrada = false;
+                }else{
+                    controller.create(asistenciasJpa);
+                    registrada = true;
+                } 
+            }else{
+                registrada = false;
+            }  
+        }catch(Exception excepcion){
+            registrada = false;
+        }
+        return registrada;
     }
 }
