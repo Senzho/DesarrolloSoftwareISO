@@ -34,7 +34,7 @@
         </FXCollections>
       </items>
     </ComboBox>
-    <GridPane hgap="5.0" prefHeight="288.9999000000025" prefWidth="755.7141845703125" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="11.29" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="95.0">
+    <GridPane hgap="5.0" prefHeight="288.9999000000025" prefWidth="755.7141845703125" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="95.0">
       <children>
         <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
                <content>
@@ -55,7 +55,7 @@
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       </rowConstraints>
     </GridPane>
-    <GridPane hgap="5.0" layoutX="15.0" layoutY="69.0" prefHeight="26.0" prefWidth="748.7141845703125" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="10.289999999999964" AnchorPane.topAnchor="69.0">
+    <GridPane hgap="5.0" layoutX="15.0" layoutY="69.0" prefHeight="26.0" prefWidth="748.7141845703125" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="69.0">
       <children>
         <Label font="$x1" text="Promociones:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
         <Label font="$x1" text="Egresos:" GridPane.columnIndex="1" GridPane.rowIndex="0" />
@@ -68,7 +68,7 @@
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       </rowConstraints>
     </GridPane>
-    <Line endX="778.4951782226562" endY="2.0" layoutX="-22.495186767578126" layoutY="46.0" startX="34.49229431152344" startY="3.0" stroke="GREY" AnchorPane.leftAnchor="11.29" AnchorPane.rightAnchor="17.297070312499955" AnchorPane.topAnchor="47.292893171310425" />
       <Button fx:id="btnBuscar" layoutX="399.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#btnBuscar_onClick" prefHeight="27.0" prefWidth="52.0" text="Buscar" AnchorPane.leftAnchor="399.0" AnchorPane.topAnchor="11.0" />
+      <Separator layoutX="14.0" layoutY="55.0" prefHeight="2.0" prefWidth="746.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="55.0" />
   </children>
 </AnchorPane>

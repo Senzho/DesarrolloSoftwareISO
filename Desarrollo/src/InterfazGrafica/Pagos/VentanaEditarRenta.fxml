@@ -21,7 +21,6 @@
             <Font name="Arial" size="16.0" />
          </font>
       </Label>
-      <ComboBox fx:id="dias" layoutX="73.0" layoutY="121.0" prefHeight="25.0" prefWidth="111.0" AnchorPane.leftAnchor="73.0" AnchorPane.rightAnchor="226.0" AnchorPane.topAnchor="121.0" />
       <ComboBox fx:id="horaInicio" layoutX="196.0" layoutY="121.0" prefHeight="25.0" prefWidth="86.0" AnchorPane.rightAnchor="128.0" AnchorPane.topAnchor="121.0" />
       <Label layoutX="295.0" layoutY="125.0" text="-" AnchorPane.rightAnchor="110.0" AnchorPane.topAnchor="125.0" />
       <ComboBox fx:id="horaFin" layoutX="314.0" layoutY="121.0" prefHeight="25.0" prefWidth="86.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="121.0" />
@@ -39,5 +38,6 @@
       <TextField fx:id="monto" layoutX="253.0" layoutY="156.0" prefHeight="25.0" prefWidth="147.0" AnchorPane.leftAnchor="253.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="156.0" />
       <Button layoutX="341.0" layoutY="246.0" mnemonicParsing="false" onMouseClicked="#guardar_onClick" text="Guardar" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
       <Separator layoutX="12.0" layoutY="231.0" prefHeight="3.0" prefWidth="382.0" AnchorPane.bottomAnchor="51.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+      <DatePicker fx:id="dia" layoutX="73.0" layoutY="121.0" prefHeight="25.0" prefWidth="284.0" AnchorPane.leftAnchor="73.0" AnchorPane.rightAnchor="226.0" AnchorPane.topAnchor="121.0" />
    </children>
 </AnchorPane>

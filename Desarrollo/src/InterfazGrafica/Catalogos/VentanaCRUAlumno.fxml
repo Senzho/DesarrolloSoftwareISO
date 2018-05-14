@@ -17,16 +17,16 @@
       </font>
     </Label>
     <TextField fx:id="nombre" prefWidth="372.0" AnchorPane.leftAnchor="214.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="19.0" />
-    <Label font="$x1" text="Telefono:" AnchorPane.leftAnchor="144.0" AnchorPane.topAnchor="48.0" />
-    <TextField fx:id="telefono" prefWidth="372.0" AnchorPane.leftAnchor="214.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="45.0" />
-    <Label font="$x1" text="Correo:" AnchorPane.leftAnchor="144.0" AnchorPane.topAnchor="75.0" />
-    <TextField fx:id="correo" prefWidth="372.0" AnchorPane.leftAnchor="214.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="72.0" />
+    <Label font="$x1" layoutX="144.0" layoutY="51.0" text="Telefono:" AnchorPane.leftAnchor="144.0" AnchorPane.topAnchor="51.0" />
+    <TextField fx:id="telefono" layoutX="214.0" layoutY="48.0" prefWidth="372.0" AnchorPane.leftAnchor="214.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="48.0" />
+    <Label font="$x1" layoutX="144.0" layoutY="80.0" text="Correo:" AnchorPane.leftAnchor="144.0" AnchorPane.topAnchor="80.0" />
+    <TextField fx:id="correo" layoutX="214.0" layoutY="77.0" prefWidth="372.0" AnchorPane.leftAnchor="214.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="77.0" />
     <Label font="$x1" text="Direccion:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="142.0" />
     <TextArea fx:id="direccion" layoutX="144.0" prefHeight="172.0" prefWidth="331.0" wrapText="true" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="144.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="142.0" />
-    <Separator prefWidth="571.0" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="14.0" />
-    <Button fx:id="registrar" mnemonicParsing="false" onMouseClicked="#registrar_OnClick" text="Registrar" AnchorPane.bottomAnchor="13.0" AnchorPane.rightAnchor="14.0" />
-    <Label font="$x1" layoutX="144.0" layoutY="102.0" text="Estado:" />
-    <RadioButton fx:id="activo" mnemonicParsing="false" onMouseClicked="#activo_OnClick" text="Activo" AnchorPane.leftAnchor="214.0" AnchorPane.topAnchor="104.0" />
-    <RadioButton fx:id="inactivo" mnemonicParsing="false" onMouseClicked="#inactivo_OnClick" text="Inactivo" AnchorPane.leftAnchor="284.0" AnchorPane.topAnchor="104.0" />
+    <Separator layoutX="14.0" layoutY="350.0" prefWidth="571.0" AnchorPane.bottomAnchor="51.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+    <Button fx:id="registrar" mnemonicParsing="false" onMouseClicked="#registrar_OnClick" text="Registrar" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+    <Label font="$x1" layoutX="144.0" layoutY="107.0" text="Estado:" />
+    <RadioButton fx:id="activo" layoutX="214.0" layoutY="109.0" mnemonicParsing="false" onMouseClicked="#activo_OnClick" text="Activo" AnchorPane.leftAnchor="214.0" AnchorPane.topAnchor="109.0" />
+    <RadioButton fx:id="inactivo" layoutX="284.0" layoutY="109.0" mnemonicParsing="false" onMouseClicked="#inactivo_OnClick" text="Inactivo" AnchorPane.leftAnchor="284.0" AnchorPane.topAnchor="109.0" />
   </children>
 </AnchorPane>

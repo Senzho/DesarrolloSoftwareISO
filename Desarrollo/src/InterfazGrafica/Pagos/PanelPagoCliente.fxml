@@ -9,27 +9,27 @@
 
 <AnchorPane id="AnchorPane" prefHeight="79.0" prefWidth="559.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LogicaNegocio.Pagos.PanelPagoClienteController">
    <children>
-      <Button fx:id="btnGenerarRecibo" layoutX="416.0" layoutY="24.0" mnemonicParsing="false" text="Generar recibo" AnchorPane.bottomAnchor="23.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="24.0">
+      <Button fx:id="btnGenerarRecibo" layoutX="416.0" layoutY="24.0" mnemonicParsing="false" text="Generar recibo" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
          <font>
             <Font name="Arial" size="16.0" />
          </font>
       </Button>
-      <Label fx:id="lblFecha" layoutX="43.0" layoutY="18.0" text="fecha" AnchorPane.leftAnchor="43.0" AnchorPane.topAnchor="18.0">
+      <Label fx:id="lblFecha" layoutX="43.0" layoutY="18.0" text="fecha" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
          <font>
             <Font name="Arial" size="16.0" />
          </font>
       </Label>
-      <Label fx:id="lblMonto" layoutX="43.0" layoutY="46.0" text="monto">
+      <Label fx:id="lblMonto" layoutX="43.0" layoutY="46.0" text="monto" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0">
          <font>
             <Font name="Arial" size="16.0" />
          </font>
       </Label>
-      <Label fx:id="lblHoraFin" layoutX="277.0" layoutY="46.0" text="hora fin">
+      <Label fx:id="lblHoraFin" layoutX="277.0" layoutY="46.0" text="hora fin" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="277.0">
          <font>
             <Font name="Arial" size="16.0" />
          </font>
       </Label>
-      <Label fx:id="lblHoraInicio" layoutX="277.0" layoutY="18.0" text="hora inicio" AnchorPane.topAnchor="18.0">
+      <Label fx:id="lblHoraInicio" layoutX="277.0" layoutY="18.0" text="hora inicio" AnchorPane.leftAnchor="277.0" AnchorPane.topAnchor="14.0">
          <font>
             <Font name="Arial" size="16.0" />
          </font>

@@ -16,13 +16,13 @@
             <Font name="Arial" size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="nombre" layoutX="86.0" layoutY="12.0" prefHeight="25.0" prefWidth="502.0" AnchorPane.leftAnchor="86.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="12.0" />
+      <TextField fx:id="nombre" layoutX="86.0" layoutY="12.0" prefHeight="25.0" prefWidth="502.0" AnchorPane.leftAnchor="86.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="12.0" />
       <Label layoutX="13.0" layoutY="47.0" text="Profesor:" AnchorPane.leftAnchor="13.0" AnchorPane.topAnchor="47.0">
          <font>
             <Font name="Arial" size="16.0" />
          </font>
       </Label>
-      <ComboBox fx:id="profesores" layoutX="86.0" layoutY="44.0" prefHeight="25.0" prefWidth="502.0" AnchorPane.leftAnchor="86.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="44.0" />
+      <ComboBox fx:id="profesores" layoutX="86.0" layoutY="44.0" prefHeight="25.0" prefWidth="502.0" AnchorPane.leftAnchor="86.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="44.0" />
       <Label layoutX="13.0" layoutY="109.0" text="Horario:" AnchorPane.leftAnchor="13.0" AnchorPane.topAnchor="109.0">
          <font>
             <Font name="Arial" size="16.0" />
@@ -33,14 +33,14 @@
             <FlowPane fx:id="panelHorario" prefHeight="297.0" prefWidth="462.0" />
          </content>
       </ScrollPane>
-      <Separator layoutX="13.0" layoutY="346.0" prefHeight="5.0" prefWidth="573.0" AnchorPane.bottomAnchor="49.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="14.0" />
+      <Separator layoutX="13.0" layoutY="346.0" prefHeight="5.0" prefWidth="573.0" AnchorPane.bottomAnchor="49.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
       <Button fx:id="guardar" layoutX="527.0" layoutY="361.0" mnemonicParsing="false" onMouseClicked="#guardar_onClick" text="Guardar" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
-      <ImageView fx:id="agregarDia" fitHeight="30.0" fitWidth="30.0" layoutX="557.0" layoutY="110.0" onMouseClicked="#agregarDia_onClick" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="110.0" />
+      <ImageView fx:id="agregarDia" fitHeight="30.0" fitWidth="30.0" layoutX="557.0" layoutY="110.0" onMouseClicked="#agregarDia_onClick" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="110.0" />
       <Label layoutX="13.0" layoutY="78.0" text="Danza:">
          <font>
             <Font name="Arial" size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="danza" layoutX="86.0" layoutY="76.0" prefHeight="25.0" prefWidth="502.0" AnchorPane.leftAnchor="86.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="76.0" />
+      <TextField fx:id="danza" layoutX="86.0" layoutY="76.0" prefHeight="25.0" prefWidth="502.0" AnchorPane.leftAnchor="86.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="76.0" />
    </children>
 </AnchorPane>

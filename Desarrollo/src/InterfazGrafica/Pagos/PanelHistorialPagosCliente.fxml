@@ -8,26 +8,25 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="456.0" prefWidth="601.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="LogicaNegocio.Pagos.PanelHistorialPagosClienteController">
+<AnchorPane id="AnchorPane" prefHeight="456.0" prefWidth="601.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LogicaNegocio.Pagos.PanelHistorialPagosClienteController">
    <children>
       <Button fx:id="btnRegistrarPago" layoutX="460.0" layoutY="410.0" mnemonicParsing="false" text="Registrar pago" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
          <font>
             <Font name="Arial" size="16.0" />
          </font>
       </Button>
-      <Label fx:id="lblCorreo" layoutX="17.0" layoutY="46.0" text="example.example@example.com" AnchorPane.leftAnchor="17.0" AnchorPane.topAnchor="46.0">
+      <Label fx:id="lblCorreo" layoutX="17.0" layoutY="46.0" text="example.example@example.com" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="46.0">
          <font>
             <Font name="Arial" size="16.0" />
          </font>
       </Label>
-      <Label fx:id="lblNombre" layoutX="17.0" layoutY="14.0" text="Nombre apellido1 apellido2" AnchorPane.leftAnchor="17.0" AnchorPane.topAnchor="14.0">
+      <Label fx:id="lblNombre" layoutX="17.0" layoutY="14.0" text="Nombre apellido1 apellido2" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
          <font>
             <Font name="Arial" size="16.0" />
          </font>
       </Label>
-      <ImageView fx:id="imagenCliente" fitHeight="86.0" fitWidth="86.0" layoutX="501.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="13.0" />
-      <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="11.0" layoutY="108.0" prefHeight="289.0" prefWidth="576.0" AnchorPane.bottomAnchor="59.0" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="108.0">
+      <ImageView fx:id="imagenCliente" fitHeight="86.0" fitWidth="86.0" layoutX="501.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />
+      <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="11.0" layoutY="112.0" prefHeight="285.0" prefWidth="573.0" AnchorPane.bottomAnchor="59.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="112.0">
          <content>
             <VBox fx:id="panelPagos" prefHeight="286.0" prefWidth="575.0" />
          </content>

@@ -11,19 +11,19 @@
 <AnchorPane id="AnchorPane" prefHeight="93.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LogicaNegocio.Catalogos.PanelProfesorController">
   <children>
     <ImageView fx:id="imagen" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="12.0" />
-    <Label fx:id="nombre" prefWidth="364.0" text="Nombre" AnchorPane.leftAnchor="92.0" AnchorPane.topAnchor="19.0">
+    <Label fx:id="nombre" prefWidth="364.0" text="Nombre" AnchorPane.leftAnchor="92.0" AnchorPane.topAnchor="14.0">
       <font>
         <Font name="Arial Bold" size="16.0" />
       </font>
     </Label>
-    <Label fx:id="telefono" prefWidth="148.0" text="Teléfono" AnchorPane.leftAnchor="92.0" AnchorPane.topAnchor="55.0">
+    <Label fx:id="telefono" prefWidth="148.0" text="Teléfono" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="92.0">
       <font>
         <Font name="Arial" size="16.0" fx:id="x1" />
       </font>
     </Label>
-    <Label fx:id="correo" font="$x1" prefWidth="157.0" text="Correo" AnchorPane.leftAnchor="265.0" AnchorPane.topAnchor="55.0" />
+    <Label fx:id="correo" font="$x1" prefWidth="157.0" text="Correo" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="265.0" />
     <ImageView fx:id="editar" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#editar_OnClick" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
     <ImageView fx:id="baja" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#baja_OnClick" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="51.0" />
-    <Button fx:id="pagos" mnemonicParsing="false" onMouseClicked="#pagos_OnClick" text="Pagos" AnchorPane.bottomAnchor="17.0" AnchorPane.rightAnchor="101.0" />
+    <Button fx:id="pagos" mnemonicParsing="false" onMouseClicked="#pagos_OnClick" text="Pagos" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="101.0" />
   </children>
 </AnchorPane>

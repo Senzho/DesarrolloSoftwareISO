@@ -8,32 +8,31 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="310.0" prefWidth="440.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="LogicaNegocio.Pagos.VentanaCRUPromocionController">
+<AnchorPane id="AnchorPane" prefHeight="326.0" prefWidth="440.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LogicaNegocio.Pagos.VentanaCRUPromocionController">
    <children>
-      <TextField fx:id="txtNombre" layoutX="144.0" layoutY="10.0" prefHeight="25.0" prefWidth="284.0" AnchorPane.leftAnchor="144.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="10.0" />
+      <TextField fx:id="txtNombre" layoutX="144.0" layoutY="10.0" prefHeight="25.0" prefWidth="284.0" AnchorPane.leftAnchor="144.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="12.0" />
       <TextField fx:id="txtPorcentaje" layoutX="142.0" layoutY="220.0" prefHeight="25.0" prefWidth="284.0" AnchorPane.leftAnchor="142.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="220.0" />
-      <TextArea fx:id="txtDescripcion" layoutX="144.0" layoutY="49.0" prefHeight="164.0" prefWidth="284.0" AnchorPane.leftAnchor="144.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="49.0" />
-      <Label layoutX="19.0" layoutY="14.0" text="Nombre:" AnchorPane.leftAnchor="19.0" AnchorPane.topAnchor="14.0">
+      <TextArea fx:id="txtDescripcion" layoutX="144.0" layoutY="46.0" prefHeight="164.0" prefWidth="284.0" AnchorPane.leftAnchor="144.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="46.0" />
+      <Label layoutX="19.0" layoutY="14.0" text="Nombre:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
          <font>
             <Font name="Arial" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="19.0" layoutY="49.0" text="Descripción:" AnchorPane.leftAnchor="19.0">
+      <Label layoutX="14.0" layoutY="46.0" text="Descripción:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="46.0">
          <font>
             <Font name="Arial" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="19.0" layoutY="224.0" text="Porcentaje:" AnchorPane.leftAnchor="19.0" AnchorPane.topAnchor="224.0">
+      <Label layoutX="19.0" layoutY="224.0" text="Porcentaje:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="224.0">
          <font>
             <Font name="Arial" size="16.0" />
          </font>
       </Label>
-      <Button fx:id="btnRegistrar" layoutX="341.0" layoutY="270.0" mnemonicParsing="false" onMouseClicked="#btnRegistrar_onClick" text="Registrar" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="12.0">
+      <Button fx:id="btnRegistrar" layoutX="341.0" layoutY="270.0" mnemonicParsing="false" onMouseClicked="#btnRegistrar_onClick" text="Registrar" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
          <font>
             <Font name="Arial" size="16.0" />
          </font>
       </Button>
-      <Line endX="338.0" layoutX="100.0" layoutY="258.0" startX="-100.0" stroke="#837e7e" />
+      <Separator layoutX="14.0" layoutY="250.0" prefHeight="3.0" prefWidth="412.0" AnchorPane.bottomAnchor="57.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
    </children>
 </AnchorPane>

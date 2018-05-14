@@ -12,20 +12,17 @@
 
 <AnchorPane id="AnchorPane" prefHeight="345.0" prefWidth="339.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LogicaNegocio.Egresos.VentanaCRUEgresoController">
   <children>
-    <Label layoutX="12.0" layoutY="14.0" text="Fecha:" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="14.0">
+    <Label layoutX="12.0" layoutY="14.0" text="Fecha:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
       <font>
         <Font name="Arial" size="16.0" fx:id="x1" />
       </font>
     </Label>
-    <Label font="$x1" layoutX="12.0" layoutY="46.0" text="Descripción:" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="46.0" />
-    <Label font="$x1" layoutX="12.0" layoutY="223.0" text="Costo:" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="223.0" />
+    <Label font="$x1" layoutX="12.0" layoutY="46.0" text="Descripción:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="46.0" />
+    <Label font="$x1" layoutX="14.0" layoutY="221.0" text="Costo:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="221.0" />
     <TextArea fx:id="txtDescripcion" layoutX="110.0" layoutY="46.0" prefHeight="163.0" prefWidth="215.0" text="" wrapText="true" AnchorPane.bottomAnchor="136.0" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="46.0" />
-    <TextField fx:id="txtCosto" layoutX="110.0" layoutY="220.0" prefHeight="26.0" prefWidth="215.0" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="220.0" />
-    <Line endX="225.0" layoutX="100.41710754394532" layoutY="287.0" startX="-88.0" startY="0.0" stroke="#9f9f9f" AnchorPane.bottomAnchor="57.5" AnchorPane.leftAnchor="11.91710754394532" AnchorPane.rightAnchor="13.08289245605468">
-         <rotationAxis>
-            <Point3D />
-         </rotationAxis></Line>
-    <Button fx:id="btnRegistrar" font="$x1" layoutX="199.0" layoutY="299.0" mnemonicParsing="false" onMouseClicked="#btnRegistrar_onClick" prefWidth="123.0" text="Registrar" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.414215087890625" />
+    <TextField fx:id="txtCosto" layoutX="110.0" layoutY="218.0" prefHeight="26.0" prefWidth="215.0" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="218.0" />
+    <Button fx:id="btnRegistrar" font="$x1" layoutX="199.0" layoutY="299.0" mnemonicParsing="false" onMouseClicked="#btnRegistrar_onClick" prefWidth="123.0" text="Registrar" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
       <DatePicker fx:id="fecha" layoutX="110.0" layoutY="12.0" prefHeight="25.0" prefWidth="215.0" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="12.0" />
+      <Separator layoutX="14.0" layoutY="285.0" prefHeight="0.0" prefWidth="309.0" AnchorPane.bottomAnchor="57.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
   </children>
 </AnchorPane>

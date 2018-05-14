@@ -8,14 +8,14 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="189.0" prefWidth="431.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="LogicaNegocio.Pagos.VentanaRegistrarPagoProfesorController">
+<AnchorPane id="AnchorPane" prefHeight="189.0" prefWidth="431.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LogicaNegocio.Pagos.VentanaRegistrarPagoProfesorController">
   <children>
     <Label text="Profesor:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
       <font>
         <Font name="Arial" size="16.0" />
       </font>
     </Label>
-    <ComboBox fx:id="pofesores" prefHeight="21.0" prefWidth="331.0" AnchorPane.leftAnchor="86.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="13.0">
+    <ComboBox fx:id="pofesores" prefHeight="21.0" prefWidth="331.0" AnchorPane.leftAnchor="86.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="12.0">
       <items>
         <FXCollections fx:factory="observableArrayList">
           <String fx:value="Item 1" />
@@ -24,7 +24,7 @@
         </FXCollections>
       </items>
     </ComboBox>
-    <Separator prefWidth="403.0" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+    <Separator layoutX="14.0" layoutY="136.0" prefWidth="403.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
     <Button fx:id="registrar" mnemonicParsing="false" onMouseClicked="#registrar_OnClick" text="Registrar" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
   </children>
 </AnchorPane>

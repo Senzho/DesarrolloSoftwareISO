@@ -11,27 +11,27 @@
 
 <AnchorPane id="AnchorPane" prefHeight="468.0" prefWidth="339.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LogicaNegocio.Egresos.VentanaCRUGastoPromocionalController">
   <children>
-    <Label layoutX="12.0" layoutY="15.0" text="URL o enlace:" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="15.0">
+    <Label layoutX="12.0" layoutY="15.0" text="URL o enlace:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="15.0">
       <font>
         <Font name="Arial" size="16.0" fx:id="x1" />
       </font>
     </Label>
-    <Label font="$x1" layoutX="12.0" layoutY="45.0" text="Descripción:" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="45.0" />
+    <Label font="$x1" layoutX="12.0" layoutY="45.0" text="Descripción:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="45.0" />
     <Label font="$x1" layoutX="14.0" layoutY="225.0" text="Monto:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="225.0" />
-    <Label font="$x1" text="Fecha de inicio:" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="258.0" />
+    <Label font="$x1" text="Fecha de inicio:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="258.0" />
     <Label font="$x1" layoutX="14.0" layoutY="291.0" text="Fecha de fin:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="291.0" />
-    <TextArea fx:id="txtDescripcion" layoutX="128.0" layoutY="45.0" prefHeight="168.0" prefWidth="200.0" wrapText="true" AnchorPane.leftAnchor="128.0" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="45.0" />
-    <TextField fx:id="txtEnlace" layoutX="128.0" layoutY="12.0" prefHeight="25.0" prefWidth="200.0" AnchorPane.leftAnchor="128.0" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="12.0" />
-    <TextField fx:id="txtMonto" layoutX="128.0" layoutY="223.0" prefHeight="25.0" prefWidth="200.0" AnchorPane.leftAnchor="128.0" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="223.0" />
-    <Line endX="215.0" endY="5.0" layoutX="112.0" layoutY="333.0" startX="-100.0" startY="5.0" stroke="GREY" AnchorPane.bottomAnchor="58.5" AnchorPane.leftAnchor="11.5" AnchorPane.rightAnchor="11.5" />
-    <Button fx:id="btnRegistrar" font="$x1" layoutX="239.0" layoutY="328.0" mnemonicParsing="false" onMouseClicked="#btnRegistrar_onClick" text="Registrar" AnchorPane.bottomAnchor="14.000099999997474" AnchorPane.rightAnchor="11.0" />
-      <DatePicker fx:id="fechaInicioPick" layoutX="128.0" layoutY="256.0" prefHeight="25.0" prefWidth="200.0" AnchorPane.leftAnchor="128.0" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="256.0" />
-      <DatePicker fx:id="fechaFinPick" layoutX="128.0" layoutY="289.0" prefHeight="25.0" prefWidth="200.0" AnchorPane.leftAnchor="128.0" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="289.0" />
-      <Label layoutX="15.0" layoutY="324.0" text="Profesor:">
+    <TextArea fx:id="txtDescripcion" layoutX="128.0" layoutY="45.0" prefHeight="168.0" prefWidth="200.0" wrapText="true" AnchorPane.leftAnchor="128.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="45.0" />
+    <TextField fx:id="txtEnlace" layoutX="128.0" layoutY="12.0" prefHeight="25.0" prefWidth="200.0" AnchorPane.leftAnchor="128.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="12.0" />
+    <TextField fx:id="txtMonto" layoutX="128.0" layoutY="223.0" prefHeight="25.0" prefWidth="200.0" AnchorPane.leftAnchor="128.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="223.0" />
+    <Button fx:id="btnRegistrar" font="$x1" layoutX="239.0" layoutY="328.0" mnemonicParsing="false" onMouseClicked="#btnRegistrar_onClick" text="Registrar" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+      <DatePicker fx:id="fechaInicioPick" layoutX="128.0" layoutY="256.0" prefHeight="25.0" prefWidth="200.0" AnchorPane.leftAnchor="128.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="256.0" />
+      <DatePicker fx:id="fechaFinPick" layoutX="128.0" layoutY="289.0" prefHeight="25.0" prefWidth="200.0" AnchorPane.leftAnchor="128.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="289.0" />
+      <Label layoutX="15.0" layoutY="324.0" text="Profesor:" AnchorPane.leftAnchor="14.0">
          <font>
             <Font name="Arial" size="16.0" />
          </font>
       </Label>
-      <ComboBox fx:id="profesores" layoutX="128.0" layoutY="322.0" prefHeight="25.0" prefWidth="202.0" AnchorPane.leftAnchor="128.0" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="322.0" />
+      <ComboBox fx:id="profesores" layoutX="128.0" layoutY="322.0" prefHeight="25.0" prefWidth="202.0" AnchorPane.leftAnchor="128.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="322.0" />
+      <Separator layoutX="14.0" layoutY="408.0" prefHeight="0.0" prefWidth="306.0" AnchorPane.bottomAnchor="57.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
   </children>
 </AnchorPane>

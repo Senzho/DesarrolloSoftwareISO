@@ -10,20 +10,20 @@
 
 <AnchorPane id="AnchorPane" prefHeight="93.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LogicaNegocio.Catalogos.PanelClienteController">
   <children>
-    <Label fx:id="nombre" layoutX="94.0" layoutY="23.0" prefWidth="364.0" text="Nombre" AnchorPane.leftAnchor="94.0" AnchorPane.topAnchor="23.0">
+    <Label fx:id="nombre" layoutX="94.0" layoutY="23.0" prefWidth="364.0" text="Nombre" AnchorPane.leftAnchor="94.0" AnchorPane.topAnchor="14.0">
       <font>
         <Font name="Arial Bold" size="16.0" />
       </font>
     </Label>
-    <Label fx:id="telefono" layoutX="94.0" layoutY="59.0" prefWidth="148.0" text="Teléfono" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="94.0">
+    <Label fx:id="telefono" layoutX="94.0" layoutY="59.0" prefWidth="148.0" text="Teléfono" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="94.0">
       <font>
         <Font name="Arial" size="16.0" fx:id="x1" />
       </font>
     </Label>
-    <Label fx:id="correo" font="$x1" layoutX="267.0" layoutY="59.0" prefWidth="191.0" text="Correo" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="267.0" />
-    <ImageView fx:id="editar" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#editar_OnClick" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="13.0" AnchorPane.rightAnchor="13.0" />
+    <Label fx:id="correo" font="$x1" layoutX="267.0" layoutY="59.0" prefWidth="191.0" text="Correo" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="267.0" />
+    <ImageView fx:id="editar" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#editar_OnClick" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
       <ImageView fx:id="imagen" fitHeight="70.0" fitWidth="70.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="12.0" />
-      <Button fx:id="btnRentas" layoutX="458.0" layoutY="50.0" mnemonicParsing="false" onMouseClicked="#btnRentas_onClick" text="Rentas" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="69.0">
+      <Button fx:id="btnRentas" layoutX="458.0" layoutY="50.0" mnemonicParsing="false" onMouseClicked="#btnRentas_onClick" text="Rentas" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="69.0">
          <font>
             <Font name="Arial" size="16.0" />
          </font>

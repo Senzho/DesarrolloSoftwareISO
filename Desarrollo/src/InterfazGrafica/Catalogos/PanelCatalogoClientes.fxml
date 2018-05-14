@@ -9,15 +9,15 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="786.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LogicaNegocio.Catalogos.PanelCatalogoClientesController">
   <children>
-    <Label text="Nombre:" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="16.0">
+    <Label text="Nombre:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
       <font>
         <Font name="Arial" size="16.0" />
       </font>
     </Label>
-    <TextField fx:id="busqueda" prefWidth="623.0" AnchorPane.leftAnchor="85.0" AnchorPane.rightAnchor="78.0" AnchorPane.topAnchor="13.0" />
-    <Button fx:id="buscar" mnemonicParsing="false" onMouseClicked="#buscar_OnClick" text="Buscar" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="13.0" />
-    <Separator layoutX="15.0" layoutY="45.0" prefWidth="757.0" />
-    <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="331.0" prefWidth="757.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="56.0">
+    <TextField fx:id="busqueda" prefWidth="623.0" AnchorPane.leftAnchor="85.0" AnchorPane.rightAnchor="78.0" AnchorPane.topAnchor="14.0" />
+    <Button fx:id="buscar" mnemonicParsing="false" onMouseClicked="#buscar_OnClick" text="Buscar" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />
+    <Separator layoutX="14.0" layoutY="47.0" prefWidth="757.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="47.0" />
+    <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="331.0" prefWidth="757.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="56.0">
          <content>
             <VBox fx:id="panelClientes" prefHeight="200.0" prefWidth="100.0" spacing="5.0" />
          </content>
