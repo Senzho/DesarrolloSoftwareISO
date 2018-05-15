@@ -47,7 +47,6 @@ public class VentanaConsultarPromocionesController implements Initializable {
     public void setPromocion(Promocion promocion){
         this.promocion = promocion;
         this.controller.setPromocion(promocion);
-        MessageFactory.showMessage("Promocion seleccionada", "Promocion seleccionada", promocion.getDescripcion(), Alert.AlertType.INFORMATION);
         this.stage.close();
     }
     public void inicializarPanelPromociones(){
