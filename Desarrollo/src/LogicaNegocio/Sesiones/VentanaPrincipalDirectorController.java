@@ -2,6 +2,7 @@ package LogicaNegocio.Sesiones;
 
 import InterfazGrafica.Grupos.VentanaCRUGrupo;
 import InterfazGrafica.Inscripciones.VentanaInscribirAlumno;
+import InterfazGrafica.Pagos.VentanaRegistrarRenta;
 import LogicaNegocio.Asistencia.PanelAsistenciaController;
 import LogicaNegocio.Catalogos.PanelCatalogoClientesController;
 import LogicaNegocio.Catalogos.PanelCatalogoProfesoresController;
@@ -12,6 +13,7 @@ import LogicaNegocio.Catalogos.VentanaCRUProfesor;
 import LogicaNegocio.Egresos.VentanaCRUEgreso;
 import LogicaNegocio.Egresos.VentanaCRUGastoPromocional;
 import LogicaNegocio.Grupos.PanelGruposProfesorController;
+import LogicaNegocio.Grupos.PanelSemanaController;
 import LogicaNegocio.Lanzador;
 import LogicaNegocio.Pagos.VentanaRegistrarPagoAlumno;
 import LogicaNegocio.Pagos.VentanaRegistrarPagoProfesor;
@@ -101,5 +103,13 @@ public class VentanaPrincipalDirectorController implements Initializable {
         this.lanzador.lanzar("/InterfazGrafica/Asistencia/PanelAsistencia.fxml");
         PanelAsistenciaController controller = this.lanzador.getCargador().getController();
         controller.setProfesor(this.profesor.getIdProfesor());
+    }
+    public void menuVerGruposRentas_onClick(){
+        this.lanzador.lanzar("/InterfazGrafica/Grupos/PanelSemana.fxml");
+        PanelSemanaController controller = this.lanzador.getCargador().getController();
+        controller.iniciar(this.lanzador);
+    }
+    public void menuNuevaRenta_onClick(){
+        new VentanaRegistrarRenta();
     }
 }

@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="300.0" maxWidth="400.0" prefHeight="185.0" prefWidth="265.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LogicaNegocio.Grupos.PanelGrupoProfesorController">
+<AnchorPane id="AnchorPane" maxHeight="300.0" maxWidth="400.0" prefHeight="185.0" prefWidth="265.0" style="-fx-background-color: #F5A9E1;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LogicaNegocio.Grupos.PanelGrupoProfesorController">
    <children>
       <Label fx:id="nombre" alignment="TOP_LEFT" contentDisplay="TOP" layoutX="12.0" layoutY="7.0" maxHeight="80.0" maxWidth="400.0" prefHeight="66.0" prefWidth="241.0" text="Nombre de un grupo" textOverrun="CLIP" wrapText="true" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
          <font>

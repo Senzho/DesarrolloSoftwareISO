@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="100.0" prefWidth="206.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="LogicaNegocio.Pagos.PanelRentaController">
+   <children>
+      <Label fx:id="nombreGrupo" alignment="TOP_LEFT" layoutX="12.0" layoutY="11.0" prefHeight="42.0" prefWidth="196.0" text="Nombre de cliente" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="1.0">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="horas" layoutX="15.0" layoutY="50.0" text="Horas" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="40.0">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="verAlumnos" fitHeight="30.0" fitWidth="30.0" layoutX="172.0" layoutY="70.0" onMouseClicked="#verAlumnos_onClick" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" />
+      <ImageView fx:id="editar" fitHeight="30.0" fitWidth="30.0" layoutX="151.0" layoutY="75.0" onMouseClicked="#editar_onClick" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="35.0" />
+   </children>
+</AnchorPane>

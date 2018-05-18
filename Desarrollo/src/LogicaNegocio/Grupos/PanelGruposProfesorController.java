@@ -38,7 +38,6 @@ public class PanelGruposProfesorController implements Initializable {
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/InterfazGrafica/Grupos/PanelGrupoProfesor.fxml"));
         try {
             AnchorPane pane = loader.load();
-            pane.setStyle("-fx-background-color: #F5A9E1;");
             PanelGrupoProfesorController controller = loader.getController();
             controller.setLanzador(lanzador);
             controller.setGrupo(grupo);

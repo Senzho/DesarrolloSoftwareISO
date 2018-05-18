@@ -8,6 +8,7 @@ import LogicaNegocio.Egresos.Dates;
 import LogicaNegocio.Grupos.Dia;
 import LogicaNegocio.Grupos.HorarioException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
@@ -66,7 +67,7 @@ public class VentanaRegistrarRentaController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        this.fecha.setValue(LocalDate.now());
     }
     
     public void inicializar(Stage stage){
