@@ -37,7 +37,6 @@ public class PanelCatalogoAlumnosController implements Initializable {
             AnchorPane panel;
             try {
                 panel = loader.load();
-                panel.setStyle("-fx-background-color: #D8D8D8;");
                 PanelAlumnoDirectorController controller = loader.getController();
                 controller.setAlumno(alumnoObtenido);
                 this.panelAlumnos.getChildren().add(panel);

@@ -1,6 +1,7 @@
 package LogicaNegocio.Sesiones;
 
 import InterfazGrafica.MessageFactory;
+import LogicaNegocio.Catalogos.CopiarArchivo;
 import LogicaNegocio.Catalogos.Profesor;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -39,6 +40,12 @@ public class VentanaModificarCuentaController implements Initializable {
         this.imagenUsuario.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkPersonIcon.png")));
         this.lblNombreUsuario.setText(this.profesor.getNombre());
         this.txtNombre.setText(this.usuario.getNombre());
+        Image imagenProfesor = CopiarArchivo.obtenerFotoUsuario("profesor", profesor.getIdProfesor());
+        if (imagenProfesor != null) {
+            this.imagenUsuario.setImage(imagenProfesor);
+        } else {
+            this.imagenUsuario.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkPersonIcon.png")));
+        }
     }
     public boolean validarCampos(){
         boolean valido = true;

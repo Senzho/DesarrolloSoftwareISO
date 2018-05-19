@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" minHeight="-Infinity" prefHeight="93.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LogicaNegocio.Catalogos.PanelAlumnoDirectorController">
+<AnchorPane id="AnchorPane" minHeight="-Infinity" prefHeight="93.0" prefWidth="600.0" style="-fx-background-color: #D8D8D8;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LogicaNegocio.Catalogos.PanelAlumnoDirectorController">
   <children>
     <ImageView fx:id="imagen" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="12.0" />
     <Label fx:id="nombre" layoutX="94.0" layoutY="21.0" prefWidth="364.0" text="Nombre" AnchorPane.leftAnchor="94.0" AnchorPane.topAnchor="14.0">

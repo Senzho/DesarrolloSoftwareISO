@@ -47,7 +47,9 @@ public class PanelGrupoDirectorController implements Initializable {
     }
     
     public void verAlumnos_onClick(){
-        
+        this.lanzador.lanzar("/InterfazGrafica/Grupos/PanelAlumnosGrupoDirector.fxml");
+        PanelAlumnosGrupoDirectorController controller = this.lanzador.getCargador().getController();
+        controller.iniciar(this.grupo);
     }
     public void editar_onClick(){
         new VentanaCRUGrupo(this.grupo);
