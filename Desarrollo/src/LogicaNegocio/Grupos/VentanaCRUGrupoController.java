@@ -42,6 +42,7 @@ public class VentanaCRUGrupoController implements Initializable {
     private Grupo grupo;
     private List<Profesor> listaProfesores;
     private GrupoDAOSql grupoDAO;
+    private List<Dia> listaOriginal;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -75,6 +76,7 @@ public class VentanaCRUGrupoController implements Initializable {
         this.grupo.getHorario().getDias().forEach((dia) -> {
             this.nuevoDia(dia);
         });
+        this.listaOriginal = this.grupo.getHorario().getDias();
     }
 
     public void nuevoDia(Dia dia) {
@@ -192,7 +194,7 @@ public class VentanaCRUGrupoController implements Initializable {
         horario.setDias(this.dias);
         this.grupo.setHorario(horario);
         try {
-            if (this.grupoDAO.registrarGrupo(this.grupo)) {
+            if (this.grupo.registrarGrupo()) {
                 MessageFactory.showMessage("Éxito", "Registro", "El grupo fue registrado exitosamente", Alert.AlertType.INFORMATION);
             } else {
                 this.grupo = null;
@@ -206,7 +208,21 @@ public class VentanaCRUGrupoController implements Initializable {
     }
 
     public void editarGrupo() {
-
+        this.grupo.setDanza(this.danza.getText().trim());
+        this.grupo.setNombre(this.nombre.getText().trim());
+        this.grupo.setProfesor(this.getProfesor());
+        this.grupo.getHorario().setDias(this.dias);
+        try{
+            if (this.grupo.editarGrupo(this.listaOriginal)){
+                this.listaOriginal = this.grupo.getHorario().getDias();
+                MessageFactory.showMessage("Éxito", "Actualización", "El grupo fue actualizado exitosamente", Alert.AlertType.INFORMATION);
+            }else{
+                MessageFactory.showMessage("Error", "Actualización", "El grupo no pudo ser actualizado", Alert.AlertType.ERROR);
+            }
+        } catch (HorarioException ex) {
+            MessageFactory.showMessage("Error", "Horario", ex.getMessage(), Alert.AlertType.WARNING);
+            Logger.getLogger(VentanaCRUGrupoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void agregarDia_onClick() {

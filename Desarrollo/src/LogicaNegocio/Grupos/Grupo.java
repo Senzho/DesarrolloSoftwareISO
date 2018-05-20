@@ -57,8 +57,8 @@ public class Grupo {
     public boolean registrarGrupo() throws HorarioException{
         return this.grupoDAO.registrarGrupo(this);
     }
-    public boolean editarGrupo(){
-        return this.grupoDAO.editarGrupo(this);
+    public boolean editarGrupo(List<Dia> listaOriginal) throws HorarioException{
+        return this.grupoDAO.editarGrupo(this, listaOriginal);
     }
     public List<Grupo> obtenerGruposProfesor(int idProfesor){
         return this.grupoDAO.obtenerGruposProfesor(idProfesor);

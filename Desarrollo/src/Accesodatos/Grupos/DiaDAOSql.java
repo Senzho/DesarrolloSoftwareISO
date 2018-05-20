@@ -84,4 +84,16 @@ public class DiaDAOSql implements DiaDAO{
         }
         return dia;
     }
+    @Override
+    public boolean eliminarDia(int idDia){
+        boolean eliminado = false;
+        DiaJpaController controller = new DiaJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
+        try{
+            controller.destroy(idDia);
+            eliminado = true;
+        }catch(Exception excepcion){
+            eliminado = false;
+        }
+        return eliminado;
+    }
 }

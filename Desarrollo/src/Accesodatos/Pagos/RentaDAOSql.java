@@ -25,18 +25,20 @@ public class RentaDAOSql implements RentaDAO {
         DiaJpaController controller = new DiaJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
         List<Accesodatos.Entidades.Dia> diasJpa = controller.findDiaEntities();
         for (Accesodatos.Entidades.Dia diaJpa : diasJpa) {
-            if (diaJpa.getDia().equals(dia.getDia())) {
-                if (diaJpa.getSalon().equals(dia.getSalon())) {
-                    int miliIniJpa = Horas.getSegundos(diaJpa.getHoraInicio());
-                    int miliIni = Horas.getSegundos(dia.getHoraInicio());
-                    int miliFinJpa = Horas.getSegundos(diaJpa.getHoraFin());
-                    int miliFin = Horas.getSegundos(dia.getHoraFin());
-                    if ((miliIni >= miliIniJpa && miliIni <= miliFinJpa) || (miliFin >= miliIniJpa && miliFin <= miliFinJpa)) {
-                        diaError = dia;
-                        break;
+            if (!(dia.isTipo() == (diaJpa.getTipo()==1) && dia.getIdTipo() == diaJpa.getIdTipo())){
+                if (diaJpa.getDia().equals(dia.getDia())) {
+                    if (diaJpa.getSalon().equals(dia.getSalon())) {
+                        int miliIniJpa = Horas.getSegundos(diaJpa.getHoraInicio());
+                        int miliIni = Horas.getSegundos(dia.getHoraInicio());
+                        int miliFinJpa = Horas.getSegundos(diaJpa.getHoraFin());
+                        int miliFin = Horas.getSegundos(dia.getHoraFin());
+                        if ((miliIni >= miliIniJpa && miliIni <= miliFinJpa) || (miliFin >= miliIniJpa && miliFin <= miliFinJpa)) {
+                            diaError = dia;
+                            break;
+                        }
                     }
                 }
-            }
+            }  
         }
         return diaError;
     }

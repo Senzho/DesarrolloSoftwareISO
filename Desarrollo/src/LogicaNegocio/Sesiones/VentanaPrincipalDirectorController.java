@@ -44,6 +44,9 @@ public class VentanaPrincipalDirectorController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {//1 activo 2 baja
         this.lanzador = new Lanzador(this.panelPrincipal);
+        this.lanzador.lanzar("/InterfazGrafica/Grupos/PanelSemana.fxml");
+        PanelSemanaController controller = this.lanzador.getCargador().getController();
+        controller.iniciar(this.lanzador);
     }    
     
     public void imageView_onClick(){

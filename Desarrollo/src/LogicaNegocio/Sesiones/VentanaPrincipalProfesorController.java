@@ -32,6 +32,10 @@ public class VentanaPrincipalProfesorController implements Initializable {
         System.out.println(usuario.getNombre());
         this.usuario = usuario;
         this.profesor = profesor;
+        this.lanzador.lanzar("/InterfazGrafica/Grupos/PanelGruposProfesor.fxml");
+        PanelGruposProfesorController controller = this.lanzador.getCargador().getController();
+        controller.setLanzador(this.lanzador);
+        controller.setIdProfesor(this.profesor.getIdProfesor());
     }
     
     @Override

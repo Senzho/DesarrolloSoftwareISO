@@ -41,18 +41,20 @@ public class GrupoDAOSql implements GrupoDAO{
         fors:
         for (Dia dia : dias){
             for (Accesodatos.Entidades.Dia diaJpa : diasJpa){
-                if (diaJpa.getDia().equals(dia.getDia())){
-                    if (diaJpa.getSalon().equals(dia.getSalon())){
-                        int miliIniJpa = Horas.getSegundos(diaJpa.getHoraInicio());
-                        int miliIni = Horas.getSegundos(dia.getHoraInicio());
-                        int miliFinJpa = Horas.getSegundos(diaJpa.getHoraFin());
-                        int miliFin = Horas.getSegundos(dia.getHoraFin());
-                        if ((miliIni >= miliIniJpa && miliIni <= miliFinJpa) || (miliFin >= miliIniJpa && miliFin <= miliFinJpa)){
-                            diaError = dia;
-                            break fors;
-                        }
-                    } 
-                }
+                if (!(dia.isTipo() == (diaJpa.getTipo()==1) && dia.getIdTipo() == diaJpa.getIdTipo())){
+                    if (diaJpa.getDia().equals(dia.getDia())){
+                        if (diaJpa.getSalon().equals(dia.getSalon())){
+                            int miliIniJpa = Horas.getSegundos(diaJpa.getHoraInicio());
+                            int miliIni = Horas.getSegundos(dia.getHoraInicio());
+                            int miliFinJpa = Horas.getSegundos(diaJpa.getHoraFin());
+                            int miliFin = Horas.getSegundos(dia.getHoraFin());
+                            if ((miliIni >= miliIniJpa && miliIni <= miliFinJpa) || (miliFin >= miliIniJpa && miliFin <= miliFinJpa)){
+                                diaError = dia;
+                                break fors;
+                            }
+                        } 
+                    }
+                }  
             }
         }
         return diaError;
@@ -94,8 +96,47 @@ public class GrupoDAOSql implements GrupoDAO{
         return registrado;
     }
     @Override
-    public boolean editarGrupo(Grupo grupo) {
-        return false;
+    public boolean editarGrupo(Grupo grupo, List<Dia> listaOriginal) throws HorarioException{
+        boolean editado = true;
+        GrupoJpaController grupoController = new GrupoJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
+        ProfesorJpaController profesorController = new ProfesorJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
+        Dia diaValidacion = this.horarioValido(grupo.getHorario().getDias());
+        if (diaValidacion == null){
+            try{
+                Accesodatos.Entidades.Grupo grupoJpa = grupoController.findGrupo(grupo.getId());
+                grupoJpa.setDanza(grupo.getDanza());
+                Accesodatos.Entidades.Profesor profesorJpa = profesorController.findProfesor(grupo.getProfesor().getIdProfesor());
+                if (profesorJpa != null){
+                    grupoJpa.setIdProfesor(profesorJpa);
+                    grupoJpa.setNombre(grupo.getNombre());
+                    grupoController.edit(grupoJpa);
+                    DiaDAOSql diaDAO = new DiaDAOSql();
+                    listaOriginal.forEach((diaOriginal) -> {
+                        boolean esta = false;
+                        for (Dia diaNuevo : grupo.getHorario().getDias()) {
+                            if (diaOriginal.getId() == diaNuevo.getId()){
+                                esta = true;
+                                diaDAO.editarDia(diaNuevo);
+                            }else if (diaNuevo.getId() == 0){
+                                diaNuevo.setTipo(true);
+                                diaNuevo.setIdTipo(grupo.getId());
+                                diaDAO.agregarDia(diaNuevo);
+                            }
+                        }
+                        if (!esta){
+                            diaDAO.eliminarDia(diaOriginal.getId());
+                        }
+                    });
+                }else{
+                    editado = false;
+                }
+            }catch(Exception excepcion){
+                editado = false;
+            }
+        }else{
+            throw new HorarioException(diaValidacion);
+        }  
+        return editado;
     }
     @Override
     public List<Grupo> obtenerGruposProfesor(int idProfesor) {
