@@ -5,6 +5,7 @@
  */
 package LogicaNegocio.Pagos;
 
+import LogicaNegocio.Catalogos.Alumno;
 import LogicaNegocio.Egresos.Dates;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -28,6 +29,7 @@ public class PanelPagoAlumnoController implements Initializable {
     @FXML
     private Label lblPromocion;
     private Promocion promocion;
+    private Alumno alumno;
     
     /**
      * Initializes the controller class.
@@ -46,9 +48,14 @@ public class PanelPagoAlumnoController implements Initializable {
             lblPromocion.setText(promocion.getDescripcion());
         }
     }
+    public void setAlumno(Alumno alumno){
+        this.alumno = alumno;
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-    
+    public void generarRecibo_onClick(){
+        new VentanaReciboPago(alumno, pagoAlumno);
+    }
 }

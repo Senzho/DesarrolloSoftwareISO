@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="260.0" prefWidth="316.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="LogicaNegocio.Pagos.VentanaReciboPagoController">
+   <children>
+      <Label layoutX="14.0" layoutY="14.0" text="Fecha:">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="txtFecha" layoutX="131.0" layoutY="14.0" text="Label">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="77.0" text="Monto:">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="44.0" text="Nombre:">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="txtNombre" layoutX="131.0" layoutY="44.0" text="Label">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="txtMonto" layoutX="131.0" layoutY="77.0" text="Label">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="txtTipoPago" layoutX="131.0" layoutY="113.0" text="Label">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="113.0" text="Tipo de pago:">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnGuardar" layoutX="193.0" layoutY="214.0" mnemonicParsing="false" onMouseClicked="#btnGuardar_onCLick" text="Guardar" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="8.0">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
