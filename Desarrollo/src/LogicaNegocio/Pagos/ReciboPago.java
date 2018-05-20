@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -33,6 +34,7 @@ public class ReciboPago {
     private Font fuenteBold = new Font(Font.FontFamily.COURIER, 10, Font.BOLD);
     private Font fuenteNormal = new Font(Font.FontFamily.COURIER, 8, Font.NORMAL);
     private Font fuenteItalic = new Font(Font.FontFamily.COURIER, 8, Font.ITALIC);
+    private PagoProfesor pagoProfesor;
     private PagoAlumno pagoAlumno;
     private Alumno alumno;
     private Profesor profesor;
@@ -50,6 +52,9 @@ public class ReciboPago {
     public void setProfesor(Profesor profesor) {
         this.profesor = profesor;
     }
+    public void setPagoProfesor(PagoProfesor pagoProfesor){
+        this.pagoProfesor = pagoProfesor;
+    }
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
@@ -59,24 +64,33 @@ public class ReciboPago {
         this.renta = renta;
     }
 
-    public boolean generarReciboPagoCliente() {
+    public boolean generarReciboPagoCliente() {//cliente y renta
         boolean guardado = false;
-        String rutaGuardar = "C:\\recibos";
+        String rutaGuardar = "C:\\recibos\\clientes";
         File recibos = new File(rutaGuardar);
-        if (!recibos.exists()) {
+        File recibo = null;
+        recibo = new File("C:\\recibos");
+        if (!recibo.exists()) {
+            recibo.mkdir();
+        }
+        if(!recibos.exists()){
             recibos.mkdir();
         }
         try {
             Document doc = new Document(PageSize.A7, 36, 36, 10, 10);
-            FileOutputStream output = new FileOutputStream(rutaGuardar + "\\" + cliente.getNombre() + "_reciboPDF.pdf");
+            FileOutputStream output = new FileOutputStream(rutaGuardar + "\\" + this.cliente.getNombre() + "_reciboPDF.pdf");
             PdfWriter.getInstance(doc, output);
             doc.open();
-            doc.add(this.getCabecera("Centro de control ared espacio"));
+            doc.add(this.getCabecera("Ared espacio"));
             /**/
+            doc.add(this.getInformacion("Fecha: " + Dates.getSentence(new Date())));
             doc.add(this.getInformacion("Nombre: " + this.cliente.getNombre()));
-            doc.add(this.getInformacion("Correo: " + this.cliente.getCorreo()));
-            doc.add(this.getPiePagina("Monto." + renta.getMonto() + "$"));
-            doc.add(this.getPiePagina("Fecha: " + Dates.getSentence(renta.getFecha())));
+            doc.add(this.getInformacion("Monto: " + renta.getMonto() + "$"));
+            doc.add(this.getInformacion("Fecha a rentar: " + Dates.getSentence(renta.getFecha())));
+            doc.add(this.getInformacion("Horario: " + renta.getDia().getHoraInicio()+" - "+renta.getDia().getHoraFin()));
+            doc.add(this.getInformacion("Salón: " + renta.getDia().getSalon()));
+            
+            
             doc.close();
             guardado = true;
         } catch (FileNotFoundException ex) {
@@ -141,6 +155,45 @@ public class ReciboPago {
      * @return
      */
 
+    public boolean generarReciboPagoProfesor() {
+        boolean guardado = false;
+        String rutaGuardar = "C:\\recibos\\profesores";
+        File recibos = new File(rutaGuardar);
+        File recibo = new File("C:\\recibos");
+        if (!recibo.exists()) {
+            recibo.mkdir();
+        }
+        if(!recibos.exists()){
+            recibos.mkdir();
+        }
+        try {
+            Document doc = new Document(PageSize.A7, 36, 36, 10, 10);
+            FileOutputStream output = new FileOutputStream(rutaGuardar + "\\" + this.profesor.getNombre() + "_reciboPDF.pdf");
+            PdfWriter.getInstance(doc, output);
+            doc.open();
+            doc.add(this.getCabecera("Ared espacio"));
+            /**/
+            doc.add(this.getInformacion("Fecha: " + Dates.getSentence(pagoProfesor.getFecha())));
+            doc.add(this.getInformacion("Nombre: " + this.profesor.getNombre()));
+            doc.add(this.getInformacion("Monto: " + pagoProfesor.getMonto() + "$"));
+            String tipoPago = "";
+            if (pagoProfesor.isTipoPago()) {
+                tipoPago = "Quincenal";
+            } else {
+                tipoPago = "Mensualidad";
+            }
+            doc.add(this.getInformacion("Tipo pago: " + tipoPago));
+            doc.close();
+            guardado = true;
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(ReciboPago.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(ReciboPago.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DocumentException ex) {
+            Logger.getLogger(ReciboPago.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return guardado;
+    }
     private Paragraph getCabecera(String cabecera) {
         Paragraph p = new Paragraph();
         Chunk c = new Chunk();

@@ -6,7 +6,7 @@
 package LogicaNegocio.Pagos;
 
 import InterfazGrafica.MessageFactory;
-import LogicaNegocio.Catalogos.Alumno;
+import LogicaNegocio.Catalogos.Profesor;
 import LogicaNegocio.Egresos.Dates;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -21,9 +21,8 @@ import javafx.stage.Stage;
  *
  * @author Desktop
  */
-public class VentanaReciboPagoController implements Initializable {
-
-    @FXML
+public class VentanaReciboProfesorController implements Initializable {
+     @FXML
     private Label txtFecha;
     @FXML
     private Label txtNombre;
@@ -31,10 +30,31 @@ public class VentanaReciboPagoController implements Initializable {
     private Label txtMonto;
     @FXML
     private Label txtTipoPago;
-    private Alumno alumno;
-    private PagoAlumno pagoAlumno;
+    private Profesor profesor;
+    private PagoProfesor pagoProfesor;
     private Stage stage;
     
+    public void setPagoProfesor(PagoProfesor pagoProfesor){
+        this.pagoProfesor = pagoProfesor;
+    }
+    public void setProfesor(Profesor profesor){
+        this.profesor = profesor;
+    }
+    public void setStage(Stage stage){
+        this.stage = stage;
+    }
+    public void generarDatosRecibo(){
+        this.txtFecha.setText(Dates.getSentence(pagoProfesor.getFecha()));
+        this.txtNombre.setText(profesor.getNombre());
+        this.txtMonto.setText(pagoProfesor.getMonto());
+        String tipoPago="";
+        if (!pagoProfesor.isTipoPago()){
+            tipoPago = "Quincenal";
+        }else{
+            tipoPago = "Mensualidad";
+        }
+        this.txtTipoPago.setText(tipoPago);
+    }
     /**
      * Initializes the controller class.
      */
@@ -42,32 +62,11 @@ public class VentanaReciboPagoController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-    public void setAlumno(Alumno alumno){
-        this.alumno = alumno;
-    }
-    public void setPagoAlumno(PagoAlumno pagoAlumno){
-        this.pagoAlumno = pagoAlumno;
-    }
-    public void setStage(Stage stage){
-        this.stage = stage;
-    }
-    public void generarDatosRecibo(){
-        this.txtFecha.setText(Dates.getSentence(pagoAlumno.getFecha()));
-        this.txtNombre.setText(alumno.getNombre());
-        this.txtMonto.setText(pagoAlumno.getMonto());
-        String tipoPago="";
-        if (pagoAlumno.getTipoPago() == 0){
-            tipoPago = "inscripción";
-        }else{
-            tipoPago = "Mensualidad";
-        }
-        this.txtTipoPago.setText(tipoPago);
-    }
     public void btnGuardar_onCLick(){
         ReciboPago recibo = new ReciboPago();
-        recibo.setAlumno(alumno);
-        recibo.setPagoAlumno(pagoAlumno);
-        if(recibo.generarReciboPagoAlumno()){
+        recibo.setProfesor(profesor);
+        recibo.setPagoProfesor(pagoProfesor);
+        if(recibo.generarReciboPagoProfesor()){
          MessageFactory.showMessage("Archivo creado", "Se ha guardado el archivo", "El archivo ha sido creado con exito", Alert.AlertType.INFORMATION);
          this.stage.close();
         }else{

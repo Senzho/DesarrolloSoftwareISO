@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="317.0" prefWidth="332.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LogicaNegocio.Pagos.VentanaReciboRentaController">
+   <children>
+      <Label layoutX="19.0" layoutY="24.0" text="Fecha:">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="19.0" layoutY="162.0" text="Horario">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="19.0" layoutY="59.0" text="Nombre:">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="19.0" layoutY="94.0" text="Monto:">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="19.0" layoutY="126.0" text="Fecha a rentar:">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblFechaRentar" layoutX="155.0" layoutY="127.0" text="lblFechaRentar">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblMonto" layoutX="155.0" layoutY="95.0" text="lblMonto">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblNombre" layoutX="155.0" layoutY="60.0" text="lblNombre">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblHorario" layoutX="155.0" layoutY="162.0" text="lblHorario">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblFecha" layoutX="155.0" layoutY="25.0" text="lblFecha">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblSalon" layoutX="155.0" layoutY="192.0" text="lblSalon">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="19.0" layoutY="192.0" text="Salón:">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnGuardar" layoutX="241.0" layoutY="271.0" mnemonicParsing="false" onMouseClicked="#btnGuardar_onClick" text="Guardar" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="10.0">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

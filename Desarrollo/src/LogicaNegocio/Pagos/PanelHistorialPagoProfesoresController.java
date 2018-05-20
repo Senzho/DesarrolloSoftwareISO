@@ -67,6 +67,7 @@ public class PanelHistorialPagoProfesoresController implements Initializable {
             panel.setStyle("-fx-background-color: #D8D8D8;");
             PanelPagoProfesorController controller = loader.getController();
             controller.setPagoProfesor(pago);
+            controller.setProfesor(profesor);
             this.panelPagos.getChildren().add(0, panel);
         } catch (IOException ex) {
             Logger.getLogger(PanelHistorialPagoProfesoresController.class.getName()).log(Level.SEVERE, null, ex);

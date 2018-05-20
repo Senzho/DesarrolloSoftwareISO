@@ -45,6 +45,9 @@ public class PanelPagoClienteController implements Initializable {
     public void setCliente(Cliente cliente){
         this.cliente = cliente;
     }
+    public void btnGenerarRecibo_onClick(){
+        new VentanaReciboRenta(cliente, renta);
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

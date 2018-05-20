@@ -1,5 +1,6 @@
 package LogicaNegocio.Pagos;
 
+import LogicaNegocio.Catalogos.Profesor;
 import LogicaNegocio.Egresos.Dates;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -17,7 +18,7 @@ public class PanelPagoProfesorController implements Initializable {
     private Label monto;
     @FXML
     private Button generar;
-    
+    private Profesor profesor;
     private PagoProfesor pagoProfesor;
     
     @Override
@@ -28,6 +29,9 @@ public class PanelPagoProfesorController implements Initializable {
     public void setPagoProfesor(PagoProfesor pagoProfesor){
         this.pagoProfesor = pagoProfesor;
         this.cargarPago();
+    }
+    public void setProfesor(Profesor profesor){
+        this.profesor = profesor;
     }
     public void cargarPago(){
         this.fecha.setText(Dates.getSentence(this.pagoProfesor.getFecha()));
@@ -42,6 +46,6 @@ public class PanelPagoProfesorController implements Initializable {
     }
     
     public void generar_OnClick(){
-        
+        new VentanaReciboProfesor(profesor, pagoProfesor);
     }
 }

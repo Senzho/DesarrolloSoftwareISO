@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="272.0" prefWidth="298.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="LogicaNegocio.Pagos.VentanaReciboProfesorController">
+   <children>
+      <Button fx:id="btnGuardar" layoutX="203.0" layoutY="224.0" mnemonicParsing="false" onMouseClicked="#btnGuardar_onCLick" text="Guardar">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Button>
+      <Label layoutX="24.0" layoutY="123.0" text="Tipo de pago:">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="txtTipoPago" layoutX="141.0" layoutY="123.0" text="Label">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="txtMonto" layoutX="141.0" layoutY="87.0" text="Label">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="txtNombre" layoutX="141.0" layoutY="54.0" text="Label">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="24.0" layoutY="54.0" text="Nombre:">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="24.0" layoutY="87.0" text="Monto:">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="txtFecha" layoutX="141.0" layoutY="24.0" text="Label">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="24.0" layoutY="24.0" text="Fecha:">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
