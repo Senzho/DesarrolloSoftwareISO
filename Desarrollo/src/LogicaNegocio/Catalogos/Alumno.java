@@ -94,4 +94,7 @@ public class Alumno implements Comparable<Alumno>{
     public List<Alumno> obtenerAlumnos(int idGrupo){
         return this.alumnoDAO.obtenerAlumnos(idGrupo);
     }
+    public Alumno obtenerAlumno(int idAlumno){
+        return this.alumnoDAO.obtenerAlumno(idAlumno);
+    }
 }

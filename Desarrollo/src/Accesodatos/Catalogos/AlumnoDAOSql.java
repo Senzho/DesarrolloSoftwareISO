@@ -11,20 +11,21 @@ import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-public class AlumnoDAOSql implements AlumnoDAO{
-    public AlumnoDAOSql(){
-        
+public class AlumnoDAOSql implements AlumnoDAO {
+
+    public AlumnoDAOSql() {
+
     }
-    
-    private Accesodatos.Entidades.Alumno obtenerEntidad(Alumno alumno){
+
+    private Accesodatos.Entidades.Alumno obtenerEntidad(Alumno alumno) {
         Accesodatos.Entidades.Alumno alumnoJpa = new Accesodatos.Entidades.Alumno();
         alumnoJpa.setIdAlumno(alumno.getIdAlumno());
         alumnoJpa.setCorreo(alumno.getCorreo());
         alumnoJpa.setDireccion(alumno.getDireccion());
         int estado;
-        if (alumno.isEstado()){
+        if (alumno.isEstado()) {
             estado = 1;
-        }else{
+        } else {
             estado = 0;
         }
         alumnoJpa.setEstado(estado);
@@ -33,7 +34,8 @@ public class AlumnoDAOSql implements AlumnoDAO{
         alumnoJpa.setTelefono(alumno.getTeléfono());
         return alumnoJpa;
     }
-    private Alumno obtenerEntidad(Accesodatos.Entidades.Alumno alumnoJpa){
+
+    private Alumno obtenerEntidad(Accesodatos.Entidades.Alumno alumnoJpa) {
         Alumno alumno = new Alumno();
         alumno.setIdAlumno(alumnoJpa.getIdAlumno());
         alumno.setCorreo(alumnoJpa.getCorreo());
@@ -46,36 +48,37 @@ public class AlumnoDAOSql implements AlumnoDAO{
         alumno.setTeléfono(alumnoJpa.getTelefono());
         return alumno;
     }
-    
+
     @Override
     public boolean registrarAlumno(Alumno alumno) {
         boolean registrado = false;
-        if (OperacionesString.emailValido(alumno.getCorreo()) && OperacionesString.telefonoValido(alumno.getTeléfono())){
+        if (OperacionesString.emailValido(alumno.getCorreo()) && OperacionesString.telefonoValido(alumno.getTeléfono())) {
             AlumnoJpaController controller = new AlumnoJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
-            try{
+            try {
                 Accesodatos.Entidades.Alumno alumnoJpa = this.obtenerEntidad(alumno);
                 controller.create(alumnoJpa);
                 alumno.setIdAlumno(alumnoJpa.getIdAlumno());
                 registrado = true;
-            }catch(Exception excepcion){
+            } catch (Exception excepcion) {
                 Logger.getLogger(AlumnoDAOSql.class.getName()).log(Level.SEVERE, null, excepcion);
             }
-        } 
+        }
         return registrado;
     }
+
     @Override
     public boolean editarAlumno(Alumno alumno) {
         boolean editado = false;
-        if (OperacionesString.emailValido(alumno.getCorreo()) && OperacionesString.telefonoValido(alumno.getTeléfono())){
+        if (OperacionesString.emailValido(alumno.getCorreo()) && OperacionesString.telefonoValido(alumno.getTeléfono())) {
             AlumnoJpaController controller = new AlumnoJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
             try {
                 Accesodatos.Entidades.Alumno alumnoJpa = controller.findAlumno(alumno.getIdAlumno());
                 alumnoJpa.setCorreo(alumno.getCorreo());
                 alumnoJpa.setDireccion(alumno.getDireccion());
                 int estado;
-                if (alumno.isEstado()){
+                if (alumno.isEstado()) {
                     estado = 1;
-                }else{
+                } else {
                     estado = 0;
                 }
                 alumnoJpa.setEstado(estado);
@@ -90,6 +93,7 @@ public class AlumnoDAOSql implements AlumnoDAO{
         }
         return editado;
     }
+
     @Override
     public List<Alumno> obtenerAlumnos() {
         ArrayList<Alumno> alumnos = new ArrayList();
@@ -99,18 +103,20 @@ public class AlumnoDAOSql implements AlumnoDAO{
         });
         return alumnos;
     }
+
     @Override
-    public List<Alumno> obtenerAlumnos(String nombre){
+    public List<Alumno> obtenerAlumnos(String nombre) {
         List<Alumno> alumnos = new ArrayList();
-        for (Alumno alumno : this.obtenerAlumnos()){
-            if (OperacionesString.coincide(nombre, alumno.getNombre())){
+        for (Alumno alumno : this.obtenerAlumnos()) {
+            if (OperacionesString.coincide(nombre, alumno.getNombre())) {
                 alumnos.add(alumno);
             }
         }
         return alumnos;
     }
+
     @Override
-    public List<Alumno> obtenerAlumnos(int idGrupo){
+    public List<Alumno> obtenerAlumnos(int idGrupo) {
         List<Alumno> alumnos = new ArrayList();
         EntityManager entityManager = Persistence.createEntityManagerFactory("CentroDeControlAredPU").createEntityManager();
         Query query = entityManager.createNamedQuery("Alumno.findFromGrupo");
@@ -120,10 +126,18 @@ public class AlumnoDAOSql implements AlumnoDAO{
         });
         return alumnos;
     }
+
     @Override
     public int[] obtenerGrupos() {
         int[] grupos = {0, 1};
         //A la espera de la entidad de Grupo
         return grupos;
-    } 
+    }
+
+    @Override
+    public Alumno obtenerAlumno(int idAlumno) {
+        AlumnoJpaController controller = new AlumnoJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
+        Alumno alumno = this.obtenerEntidad(controller.findAlumno(idAlumno));
+        return alumno;
+    }
 }

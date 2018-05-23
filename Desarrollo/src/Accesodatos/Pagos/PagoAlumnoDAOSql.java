@@ -22,14 +22,14 @@ import javax.persistence.Persistence;
  * @author Desktop
  */
 public class PagoAlumnoDAOSql implements PagoAlumnoDAO {
-    
+
     @Override
     public List<PagoAlumno> obtenerPagos(int idAlumno, int idProfesor) {
         List<PagoAlumno> listaPagos = new ArrayList();
         AlumnoJpaController controller = new AlumnoJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
         Accesodatos.Entidades.Alumno alumnoJpa = controller.findAlumno(idAlumno);
         for (Pagoalumno pagoJpa : alumnoJpa.getPagoalumnoCollection()) {
-            if(pagoJpa.getIdProfesor().getIdProfesor() == idProfesor){
+            if (pagoJpa.getIdProfesor().getIdProfesor() == idProfesor) {
                 listaPagos.add(this.obtenerEntidad(pagoJpa));
             }
         }
@@ -44,6 +44,7 @@ public class PagoAlumnoDAOSql implements PagoAlumnoDAO {
         ProfesorJpaController profesorController = new ProfesorJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
         Profesor profesorJpa = profesorController.findProfesor(pagoJpa.getIdProfesor().getIdProfesor());
         pago.setIdProfesor(profesorJpa.getIdProfesor());
+        pago.setIdAlumno(pagoJpa.getIdAlumno().getIdAlumno());
         if (pagoJpa.getIdPromocion() != null) {
             pago.setIdPromocion(pagoJpa.getIdPromocion().getIdPromocion());
         } else {
@@ -52,7 +53,7 @@ public class PagoAlumnoDAOSql implements PagoAlumnoDAO {
         pago.setTipoPago(pagoJpa.getTipoPago());
         return pago;
     }
-    
+
     @Override
     public boolean registrarPago(PagoAlumno pagoAlumno, int idAlumno, int idPromocion) {
         boolean registrado = false;
@@ -86,5 +87,16 @@ public class PagoAlumnoDAOSql implements PagoAlumnoDAO {
         }
         return registrado;
     }
-    
+
+    @Override
+    public List<PagoAlumno> obtenerPagos() {
+        List<PagoAlumno> listaPagos = new ArrayList();
+        PagoalumnoJpaController controller = new PagoalumnoJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
+        List<Accesodatos.Entidades.Pagoalumno> pagoAlumnoJpa = controller.findPagoalumnoEntities();
+        for (Pagoalumno pagoJpa : pagoAlumnoJpa) {
+            listaPagos.add(this.obtenerEntidad(pagoJpa));
+        }
+        return listaPagos;
+    }
+
 }

@@ -22,18 +22,28 @@ public class PagoAlumno {
     private int idPromocion;
     private PagoAlumnoDAOSql pagoAlumnoDao;
     private int idProfesor; 
+    private int idAlumno;
     
     public PagoAlumno() {
         pagoAlumnoDao = new PagoAlumnoDAOSql();
     }
 
-    public PagoAlumno(Date fecha, int idPagoAlumno, String monto, int tipoPago, int idProfesor) {
+    public PagoAlumno(Date fecha, int idPagoAlumno, String monto, int tipoPago, int idProfesor, int idAlumno) {
         this.fecha = fecha;
         this.idProfesor = idProfesor;
         this.idPagoAlumno = idPagoAlumno;
         this.monto = monto;
         this.tipoPago = tipoPago;
+        this.idAlumno = idAlumno;
         pagoAlumnoDao = new PagoAlumnoDAOSql();
+    }
+
+    public int getIdAlumno() {
+        return idAlumno;
+    }
+
+    public void setIdAlumno(int idAlumno) {
+        this.idAlumno = idAlumno;
     }
 
     public int getIdProfesor() {
@@ -86,6 +96,9 @@ public class PagoAlumno {
 
     public List<PagoAlumno> obtenerPagos(int idAlumno, int idProfesor) {
        return pagoAlumnoDao.obtenerPagos(idAlumno, idProfesor);
+    }
+    public List<PagoAlumno> obtenerPagos(){
+        return pagoAlumnoDao.obtenerPagos();
     }
     
     public boolean registrarPago(int idAlumno, int idPromocion) {
