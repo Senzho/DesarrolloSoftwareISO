@@ -17,13 +17,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import Accesodatos.Entidades.Asistencia;
 import Accesodatos.Entidades.Pagoalumno;
+import Accesodatos.Entidades.Pagotemporal;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author Desktop
+ * @author Victor Javier
  */
 public class AlumnoJpaController implements Serializable {
 
@@ -45,6 +46,9 @@ public class AlumnoJpaController implements Serializable {
         }
         if (alumno.getPagoalumnoCollection() == null) {
             alumno.setPagoalumnoCollection(new ArrayList<Pagoalumno>());
+        }
+        if (alumno.getPagotemporalCollection() == null) {
+            alumno.setPagotemporalCollection(new ArrayList<Pagotemporal>());
         }
         EntityManager em = null;
         try {
@@ -68,6 +72,12 @@ public class AlumnoJpaController implements Serializable {
                 attachedPagoalumnoCollection.add(pagoalumnoCollectionPagoalumnoToAttach);
             }
             alumno.setPagoalumnoCollection(attachedPagoalumnoCollection);
+            Collection<Pagotemporal> attachedPagotemporalCollection = new ArrayList<Pagotemporal>();
+            for (Pagotemporal pagotemporalCollectionPagotemporalToAttach : alumno.getPagotemporalCollection()) {
+                pagotemporalCollectionPagotemporalToAttach = em.getReference(pagotemporalCollectionPagotemporalToAttach.getClass(), pagotemporalCollectionPagotemporalToAttach.getIdPago());
+                attachedPagotemporalCollection.add(pagotemporalCollectionPagotemporalToAttach);
+            }
+            alumno.setPagotemporalCollection(attachedPagotemporalCollection);
             em.persist(alumno);
             for (Inscripcion inscripcionCollectionInscripcion : alumno.getInscripcionCollection()) {
                 Alumno oldIdAlumnoOfInscripcionCollectionInscripcion = inscripcionCollectionInscripcion.getIdAlumno();
@@ -96,6 +106,15 @@ public class AlumnoJpaController implements Serializable {
                     oldIdAlumnoOfPagoalumnoCollectionPagoalumno = em.merge(oldIdAlumnoOfPagoalumnoCollectionPagoalumno);
                 }
             }
+            for (Pagotemporal pagotemporalCollectionPagotemporal : alumno.getPagotemporalCollection()) {
+                Alumno oldIdAlumnoOfPagotemporalCollectionPagotemporal = pagotemporalCollectionPagotemporal.getIdAlumno();
+                pagotemporalCollectionPagotemporal.setIdAlumno(alumno);
+                pagotemporalCollectionPagotemporal = em.merge(pagotemporalCollectionPagotemporal);
+                if (oldIdAlumnoOfPagotemporalCollectionPagotemporal != null) {
+                    oldIdAlumnoOfPagotemporalCollectionPagotemporal.getPagotemporalCollection().remove(pagotemporalCollectionPagotemporal);
+                    oldIdAlumnoOfPagotemporalCollectionPagotemporal = em.merge(oldIdAlumnoOfPagotemporalCollectionPagotemporal);
+                }
+            }
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -116,6 +135,8 @@ public class AlumnoJpaController implements Serializable {
             Collection<Asistencia> asistenciaCollectionNew = alumno.getAsistenciaCollection();
             Collection<Pagoalumno> pagoalumnoCollectionOld = persistentAlumno.getPagoalumnoCollection();
             Collection<Pagoalumno> pagoalumnoCollectionNew = alumno.getPagoalumnoCollection();
+            Collection<Pagotemporal> pagotemporalCollectionOld = persistentAlumno.getPagotemporalCollection();
+            Collection<Pagotemporal> pagotemporalCollectionNew = alumno.getPagotemporalCollection();
             Collection<Inscripcion> attachedInscripcionCollectionNew = new ArrayList<Inscripcion>();
             for (Inscripcion inscripcionCollectionNewInscripcionToAttach : inscripcionCollectionNew) {
                 inscripcionCollectionNewInscripcionToAttach = em.getReference(inscripcionCollectionNewInscripcionToAttach.getClass(), inscripcionCollectionNewInscripcionToAttach.getIdInscripcion());
@@ -137,6 +158,13 @@ public class AlumnoJpaController implements Serializable {
             }
             pagoalumnoCollectionNew = attachedPagoalumnoCollectionNew;
             alumno.setPagoalumnoCollection(pagoalumnoCollectionNew);
+            Collection<Pagotemporal> attachedPagotemporalCollectionNew = new ArrayList<Pagotemporal>();
+            for (Pagotemporal pagotemporalCollectionNewPagotemporalToAttach : pagotemporalCollectionNew) {
+                pagotemporalCollectionNewPagotemporalToAttach = em.getReference(pagotemporalCollectionNewPagotemporalToAttach.getClass(), pagotemporalCollectionNewPagotemporalToAttach.getIdPago());
+                attachedPagotemporalCollectionNew.add(pagotemporalCollectionNewPagotemporalToAttach);
+            }
+            pagotemporalCollectionNew = attachedPagotemporalCollectionNew;
+            alumno.setPagotemporalCollection(pagotemporalCollectionNew);
             alumno = em.merge(alumno);
             for (Inscripcion inscripcionCollectionOldInscripcion : inscripcionCollectionOld) {
                 if (!inscripcionCollectionNew.contains(inscripcionCollectionOldInscripcion)) {
@@ -189,6 +217,23 @@ public class AlumnoJpaController implements Serializable {
                     }
                 }
             }
+            for (Pagotemporal pagotemporalCollectionOldPagotemporal : pagotemporalCollectionOld) {
+                if (!pagotemporalCollectionNew.contains(pagotemporalCollectionOldPagotemporal)) {
+                    pagotemporalCollectionOldPagotemporal.setIdAlumno(null);
+                    pagotemporalCollectionOldPagotemporal = em.merge(pagotemporalCollectionOldPagotemporal);
+                }
+            }
+            for (Pagotemporal pagotemporalCollectionNewPagotemporal : pagotemporalCollectionNew) {
+                if (!pagotemporalCollectionOld.contains(pagotemporalCollectionNewPagotemporal)) {
+                    Alumno oldIdAlumnoOfPagotemporalCollectionNewPagotemporal = pagotemporalCollectionNewPagotemporal.getIdAlumno();
+                    pagotemporalCollectionNewPagotemporal.setIdAlumno(alumno);
+                    pagotemporalCollectionNewPagotemporal = em.merge(pagotemporalCollectionNewPagotemporal);
+                    if (oldIdAlumnoOfPagotemporalCollectionNewPagotemporal != null && !oldIdAlumnoOfPagotemporalCollectionNewPagotemporal.equals(alumno)) {
+                        oldIdAlumnoOfPagotemporalCollectionNewPagotemporal.getPagotemporalCollection().remove(pagotemporalCollectionNewPagotemporal);
+                        oldIdAlumnoOfPagotemporalCollectionNewPagotemporal = em.merge(oldIdAlumnoOfPagotemporalCollectionNewPagotemporal);
+                    }
+                }
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -232,6 +277,11 @@ public class AlumnoJpaController implements Serializable {
             for (Pagoalumno pagoalumnoCollectionPagoalumno : pagoalumnoCollection) {
                 pagoalumnoCollectionPagoalumno.setIdAlumno(null);
                 pagoalumnoCollectionPagoalumno = em.merge(pagoalumnoCollectionPagoalumno);
+            }
+            Collection<Pagotemporal> pagotemporalCollection = alumno.getPagotemporalCollection();
+            for (Pagotemporal pagotemporalCollectionPagotemporal : pagotemporalCollection) {
+                pagotemporalCollectionPagotemporal.setIdAlumno(null);
+                pagotemporalCollectionPagotemporal = em.merge(pagotemporalCollectionPagotemporal);
             }
             em.remove(alumno);
             em.getTransaction().commit();

@@ -39,8 +39,12 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Alumno.findByCorreo", query = "SELECT a FROM Alumno a WHERE a.correo = :correo")
     , @NamedQuery(name = "Alumno.findByEstado", query = "SELECT a FROM Alumno a WHERE a.estado = :estado")
     , @NamedQuery(name = "Alumno.findByTelefono", query = "SELECT a FROM Alumno a WHERE a.telefono = :telefono")
-    , @NamedQuery(name = "Alumno.findFromGrupo", query = "SELECT a FROM Alumno a, Inscripcion i WHERE i.idGrupo.idGrupo = :idGrupo AND i.idAlumno.idAlumno = a.idAlumno")})
+    , @NamedQuery(name = "Alumno.findFromGrupo", query = "SELECT a FROM Alumno a, Inscripcion i WHERE i.idGrupo.idGrupo = :idGrupo AND i.idAlumno.idAlumno = a.idAlumno")
+})
 public class Alumno implements Serializable {
+
+    @OneToMany(mappedBy = "idAlumno")
+    private Collection<Pagotemporal> pagotemporalCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -182,6 +186,15 @@ public class Alumno implements Serializable {
     @Override
     public String toString() {
         return "Accesodatos.Entidades.Alumno[ idAlumno=" + idAlumno + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Pagotemporal> getPagotemporalCollection() {
+        return pagotemporalCollection;
+    }
+
+    public void setPagotemporalCollection(Collection<Pagotemporal> pagotemporalCollection) {
+        this.pagotemporalCollection = pagotemporalCollection;
     }
     
 }

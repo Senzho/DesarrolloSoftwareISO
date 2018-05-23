@@ -17,6 +17,7 @@ import java.util.Collection;
 import Accesodatos.Entidades.Gastopromocional;
 import Accesodatos.Entidades.Grupo;
 import Accesodatos.Entidades.Pagoprofesor;
+import Accesodatos.Entidades.Pagotemporal;
 import Accesodatos.Entidades.Profesor;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -24,7 +25,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author Desktop
+ * @author Victor Javier
  */
 public class ProfesorJpaController implements Serializable {
 
@@ -49,6 +50,9 @@ public class ProfesorJpaController implements Serializable {
         }
         if (profesor.getPagoprofesorCollection() == null) {
             profesor.setPagoprofesorCollection(new ArrayList<Pagoprofesor>());
+        }
+        if (profesor.getPagotemporalCollection() == null) {
+            profesor.setPagotemporalCollection(new ArrayList<Pagotemporal>());
         }
         EntityManager em = null;
         try {
@@ -78,6 +82,12 @@ public class ProfesorJpaController implements Serializable {
                 attachedPagoprofesorCollection.add(pagoprofesorCollectionPagoprofesorToAttach);
             }
             profesor.setPagoprofesorCollection(attachedPagoprofesorCollection);
+            Collection<Pagotemporal> attachedPagotemporalCollection = new ArrayList<Pagotemporal>();
+            for (Pagotemporal pagotemporalCollectionPagotemporalToAttach : profesor.getPagotemporalCollection()) {
+                pagotemporalCollectionPagotemporalToAttach = em.getReference(pagotemporalCollectionPagotemporalToAttach.getClass(), pagotemporalCollectionPagotemporalToAttach.getIdPago());
+                attachedPagotemporalCollection.add(pagotemporalCollectionPagotemporalToAttach);
+            }
+            profesor.setPagotemporalCollection(attachedPagotemporalCollection);
             em.persist(profesor);
             for (Promocion promocionCollectionPromocion : profesor.getPromocionCollection()) {
                 Profesor oldIdProfesorOfPromocionCollectionPromocion = promocionCollectionPromocion.getIdProfesor();
@@ -115,6 +125,15 @@ public class ProfesorJpaController implements Serializable {
                     oldIdProfesorOfPagoprofesorCollectionPagoprofesor = em.merge(oldIdProfesorOfPagoprofesorCollectionPagoprofesor);
                 }
             }
+            for (Pagotemporal pagotemporalCollectionPagotemporal : profesor.getPagotemporalCollection()) {
+                Profesor oldIdProfesorOfPagotemporalCollectionPagotemporal = pagotemporalCollectionPagotemporal.getIdProfesor();
+                pagotemporalCollectionPagotemporal.setIdProfesor(profesor);
+                pagotemporalCollectionPagotemporal = em.merge(pagotemporalCollectionPagotemporal);
+                if (oldIdProfesorOfPagotemporalCollectionPagotemporal != null) {
+                    oldIdProfesorOfPagotemporalCollectionPagotemporal.getPagotemporalCollection().remove(pagotemporalCollectionPagotemporal);
+                    oldIdProfesorOfPagotemporalCollectionPagotemporal = em.merge(oldIdProfesorOfPagotemporalCollectionPagotemporal);
+                }
+            }
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -137,6 +156,8 @@ public class ProfesorJpaController implements Serializable {
             Collection<Grupo> grupoCollectionNew = profesor.getGrupoCollection();
             Collection<Pagoprofesor> pagoprofesorCollectionOld = persistentProfesor.getPagoprofesorCollection();
             Collection<Pagoprofesor> pagoprofesorCollectionNew = profesor.getPagoprofesorCollection();
+            Collection<Pagotemporal> pagotemporalCollectionOld = persistentProfesor.getPagotemporalCollection();
+            Collection<Pagotemporal> pagotemporalCollectionNew = profesor.getPagotemporalCollection();
             Collection<Promocion> attachedPromocionCollectionNew = new ArrayList<Promocion>();
             for (Promocion promocionCollectionNewPromocionToAttach : promocionCollectionNew) {
                 promocionCollectionNewPromocionToAttach = em.getReference(promocionCollectionNewPromocionToAttach.getClass(), promocionCollectionNewPromocionToAttach.getIdPromocion());
@@ -165,6 +186,13 @@ public class ProfesorJpaController implements Serializable {
             }
             pagoprofesorCollectionNew = attachedPagoprofesorCollectionNew;
             profesor.setPagoprofesorCollection(pagoprofesorCollectionNew);
+            Collection<Pagotemporal> attachedPagotemporalCollectionNew = new ArrayList<Pagotemporal>();
+            for (Pagotemporal pagotemporalCollectionNewPagotemporalToAttach : pagotemporalCollectionNew) {
+                pagotemporalCollectionNewPagotemporalToAttach = em.getReference(pagotemporalCollectionNewPagotemporalToAttach.getClass(), pagotemporalCollectionNewPagotemporalToAttach.getIdPago());
+                attachedPagotemporalCollectionNew.add(pagotemporalCollectionNewPagotemporalToAttach);
+            }
+            pagotemporalCollectionNew = attachedPagotemporalCollectionNew;
+            profesor.setPagotemporalCollection(pagotemporalCollectionNew);
             profesor = em.merge(profesor);
             for (Promocion promocionCollectionOldPromocion : promocionCollectionOld) {
                 if (!promocionCollectionNew.contains(promocionCollectionOldPromocion)) {
@@ -234,6 +262,23 @@ public class ProfesorJpaController implements Serializable {
                     }
                 }
             }
+            for (Pagotemporal pagotemporalCollectionOldPagotemporal : pagotemporalCollectionOld) {
+                if (!pagotemporalCollectionNew.contains(pagotemporalCollectionOldPagotemporal)) {
+                    pagotemporalCollectionOldPagotemporal.setIdProfesor(null);
+                    pagotemporalCollectionOldPagotemporal = em.merge(pagotemporalCollectionOldPagotemporal);
+                }
+            }
+            for (Pagotemporal pagotemporalCollectionNewPagotemporal : pagotemporalCollectionNew) {
+                if (!pagotemporalCollectionOld.contains(pagotemporalCollectionNewPagotemporal)) {
+                    Profesor oldIdProfesorOfPagotemporalCollectionNewPagotemporal = pagotemporalCollectionNewPagotemporal.getIdProfesor();
+                    pagotemporalCollectionNewPagotemporal.setIdProfesor(profesor);
+                    pagotemporalCollectionNewPagotemporal = em.merge(pagotemporalCollectionNewPagotemporal);
+                    if (oldIdProfesorOfPagotemporalCollectionNewPagotemporal != null && !oldIdProfesorOfPagotemporalCollectionNewPagotemporal.equals(profesor)) {
+                        oldIdProfesorOfPagotemporalCollectionNewPagotemporal.getPagotemporalCollection().remove(pagotemporalCollectionNewPagotemporal);
+                        oldIdProfesorOfPagotemporalCollectionNewPagotemporal = em.merge(oldIdProfesorOfPagotemporalCollectionNewPagotemporal);
+                    }
+                }
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -282,6 +327,11 @@ public class ProfesorJpaController implements Serializable {
             for (Pagoprofesor pagoprofesorCollectionPagoprofesor : pagoprofesorCollection) {
                 pagoprofesorCollectionPagoprofesor.setIdProfesor(null);
                 pagoprofesorCollectionPagoprofesor = em.merge(pagoprofesorCollectionPagoprofesor);
+            }
+            Collection<Pagotemporal> pagotemporalCollection = profesor.getPagotemporalCollection();
+            for (Pagotemporal pagotemporalCollectionPagotemporal : pagotemporalCollection) {
+                pagotemporalCollectionPagotemporal.setIdProfesor(null);
+                pagotemporalCollectionPagotemporal = em.merge(pagotemporalCollectionPagotemporal);
             }
             em.remove(profesor);
             em.getTransaction().commit();

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="253.0" prefWidth="442.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="LogicaNegocio.Pagos.VentanaRegistrarPagoTemporalController">
+   <children>
+      <Label layoutX="14.0" layoutY="14.0" text="Profesor:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="comboProfesores" layoutX="91.0" layoutY="12.0" onAction="#comboProfesores_onAction" prefHeight="25.0" prefWidth="496.0" AnchorPane.leftAnchor="91.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="12.0" />
+      <Label layoutX="14.0" layoutY="48.0" text="Alumno:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="48.0">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="comboAlumnos" layoutX="91.0" layoutY="46.0" prefHeight="25.0" prefWidth="495.0" AnchorPane.leftAnchor="91.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="46.0" />
+      <Label layoutX="14.0" layoutY="82.0" text="Monto:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="82.0">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="campoMonto" layoutX="91.0" layoutY="80.0" prefHeight="25.0" prefWidth="165.0" AnchorPane.leftAnchor="91.0" AnchorPane.rightAnchor="186.0" AnchorPane.topAnchor="80.0" />
+      <RadioButton fx:id="radioInscripcion" layoutX="14.0" layoutY="114.0" mnemonicParsing="false" text="Inscripción" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="114.0">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </RadioButton>
+      <RadioButton fx:id="radioMensualidad" layoutX="138.0" layoutY="114.0" mnemonicParsing="false" text="Mensualidad" AnchorPane.leftAnchor="138.0" AnchorPane.topAnchor="114.0">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </RadioButton>
+      <Separator layoutX="24.0" layoutY="181.0" prefHeight="0.0" prefWidth="424.0" AnchorPane.bottomAnchor="57.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+      <Button layoutX="341.0" layoutY="207.0" mnemonicParsing="false" onMouseClicked="#botonRegistrar_onClick" text="Registrar" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

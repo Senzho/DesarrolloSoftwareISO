@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
--- Host: localhost    Database: ared
+-- Host: localhost    Database: Ared
 -- ------------------------------------------------------
 -- Server version	5.7.17-log
 
@@ -117,7 +117,7 @@ CREATE TABLE `dia` (
   `horaInicio` varchar(5) DEFAULT NULL,
   `horaFin` varchar(5) DEFAULT NULL,
   PRIMARY KEY (`idDia`)
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -126,7 +126,7 @@ CREATE TABLE `dia` (
 
 LOCK TABLES `dia` WRITE;
 /*!40000 ALTER TABLE `dia` DISABLE KEYS */;
-INSERT INTO `dia` VALUES (40,'X',1,21,'Lunes','09:00','11:00'),(41,'X',1,21,'Miercoles','11:30','14:30'),(42,'X',1,21,'Sabado','18:30','19:00'),(43,'X',1,21,'Domingo','09:00','09:30'),(44,'X',1,22,'Martes','20:00','21:30'),(45,'X',1,22,'Jueves','16:00','16:30'),(46,'X',1,22,'Sabado','09:00','12:00'),(47,'X',1,23,'Lunes','15:00','17:00'),(48,'X',1,23,'Martes','10:00','11:00'),(49,'X',1,23,'Miercoles','09:00','10:00'),(50,'X',1,23,'Jueves','12:30','15:00'),(51,'X',1,23,'Viernes','20:00','20:30'),(52,'X',1,23,'Sabado','12:30','13:30'),(53,'X',1,23,'Domingo','10:00','10:30'),(54,'X',1,24,'Miercoles','20:00','20:30'),(55,'X',1,24,'Jueves','09:00','10:30'),(56,'X',1,24,'Viernes','09:00','11:00'),(57,'X',1,25,'Lunes','17:30','19:30'),(58,'X',1,25,'Martes','11:30','12:30');
+INSERT INTO `dia` VALUES (40,'X',1,21,'Lunes','09:00','11:00'),(41,'X',1,21,'Miercoles','11:30','14:30'),(42,'X',1,21,'Sabado','18:30','19:00'),(43,'X',1,21,'Domingo','09:00','09:30'),(44,'X',1,22,'Martes','20:00','21:30'),(45,'X',1,22,'Jueves','16:00','16:30'),(46,'X',1,22,'Sabado','09:00','12:00'),(47,'X',1,23,'Lunes','15:00','17:00'),(48,'X',1,23,'Martes','10:00','11:00'),(49,'X',1,23,'Miercoles','09:00','10:00'),(50,'X',1,23,'Jueves','12:30','15:00'),(51,'X',1,23,'Viernes','20:00','20:30'),(52,'X',1,23,'Sabado','12:30','13:30'),(53,'X',1,23,'Domingo','10:00','10:30'),(54,'X',1,24,'Miercoles','20:00','20:30'),(55,'X',1,24,'Jueves','09:00','10:30'),(56,'X',1,24,'Viernes','09:00','11:00'),(57,'X',1,25,'Lunes','17:30','19:30'),(58,'X',1,25,'Martes','11:30','12:30'),(59,'X',0,1,'Domingo','17:30','19:00');
 /*!40000 ALTER TABLE `dia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -309,6 +309,37 @@ INSERT INTO `pagoprofesor` VALUES (17,1,'1850','2018-04-18',11),(18,0,'2600','20
 UNLOCK TABLES;
 
 --
+-- Table structure for table `pagotemporal`
+--
+
+DROP TABLE IF EXISTS `pagotemporal`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pagotemporal` (
+  `idPago` int(11) NOT NULL AUTO_INCREMENT,
+  `tipoPago` int(11) DEFAULT NULL,
+  `fecha` date DEFAULT NULL,
+  `monto` varchar(15) DEFAULT NULL,
+  `idAlumno` int(11) DEFAULT NULL,
+  `idProfesor` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idPago`),
+  KEY `idAlumno` (`idAlumno`),
+  KEY `idProfesor` (`idProfesor`),
+  CONSTRAINT `pagotemporal_ibfk_1` FOREIGN KEY (`idAlumno`) REFERENCES `alumno` (`idAlumno`),
+  CONSTRAINT `pagotemporal_ibfk_2` FOREIGN KEY (`idProfesor`) REFERENCES `profesor` (`idProfesor`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pagotemporal`
+--
+
+LOCK TABLES `pagotemporal` WRITE;
+/*!40000 ALTER TABLE `pagotemporal` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pagotemporal` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `profesor`
 --
 
@@ -336,7 +367,7 @@ CREATE TABLE `profesor` (
 
 LOCK TABLES `profesor` WRITE;
 /*!40000 ALTER TABLE `profesor` DISABLE KEYS */;
-INSERT INTO `profesor` VALUES (10,0,'Gabriela Sosa Martínez','2281916676',0,'gasoma@gmail.com','2018-04-18','Av. Américas #45. Col. Centro. Xalapa, Ver.','2600','2018-04-23'),(11,1,'Luis Daniel Montoya Jiménez','2281765542',1,'ludamoji@outlook.es','2018-04-18','Calle Justino Sarmiento #03. Col. Revolución. Xalapa, Ver.','1850','2018-02-01');
+INSERT INTO `profesor` VALUES (10,1,'Gabriela Sosa Martínez','2281916676',0,'gasoma@gmail.com','2018-04-18','Av. Américas #45. Col. Centro. Xalapa, Ver.','2600','2018-04-23'),(11,1,'Luis Daniel Montoya Jiménez','2281765542',1,'ludamoji@outlook.es','2018-04-18','Calle Justino Sarmiento #03. Col. Revolución. Xalapa, Ver.','1850','2018-02-01');
 /*!40000 ALTER TABLE `profesor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -384,7 +415,7 @@ CREATE TABLE `renta` (
   PRIMARY KEY (`idRenta`),
   KEY `idCliente` (`idCliente`),
   CONSTRAINT `renta_ibfk_1` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idCliente`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -393,6 +424,7 @@ CREATE TABLE `renta` (
 
 LOCK TABLES `renta` WRITE;
 /*!40000 ALTER TABLE `renta` DISABLE KEYS */;
+INSERT INTO `renta` VALUES (1,'2018-05-20',1,'2500');
 /*!40000 ALTER TABLE `renta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -432,4 +464,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-08 18:12:56
+-- Dump completed on 2018-05-22 18:22:28

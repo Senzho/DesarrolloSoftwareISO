@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Desktop
+ * @author Victor Javier
  */
 @Entity
 @Table(name = "profesor")
@@ -45,7 +45,7 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Profesor implements Serializable {
 
     @OneToMany(mappedBy = "idProfesor")
-    private Collection<Pagoalumno> pagoalumnoCollection;
+    private Collection<Pagotemporal> pagotemporalCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -232,12 +232,12 @@ public class Profesor implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Pagoalumno> getPagoalumnoCollection() {
-        return pagoalumnoCollection;
+    public Collection<Pagotemporal> getPagotemporalCollection() {
+        return pagotemporalCollection;
     }
 
-    public void setPagoalumnoCollection(Collection<Pagoalumno> pagoalumnoCollection) {
-        this.pagoalumnoCollection = pagoalumnoCollection;
+    public void setPagotemporalCollection(Collection<Pagotemporal> pagotemporalCollection) {
+        this.pagotemporalCollection = pagotemporalCollection;
     }
     
 }
