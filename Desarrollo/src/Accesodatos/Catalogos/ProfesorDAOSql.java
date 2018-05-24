@@ -9,15 +9,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.Persistence;
 
-public class ProfesorDAOSql implements ProfesorDAO{
-    private Accesodatos.Entidades.Profesor obtenerEntidad(Profesor profesor){
+public class ProfesorDAOSql implements ProfesorDAO {
+
+    private Accesodatos.Entidades.Profesor obtenerEntidad(Profesor profesor) {
         Accesodatos.Entidades.Profesor profesorJpa = new Accesodatos.Entidades.Profesor();
         profesorJpa.setCorreo(profesor.getCorreo());
         profesorJpa.setDireccion(profesor.getDireccion());
         int estado;
-        if (profesor.isEstado()){
+        if (profesor.isEstado()) {
             estado = 1;
-        }else{
+        } else {
             estado = 0;
         }
         profesorJpa.setEstado(estado);
@@ -26,9 +27,9 @@ public class ProfesorDAOSql implements ProfesorDAO{
         profesorJpa.setNombre(profesor.getNombre());
         profesorJpa.setTelefono(profesor.getTelefono());
         int tipoPago;
-        if (profesor.isTipoPago()){
+        if (profesor.isTipoPago()) {
             tipoPago = 1;
-        }else{
+        } else {
             tipoPago = 0;
         }
         profesorJpa.setTipoPago(tipoPago);
@@ -36,7 +37,8 @@ public class ProfesorDAOSql implements ProfesorDAO{
         profesorJpa.setFechaInicio(profesor.getFechaInicio());
         return profesorJpa;
     }
-    public static Profesor obtenerEntidad(Accesodatos.Entidades.Profesor profesorJpa){
+
+    public static Profesor obtenerEntidad(Accesodatos.Entidades.Profesor profesorJpa) {
         Profesor profesor = new Profesor();
         profesor.setIdProfesor(profesorJpa.getIdProfesor());
         profesor.setCorreo(profesorJpa.getCorreo());
@@ -50,41 +52,42 @@ public class ProfesorDAOSql implements ProfesorDAO{
         profesor.setFechaInicio(profesorJpa.getFechaInicio());
         return profesor;
     }
-    
-    public ProfesorDAOSql(){
-        
+
+    public ProfesorDAOSql() {
+
     }
-    
+
     @Override
     public boolean registrarProfesor(Profesor profesor) {
         boolean registrado = false;
-        if (OperacionesString.emailValido(profesor.getCorreo()) && OperacionesString.telefonoValido(profesor.getTelefono()) && OperacionesString.montoValido(profesor.getMonto())){
+        if (OperacionesString.emailValido(profesor.getCorreo()) && OperacionesString.telefonoValido(profesor.getTelefono()) && OperacionesString.montoValido(profesor.getMonto())) {
             ProfesorJpaController controller = new ProfesorJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
-            try{
+            try {
                 Accesodatos.Entidades.Profesor profesorJpa = this.obtenerEntidad(profesor);
                 controller.create(profesorJpa);
                 profesor.setIdProfesor(profesorJpa.getIdProfesor());
                 registrado = true;
-            }catch(Exception excepcion){
+            } catch (Exception excepcion) {
                 registrado = false;
                 Logger.getLogger(ProfesorDAOSql.class.getName()).log(Level.SEVERE, null, excepcion);
             }
-        } 
+        }
         return registrado;
     }
+
     @Override
     public boolean editarProfesor(Profesor profesor) {
         boolean editado = false;
-        if (OperacionesString.emailValido(profesor.getCorreo()) && OperacionesString.telefonoValido(profesor.getTelefono()) && OperacionesString.montoValido(profesor.getMonto())){
+        if (OperacionesString.emailValido(profesor.getCorreo()) && OperacionesString.telefonoValido(profesor.getTelefono()) && OperacionesString.montoValido(profesor.getMonto())) {
             ProfesorJpaController controller = new ProfesorJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
             try {
                 Accesodatos.Entidades.Profesor profesorJpa = controller.findProfesor(profesor.getIdProfesor());
                 profesorJpa.setCorreo(profesor.getCorreo());
                 profesorJpa.setDireccion(profesor.getDireccion());
                 int estado;
-                if (profesor.isEstado()){
+                if (profesor.isEstado()) {
                     estado = 1;
-                }else{
+                } else {
                     estado = 0;
                 }
                 profesorJpa.setEstado(estado);
@@ -92,9 +95,9 @@ public class ProfesorDAOSql implements ProfesorDAO{
                 profesorJpa.setNombre(profesor.getNombre());
                 profesorJpa.setTelefono(profesor.getTelefono());
                 int tipoPago;
-                if (profesor.isTipoPago()){
+                if (profesor.isTipoPago()) {
                     tipoPago = 1;
-                }else{
+                } else {
                     tipoPago = 0;
                 }
                 profesorJpa.setTipoPago(tipoPago);
@@ -117,14 +120,22 @@ public class ProfesorDAOSql implements ProfesorDAO{
         });
         return profesores;
     }
+
     @Override
     public List<Profesor> obtenerProfesores(String nombre) {
         List<Profesor> profesores = new ArrayList();
-        for (Profesor profesor : this.obtenerProfesores()){
-            if (OperacionesString.coincide(nombre, profesor.getNombre())){
+        for (Profesor profesor : this.obtenerProfesores()) {
+            if (OperacionesString.coincide(nombre, profesor.getNombre())) {
                 profesores.add(profesor);
             }
         }
         return profesores;
+    }
+
+    @Override
+    public Profesor obtenerProfesor(int idProfesor) {
+        ProfesorJpaController controller = new ProfesorJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
+        Profesor profesor = ProfesorDAOSql.obtenerEntidad(controller.findProfesor(idProfesor));
+        return profesor;
     }
 }

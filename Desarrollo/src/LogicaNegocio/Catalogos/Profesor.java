@@ -110,4 +110,7 @@ public class Profesor implements Comparable<Profesor>{
     public List<Profesor> obtenerProfesores(String nombre){
         return this.profesorDAO.obtenerProfesores(nombre);
     }
+    public Profesor obtenerProfesor(int idProfesor){
+        return this.profesorDAO.obtenerProfesor(idProfesor);
+    }
 }
