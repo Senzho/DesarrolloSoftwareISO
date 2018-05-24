@@ -30,7 +30,7 @@ public class PagoAlumnoDAOObtenerPagosTest {
         profesor = new Profesor().obtenerProfesores().get(0);
         alumno = new Alumno().obtenerAlumnos().get(0);
         promocion = new Promocion().obtenerPromociones(profesor.getIdProfesor()).get(0);
-        pagoAlumno = new PagoAlumno(new Date(), 0, "500", 1, profesor.getIdProfesor());
+        pagoAlumno = new PagoAlumno(new Date(), 0, "500", 1, profesor.getIdProfesor(), alumno.getIdAlumno());
     }
 
     @Test
@@ -53,7 +53,7 @@ public class PagoAlumnoDAOObtenerPagosTest {
     }
     @Test 
     public void registrarPagoMontoInvalidoTest(){
-        PagoAlumno pago = new PagoAlumno(new Date(), 0, "no es un pago", 1, profesor.getIdProfesor());
+        PagoAlumno pago = new PagoAlumno(new Date(), 0, "no es un pago", 1, profesor.getIdProfesor(), alumno.getIdAlumno());
         boolean registrado = pagoAlumnoDao.registrarPago(pago, alumno.getIdAlumno(), promocion.getIdPromocion());
         assertFalse(registrado);
     }

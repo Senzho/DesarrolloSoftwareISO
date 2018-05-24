@@ -11,6 +11,7 @@ import LogicaNegocio.Grupos.Grupo;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -65,6 +66,16 @@ public class VentanaRegistrarPagoTemporalController implements Initializable {
         }
         return profesorSeleccionado;
     }
+    private Alumno getAlumnoSeleccionado(){
+        Alumno alumnoSeleccionado = null;
+        for (Alumno alumno : this.listaAlumnos){
+            if (alumno.getNombre().equals(this.comboAlumnos.getValue())){
+                alumnoSeleccionado = alumno;
+                break;
+            }
+        }
+        return alumnoSeleccionado;
+    }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -76,18 +87,38 @@ public class VentanaRegistrarPagoTemporalController implements Initializable {
         this.cargarProfesores();
         this.comboAlumnos.setDisable(true);
     }
+    public void registrar(String monto){
+        this.pagoTemporal = new PagoTemporal();
+        this.pagoTemporal.setFecha(new Date());
+        this.pagoTemporal.setIdPago(0);
+        this.pagoTemporal.setMonto(monto);
+        this.pagoTemporal.setTipoPago(this.radioInscripcion.isSelected()?0:1);//0: Inscripcion
+        this.pagoTemporal.setProfesor(this.getProfesorSeleccionado());
+        this.pagoTemporal.setAlumno(this.getAlumnoSeleccionado());
+        if (this.pagoTemporal.registrarPago()){
+            MessageFactory.showMessage("Exito", "Registro", "El pago fue registrado", Alert.AlertType.INFORMATION);
+            this.stage.close();
+        }else{
+            MessageFactory.showMessage("Error", "Registro", "El pago no fue registrado", Alert.AlertType.ERROR);
+        }
+    }
     
     public void comboProfesores_onAction(){
         this.cargarAlumnos();
         this.comboAlumnos.setDisable(false);
     }
     public void botonRegistrar_onClick(){
-        String monto = this.campoMonto.getText().trim();
-        if (OperacionesString.montoValido(monto)){
-            
+        if (this.getProfesorSeleccionado() == null){
+            MessageFactory.showMessage("Advertencia", "Registro", "No hay profesores", Alert.AlertType.WARNING);
+        }else if (this.getAlumnoSeleccionado() == null){
+            MessageFactory.showMessage("Advertencia", "Registro", "No hay alumnos", Alert.AlertType.WARNING);
         }else{
-            MessageFactory.showMessage("Advertencia", "Monto", "El valor del monto no es válido", Alert.AlertType.WARNING);
+            String monto = this.campoMonto.getText().trim();
+            if (OperacionesString.montoValido(monto)){
+                this.registrar(monto);
+            }else{
+                MessageFactory.showMessage("Advertencia", "Monto", "El valor del monto no es válido", Alert.AlertType.WARNING);
+            }
         }
-        this.stage.close();
     }
 }

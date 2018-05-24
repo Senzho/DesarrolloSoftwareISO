@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="170.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="LogicaNegocio.Pagos.PanelPagoTemporalController">
+   <children>
+      <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="77.0" />
+      <Label layoutX="73.0" layoutY="44.0" prefHeight="20.0" prefWidth="508.0" text="Nombre de alumno." AnchorPane.leftAnchor="73.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="107.0">
+         <font>
+            <Font name="Arial Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="73.0" text="Tipo de pago." AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="156.0" layoutY="73.0" prefHeight="20.0" prefWidth="113.0" text="Monto." AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="156.0" AnchorPane.rightAnchor="331.0">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="473.0" layoutY="73.0" prefHeight="20.0" prefWidth="133.0" text="Fecha." AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
+      <Label layoutX="77.0" layoutY="44.0" prefHeight="20.0" prefWidth="517.0" text="Nombre de profesor." AnchorPane.leftAnchor="73.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="44.0">
+         <font>
+            <Font name="Arial Bold" size="16.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

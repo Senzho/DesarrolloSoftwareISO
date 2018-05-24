@@ -35,7 +35,7 @@ public class AlumnoDAOSql implements AlumnoDAO {
         return alumnoJpa;
     }
 
-    private Alumno obtenerEntidad(Accesodatos.Entidades.Alumno alumnoJpa) {
+    public static Alumno obtenerEntidad(Accesodatos.Entidades.Alumno alumnoJpa) {
         Alumno alumno = new Alumno();
         alumno.setIdAlumno(alumnoJpa.getIdAlumno());
         alumno.setCorreo(alumnoJpa.getCorreo());
@@ -99,7 +99,7 @@ public class AlumnoDAOSql implements AlumnoDAO {
         ArrayList<Alumno> alumnos = new ArrayList();
         AlumnoJpaController controller = new AlumnoJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
         controller.findAlumnoEntities().forEach((alumnoJpa) -> {
-            alumnos.add(this.obtenerEntidad(alumnoJpa));
+            alumnos.add(AlumnoDAOSql.obtenerEntidad(alumnoJpa));
         });
         return alumnos;
     }
@@ -122,7 +122,7 @@ public class AlumnoDAOSql implements AlumnoDAO {
         Query query = entityManager.createNamedQuery("Alumno.findFromGrupo");
         query.setParameter("idGrupo", idGrupo);
         query.getResultList().forEach((alumnoJpa) -> {
-            alumnos.add(this.obtenerEntidad((Accesodatos.Entidades.Alumno) alumnoJpa));
+            alumnos.add(AlumnoDAOSql.obtenerEntidad((Accesodatos.Entidades.Alumno) alumnoJpa));
         });
         return alumnos;
     }
@@ -137,7 +137,7 @@ public class AlumnoDAOSql implements AlumnoDAO {
     @Override
     public Alumno obtenerAlumno(int idAlumno) {
         AlumnoJpaController controller = new AlumnoJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
-        Alumno alumno = this.obtenerEntidad(controller.findAlumno(idAlumno));
+        Alumno alumno = AlumnoDAOSql.obtenerEntidad(controller.findAlumno(idAlumno));
         return alumno;
     }
 }
