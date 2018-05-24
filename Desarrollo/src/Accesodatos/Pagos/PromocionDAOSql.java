@@ -98,4 +98,15 @@ public class PromocionDAOSql implements PromocionDAO {
         promocion.setPorcentaje(promocionJpa.getPorcentaje());
         return promocion;
     }
+
+    @Override
+    public List<Promocion> obtenerPromociones() {
+       List<Promocion> promociones = new ArrayList();
+        PromocionJpaController controller = new PromocionJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
+        List<Accesodatos.Entidades.Promocion> promocionJpa = controller.findPromocionEntities();
+        for (Accesodatos.Entidades.Promocion pagoJpa : promocionJpa) {
+            promociones.add(this.obtenerEntidad(pagoJpa));
+        }
+        return promociones;
+    }
 }
