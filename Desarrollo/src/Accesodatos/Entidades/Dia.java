@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Victor Javier
+ * @author Desktop
  */
 @Entity
 @Table(name = "dia")
@@ -32,6 +32,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Dia.findByIdTipo", query = "SELECT d FROM Dia d WHERE d.idTipo = :idTipo")
     , @NamedQuery(name = "Dia.findByDia", query = "SELECT d FROM Dia d WHERE d.dia = :dia")
     , @NamedQuery(name = "Dia.findByHoraInicio", query = "SELECT d FROM Dia d WHERE d.horaInicio = :horaInicio")
+    , @NamedQuery(name = "Dia.findByHoraFin", query = "SELECT d FROM Dia d WHERE d.horaFin = :horaFin")
     , @NamedQuery(name = "Dia.findByHoraFin", query = "SELECT d FROM Dia d WHERE d.horaFin = :horaFin")
     , @NamedQuery(name = "Dia.findByGrupo", query = "SELECT d FROM Dia d WHERE d.tipo = 1 and d.idTipo = :idGrupo")
     , @NamedQuery(name = "Dia.findByRenta", query = "SELECT d FROM Dia d WHERE d.tipo = 0 and d.idTipo = :idRenta")

@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Victor Javier
+ * @author Desktop
  */
 @Entity
 @Table(name = "asistencia")
@@ -33,8 +33,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Asistencia.findAll", query = "SELECT a FROM Asistencia a")
     , @NamedQuery(name = "Asistencia.findByIdAsistencia", query = "SELECT a FROM Asistencia a WHERE a.idAsistencia = :idAsistencia")
     , @NamedQuery(name = "Asistencia.findByFecha", query = "SELECT a FROM Asistencia a WHERE a.fecha = :fecha")
-    , @NamedQuery(name = "Asistencia.findRegistrada", query = "SELECT a FROM Asistencia a WHERE a.idGrupo.idGrupo = :idGrupo and a.fecha = :fecha")
-})
+    , @NamedQuery(name = "Asistencia.findByFecha", query = "SELECT a FROM Asistencia a WHERE a.fecha = :fecha")
+    , @NamedQuery(name = "Asistencia.findRegistrada", query = "SELECT a FROM Asistencia a WHERE a.idGrupo.idGrupo = :idGrupo and a.fecha = :fecha")})
 public class Asistencia implements Serializable {
 
     private static final long serialVersionUID = 1L;

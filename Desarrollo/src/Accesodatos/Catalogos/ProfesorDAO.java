@@ -8,4 +8,5 @@ public interface ProfesorDAO {
     public boolean editarProfesor(Profesor profesor);
     public List<Profesor> obtenerProfesores();
     public List<Profesor> obtenerProfesores(String nombre);
+    public Profesor obtenerProfesor(int idProfesor);
 }

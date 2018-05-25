@@ -20,7 +20,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author Victor Javier
+ * @author Desktop
  */
 public class PagotemporalJpaController implements Serializable {
 

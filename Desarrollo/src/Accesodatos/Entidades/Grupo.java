@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Victor Javier
+ * @author Desktop
  */
 @Entity
 @Table(name = "grupo")
@@ -33,6 +33,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Grupo.findAll", query = "SELECT g FROM Grupo g")
     , @NamedQuery(name = "Grupo.findByIdGrupo", query = "SELECT g FROM Grupo g WHERE g.idGrupo = :idGrupo")
     , @NamedQuery(name = "Grupo.findByDanza", query = "SELECT g FROM Grupo g WHERE g.danza = :danza")
+    , @NamedQuery(name = "Grupo.findByNombre", query = "SELECT g FROM Grupo g WHERE g.nombre = :nombre")
     , @NamedQuery(name = "Grupo.findByNombre", query = "SELECT g FROM Grupo g WHERE g.nombre = :nombre")
     , @NamedQuery(name = "Grupo.findByAlumno", query = "SELECT g FROM Grupo g, Inscripcion i WHERE g.idGrupo = i.idGrupo.idGrupo and i.idAlumno.idAlumno = :idAlumno")
 })

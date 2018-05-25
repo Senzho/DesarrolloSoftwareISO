@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Victor Javier
+ * @author Desktop
  */
 @Entity
 @Table(name = "pagotemporal")

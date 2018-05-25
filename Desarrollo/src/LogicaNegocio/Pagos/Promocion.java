@@ -87,5 +87,8 @@ public class Promocion {
     public Promocion obtenerPromocion(int idPromocion){
         return promocionDao.obtenerPromocion(idPromocion);
     }
+    public List<Promocion> obtenerPromociones(){
+        return promocionDao.obtenerPromociones();
+    }
 
 }

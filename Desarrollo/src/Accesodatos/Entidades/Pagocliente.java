@@ -27,23 +27,21 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Desktop
  */
 @Entity
-@Table(name = "renta")
+@Table(name = "pagocliente")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Renta.findAll", query = "SELECT r FROM Renta r")
-    , @NamedQuery(name = "Renta.findByIdRenta", query = "SELECT r FROM Renta r WHERE r.idRenta = :idRenta")
-    , @NamedQuery(name = "Renta.findByFecha", query = "SELECT r FROM Renta r WHERE r.fecha = :fecha")
-    , @NamedQuery(name = "Renta.findByMonto", query = "SELECT r FROM Renta r WHERE r.monto = :monto")
-    , @NamedQuery(name = "Renta.findByMonto", query = "SELECT r FROM Renta r WHERE r.monto = :monto")
-    , @NamedQuery(name = "Renta.findRentasByIdCliente", query = "SELECT r FROM Renta r WHERE r.idCliente.idCliente = :idCliente")})
-public class Renta implements Serializable {
+    @NamedQuery(name = "Pagocliente.findAll", query = "SELECT p FROM Pagocliente p")
+    , @NamedQuery(name = "Pagocliente.findByIdPago", query = "SELECT p FROM Pagocliente p WHERE p.idPago = :idPago")
+    , @NamedQuery(name = "Pagocliente.findByFecha", query = "SELECT p FROM Pagocliente p WHERE p.fecha = :fecha")
+    , @NamedQuery(name = "Pagocliente.findByMonto", query = "SELECT p FROM Pagocliente p WHERE p.monto = :monto")})
+public class Pagocliente implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idRenta")
-    private Integer idRenta;
+    @Column(name = "idPago")
+    private Integer idPago;
     @Column(name = "fecha")
     @Temporal(TemporalType.DATE)
     private Date fecha;
@@ -53,19 +51,19 @@ public class Renta implements Serializable {
     @ManyToOne
     private Cliente idCliente;
 
-    public Renta() {
+    public Pagocliente() {
     }
 
-    public Renta(Integer idRenta) {
-        this.idRenta = idRenta;
+    public Pagocliente(Integer idPago) {
+        this.idPago = idPago;
     }
 
-    public Integer getIdRenta() {
-        return idRenta;
+    public Integer getIdPago() {
+        return idPago;
     }
 
-    public void setIdRenta(Integer idRenta) {
-        this.idRenta = idRenta;
+    public void setIdPago(Integer idPago) {
+        this.idPago = idPago;
     }
 
     public Date getFecha() {
@@ -95,18 +93,18 @@ public class Renta implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idRenta != null ? idRenta.hashCode() : 0);
+        hash += (idPago != null ? idPago.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Renta)) {
+        if (!(object instanceof Pagocliente)) {
             return false;
         }
-        Renta other = (Renta) object;
-        if ((this.idRenta == null && other.idRenta != null) || (this.idRenta != null && !this.idRenta.equals(other.idRenta))) {
+        Pagocliente other = (Pagocliente) object;
+        if ((this.idPago == null && other.idPago != null) || (this.idPago != null && !this.idPago.equals(other.idPago))) {
             return false;
         }
         return true;
@@ -114,7 +112,7 @@ public class Renta implements Serializable {
 
     @Override
     public String toString() {
-        return "Accesodatos.Entidades.Renta[ idRenta=" + idRenta + " ]";
+        return "Accesodatos.Entidades.Pagocliente[ idPago=" + idPago + " ]";
     }
     
 }

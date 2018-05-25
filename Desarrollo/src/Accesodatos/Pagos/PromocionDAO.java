@@ -17,4 +17,5 @@ public interface PromocionDAO {
     public boolean registrarPromocion(Promocion promocion);
     public List<Promocion> obtenerPromociones(int idProfesor);
     Promocion obtenerPromocion(int idPromocion);
+    public List<Promocion> obtenerPromociones();
 }

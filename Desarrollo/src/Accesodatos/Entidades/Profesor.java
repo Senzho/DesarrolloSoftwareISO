@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Victor Javier
+ * @author Desktop
  */
 @Entity
 @Table(name = "profesor")
@@ -43,9 +43,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Profesor.findByMonto", query = "SELECT p FROM Profesor p WHERE p.monto = :monto")
     , @NamedQuery(name = "Profesor.findByFechaInicio", query = "SELECT p FROM Profesor p WHERE p.fechaInicio = :fechaInicio")})
 public class Profesor implements Serializable {
-
-    @OneToMany(mappedBy = "idProfesor")
-    private Collection<Pagotemporal> pagotemporalCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -80,6 +77,10 @@ public class Profesor implements Serializable {
     private Collection<Gastopromocional> gastopromocionalCollection;
     @OneToMany(mappedBy = "idProfesor")
     private Collection<Grupo> grupoCollection;
+    @OneToMany(mappedBy = "idProfesor")
+    private Collection<Pagotemporal> pagotemporalCollection;
+    @OneToMany(mappedBy = "idProfesor")
+    private Collection<Pagoalumno> pagoalumnoCollection;
     @OneToMany(mappedBy = "idProfesor")
     private Collection<Pagoprofesor> pagoprofesorCollection;
 
@@ -198,6 +199,24 @@ public class Profesor implements Serializable {
     }
 
     @XmlTransient
+    public Collection<Pagotemporal> getPagotemporalCollection() {
+        return pagotemporalCollection;
+    }
+
+    public void setPagotemporalCollection(Collection<Pagotemporal> pagotemporalCollection) {
+        this.pagotemporalCollection = pagotemporalCollection;
+    }
+
+    @XmlTransient
+    public Collection<Pagoalumno> getPagoalumnoCollection() {
+        return pagoalumnoCollection;
+    }
+
+    public void setPagoalumnoCollection(Collection<Pagoalumno> pagoalumnoCollection) {
+        this.pagoalumnoCollection = pagoalumnoCollection;
+    }
+
+    @XmlTransient
     public Collection<Pagoprofesor> getPagoprofesorCollection() {
         return pagoprofesorCollection;
     }
@@ -229,15 +248,6 @@ public class Profesor implements Serializable {
     @Override
     public String toString() {
         return "Accesodatos.Entidades.Profesor[ idProfesor=" + idProfesor + " ]";
-    }
-
-    @XmlTransient
-    public Collection<Pagotemporal> getPagotemporalCollection() {
-        return pagotemporalCollection;
-    }
-
-    public void setPagotemporalCollection(Collection<Pagotemporal> pagotemporalCollection) {
-        this.pagotemporalCollection = pagotemporalCollection;
     }
     
 }

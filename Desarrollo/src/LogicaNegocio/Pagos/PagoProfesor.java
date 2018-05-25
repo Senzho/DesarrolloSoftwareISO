@@ -9,17 +9,18 @@ public class PagoProfesor {
     private boolean tipoPago;
     private String monto;
     private Date fecha;
-    
+    private int idProfesor;
     private PagoProfesorDAOSql pagoProfesorDAO;
 
     public PagoProfesor() {
         this.pagoProfesorDAO = new PagoProfesorDAOSql();
     }
-    public PagoProfesor(int idPago, boolean tipoPago, String monto, Date fecha) {
+    public PagoProfesor(int idPago, boolean tipoPago, String monto, Date fecha, int idProfesor) {
         this.idPago = idPago;
         this.tipoPago = tipoPago;
         this.monto = monto;
         this.fecha = fecha;
+        this.idProfesor = idProfesor;
         this.pagoProfesorDAO = new PagoProfesorDAOSql();
     }
 
@@ -31,6 +32,14 @@ public class PagoProfesor {
     }
     public boolean isTipoPago() {
         return tipoPago;
+    }
+
+    public int getIdProfesor() {
+        return idProfesor;
+    }
+
+    public void setIdProfesor(int idProfesor) {
+        this.idProfesor = idProfesor;
     }
     public void setTipoPago(boolean tipoPago) {
         this.tipoPago = tipoPago;
@@ -53,5 +62,8 @@ public class PagoProfesor {
     }
     public List<PagoProfesor> obtenerPagos(int idProfesor){
         return this.pagoProfesorDAO.obtenerPagos(idProfesor);
+    }
+    public List<PagoProfesor> obtenerPagos(){
+        return this.pagoProfesorDAO.obtenerPagos();
     }
 }
