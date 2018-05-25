@@ -9,35 +9,35 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="170.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="LogicaNegocio.Pagos.PanelPagoTemporalController">
+<AnchorPane id="AnchorPane" maxHeight="170.0" prefHeight="170.0" prefWidth="600.0" style="-fx-background-color: #D8D8D8;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LogicaNegocio.Pagos.PanelPagoTemporalController">
    <children>
-      <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="77.0" />
-      <Label layoutX="73.0" layoutY="44.0" prefHeight="20.0" prefWidth="508.0" text="Nombre de alumno." AnchorPane.leftAnchor="73.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="107.0">
+      <ImageView fx:id="imagenAlumno" fitHeight="50.0" fitWidth="50.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="77.0" />
+      <Label fx:id="labelNombreAlumno" layoutX="73.0" layoutY="44.0" prefHeight="20.0" prefWidth="508.0" text="Nombre de alumno." AnchorPane.leftAnchor="73.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="107.0">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="14.0" layoutY="73.0" text="Tipo de pago." AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0">
+      <Label fx:id="labelTipoPago" layoutX="14.0" layoutY="73.0" text="Tipo de pago." AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="136.0">
          <font>
             <Font name="Arial" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="156.0" layoutY="73.0" prefHeight="20.0" prefWidth="113.0" text="Monto." AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="156.0" AnchorPane.rightAnchor="331.0">
+      <Label fx:id="labelMonto" layoutX="156.0" layoutY="73.0" prefHeight="20.0" prefWidth="113.0" text="Monto." AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="156.0" AnchorPane.rightAnchor="331.0" AnchorPane.topAnchor="136.0">
          <font>
             <Font name="Arial" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="473.0" layoutY="73.0" prefHeight="20.0" prefWidth="133.0" text="Fecha." AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
+      <Label fx:id="labelFecha" alignment="CENTER_RIGHT" layoutX="473.0" layoutY="73.0" prefHeight="20.0" prefWidth="133.0" text="Fecha." AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="136.0">
          <font>
             <Font name="Arial" size="16.0" />
          </font>
       </Label>
-      <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
-      <Label layoutX="77.0" layoutY="44.0" prefHeight="20.0" prefWidth="517.0" text="Nombre de profesor." AnchorPane.leftAnchor="73.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="44.0">
+      <ImageView fx:id="imagenProfesor" fitHeight="50.0" fitWidth="50.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
+      <Label fx:id="labelNombreProfesor" layoutX="77.0" layoutY="44.0" prefHeight="20.0" prefWidth="517.0" text="Nombre de profesor." AnchorPane.leftAnchor="73.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="44.0">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Label>
+      <ImageView fx:id="imagenEliminar" fitHeight="30.0" fitWidth="30.0" layoutX="556.0" layoutY="121.0" onMouseClicked="#eliminar_onClick" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
    </children>
 </AnchorPane>

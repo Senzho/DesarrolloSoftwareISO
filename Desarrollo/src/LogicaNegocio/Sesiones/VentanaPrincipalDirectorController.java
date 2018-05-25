@@ -2,6 +2,7 @@ package LogicaNegocio.Sesiones;
 
 import InterfazGrafica.Grupos.VentanaCRUGrupo;
 import InterfazGrafica.Inscripciones.VentanaInscribirAlumno;
+import InterfazGrafica.Pagos.VentanaRegistrarPagoTemporal;
 import InterfazGrafica.Pagos.VentanaRegistrarRenta;
 import LogicaNegocio.Asistencia.PanelAsistenciaController;
 import LogicaNegocio.Catalogos.PanelCatalogoClientesController;
@@ -114,5 +115,11 @@ public class VentanaPrincipalDirectorController implements Initializable {
     }
     public void menuNuevaRenta_onClick(){
         new VentanaRegistrarRenta();
+    }
+    public void menuPagosTemp_onClick(){
+        this.lanzador.lanzar("/InterfazGrafica/Pagos/PanelPagosTemporales.fxml");
+    }
+    public void menuPagoTemp_onClick(){
+        new VentanaRegistrarPagoTemporal();
     }
 }

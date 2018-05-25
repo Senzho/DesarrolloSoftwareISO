@@ -25,7 +25,7 @@
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#menuRegistroPagoAlumno_onClick" text="Alumno" />
                 <MenuItem mnemonicParsing="false" onAction="#menuRegistroPagoProfesor_onClick" text="Profesor" />
-                <MenuItem mnemonicParsing="false" text="Renta" />
+                <MenuItem mnemonicParsing="false" onAction="#menuPagoTemp_onClick" text="Temporal" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Próximos pagos">
@@ -34,6 +34,7 @@
                 <MenuItem mnemonicParsing="false" text="Alumnos" />
               </items>
             </Menu>
+                  <MenuItem mnemonicParsing="false" onAction="#menuPagosTemp_onClick" text="Registros temporales" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Mis grupos">

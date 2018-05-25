@@ -9,6 +9,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class VentanaInicioSesionController implements Initializable {
@@ -19,6 +21,9 @@ public class VentanaInicioSesionController implements Initializable {
     private TextField txtContraseña;
     @FXML
     private Button btnIniciarSesion;
+    @FXML
+    private ImageView imagenAred;
+    
     private Usuario usuario;
     private Profesor profesor;
     private Stage stage;
@@ -26,6 +31,7 @@ public class VentanaInicioSesionController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.txtUsuario.setStyle("-fx-accent: #FA58F4");
+        this.imagenAred.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/AredImagen.png")));
     }
 
     public void setStage(Stage stage) {

@@ -7,7 +7,7 @@ import Accesodatos.Controladores.PagotemporalJpaController;
 import Accesodatos.Controladores.ProfesorJpaController;
 import Accesodatos.Controladores.exceptions.NonexistentEntityException;
 import Accesodatos.Entidades.Pagotemporal;
-import LogicaNegocio.Catalogos.Profesor;
+import LogicaNegocio.Catalogos.OperacionesString;
 import LogicaNegocio.Pagos.PagoTemporal;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,26 +19,31 @@ public class PagoTemporalDAOSql implements PagoTemporalDAO{
     @Override
     public boolean registrarPago(PagoTemporal pago) {
         boolean registrado = true;
-        PagotemporalJpaController controlador = new PagotemporalJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
-        Pagotemporal pagoTemp = new Pagotemporal();
-        pagoTemp.setIdPago(pago.getIdPago());
-        pagoTemp.setFecha(pago.getFecha());
-        pagoTemp.setMonto(pago.getMonto());
-        pagoTemp.setTipoPago(pago.getTipoPago());
-        try{
-            AlumnoJpaController controladorAlumno = new AlumnoJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
-            ProfesorJpaController controladorProf = new ProfesorJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
-            Accesodatos.Entidades.Profesor profesorJpa = controladorProf.findProfesor(pago.getProfesor().getIdProfesor());
-            Accesodatos.Entidades.Alumno alumnoJpa = controladorAlumno.findAlumno(pago.getAlumno().getIdAlumno());
-            if (profesorJpa != null && alumnoJpa != null){
-                pagoTemp.setIdProfesor(profesorJpa);
-                pagoTemp.setIdAlumno(alumnoJpa);
-                controlador.create(pagoTemp);
-                pago.setIdPago(pagoTemp.getIdPago());
-            }else{
+        if (OperacionesString.montoValido(pago.getMonto())){
+            PagotemporalJpaController controlador = new PagotemporalJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
+            Pagotemporal pagoTemp = new Pagotemporal();
+            pagoTemp.setIdPago(pago.getIdPago());
+            pagoTemp.setFecha(pago.getFecha());
+            pagoTemp.setMonto(pago.getMonto());
+            pagoTemp.setTipoPago(pago.getTipoPago());
+            try{
+                AlumnoJpaController controladorAlumno = new AlumnoJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
+                ProfesorJpaController controladorProf = new ProfesorJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
+                Accesodatos.Entidades.Profesor profesorJpa = controladorProf.findProfesor(pago.getProfesor().getIdProfesor());
+                Accesodatos.Entidades.Alumno alumnoJpa = controladorAlumno.findAlumno(pago.getAlumno().getIdAlumno());
+                if (profesorJpa != null && alumnoJpa != null){
+                    pagoTemp.setIdProfesor(profesorJpa);
+                    pagoTemp.setIdAlumno(alumnoJpa);
+                    controlador.create(pagoTemp);
+                    pago.setIdPago(pagoTemp.getIdPago());
+                }else{
+                    registrado = false;
+                }
+            }catch(Exception excepcion){
                 registrado = false;
+                Logger.getLogger(PagoTemporalDAOSql.class.getName()).log(Level.SEVERE, null, excepcion);
             }
-        }catch(Exception excepcion){
+        }else{
             registrado = false;
         }
         return registrado;
@@ -66,9 +71,9 @@ public class PagoTemporalDAOSql implements PagoTemporalDAO{
         PagotemporalJpaController controller = new PagotemporalJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
         try {
             controller.destroy(idPago);
-        } catch (NonexistentEntityException ex) {
+        } catch (NonexistentEntityException excepcion) {
             eliminado = false;
-            Logger.getLogger(PagoTemporalDAOSql.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PagoTemporalDAOSql.class.getName()).log(Level.SEVERE, null, excepcion);
         }
         return eliminado;
     }
