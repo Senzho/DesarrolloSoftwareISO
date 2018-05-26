@@ -31,9 +31,9 @@ import java.util.logging.Logger;
  */
 public class ReciboPago {
 
-    private Font fuenteBold = new Font(Font.FontFamily.COURIER, 10, Font.BOLD);
-    private Font fuenteNormal = new Font(Font.FontFamily.COURIER, 8, Font.NORMAL);
-    private Font fuenteItalic = new Font(Font.FontFamily.COURIER, 8, Font.ITALIC);
+    private Font fuenteBold = new Font(Font.FontFamily.COURIER, 8, Font.BOLD);
+    private Font fuenteNormal = new Font(Font.FontFamily.COURIER, 6, Font.NORMAL);
+    private Font fuenteItalic = new Font(Font.FontFamily.COURIER, 6, Font.ITALIC);
     private PagoProfesor pagoProfesor;
     private PagoAlumno pagoAlumno;
     private Alumno alumno;
@@ -194,7 +194,7 @@ public class ReciboPago {
         }
         return guardado;
     }
-    private Paragraph getCabecera(String cabecera) {
+    public Paragraph getCabecera(String cabecera) {
         Paragraph p = new Paragraph();
         Chunk c = new Chunk();
         p.setAlignment(Element.ALIGN_CENTER);
@@ -204,7 +204,7 @@ public class ReciboPago {
         return p;
     }
 
-    private Paragraph getInformacion(String informacion) {
+    public Paragraph getInformacion(String informacion) {
         Paragraph p = new Paragraph();
         Chunk c = new Chunk();
         p.setAlignment(Element.ALIGN_JUSTIFIED);
@@ -214,7 +214,7 @@ public class ReciboPago {
         return p;
     }
 
-    private Paragraph getPiePagina(String piePagina) {
+    public Paragraph getPiePagina(String piePagina) {
         Paragraph p = new Paragraph();
         Chunk c = new Chunk();
         p.setAlignment(Element.ALIGN_LEFT);
@@ -224,15 +224,3 @@ public class ReciboPago {
         return p;
     }
 }
-/**
- * MessageFactory.showMessage("Archivo creado", "Se ha guardado el archivo", "El
- * archivo ha sido creado con exito, revise la carpeta:"+rutaGuardar+" para mas
- * inforación", Alert.AlertType.INFORMATION);
- */
-/**
- *             //String ruta = "RecursosGraficos\\AredImagen.png";
-            //Image imagen = Image.getInstance(ruta);
-            //imagen.scaleAbsolute(100, 100);
-            //imagen.setAlignment(Element.ALIGN_CENTER);
-            //doc.add(imagen);
- */

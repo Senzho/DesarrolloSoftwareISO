@@ -41,10 +41,10 @@ public class PanelRegistroController implements Initializable {
         this.lblFecha.setText(Dates.getSentence(pago.getFecha()));
         this.lblPrecio.setText("$ "+pago.getMonto());
     }
-    public void generarPanelPromocion(Promocion promocion){
+    public void generarPanelPromocion(GastoPromocional promocion){
         this.lblTitulo.setText(promocion.getDescripcion());
-        //this.lblFecha.setText(Dates.getSentence(promocion.getfecha()));
-        this.lblPrecio.setText("$ "+promocion.getPorcentaje());
+        this.lblFecha.setText(Dates.getSentence(promocion.getFechaInicio()));
+        this.lblPrecio.setText("$ "+promocion.getMonto());
     }
     public void generarPanelPagoAlumno(PagoAlumno pago, Alumno alumno){
         this.lblTitulo.setText(alumno.getNombre());

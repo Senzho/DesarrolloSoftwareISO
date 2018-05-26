@@ -38,7 +38,7 @@ public class VentanaPrincipalDirector extends Application {
         AnchorPane root = loader.load();//ancho largo
         VentanaPrincipalDirectorController controller = loader.getController();
         controller.setUsuario(this.usuario, this.profesor);
-        Scene scene = new Scene(root, 768, 468);
+        Scene scene = new Scene(root, 788, 488);
         primaryStage.setTitle("Ventana principal director");
         primaryStage.setScene(scene);
         primaryStage.show();

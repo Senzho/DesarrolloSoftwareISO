@@ -64,7 +64,10 @@
                   <MenuItem mnemonicParsing="false" onAction="#menuConsultarEgresos_onClick" text="Ver egresos" />
           </items>
         </Menu>
-        <Menu mnemonicParsing="false" text="Reporte" />
+        <Menu mnemonicParsing="false" text="Reporte">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#menuReporteMensual_onClick" text="Reporte mensual" />
+               </items></Menu>
       </menus>
     </MenuBar>
     <ImageView fx:id="imagenCambiarCuenta" fitHeight="26.0" fitWidth="26.0" onMouseClicked="#imageView_onClick" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0" />

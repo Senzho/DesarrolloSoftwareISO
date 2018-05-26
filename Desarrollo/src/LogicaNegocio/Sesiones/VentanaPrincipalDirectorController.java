@@ -11,6 +11,7 @@ import LogicaNegocio.Catalogos.Profesor;
 import LogicaNegocio.Catalogos.VentanaCRUAlumno;
 import LogicaNegocio.Catalogos.VentanaCRUCliente;
 import LogicaNegocio.Catalogos.VentanaCRUProfesor;
+import LogicaNegocio.Egresos.PanelIngresosEgresosController;
 import LogicaNegocio.Egresos.VentanaCRUEgreso;
 import LogicaNegocio.Egresos.VentanaCRUGastoPromocional;
 import LogicaNegocio.Grupos.PanelGruposProfesorController;
@@ -73,6 +74,11 @@ public class VentanaPrincipalDirectorController implements Initializable {
     }
     public void menuRegistroPagoAlumno_onClick(){
         new VentanaRegistrarPagoAlumno(this.profesor.getIdProfesor());
+    }
+    public void menuReporteMensual_onClick(){
+        this.lanzador.lanzar("/InterfazGrafica/Egresos/PanelIngresosEgresos.fxml");
+        PanelIngresosEgresosController controller =  lanzador.getCargador().getController();
+        controller.setProfesor(profesor);
     }
     public void menuProfesor_onclick(){
         this.lanzador.lanzar("/InterfazGrafica/Catalogos/PanelCatalogoProfesores.fxml");
