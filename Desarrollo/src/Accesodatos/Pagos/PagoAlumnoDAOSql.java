@@ -16,6 +16,7 @@ import LogicaNegocio.Pagos.PagoAlumno;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 /**
  *
@@ -89,10 +90,12 @@ public class PagoAlumnoDAOSql implements PagoAlumnoDAO {
     }
 
     @Override
-    public List<PagoAlumno> obtenerPagos() {
+    public List<PagoAlumno> obtenerPagos(int idProfesor) {
         List<PagoAlumno> listaPagos = new ArrayList();
         PagoalumnoJpaController controller = new PagoalumnoJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
-        List<Accesodatos.Entidades.Pagoalumno> pagoAlumnoJpa = controller.findPagoalumnoEntities();
+        Query query = controller.getEntityManager().createNamedQuery("Pagoalumno.findByIdProfesor");
+        query.setParameter("idProfesor", idProfesor);
+        List<Accesodatos.Entidades.Pagoalumno> pagoAlumnoJpa = query.getResultList();
         for (Pagoalumno pagoJpa : pagoAlumnoJpa) {
             listaPagos.add(this.obtenerEntidad(pagoJpa));
         }

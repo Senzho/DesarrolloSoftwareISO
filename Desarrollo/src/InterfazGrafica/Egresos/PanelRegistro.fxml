@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="58.0" prefWidth="159.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LogicaNegocio.Egresos.PanelRegistroController">
+   <children>
+      <Label fx:id="lblTitulo" layoutX="6.0" layoutY="6.0" text="Tiitulo" AnchorPane.leftAnchor="6.0" AnchorPane.topAnchor="6.0">
+         <font>
+            <Font name="Arial Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblFecha" layoutX="6.0" layoutY="36.0" text="Fecha" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="6.0" AnchorPane.topAnchor="38.0">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblPrecio" layoutX="119.0" layoutY="36.0" text="Precio" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="38.0">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

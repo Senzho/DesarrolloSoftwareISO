@@ -97,8 +97,8 @@ public class PagoAlumno {
     public List<PagoAlumno> obtenerPagos(int idAlumno, int idProfesor) {
        return pagoAlumnoDao.obtenerPagos(idAlumno, idProfesor);
     }
-    public List<PagoAlumno> obtenerPagos(){
-        return pagoAlumnoDao.obtenerPagos();
+    public List<PagoAlumno> obtenerPagos(int idProfesor){
+        return pagoAlumnoDao.obtenerPagos(idProfesor);
     }
     
     public boolean registrarPago(int idAlumno, int idPromocion) {
