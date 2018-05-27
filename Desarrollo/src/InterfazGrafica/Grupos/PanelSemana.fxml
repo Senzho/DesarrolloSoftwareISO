@@ -21,54 +21,83 @@
         </columnConstraints>
         <rowConstraints>
           <RowConstraints maxHeight="185.0" minHeight="24.0" prefHeight="24.0" vgrow="NEVER" />
-            <RowConstraints maxHeight="475.0" minHeight="10.0" prefHeight="413.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="475.0" minHeight="10.0" prefHeight="413.0" vgrow="ALWAYS" />
         </rowConstraints>
          <children>
             <Label text="Domingo" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
-                  <Font name="Arial" size="16.0" />
+                  <Font name="Arial Bold" size="16.0" />
                </font>
             </Label>
             <Label text="Lunes" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
-                  <Font name="Arial" size="16.0" />
+                  <Font name="Arial Bold" size="16.0" />
                </font>
             </Label>
             <Label text="Martes" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
-                  <Font name="Arial" size="16.0" />
+                  <Font name="Arial Bold" size="16.0" />
                </font>
             </Label>
             <Label text="Miercoles" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
-                  <Font name="Arial" size="16.0" />
+                  <Font name="Arial Bold" size="16.0" />
                </font>
             </Label>
             <Label text="Jueves" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
-                  <Font name="Arial" size="16.0" />
+                  <Font name="Arial Bold" size="16.0" />
                </font>
             </Label>
             <Label text="Viernes" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
-                  <Font name="Arial" size="16.0" />
+                  <Font name="Arial Bold" size="16.0" />
                </font>
             </Label>
             <Label text="Sabado" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
-                  <Font name="Arial" size="16.0" />
+                  <Font name="Arial Bold" size="16.0" />
                </font>
             </Label>
-            <VBox fx:id="listaDomingo" prefHeight="200.0" prefWidth="100.0" spacing="5.0" GridPane.rowIndex="1" />
-            <VBox fx:id="listaLunes" prefHeight="200.0" prefWidth="100.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <VBox fx:id="listaMartes" prefHeight="200.0" prefWidth="100.0" spacing="5.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <VBox fx:id="listaMiercoles" prefHeight="200.0" prefWidth="100.0" spacing="5.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <VBox fx:id="listaJueves" prefHeight="200.0" prefWidth="100.0" spacing="5.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-            <VBox fx:id="listaViernes" prefHeight="200.0" prefWidth="100.0" spacing="5.0" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-            <VBox fx:id="listaSabado" prefHeight="200.0" prefWidth="100.0" spacing="5.0" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+            <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #F2F2F2;" GridPane.rowIndex="1">
+               <content>
+                  <VBox fx:id="listaDomingo" prefHeight="200.0" prefWidth="100.0" spacing="5.0" />
+               </content>
+            </ScrollPane>
+            <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #F2F2F2;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <content>
+                  <VBox fx:id="listaLunes" prefHeight="200.0" prefWidth="100.0" spacing="5.0" />
+               </content>
+            </ScrollPane>
+            <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #F2F2F2;" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <content>
+                  <VBox fx:id="listaMartes" prefHeight="200.0" prefWidth="100.0" spacing="5.0" />
+               </content>
+            </ScrollPane>
+            <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #F2F2F2;" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <content>
+                  <VBox fx:id="listaMiercoles" prefHeight="200.0" prefWidth="100.0" spacing="5.0" />
+               </content>
+            </ScrollPane>
+            <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #F2F2F2;" GridPane.columnIndex="4" GridPane.rowIndex="1">
+               <content>
+                  <VBox fx:id="listaJueves" prefHeight="200.0" prefWidth="100.0" spacing="5.0" />
+               </content>
+            </ScrollPane>
+            <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #F2F2F2;" GridPane.columnIndex="5" GridPane.rowIndex="1">
+               <content>
+                  <VBox fx:id="listaViernes" prefHeight="200.0" prefWidth="100.0" spacing="5.0" />
+               </content>
+            </ScrollPane>
+            <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #F2F2F2;" GridPane.columnIndex="6" GridPane.rowIndex="1">
+               <content>
+                  <VBox fx:id="listaSabado" prefHeight="200.0" prefWidth="100.0" spacing="5.0" />
+               </content>
+            </ScrollPane>
          </children>
       </GridPane>
       <Button layoutX="669.0" layoutY="462.0" mnemonicParsing="false" onMouseClicked="#nuevaRenta_onClick" text="Nueva renta" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
       <Button layoutX="572.0" layoutY="456.0" mnemonicParsing="false" onMouseClicked="#nuevoGrupo_onClick" text="Nuevo grupo" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="104.0" />
+      <Button layoutX="513.0" layoutY="456.0" mnemonicParsing="false" onMouseClicked="#botonConsultarRentas_onClick" text="Consultar rentas" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="198.0" />
    </children>
 </AnchorPane>

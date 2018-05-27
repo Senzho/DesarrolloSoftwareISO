@@ -1,6 +1,7 @@
 package Accesodatos.Pagos;
 
 import Accesodatos.Catalogos.ClienteDAOSql;
+import LogicaNegocio.Catalogos.Cliente;
 import LogicaNegocio.Egresos.Dates;
 import LogicaNegocio.Grupos.Dia;
 import LogicaNegocio.Grupos.HorarioException;
@@ -20,7 +21,8 @@ public class RentaDAOCreacionTest {
     
     public RentaDAOCreacionTest() {
         this.rentaDAO = new RentaDAOSql();
-        this.idCliente = new ClienteDAOSql().obtenerClientes().get(0).getIdCliente();
+        Cliente cliente = new ClienteDAOSql().obtenerClientes().get(0);
+        this.idCliente = cliente.getIdCliente();
         this.monto = "250";
         this.horaInicio = "11:30";
         this.horaFin = "12:00";
@@ -34,12 +36,13 @@ public class RentaDAOCreacionTest {
         dia.setSalon("X");
         dia.setIdTipo(this.idCliente);
         this.renta.setDia(dia);
+        this.renta.setCliente(cliente);
     }
     
     @Test
     public void registrarRentaTrue(){
         this.renta.setFecha(Dates.toDate("2018-05-12"));
-        this.renta.setIdCliente(this.idCliente);
+        this.renta.getCliente().setIdCliente(this.idCliente);
         this.renta.setIdRenta(0);
         this.renta.setMonto(this.monto);
         this.renta.getDia().setHoraInicio(this.horaInicio);
@@ -53,7 +56,7 @@ public class RentaDAOCreacionTest {
     @Test
     public void registrarRentaFalseMonto(){
         this.renta.setFecha(Dates.toDate("2018-05-12"));
-        this.renta.setIdCliente(this.idCliente);
+        this.renta.getCliente().setIdCliente(this.idCliente);
         this.renta.setIdRenta(0);
         this.renta.setMonto("w");
         this.renta.getDia().setHoraInicio(this.horaInicio);
@@ -67,7 +70,7 @@ public class RentaDAOCreacionTest {
     @Test (expected = HorarioException.class)
     public void registrarRentaHorarioException() throws HorarioException{
         this.renta.setFecha(Dates.toDate("2018-05-12"));
-        this.renta.setIdCliente(this.idCliente);
+        this.renta.getCliente().setIdCliente(this.idCliente);
         this.renta.setIdRenta(0);
         this.renta.setMonto(this.monto);
         this.renta.getDia().setHoraInicio("17:30");

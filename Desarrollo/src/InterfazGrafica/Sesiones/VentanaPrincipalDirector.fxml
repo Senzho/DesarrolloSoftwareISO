@@ -46,6 +46,7 @@
                   <MenuItem mnemonicParsing="false" onAction="#menuCrearGrupo_onClick" text="Registrar grupo" />
                   <MenuItem mnemonicParsing="false" onAction="#menuNuevaRenta_onClick" text="Registrar renta" />
                   <MenuItem mnemonicParsing="false" onAction="#menuVerGruposRentas_onClick" text="Ver" />
+                  <MenuItem mnemonicParsing="false" onAction="#menuRentas_onClick" text="Consultar rentas" />
                </items></Menu>
         <Menu mnemonicParsing="false" text="Catálogos">
           <items>

@@ -1,5 +1,6 @@
 package Accesodatos.Pagos;
 
+import Accesodatos.Catalogos.ClienteDAOSql;
 import Accesodatos.Controladores.ClienteJpaController;
 import Accesodatos.Controladores.DiaJpaController;
 import Accesodatos.Controladores.RentaJpaController;
@@ -32,7 +33,7 @@ public class RentaDAOSql implements RentaDAO {
                         int miliIni = Horas.getSegundos(dia.getHoraInicio());
                         int miliFinJpa = Horas.getSegundos(diaJpa.getHoraFin());
                         int miliFin = Horas.getSegundos(dia.getHoraFin());
-                        if ((miliIni >= miliIniJpa && miliIni <= miliFinJpa) || (miliFin >= miliIniJpa && miliFin <= miliFinJpa)) {
+                        if ((miliIni >= miliIniJpa && miliIni < miliFinJpa) || (miliFin > miliIniJpa && miliFin <= miliFinJpa)) {
                             diaError = dia;
                             break;
                         }
@@ -60,7 +61,7 @@ public class RentaDAOSql implements RentaDAO {
             rentaJpa.setMonto(renta.getMonto());
             if (this.diaValido(renta.getDia()) == null) {
                 try {
-                    rentaJpa.setIdCliente(clienteController.findCliente(renta.getIdCliente()));
+                    rentaJpa.setIdCliente(clienteController.findCliente(renta.getCliente().getIdCliente()));
                     rentaController.create(rentaJpa);
                     renta.setIdRenta(rentaJpa.getIdRenta());
                     renta.getDia().setIdTipo(renta.getIdRenta());
@@ -105,13 +106,19 @@ public class RentaDAOSql implements RentaDAO {
 
     @Override
     public List<Renta> obtenerRentas() {
-        return new ArrayList();
+        List<Renta> rentas = new ArrayList();
+        RentaJpaController controller = new RentaJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
+        List<Accesodatos.Entidades.Renta> rentasJpa = controller.findRentaEntities();
+        rentasJpa.forEach((rentaJpa) -> {
+            rentas.add(this.obtenerEntidad(rentaJpa));
+        });
+        return rentas;
     }
 
     private Renta obtenerEntidad(Accesodatos.Entidades.Renta rentaJpa) {
         Renta renta = new Renta();
         renta.setFecha(rentaJpa.getFecha());
-        renta.setIdCliente(rentaJpa.getIdCliente().getIdCliente());
+        renta.setCliente(ClienteDAOSql.obtenerEntidad(rentaJpa.getIdCliente()));
         renta.setIdRenta(rentaJpa.getIdRenta());
         renta.setMonto(rentaJpa.getMonto());
         Dia dia = new DiaDAOSql().obtenerDia(rentaJpa.getIdRenta());

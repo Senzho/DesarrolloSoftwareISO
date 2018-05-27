@@ -128,4 +128,7 @@ public class VentanaPrincipalDirectorController implements Initializable {
     public void menuPagoTemp_onClick(){
         new VentanaRegistrarPagoTemporal();
     }
+    public void menuRentas_onClick(){
+        this.lanzador.lanzar("/InterfazGrafica/Pagos/PanelConsultarRentas.fxml");
+    }
 }

@@ -1,12 +1,20 @@
 package LogicaNegocio.Grupos;
 
 import Accesodatos.Grupos.GrupoDAOSql;
+import Accesodatos.Pagos.RentaDAOSql;
 import InterfazGrafica.Grupos.VentanaCRUGrupo;
 import InterfazGrafica.Pagos.VentanaRegistrarRenta;
 import LogicaNegocio.Egresos.Dates;
 import LogicaNegocio.Lanzador;
+import LogicaNegocio.Pagos.PanelRentaController;
+import LogicaNegocio.Pagos.Renta;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.Month;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -35,50 +43,106 @@ public class PanelSemanaController implements Initializable {
     
     private List<Grupo> grupos;
     private Lanzador lanzador;
+    private List<Calendarizable> panelesLunes;
+    private List<Calendarizable> panelesMartes;
+    private List<Calendarizable> panelesMiercoles;
+    private List<Calendarizable> panelesJueves;
+    private List<Calendarizable> panelesViernes;
+    private List<Calendarizable> panelesSabado;
+    private List<Calendarizable> panelesDomingo;
     
-    private AnchorPane getPane(String horaInicio, String horaFin, Grupo grupo){
+    private PanelGrupoDirectorController getControllerGrupo(String horaInicio, String horaFin, Grupo grupo){
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/InterfazGrafica/Grupos/PanelGrupoDirector.fxml"));
-        AnchorPane pane = null;
+        PanelGrupoDirectorController controller = null;
         try {
-            pane = loader.load();
-            PanelGrupoDirectorController controller = loader.getController();
-            controller.iniciar(horaInicio, horaFin, grupo, this.lanzador);
+            AnchorPane pane = loader.load();
+            controller = loader.getController();
+            controller.iniciar(horaInicio, horaFin, grupo, this.lanzador, pane);
         } catch (IOException ex) {
             Logger.getLogger(PanelSemanaController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return pane;
+        return controller;
+    }
+    private PanelRentaController getControllerRenta(Renta renta){
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/InterfazGrafica/Pagos/PanelRenta.fxml"));
+        PanelRentaController controller = null;
+        try {
+            AnchorPane pane = loader.load();
+            controller = loader.getController();
+            controller.iniciar(renta, pane);
+        } catch (IOException ex) {
+            Logger.getLogger(PanelSemanaController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return controller;
+    }
+    private void agregarControladorRenta(PanelRentaController controller, int dia){
+        switch(dia){
+            case 0:
+                this.panelesDomingo.add(controller);
+                break;
+            case 1:
+                this.panelesLunes.add(controller);
+                break;
+            case 2:
+                this.panelesMartes.add(controller);
+                break;
+            case 3:
+                this.panelesMiercoles.add(controller);
+                break;
+            case 4:
+                this.panelesJueves.add(controller);
+                break;
+            case 5:
+                this.panelesViernes.add(controller);
+                break;
+            default:
+                this.panelesSabado.add(controller);
+                break;
+        }
     }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.grupos = new GrupoDAOSql().obtenerGrupos();
+        this.panelesLunes = new ArrayList();
+        this.panelesMartes = new ArrayList();
+        this.panelesMiercoles = new ArrayList();
+        this.panelesJueves = new ArrayList();
+        this.panelesViernes = new ArrayList();
+        this.panelesSabado = new ArrayList();
+        this.panelesDomingo = new ArrayList();
     }
     public void iniciar(Lanzador lanzador){
         this.lanzador = lanzador;
+        this.cargarGrupos();
+        this.cargarRentas();
+        this.cargarPaneles();
+    }
+    public void cargarGrupos(){
         this.grupos.forEach((grupo) -> {
             grupo.getHorario().getDias().forEach((dia) -> {
-                AnchorPane pane = this.getPane(dia.getHoraInicio(), dia.getHoraFin(), grupo);
+                PanelGrupoDirectorController controller = this.getControllerGrupo(dia.getHoraInicio(), dia.getHoraFin(), grupo);
                 switch (dia.getDia()) {
                     case "Lunes":
-                        this.listaLunes.getChildren().add(pane);
+                        this.panelesLunes.add(controller);
                         break;
                     case "Martes":
-                        this.listaMartes.getChildren().add(pane);
+                        this.panelesMartes.add(controller);
                         break;
                     case "Miercoles":
-                        this.listaMiercoles.getChildren().add(pane);
+                        this.panelesMiercoles.add(controller);
                         break;
                     case "Jueves":
-                        this.listaJueves.getChildren().add(pane);
+                        this.panelesJueves.add(controller);
                         break;
                     case "Viernes":
-                        this.listaViernes.getChildren().add(pane);
+                        this.panelesViernes.add(controller);
                         break;
                     case "Sabado":
-                        this.listaSabado.getChildren().add(pane);
+                        this.panelesSabado.add(controller);
                         break;
                     case "Domingo":
-                        this.listaDomingo.getChildren().add(pane);
+                        this.panelesDomingo.add(controller);
                         break;
                     default:
                         break;
@@ -86,11 +150,59 @@ public class PanelSemanaController implements Initializable {
             });
         });
     }
+    public void cargarRentas(){
+        List<Renta> rentas = new RentaDAOSql().obtenerRentas();
+        Date fechaActual = new Date();
+        rentas.forEach((renta) -> {
+            int dia = LocalDate.of(Dates.getYear(fechaActual), Dates.getMonth(fechaActual), Dates.getDay(fechaActual)).getDayOfWeek().getValue();
+            int dif = Dates.getDiference(renta.getFecha(), fechaActual);
+            PanelRentaController controller = this.getControllerRenta(renta);
+            if (dif > -1){
+                if ((dif <= dia)){
+                    this.agregarControladorRenta(controller, dia);
+                }
+            }
+        });
+    }
+    public void cargarPaneles(){
+        Collections.sort(this.panelesLunes);
+        Collections.sort(this.panelesMartes);
+        Collections.sort(this.panelesMiercoles);
+        Collections.sort(this.panelesJueves);
+        Collections.sort(this.panelesViernes);
+        Collections.sort(this.panelesSabado);
+        Collections.sort(this.panelesDomingo);
+        this.panelesLunes.forEach((controller) -> {
+            this.listaLunes.getChildren().add(0, controller.getPane());
+        });
+        this.panelesMartes.forEach((controller) -> {
+            this.listaMartes.getChildren().add(0, controller.getPane());
+        });
+        this.panelesMiercoles.forEach((controller) -> {
+            this.listaMiercoles.getChildren().add(0, controller.getPane());
+        });
+        this.panelesJueves.forEach((controller) -> {
+            this.listaJueves.getChildren().add(0, controller.getPane());
+        });
+        this.panelesViernes.forEach((controller) -> {
+            this.listaViernes.getChildren().add(0, controller.getPane());
+        });
+        this.panelesSabado.forEach((controller) -> {
+            this.listaSabado.getChildren().add(0, controller.getPane());
+        });
+        this.panelesDomingo.forEach((controller) -> {
+            this.listaDomingo.getChildren().add(0, controller.getPane());
+        });
+    }
+    
     
     public void nuevaRenta_onClick(){
         new VentanaRegistrarRenta();
     }
     public void nuevoGrupo_onClick(){
         new VentanaCRUGrupo();
+    }
+    public void botonConsultarRentas_onClick(){
+        this.lanzador.lanzar("/InterfazGrafica/Pagos/PanelConsultarRentas.fxml");
     }
 }

@@ -124,7 +124,7 @@ public class VentanaCRUGrupoController implements Initializable {
                         int miliIni = Horas.getSegundos(dia.getHoraInicio());
                         int miliFin2 = Horas.getSegundos(dia2.getHoraFin());
                         int miliFin = Horas.getSegundos(dia.getHoraFin());;
-                        if ((miliIni >= miliIni2 && miliIni <= miliFin2) || (miliFin >= miliIni2 && miliFin <= miliFin2)) {
+                        if ((miliIni >= miliIni2 && miliIni < miliFin2) || (miliFin > miliIni2 && miliFin <= miliFin2)) {
                             diaValidacion = dia;
                             break fors;
                         }

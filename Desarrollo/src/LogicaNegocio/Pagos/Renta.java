@@ -2,6 +2,7 @@ package LogicaNegocio.Pagos;
 
 import Accesodatos.Grupos.DiaDAOSql;
 import Accesodatos.Pagos.RentaDAOSql;
+import LogicaNegocio.Catalogos.Cliente;
 import LogicaNegocio.Grupos.Dia;
 import LogicaNegocio.Grupos.HorarioException;
 import java.util.Date;
@@ -10,7 +11,7 @@ import java.util.List;
 public class Renta {
     private int idRenta;
     private Date fecha;
-    private int idCliente;
+    private Cliente cliente;
     private Dia dia;
     private String monto;
     private RentaDAOSql rentaDAO;
@@ -18,10 +19,10 @@ public class Renta {
     public Renta(){
         this.rentaDAO = new RentaDAOSql();
     }
-    public Renta(int idRenta, Date fecha, int idCliente, String monto){
+    public Renta(int idRenta, Date fecha, Cliente cliente, String monto){
         this.idRenta = idRenta;
         this.fecha = fecha;
-        this.idCliente = idCliente;
+        this.cliente = cliente;
         this.monto = monto;
         this.dia = new DiaDAOSql().obtenerDia(this.idRenta);
         this.rentaDAO = new RentaDAOSql();
@@ -39,11 +40,11 @@ public class Renta {
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
-    public int getIdCliente() {
-        return idCliente;
+    public Cliente getCliente() {
+        return cliente;
     }
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
     public Dia getDia() {
         return dia;

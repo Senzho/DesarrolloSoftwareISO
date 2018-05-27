@@ -43,14 +43,14 @@ public class VentanaRegistrarRentaController implements Initializable {
     private Stage stage;
     private Renta renta;
     
-    private int obtenerIdCliente(){
-        int id = 0;
-        for (Cliente cliente : this.listaClientes){
-            if (cliente.getNombre().equals(this.clientes.getValue().toString())){
-                id = cliente.getIdCliente();
+    private Cliente obtenerCliente(){
+        Cliente cliente = null;
+        for (Cliente clienteLista : this.listaClientes){
+            if (clienteLista.getNombre().equals(this.clientes.getValue().toString())){
+                cliente = clienteLista;
             }
         }
-        return id;
+        return cliente;
     }
     private String getDia(){
         int valorDia = this.fecha.getValue().getDayOfWeek().getValue();
@@ -125,7 +125,7 @@ public class VentanaRegistrarRentaController implements Initializable {
             if (Dates.getDiference(new Date(), fecha) > 0){
                 this.renta = new Renta();
                 this.renta.setIdRenta(0);
-                this.renta.setIdCliente(this.obtenerIdCliente());
+                this.renta.setCliente(this.obtenerCliente());
                 this.renta.setFecha(fecha);
                 this.renta.setMonto(monto);
                 Dia dia = new Dia();

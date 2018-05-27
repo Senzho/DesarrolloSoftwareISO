@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="LogicaNegocio.Pagos.PanelConsultarRentasController">
+   <children>
+      <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="187.0" layoutY="50.0" prefHeight="296.0" prefWidth="572.0" AnchorPane.bottomAnchor="54.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="50.0">
+         <content>
+            <FlowPane fx:id="panelRentas" hgap="5.0" prefHeight="200.0" prefWidth="200.0" vgap="5.0" />
+         </content>
+      </ScrollPane>
+      <Label layoutX="35.0" layoutY="27.0" text="Cliente:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="comboClientes" layoutX="82.0" layoutY="12.0" onAction="#comboClientes_onAction" prefHeight="25.0" prefWidth="232.0" AnchorPane.leftAnchor="82.0" AnchorPane.rightAnchor="286.0" AnchorPane.topAnchor="12.0" />
+      <Button layoutX="325.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#botonTodas_onClick" text="Todas" AnchorPane.rightAnchor="227.0" AnchorPane.topAnchor="12.0" />
+      <Button layoutX="534.0" layoutY="361.0" mnemonicParsing="false" onMouseClicked="#botonNuevaRenta_onClick" text="Nueva renta" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+   </children>
+</AnchorPane>

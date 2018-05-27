@@ -48,7 +48,7 @@ public class GrupoDAOSql implements GrupoDAO{
                             int miliIni = Horas.getSegundos(dia.getHoraInicio());
                             int miliFinJpa = Horas.getSegundos(diaJpa.getHoraFin());
                             int miliFin = Horas.getSegundos(dia.getHoraFin());
-                            if ((miliIni >= miliIniJpa && miliIni <= miliFinJpa) || (miliFin >= miliIniJpa && miliFin <= miliFinJpa)){
+                            if ((miliIni >= miliIniJpa && miliIni < miliFinJpa) || (miliFin > miliIniJpa && miliFin <= miliFinJpa)){
                                 diaError = dia;
                                 break fors;
                             }

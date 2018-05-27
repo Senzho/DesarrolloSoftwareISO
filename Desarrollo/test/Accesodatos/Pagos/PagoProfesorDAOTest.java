@@ -1,5 +1,6 @@
 package Accesodatos.Pagos;
 
+import Accesodatos.Catalogos.ProfesorDAOSql;
 import LogicaNegocio.Pagos.PagoProfesor;
 import java.util.Date;
 import org.junit.Test;
@@ -13,7 +14,8 @@ public class PagoProfesorDAOTest {
     public PagoProfesorDAOTest() {
         this.pagoProfesorDAO = new PagoProfesorDAOSql();
         this.monto = "900.5";
-        this.pagoProfesor = new PagoProfesor(0, true, this.monto, new Date());
+        int id = new ProfesorDAOSql().obtenerProfesores().get(0).getIdProfesor();
+        this.pagoProfesor = new PagoProfesor(0, true, this.monto, new Date(), id);
     }
     
     @Test

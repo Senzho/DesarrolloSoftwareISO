@@ -9,8 +9,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 
-public class PanelGrupoDirectorController implements Initializable {
+public class PanelGrupoDirectorController extends Calendarizable implements Initializable {
     @FXML
     private Label nombreGrupo;
     @FXML
@@ -36,11 +37,13 @@ public class PanelGrupoDirectorController implements Initializable {
         this.darDeBaja.setImage(new Image("/RecursosGraficos/darkCrossIcon.png"));
     }
     
-    public void iniciar(String horaInicio, String horaFin, Grupo grupo, Lanzador lanzador){
+    public void iniciar(String horaInicio, String horaFin, Grupo grupo, Lanzador lanzador, AnchorPane pane){
+        this.setPane(pane);
         this.lanzador = lanzador;
         this.horaInicio = horaInicio;
         this.horaFin = horaFin;
         this.grupo = grupo;
+        super.setValor(Horas.getSegundos(this.horaInicio));
         this.nombreGrupo.setText(this.grupo.getNombre());
         this.nombreProfesor.setText(this.grupo.getProfesor().getNombre());
         this.horas.setText(this.horaInicio + " - " + this.horaFin);

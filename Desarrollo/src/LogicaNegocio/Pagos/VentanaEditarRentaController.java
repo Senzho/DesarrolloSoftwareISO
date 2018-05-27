@@ -40,10 +40,9 @@ public class VentanaEditarRentaController implements Initializable {
     private TextField monto;
     
     private Renta renta;
-    private Cliente cliente;
     
     private void caragarImagen(){
-        Image imagenCliente = CopiarArchivo.obtenerFotoUsuario("cliente", this.cliente.getIdCliente());
+        Image imagenCliente = CopiarArchivo.obtenerFotoUsuario("cliente", this.renta.getCliente().getIdCliente());
         if (imagenCliente != null) {
             this.imagen.setImage(imagenCliente);
         } else {
@@ -90,14 +89,13 @@ public class VentanaEditarRentaController implements Initializable {
         this.cargarSalones();
     }
     
-    public void setRenta(Renta renta, Cliente cliente){
+    public void setRenta(Renta renta){
         this.renta = renta;
-        this.cliente = cliente;
         this.caragarImagen();
         this.cargarRenta();
     }
     public void cargarRenta(){
-        this.nombre.setText(this.cliente.getNombre());
+        this.nombre.setText(this.renta.getCliente().getNombre());
         Date fecha = this.renta.getFecha();
         this.dia.setValue(LocalDate.of(Dates.getYear(fecha), Dates.getMonth(fecha), Dates.getDay(fecha)));
         this.monto.setText(this.renta.getMonto());
@@ -110,7 +108,7 @@ public class VentanaEditarRentaController implements Initializable {
         String monto = this.monto.getText().trim();
         Date fecha = Dates.toDate(this.dia.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE));
         if (OperacionesString.montoValido(monto)){
-            if (Dates.getDiference(new Date(), fecha) > 0){
+            if (Dates.getDiference(new Date(), fecha) > -1){
                 this.renta.setFecha(fecha);
                 this.renta.setMonto(monto);
                 Dia dia = this.renta.getDia();

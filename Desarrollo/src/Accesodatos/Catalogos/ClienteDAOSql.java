@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 import javax.persistence.Persistence;
 
 public class ClienteDAOSql implements ClienteDAO{
-    private Cliente obtenerEntidad(Accesodatos.Entidades.Cliente clienteJpa){
+    public static Cliente obtenerEntidad(Accesodatos.Entidades.Cliente clienteJpa){
         Cliente cliente = new Cliente();
         cliente.setCorreo(clienteJpa.getCorreo());
         cliente.setFecha(clienteJpa.getFecha());
@@ -75,7 +75,7 @@ public class ClienteDAOSql implements ClienteDAO{
         List<Cliente> clientes = new ArrayList();
         ClienteJpaController controller = new ClienteJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
         controller.findClienteEntities().forEach((clienteJpa) -> {
-            clientes.add(this.obtenerEntidad(clienteJpa));
+            clientes.add(ClienteDAOSql.obtenerEntidad(clienteJpa));
         });
         return clientes;
     }

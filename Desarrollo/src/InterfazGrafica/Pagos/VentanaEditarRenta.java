@@ -13,12 +13,10 @@ import javafx.stage.Stage;
 
 public class VentanaEditarRenta extends Application{
     private Renta renta;
-    private Cliente cliente;
     
-    public VentanaEditarRenta(Renta renta, Cliente cliente){
+    public VentanaEditarRenta(Renta renta){
         try {
             this.renta = renta;
-            this.cliente = cliente;
             this.start(new Stage());
         } catch (Exception ex) {
             Logger.getLogger(VentanaEditarRenta.class.getName()).log(Level.SEVERE, null, ex);
@@ -30,7 +28,7 @@ public class VentanaEditarRenta extends Application{
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/InterfazGrafica/Pagos/VentanaEditarRenta.fxml"));
         AnchorPane root = loader.load();
         VentanaEditarRentaController controller = loader.getController();
-        controller.setRenta(this.renta, this.cliente);
+        controller.setRenta(this.renta);
         Scene scene = new Scene(root, 450, 300);
         primaryStage.setTitle("Renta");
         primaryStage.setScene(scene);
