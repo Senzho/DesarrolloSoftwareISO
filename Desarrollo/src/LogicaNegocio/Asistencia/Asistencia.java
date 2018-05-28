@@ -44,4 +44,7 @@ public class Asistencia {
     public boolean asistenciaRegistrada(){
         return this.asistenciaDAO.asistenciaRegistrada(this.idGrupo, this.fecha);
     }
+    public List<Asistencia> obtenerAsistencias(int idGrupo){
+        return this.asistenciaDAO.obtenerAsistencias(idGrupo);
+    }
 }

@@ -62,4 +62,12 @@ public class PagoAlumnoDAOObtenerPagosTest {
         boolean registrado = pagoAlumnoDao.registrarPago(pagoAlumno, alumno.getIdAlumno(), promocion.getIdPromocion());
         assertTrue(registrado);
     }  
+    @Test
+    public void obtenerProfesoresExceptionTest(){
+        try {
+            pagoAlumnoDao.obtenerPagos(profesor.getIdProfesor());
+        } catch (Exception excepcion) {
+            fail();
+        }
+    }
 }
