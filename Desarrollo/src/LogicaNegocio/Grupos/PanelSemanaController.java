@@ -155,11 +155,13 @@ public class PanelSemanaController implements Initializable {
         Date fechaActual = new Date();
         rentas.forEach((renta) -> {
             int dia = LocalDate.of(Dates.getYear(fechaActual), Dates.getMonth(fechaActual), Dates.getDay(fechaActual)).getDayOfWeek().getValue();
-            int dif = Dates.getDiference(renta.getFecha(), fechaActual);
+            int dif = Dates.getDiference(fechaActual, renta.getFecha());
             PanelRentaController controller = this.getControllerRenta(renta);
             if (dif > -1){
-                if ((dif <= dia)){
-                    this.agregarControladorRenta(controller, dia);
+                if ((dif < 7 - dia)){
+                    Date fechRen = renta.getFecha();
+                    int diaRen = LocalDate.of(Dates.getYear(fechRen), Dates.getMonth(fechRen), Dates.getDay(fechRen)).getDayOfWeek().getValue();
+                    this.agregarControladorRenta(controller, diaRen);
                 }
             }
         });
