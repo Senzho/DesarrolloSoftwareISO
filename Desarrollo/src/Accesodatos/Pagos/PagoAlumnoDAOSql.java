@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Accesodatos.Pagos;
 
 import Accesodatos.Controladores.AlumnoJpaController;
+import Accesodatos.Controladores.GrupoJpaController;
 import Accesodatos.Controladores.PagoalumnoJpaController;
 import Accesodatos.Controladores.ProfesorJpaController;
 import Accesodatos.Controladores.PromocionJpaController;
@@ -14,14 +10,11 @@ import Accesodatos.Entidades.Profesor;
 import LogicaNegocio.Catalogos.OperacionesString;
 import LogicaNegocio.Pagos.PagoAlumno;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-/**
- *
- * @author Desktop
- */
 public class PagoAlumnoDAOSql implements PagoAlumnoDAO {
 
     @Override
@@ -46,6 +39,7 @@ public class PagoAlumnoDAOSql implements PagoAlumnoDAO {
         Profesor profesorJpa = profesorController.findProfesor(pagoJpa.getIdProfesor().getIdProfesor());
         pago.setIdProfesor(profesorJpa.getIdProfesor());
         pago.setIdAlumno(pagoJpa.getIdAlumno().getIdAlumno());
+        pago.setIdGrupo(pagoJpa.getIdGrupo().getIdGrupo());
         if (pagoJpa.getIdPromocion() != null) {
             pago.setIdPromocion(pagoJpa.getIdPromocion().getIdPromocion());
         } else {
@@ -72,6 +66,9 @@ public class PagoAlumnoDAOSql implements PagoAlumnoDAO {
                     ProfesorJpaController profesorController = new ProfesorJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
                     Profesor profesorJpa = profesorController.findProfesor(pagoAlumno.getIdProfesor());
                     pagoJpa.setIdProfesor(profesorJpa);
+                    GrupoJpaController grupoController = new GrupoJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
+                    Accesodatos.Entidades.Grupo grupoJpa = grupoController.findGrupo(pagoAlumno.getIdGrupo());
+                    pagoJpa.setIdGrupo(grupoJpa);
                     PromocionJpaController promocionController = new PromocionJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
                     Accesodatos.Entidades.Promocion promocionJpa = promocionController.findPromocion(idPromocion);
                     if (promocionJpa != null) {
@@ -101,5 +98,18 @@ public class PagoAlumnoDAOSql implements PagoAlumnoDAO {
         }
         return listaPagos;
     }
-
+    @Override
+    public PagoAlumno obtenerPrimeraInscripcion(int idAlumno, int idGrupo){
+        PagoAlumno pagoAlumno;
+        try{
+            PagoalumnoJpaController controller = new PagoalumnoJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
+            Query query = controller.getEntityManager().createNamedQuery("Pagoalumno.findPrimeraInscripcion");
+            query.setParameter("idAlumno", idAlumno);
+            query.setParameter("idGrupo", idGrupo);
+            pagoAlumno = this.obtenerEntidad((Accesodatos.Entidades.Pagoalumno) query.getSingleResult());
+        }catch(Exception excepcion){
+            pagoAlumno = null;
+        }
+        return pagoAlumno;
+    }
 }

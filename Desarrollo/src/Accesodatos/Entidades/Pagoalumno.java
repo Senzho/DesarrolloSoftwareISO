@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Pagoalumno.findByTipoPago", query = "SELECT p FROM Pagoalumno p WHERE p.tipoPago = :tipoPago")
     , @NamedQuery(name = "Pagoalumno.findByFecha", query = "SELECT p FROM Pagoalumno p WHERE p.fecha = :fecha")
     , @NamedQuery(name = "Pagoalumno.findByMonto", query = "SELECT p FROM Pagoalumno p WHERE p.monto = :monto")
-    , @NamedQuery(name = "Pagoalumno.findByIdProfesor", query = "SELECT P FROM Pagoalumno p WHERE p.idProfesor.idProfesor = :idProfesor")
+    , @NamedQuery(name = "Pagoalumno.findPrimeraInscripcion", query = "SELECT p FROM Pagoalumno p WHERE p.idAlumno.idAlumno = :idAlumno AND p.idGrupo.idGrupo = :idGrupo and p.tipoPago = 0")
 })
 public class Pagoalumno implements Serializable {
 
@@ -61,6 +61,9 @@ public class Pagoalumno implements Serializable {
     @JoinColumn(name = "idProfesor", referencedColumnName = "idProfesor")
     @ManyToOne
     private Profesor idProfesor;
+    @JoinColumn(name = "idGrupo", referencedColumnName = "idGrupo")
+    @ManyToOne
+    private Grupo idGrupo;
 
     public Pagoalumno() {
     }
@@ -123,6 +126,14 @@ public class Pagoalumno implements Serializable {
 
     public void setIdProfesor(Profesor idProfesor) {
         this.idProfesor = idProfesor;
+    }
+
+    public Grupo getIdGrupo() {
+        return idGrupo;
+    }
+
+    public void setIdGrupo(Grupo idGrupo) {
+        this.idGrupo = idGrupo;
     }
 
     @Override

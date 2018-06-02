@@ -16,4 +16,5 @@ public interface PagoAlumnoDAO {
     public List<PagoAlumno> obtenerPagos(int idAlumno, int idProfesor);
     public List<PagoAlumno> obtenerPagos(int idProfesor);
     public boolean registrarPago(PagoAlumno pagoAlumno, int idAlumno, int idPromocion);
+    public PagoAlumno obtenerPrimeraInscripcion(int idAlumno, int idGrupo);
 }

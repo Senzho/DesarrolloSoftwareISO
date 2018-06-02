@@ -9,29 +9,29 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="231.0" prefWidth="455.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LogicaNegocio.Pagos.VentanaRegistrarPagoAlumnoController">
+<AnchorPane id="AnchorPane" prefHeight="257.0" prefWidth="455.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LogicaNegocio.Pagos.VentanaRegistrarPagoAlumnoController">
    <children>
       <Label layoutX="25.0" layoutY="16.0" text="Alumno:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
          <font>
             <Font name="Arial" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="25.0" layoutY="57.0" text="Monto:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="57.0">
+      <Label layoutX="14.0" layoutY="87.0" text="Monto:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="87.0">
          <font>
             <Font name="Arial" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="268.0" layoutY="56.0" text="Promoción:" AnchorPane.rightAnchor="122.0" AnchorPane.topAnchor="56.0">
+      <Label layoutX="252.0" layoutY="86.0" text="Promoción:" AnchorPane.rightAnchor="122.0" AnchorPane.topAnchor="86.0">
          <font>
             <Font name="Arial" size="16.0" />
          </font>
       </Label>
-      <RadioButton fx:id="radioInscripcion" layoutX="25.0" layoutY="95.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="120.0" text="Inscripción" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="321.0" AnchorPane.topAnchor="95.0">
+      <RadioButton fx:id="radioInscripcion" layoutX="14.0" layoutY="125.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="120.0" text="Inscripción" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="321.0" AnchorPane.topAnchor="125.0">
          <font>
             <Font name="Arial" size="16.0" />
          </font>
       </RadioButton>
-      <RadioButton fx:id="radioMensualidad" layoutX="148.0" layoutY="95.0" mnemonicParsing="false" text="Mensualidad" AnchorPane.leftAnchor="148.0" AnchorPane.topAnchor="95.0">
+      <RadioButton fx:id="radioMensualidad" layoutX="148.0" layoutY="125.0" mnemonicParsing="false" text="Mensualidad" AnchorPane.leftAnchor="148.0" AnchorPane.topAnchor="125.0">
          <font>
             <Font name="Arial" size="16.0" />
          </font>
@@ -41,19 +41,25 @@
             <Font name="Arial" size="16.0" />
          </font>
       </Button>
-      <ComboBox fx:id="comboAlumno" layoutX="101.0" layoutY="12.0" prefHeight="25.0" prefWidth="353.0" AnchorPane.leftAnchor="101.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="12.0" />
-      <TextField fx:id="txtMonto" layoutX="102.0" layoutY="53.0" prefHeight="25.0" prefWidth="147.0" AnchorPane.leftAnchor="101.0" AnchorPane.rightAnchor="218.5" AnchorPane.topAnchor="53.0" />
-      <Button fx:id="btnPromocion" layoutX="353.0" layoutY="50.0" mnemonicParsing="false" onMouseClicked="#btnPromocion_onClick" prefHeight="20.0" prefWidth="106.0" text="Seleccionar" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="50.0">
+      <ComboBox fx:id="comboAlumno" layoutX="101.0" layoutY="12.0" onAction="#comboAlumnos_onAction" prefHeight="25.0" prefWidth="353.0" AnchorPane.leftAnchor="101.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="12.0" />
+      <TextField fx:id="txtMonto" layoutX="101.0" layoutY="83.0" prefHeight="25.0" prefWidth="147.0" AnchorPane.leftAnchor="101.0" AnchorPane.rightAnchor="218.5" AnchorPane.topAnchor="83.0" />
+      <Button fx:id="btnPromocion" layoutX="335.0" layoutY="80.0" mnemonicParsing="false" onMouseClicked="#btnPromocion_onClick" prefHeight="20.0" prefWidth="106.0" text="Seleccionar" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="80.0">
          <font>
             <Font name="Arial" size="16.0" />
          </font>
       </Button>
-      <Label fx:id="lblPromocion" layoutX="308.0" layoutY="96.0" onMouseClicked="#imagenCancelar_onClick" prefHeight="20.0" prefWidth="120.0" textFill="#1082bc" AnchorPane.leftAnchor="308.0" AnchorPane.rightAnchor="43.0" AnchorPane.topAnchor="96.0">
+      <Label fx:id="lblPromocion" layoutX="308.0" layoutY="126.0" onMouseClicked="#imagenCancelar_onClick" prefHeight="20.0" prefWidth="120.0" textFill="#1082bc" AnchorPane.leftAnchor="308.0" AnchorPane.rightAnchor="43.0" AnchorPane.topAnchor="126.0">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Label>
-      <ImageView fx:id="imagenCancelar" fitHeight="20.0" fitWidth="20.0" layoutX="425.0" layoutY="95.0" onMouseClicked="#imagenCancelar_onClick" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="95.0" />
+      <ImageView fx:id="imagenCancelar" fitHeight="20.0" fitWidth="20.0" layoutX="421.0" layoutY="125.0" onMouseClicked="#imagenCancelar_onClick" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="125.0" />
       <Separator layoutX="14.0" layoutY="171.0" prefHeight="0.0" prefWidth="424.0" AnchorPane.bottomAnchor="57.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+      <Label layoutX="14.0" layoutY="48.0" text="Grupo:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="48.0">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="comboGrupos" layoutX="101.0" layoutY="46.0" prefHeight="25.0" prefWidth="340.0" AnchorPane.leftAnchor="101.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="46.0" />
    </children>
 </AnchorPane>

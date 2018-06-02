@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="48.0" prefWidth="600.0" style="-fx-background-color: #D8D8D8;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LogicaNegocio.Pagos.PanelPagoProximoAlumnoController">
+   <children>
+      <Label fx:id="nombre" layoutX="59.0" layoutY="4.0" prefHeight="20.0" prefWidth="442.0" text="Nombre alumno" AnchorPane.leftAnchor="59.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="fecha" layoutX="59.0" layoutY="24.0" prefHeight="20.0" prefWidth="214.0" text="Fecha" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="59.0">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="imagenAlumno" fitHeight="48.0" fitWidth="48.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+   </children>
+</AnchorPane>

@@ -19,7 +19,10 @@
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#menuInscripcion_onClick" text="Inscribir alumno" />
                </items></Menu>
-        <Menu mnemonicParsing="false" text="Proximos pagos" />
+        <Menu mnemonicParsing="false" text="Proximos pagos">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#menuProximosAlumno_onClick" text="Ver" />
+               </items></Menu>
         <Menu mnemonicParsing="false" text="Mis grupos">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#menuMisGrupos_onClick" text="Ver" />

@@ -234,7 +234,7 @@ CREATE TABLE `inscripcion` (
   KEY `idAlumno` (`idAlumno`),
   CONSTRAINT `inscripcion_ibfk_1` FOREIGN KEY (`idGrupo`) REFERENCES `grupo` (`idGrupo`),
   CONSTRAINT `inscripcion_ibfk_2` FOREIGN KEY (`idAlumno`) REFERENCES `alumno` (`idAlumno`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -262,14 +262,17 @@ CREATE TABLE `pagoalumno` (
   `fecha` date DEFAULT NULL,
   `monto` varchar(15) DEFAULT NULL,
   `idProfesor` int(11) DEFAULT NULL,
+  `idGrupo` int(11) DEFAULT NULL,
   PRIMARY KEY (`idPago`),
   KEY `idAlumno` (`idAlumno`),
   KEY `idPromocion` (`idPromocion`),
   KEY `idProfesor` (`idProfesor`),
+  KEY `idGrupo` (`idGrupo`),
   CONSTRAINT `pagoalumno_ibfk_1` FOREIGN KEY (`idAlumno`) REFERENCES `alumno` (`idAlumno`),
   CONSTRAINT `pagoalumno_ibfk_2` FOREIGN KEY (`idPromocion`) REFERENCES `promocion` (`idPromocion`),
-  CONSTRAINT `pagoalumno_ibfk_3` FOREIGN KEY (`idProfesor`) REFERENCES `profesor` (`idProfesor`)
-) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8;
+  CONSTRAINT `pagoalumno_ibfk_3` FOREIGN KEY (`idProfesor`) REFERENCES `profesor` (`idProfesor`),
+  CONSTRAINT `pagoalumno_ibfk_4` FOREIGN KEY (`idGrupo`) REFERENCES `grupo` (`idGrupo`)
+) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -278,7 +281,7 @@ CREATE TABLE `pagoalumno` (
 
 LOCK TABLES `pagoalumno` WRITE;
 /*!40000 ALTER TABLE `pagoalumno` DISABLE KEYS */;
-INSERT INTO `pagoalumno` VALUES (36,0,5,NULL,'2018-05-04','2500',11),(37,1,5,NULL,'2018-05-04','650',11),(38,0,6,NULL,'2018-05-04','2000',11),(39,1,6,NULL,'2018-05-04','500',11),(40,0,3,3,'2018-05-04','750',11),(41,1,3,NULL,'2018-05-04','260',11),(42,0,4,NULL,'2018-05-04','3000',11),(43,1,4,NULL,'2018-05-04','890',11),(44,0,7,NULL,'2018-05-04','2000',10),(45,1,7,NULL,'2018-05-04','900',10),(46,0,8,NULL,'2018-05-04','1200',10),(47,1,8,NULL,'2018-05-04','600',10),(48,0,9,NULL,'2018-05-04','2000',10),(49,1,9,NULL,'2018-05-04','765',10),(50,0,10,NULL,'2018-05-04','1500',10),(51,1,10,NULL,'2018-05-04','600',10),(52,0,12,NULL,'2018-05-04','1000',10),(53,1,12,NULL,'2018-05-04','450',10),(54,0,11,NULL,'2018-05-04','3200',10),(55,1,11,5,'2018-05-04','800',10),(56,0,8,NULL,'2018-05-04','2150',11),(57,1,8,NULL,'2018-05-04','700',11);
+INSERT INTO `pagoalumno` VALUES (58,0,7,1,'2018-05-05','1200',10,23),(59,1,7,NULL,'2018-05-24','600',10,23),(60,0,8,NULL,'2018-05-24','1200',10,23),(61,1,8,NULL,'2018-05-24','600',10,23),(62,0,8,NULL,'2018-05-24','1200',10,25),(63,1,8,NULL,'2018-05-24','600',10,25),(64,0,9,NULL,'2018-05-24','1200',10,24),(65,1,9,5,'2018-05-24','500',10,24),(66,0,10,NULL,'2018-05-24','3000',10,24),(67,1,10,NULL,'2018-05-24','1200',10,24),(68,0,11,NULL,'2018-05-24','1200',10,25),(69,1,11,NULL,'2018-05-24','400',10,25),(70,0,12,NULL,'2018-05-24','4500',10,25),(71,1,12,NULL,'2018-05-24','500',10,25);
 /*!40000 ALTER TABLE `pagoalumno` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -467,4 +470,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-06-01 18:59:15
+-- Dump completed on 2018-06-02 17:54:02

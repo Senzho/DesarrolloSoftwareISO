@@ -1,36 +1,30 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Accesodatos.Pagos;
 
+import Accesodatos.Grupos.GrupoDAOSql;
 import LogicaNegocio.Catalogos.Alumno;
 import LogicaNegocio.Catalogos.Profesor;
+import LogicaNegocio.Grupos.Grupo;
 import LogicaNegocio.Pagos.PagoAlumno;
 import LogicaNegocio.Pagos.Promocion;
 import java.util.Date;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author Desktop
- */
 public class PagoAlumnoDAOObtenerPagosTest {
-
     private PagoAlumnoDAOSql pagoAlumnoDao;
     private PagoAlumno pagoAlumno;
     private Profesor profesor;
     private Alumno alumno;
     private Promocion promocion;
+    private int idGrupo;
 
     public PagoAlumnoDAOObtenerPagosTest() {
         pagoAlumnoDao = new PagoAlumnoDAOSql();
         profesor = new Profesor().obtenerProfesores().get(0);
         alumno = new Alumno().obtenerAlumnos().get(0);
         promocion = new Promocion().obtenerPromociones(profesor.getIdProfesor()).get(0);
-        pagoAlumno = new PagoAlumno(new Date(), 0, "500", 1, profesor.getIdProfesor(), alumno.getIdAlumno());
+        this.idGrupo = new Grupo().obtenerGrupos().get(0).getId();
+        pagoAlumno = new PagoAlumno(new Date(), 0, "500", 1, profesor.getIdProfesor(), alumno.getIdAlumno(), this.idGrupo);
     }
 
     @Test
@@ -41,7 +35,6 @@ public class PagoAlumnoDAOObtenerPagosTest {
             fail();
         }
     }
-
     @Test(expected = NullPointerException.class)
     public void obtenerPagosTest() {
         this.pagoAlumnoDao.obtenerPagos(0,profesor.getIdProfesor());
@@ -53,7 +46,7 @@ public class PagoAlumnoDAOObtenerPagosTest {
     }
     @Test 
     public void registrarPagoMontoInvalidoTest(){
-        PagoAlumno pago = new PagoAlumno(new Date(), 0, "no es un pago", 1, profesor.getIdProfesor(), alumno.getIdAlumno());
+        PagoAlumno pago = new PagoAlumno(new Date(), 0, "no es un pago", 1, profesor.getIdProfesor(), alumno.getIdAlumno(), this.idGrupo);
         boolean registrado = pagoAlumnoDao.registrarPago(pago, alumno.getIdAlumno(), promocion.getIdPromocion());
         assertFalse(registrado);
     }
@@ -69,5 +62,14 @@ public class PagoAlumnoDAOObtenerPagosTest {
         } catch (Exception excepcion) {
             fail();
         }
+    }
+    @Test
+    public void obtenerPrimeraInscripcionTestNotNull(){
+        int idGrupo = new GrupoDAOSql().obtenerGruposAlumno(this.alumno.getIdAlumno()).get(0).getId();
+        assertNotNull(this.pagoAlumnoDao.obtenerPrimeraInscripcion(this.alumno.getIdAlumno(), idGrupo));
+    }
+    @Test
+    public void obtenerPrimeraInscripcionTestNull(){
+        assertNull(this.pagoAlumnoDao.obtenerPrimeraInscripcion(this.alumno.getIdAlumno(), 0));
     }
 }

@@ -45,19 +45,41 @@ public class VentanaRegistrarPagoAlumnoController implements Initializable {
     private RadioButton radioMensualidad;
     @FXML
     private Button btnRegistrar;
+    @FXML
+    private Label lblPromocion;
+    @FXML
+    private ImageView imagenCancelar;
+    @FXML
+    private ComboBox comboGrupos;
+    
     private PagoAlumno pagoAlumno;
     private int idProfesor;
     private List<Alumno> alumnos;
     private List<Grupo> listaGrupos;
     private Promocion promocion;
     private ToggleGroup grupo;
-    @FXML
-    private Label lblPromocion;
-    @FXML
-    private ImageView imagenCancelar;
-    /**
-     * Initializes the controller class.
-     */
+    
+    private Alumno obtenerAlumnoSeleccionado(){
+        Alumno alumno = null;
+        for (Alumno alumnoRegistro : alumnos) {
+            if (alumnoRegistro.getNombre().equalsIgnoreCase(this.comboAlumno.getSelectionModel().getSelectedItem().toString())) {
+                alumno = alumnoRegistro;
+                break;
+            }
+        }
+        return alumno;
+    }
+    private Grupo obtenerGrupoSeleccionado(){
+        Grupo grupo = null;
+        for (Grupo grupoLista : this.listaGrupos) {
+            if (grupoLista.getNombre().equals(this.comboGrupos.getValue().toString())){
+                grupo = grupoLista;
+                break;
+            }
+        }
+        return grupo;
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         imagenCancelar.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkCrossIcon.png")));
@@ -74,11 +96,24 @@ public class VentanaRegistrarPagoAlumnoController implements Initializable {
         for (Grupo grupo : listaGrupos) {
             List<Alumno> alumnosGrupo = new Alumno().obtenerAlumnos(grupo.getId());
             for (Alumno alumno : alumnosGrupo) {
-                alumnos.add(alumno);
-                comboAlumno.getItems().add(alumno.getNombre());
-                comboAlumno.setValue(alumno.getNombre());
+                if (!this.comboAlumno.getItems().contains(alumno.getNombre())){
+                    alumnos.add(alumno);
+                    comboAlumno.getItems().add(alumno.getNombre());
+                    comboAlumno.setValue(alumno.getNombre());
+                }  
             }
         }
+    }
+    public void inicializarComboGrupos(){
+        this.comboGrupos.getItems().clear();
+        List<Grupo> gruposInscrito = new Grupo().obtenerGruposAlumno(this.obtenerAlumnoSeleccionado().getIdAlumno());
+        this.listaGrupos.forEach((grupo) -> {
+            for (Grupo grupoInscrito : gruposInscrito){
+                if (grupoInscrito.getId() == grupo.getId()){
+                    this.comboGrupos.getItems().add(grupo.getNombre());
+                }
+            }
+        });
     }
 
     public void setPromocion(Promocion promocion) {
@@ -99,39 +134,36 @@ public class VentanaRegistrarPagoAlumnoController implements Initializable {
     }
 
     public void btnRegistrar_onClick() {
-        int tipoPago = 0;
-        boolean registrado = false;
-        if (radioInscripcion.isSelected()) {
-            tipoPago = 0;
-        } else if (radioMensualidad.isSelected()) {
-            tipoPago = 1;
-        }
-        Alumno alumno = null;
-        for (Alumno alumnoRegistro : alumnos) {
-            if (alumnoRegistro.getNombre().equalsIgnoreCase(this.comboAlumno.getSelectionModel().getSelectedItem().toString())) {
-                alumno = alumnoRegistro;
-            }
-        }
-        if (OperacionesString.montoValido(this.txtMonto.getText())) {
-            pagoAlumno = new PagoAlumno(new Date(), 0, this.txtMonto.getText(), tipoPago,this.idProfesor,alumno.getIdAlumno());
-            
-            if (this.promocion != null) {
-                registrado = pagoAlumno.registrarPago(alumno.getIdAlumno(), promocion.getIdPromocion());
+        boolean registrado;
+        int tipoPago = this.radioMensualidad.isSelected()?1:0;
+        Alumno alumno = this.obtenerAlumnoSeleccionado();
+        if (alumno != null){
+            if (OperacionesString.montoValido(this.txtMonto.getText())) {
+                int idGrupo = this.obtenerGrupoSeleccionado().getId();
+                pagoAlumno = new PagoAlumno(new Date(), 0, this.txtMonto.getText(), tipoPago,this.idProfesor,alumno.getIdAlumno(), idGrupo);
+                if (this.promocion != null) {
+                    registrado = pagoAlumno.registrarPago(alumno.getIdAlumno(), promocion.getIdPromocion());
+                } else {
+                    registrado = pagoAlumno.registrarPago(alumno.getIdAlumno(), 0);
+                }
+                if (registrado) {
+                    MessageFactory.showMessage("Confirmación", "Datos regstrados", "Datos registrados correctamente", Alert.AlertType.INFORMATION);
+                } else {
+                    MessageFactory.showMessage("Información", "Datos no almacenados", "Los datos no pudieron almacenarse", Alert.AlertType.ERROR);
+                }
             } else {
-                registrado = pagoAlumno.registrarPago(alumno.getIdAlumno(), 0);
+                MessageFactory.showMessage("Error de datos", "Datos incorrectos", "Debe ingresar un monto", Alert.AlertType.WARNING);
             }
-            if (registrado) {
-                MessageFactory.showMessage("Confirmación", "Datos regstrados", "Datos registrados correctamente", Alert.AlertType.INFORMATION);
-            } else {
-                MessageFactory.showMessage("Información", "Datos no almacenados", "Los datos no pudieron almacenarse", Alert.AlertType.ERROR);
-            }
-        } else {
-            MessageFactory.showMessage("Error de datos", "Datos incorrectos", "Debe ingresar un monto", Alert.AlertType.WARNING);
+        } else{
+            MessageFactory.showMessage("Error de datos", "Datos incorrectos", "Seleccione un alumno", Alert.AlertType.WARNING);
         }
     }
     public void imagenCancelar_onClick(){
         this.promocion = null;
         this.imagenCancelar.setVisible(false);
         this.lblPromocion.setText("");
+    }
+    public void comboAlumnos_onAction(){
+        this.inicializarComboGrupos();
     }
 }

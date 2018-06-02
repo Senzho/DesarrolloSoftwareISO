@@ -5,6 +5,7 @@ import LogicaNegocio.Asistencia.PanelAsistenciaController;
 import LogicaNegocio.Catalogos.Profesor;
 import LogicaNegocio.Grupos.PanelGruposProfesorController;
 import LogicaNegocio.Lanzador;
+import LogicaNegocio.Pagos.PanelProximosPagosAlumnoController;
 import LogicaNegocio.Pagos.VentanaRegistrarPagoAlumno;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -63,5 +64,10 @@ public class VentanaPrincipalProfesorController implements Initializable {
         this.lanzador.lanzar("/InterfazGrafica/Asistencia/PanelAsistencia.fxml");
         PanelAsistenciaController controller = this.lanzador.getCargador().getController();
         controller.setProfesor(this.profesor.getIdProfesor());
+    }
+    public void menuProximosAlumno_onClick(){
+        this.lanzador.lanzar("/InterfazGrafica/Pagos/PanelProximosPagosAlumno.fxml");
+        PanelProximosPagosAlumnoController controller = this.lanzador.getCargador().getController();
+        controller.iniciar(this.profesor.getIdProfesor());
     }
 }

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="LogicaNegocio.Pagos.PanelProximosPagosAlumnoController">
+   <children>
+      <Label layoutX="14.0" layoutY="14.0" text="Grupo:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="comboGrupos" layoutX="72.0" layoutY="12.0" onAction="#comboGrupos_onAction" prefHeight="25.0" prefWidth="268.0" AnchorPane.leftAnchor="72.0" AnchorPane.rightAnchor="260.0" AnchorPane.topAnchor="12.0" />
+      <Button layoutX="349.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#botonTodos_onClick" text="Todos" AnchorPane.rightAnchor="202.0" AnchorPane.topAnchor="12.0" />
+      <Separator layoutX="282.0" layoutY="236.0" prefWidth="200.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="48.0" />
+      <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="240.0" layoutY="140.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="60.0">
+         <content>
+            <VBox fx:id="panelPagos" prefHeight="200.0" prefWidth="100.0" spacing="5.0" />
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>

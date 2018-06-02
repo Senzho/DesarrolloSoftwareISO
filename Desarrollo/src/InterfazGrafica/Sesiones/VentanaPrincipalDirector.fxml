@@ -32,7 +32,7 @@
             <Menu mnemonicParsing="false" text="Próximos pagos">
               <items>
                 <MenuItem mnemonicParsing="false" text="Profesores" />
-                <MenuItem mnemonicParsing="false" text="Alumnos" />
+                <MenuItem mnemonicParsing="false" onAction="#menuProximosAlumno_onClick" text="Alumnos" />
               </items>
             </Menu>
                   <MenuItem mnemonicParsing="false" onAction="#menuPagosTemp_onClick" text="Registros temporales" />
