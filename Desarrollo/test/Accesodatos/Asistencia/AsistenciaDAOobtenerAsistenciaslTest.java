@@ -6,16 +6,11 @@
 package Accesodatos.Asistencia;
 
 import LogicaNegocio.Asistencia.Asistencia;
+import LogicaNegocio.Catalogos.Alumno;
 import LogicaNegocio.Catalogos.Profesor;
 import LogicaNegocio.Grupos.Grupo;
-import java.util.Date;
-import java.util.List;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Test;
 
 /**
  *
@@ -26,20 +21,21 @@ public class AsistenciaDAOobtenerAsistenciaslTest {
     private AsistenciaDAOSql asistenciaDao;
     private Profesor profesor;
     private Grupo grupo;
-
+    private Alumno alumno;
+    
     public AsistenciaDAOobtenerAsistenciaslTest() {
         asistenciaDao = new AsistenciaDAOSql();
         Profesor profesor = new Profesor().obtenerProfesores().get(0);
         grupo = new Grupo().obtenerGruposProfesor(profesor.getIdProfesor()).get(0);
+        alumno = new Alumno().obtenerAlumnos(grupo.getId()).get(0);
     }
 
     @Test
     public void obtenerAsistenciasExceptionTest() {
         try {
-            asistenciaDao.obtenerAsistencias(0);
+            asistenciaDao.obtenerAsistencias(grupo.getId(), alumno.getIdAlumno());
         } catch (Exception excepcion) {
             fail();
         }
     }
-
 }

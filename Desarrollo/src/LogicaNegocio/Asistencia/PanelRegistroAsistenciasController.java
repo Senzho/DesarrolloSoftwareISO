@@ -9,11 +9,10 @@ import LogicaNegocio.Catalogos.Alumno;
 import LogicaNegocio.Catalogos.Profesor;
 import LogicaNegocio.Egresos.Dates;
 import LogicaNegocio.Grupos.Grupo;
-import LogicaNegocio.Pagos.PanelPromocionController;
-import LogicaNegocio.Pagos.Promocion;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -50,9 +49,9 @@ public class PanelRegistroAsistenciasController implements Initializable {
     @FXML
     private Button btnBuscar;
     private Profesor profesor;
-    private List<Asistencia> listaAsistencias;
     private List<Grupo> listaGruposProfesor;
     private List<Alumno> listaAlumnos;
+    private Grupo grupo;
 
     public void setProfesor(Profesor profesor) {
         this.profesor = profesor;
@@ -64,8 +63,8 @@ public class PanelRegistroAsistenciasController implements Initializable {
     }
 
     public void btnBuscar_onClick() {
+        panelAsistencias.getChildren().clear();
         String nombreGrupo = (String) this.comboCursos.getSelectionModel().getSelectedItem();
-        Grupo grupo = null;
         for (Grupo grupo1 : listaGruposProfesor) {
             if (grupo1.getNombre().equals(nombreGrupo)) {
                 grupo = grupo1;
@@ -73,7 +72,6 @@ public class PanelRegistroAsistenciasController implements Initializable {
             }
         }
         listaAlumnos = new Alumno().obtenerAlumnos(grupo.getId());
-        listaAsistencias = new Asistencia().obtenerAsistencias(grupo.getId());
         inicializarTabla();
     }
 
@@ -89,31 +87,49 @@ public class PanelRegistroAsistenciasController implements Initializable {
     public void btnVerAsistencias_onClick() {
         panelAsistencias.getChildren().clear();
         Alumno alumno = (Alumno) tablaAlumnos.getSelectionModel().getSelectedItem();
-        List<Asistencia> asistenciasAlumno = new ArrayList<>();
-        for (Asistencia asistencia : listaAsistencias) {
-            List<Alumno> alumnos = asistencia.getAlumnos();
-            Date fecha = asistencia.getFecha();
-            for (int i = 0; i < alumnos.size(); i++) {
-                if (alumnos.get(i).getNombre().equalsIgnoreCase(alumno.getNombre())) {
-
-                    FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/InterfazGrafica/Asistencia/panelAsistenciaAlumno.fxml"));
-                    AnchorPane panel;
-                    try {
-                        panel = loader.load();
-                        panel.setStyle("-fx-background-color: #DAD9D5;");
-                        PanelAsistenciaAlumnoController controller = loader.getController();
-                        controller.setDatos(alumno.getCorreo(), Dates.getSentence(fecha));
-                        this.panelAsistencias.getChildren().add(panel);
-                    } catch (IOException ex) {
-                        Logger.getLogger(PanelAsistenciaAlumnoController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    System.out.println("asistencia de " + alumno.getNombre() + "//" + Dates.getSentence(fecha));
-                }
+        List<Date> fechasAsistencia = new Asistencia().obtenerAsistencias(grupo.getId(), alumno.getIdAlumno());
+        for (Date fecha : fechasAsistencia) {
+            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/InterfazGrafica/Asistencia/panelAsistenciaAlumno.fxml"));
+            AnchorPane panel;
+            try {
+                panel = loader.load();
+                panel.setStyle("-fx-background-color: #DAD9D5;");
+                PanelAsistenciaAlumnoController controller = loader.getController();
+                int dia = LocalDate.of(Dates.getYear(fecha), Dates.getMonth(fecha), Dates.getDay(fecha)).getDayOfWeek().getValue();
+                controller.setDatos(this.obtenerDia(dia), Dates.getSentence(fecha));
+                this.panelAsistencias.getChildren().add(panel);
+            } catch (IOException ex) {
+                Logger.getLogger(PanelRegistroAsistenciasController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            break;
         }
     }
-
+    public String obtenerDia(int numeroDia){
+        String nombreDia = "";
+        switch (numeroDia) {
+            case 1:
+                nombreDia = "Lunes";
+                break;
+            case 2:
+                nombreDia = "Martes";
+                break;
+            case 3:
+                nombreDia = "Miercoles";
+                break;
+            case 4:
+                nombreDia = "Jueves";
+                break;
+            case 5:
+                nombreDia = "Viernes";
+                break;
+            case 6:
+                nombreDia = "Sabado";
+                break;
+            default:
+                nombreDia = "Domingo";
+                break;
+        }
+        return nombreDia;
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

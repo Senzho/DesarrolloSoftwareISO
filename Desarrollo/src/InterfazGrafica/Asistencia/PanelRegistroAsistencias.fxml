@@ -7,31 +7,31 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="456.0" prefWidth="594.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LogicaNegocio.Asistencia.PanelRegistroAsistenciasController">
+<AnchorPane id="AnchorPane" prefHeight="432.0" prefWidth="618.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LogicaNegocio.Asistencia.PanelRegistroAsistenciasController">
    <children>
-      <ComboBox fx:id="comboCursos" layoutX="80.0" layoutY="20.0" prefHeight="25.0" prefWidth="242.0" />
-      <Label layoutX="20.0" layoutY="23.0" text="Curso:">
+      <ComboBox fx:id="comboCursos" layoutX="80.0" layoutY="20.0" prefHeight="25.0" prefWidth="242.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="296.0" AnchorPane.topAnchor="20.0" />
+      <Label layoutX="20.0" layoutY="23.0" text="Curso:" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="23.0">
          <font>
             <Font name="Arial" size="16.0" />
          </font>
       </Label>
-      <Button fx:id="btnBuscar" layoutX="334.0" layoutY="20.0" mnemonicParsing="false" onMouseClicked="#btnBuscar_onClick" text="Buscar">
+      <Button fx:id="btnBuscar" layoutX="334.0" layoutY="20.0" mnemonicParsing="false" onMouseClicked="#btnBuscar_onClick" text="Buscar" AnchorPane.rightAnchor="220.0" AnchorPane.topAnchor="20.0">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
       </Button>
-      <GridPane layoutX="10.0" layoutY="68.0" prefHeight="325.0" prefWidth="577.0" AnchorPane.bottomAnchor="63.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="68.0">
+      <GridPane layoutX="10.0" layoutY="68.0" prefHeight="379.0" prefWidth="601.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="68.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="284.0" minWidth="10.0" prefWidth="250.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="485.0" minWidth="10.0" prefWidth="327.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="284.0" minWidth="10.0" prefWidth="213.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="485.0" minWidth="10.0" prefWidth="388.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <TableView fx:id="tablaAlumnos" prefHeight="325.0" prefWidth="198.0">
+            <TableView fx:id="tablaAlumnos" onMouseClicked="#btnVerAsistencias_onClick" prefHeight="327.0" prefWidth="235.0">
                <columns>
-                  <TableColumn prefWidth="75.0" text="Alumnos" />
+                  <TableColumn prefWidth="249.0" text="Alumnos" />
                </columns>
             </TableView>
             <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
@@ -41,6 +41,5 @@
             </ScrollPane>
          </children>
       </GridPane>
-      <Button fx:id="btnBuscar" layoutX="528.0" layoutY="417.0" mnemonicParsing="false" onMouseClicked="#btnVerAsistencias_onClick" text="Ver asistencias" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
    </children>
 </AnchorPane>

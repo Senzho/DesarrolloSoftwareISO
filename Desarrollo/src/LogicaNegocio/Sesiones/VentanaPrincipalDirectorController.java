@@ -5,6 +5,7 @@ import InterfazGrafica.Inscripciones.VentanaInscribirAlumno;
 import InterfazGrafica.Pagos.VentanaRegistrarPagoTemporal;
 import InterfazGrafica.Pagos.VentanaRegistrarRenta;
 import LogicaNegocio.Asistencia.PanelAsistenciaController;
+import LogicaNegocio.Asistencia.PanelRegistroAsistenciasController;
 import LogicaNegocio.Catalogos.PanelCatalogoClientesController;
 import LogicaNegocio.Catalogos.PanelCatalogoProfesoresController;
 import LogicaNegocio.Catalogos.Profesor;
@@ -113,6 +114,11 @@ public class VentanaPrincipalDirectorController implements Initializable {
         this.lanzador.lanzar("/InterfazGrafica/Asistencia/PanelAsistencia.fxml");
         PanelAsistenciaController controller = this.lanzador.getCargador().getController();
         controller.setProfesor(this.profesor.getIdProfesor());
+    }
+    public void menuHistorialAsistencia_onClick(){
+        this.lanzador.lanzar("/InterfazGrafica/Asistencia/PanelRegistroAsistencias.fxml");
+        PanelRegistroAsistenciasController controller = this.lanzador.getCargador().getController();
+        controller.setProfesor(this.profesor);
     }
     public void menuVerGruposRentas_onClick(){
         this.lanzador.lanzar("/InterfazGrafica/Grupos/PanelSemana.fxml");

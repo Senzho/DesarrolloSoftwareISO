@@ -14,6 +14,7 @@
         <Menu mnemonicParsing="false" text="Asistencia">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#menuAistencia_onClick" text="Registrar asistencia" />
+                  <MenuItem mnemonicParsing="false" onAction="#menuHistorialAsistencia_onClick" text="Historial de asistencia" />
                </items></Menu>
         <Menu mnemonicParsing="false" text="Inscripción">
                <items>
