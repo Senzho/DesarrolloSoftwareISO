@@ -14,7 +14,6 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 public class InscripcionDAOSql implements InscripcionDAO {
-
     @Override
     public boolean registrar(Inscripcion inscripcion) {
         boolean registrado = true;
@@ -24,18 +23,28 @@ public class InscripcionDAOSql implements InscripcionDAO {
         AlumnoJpaController alumnoController = new AlumnoJpaController(managerFactory);
         GrupoJpaController grupoController = new GrupoJpaController(managerFactory);
         try {
+            Query query = managerFactory.createEntityManager().createNamedQuery("Inscripcion.findByIdAlumno");
+            query.setParameter("idGrupo", inscripcion.getIdGrupo());
+            query.setParameter("idAlumno", inscripcion.getIdAlumno());
+            inscripcionJpa = (Accesodatos.Entidades.Inscripcion) query.getSingleResult();
+            try{
+                inscripcionJpa.setEstado(1);
+                inscripcionController.edit(inscripcionJpa);
+            }catch(Exception excepcion){
+                registrado = false;
+            }
+        } catch (Exception exception) {
             Accesodatos.Entidades.Alumno alumnoJpa = alumnoController.findAlumno(inscripcion.getIdAlumno());
             Accesodatos.Entidades.Grupo grupoJpa = grupoController.findGrupo(inscripcion.getIdGrupo());
             if (alumnoJpa != null && grupoJpa != null) {
                 inscripcionJpa.setIdAlumno(alumnoJpa);
                 inscripcionJpa.setIdGrupo(grupoJpa);
                 inscripcionJpa.setIdInscripcion(0);
+                inscripcionJpa.setEstado(inscripcion.getEstado());
                 inscripcionController.create(inscripcionJpa);
             } else {
                 registrado = false;
             }
-        } catch (Exception exception) {
-            registrado = false;
         }
         return registrado;
     }
@@ -51,9 +60,10 @@ public class InscripcionDAOSql implements InscripcionDAO {
             Accesodatos.Entidades.Inscripcion inscripcionJpa = (Accesodatos.Entidades.Inscripcion) query.getSingleResult();
             InscripcionJpaController controller = new InscripcionJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
             try {
-                controller.destroy(inscripcionJpa.getIdInscripcion());
+                inscripcionJpa.setEstado(0);
+                controller.edit(inscripcionJpa);
                 eliminado = true;
-            } catch (NonexistentEntityException ex) {
+            } catch (Exception ex) {
                 Logger.getLogger(InscripcionDAOSql.class.getName()).log(Level.SEVERE, null, ex);
             }
         }catch(NoResultException e){

@@ -15,12 +15,12 @@
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Label>
-      <Label fx:id="telefono" layoutX="95.0" layoutY="59.0" prefHeight="20.0" prefWidth="149.0" text="Teléfono" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="417.0">
+      <Label fx:id="telefono" layoutX="95.0" layoutY="59.0" prefHeight="20.0" prefWidth="124.0" text="Teléfono" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="442.0">
          <font>
             <Font name="Arial" size="16.0" />
          </font>
       </Label>
-      <Label fx:id="correo" layoutX="252.0" layoutY="60.0" prefHeight="20.0" prefWidth="193.0" text="Correo" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="252.0" AnchorPane.rightAnchor="216.0">
+      <Label fx:id="correo" layoutX="222.0" layoutY="60.0" prefHeight="20.0" prefWidth="193.0" text="Correo" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="222.0" AnchorPane.rightAnchor="246.0">
          <font>
             <Font name="Arial" size="16.0" />
          </font>
@@ -29,5 +29,6 @@
       <ImageView fx:id="cambiarGrupo" fitHeight="30.0" fitWidth="30.0" layoutX="456.0" layoutY="55.0" onMouseClicked="#cambiarGrupo_onClick" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="175.0" />
       <Button fx:id="pagos" layoutX="495.0" layoutY="57.0" mnemonicParsing="false" onMouseClicked="#pagos_onClick" text="Pagos" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="117.0" />
       <Button fx:id="registrarPago" layoutX="551.0" layoutY="57.0" mnemonicParsing="false" onMouseClicked="#registrarPago_onClick" text="Registrar pago" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+      <ImageView fx:id="desinscribir" fitHeight="30.0" fitWidth="30.0" layoutX="415.0" layoutY="51.0" onMouseClicked="#desinscribir_onClick" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="216.0" />
    </children>
 </AnchorPane>

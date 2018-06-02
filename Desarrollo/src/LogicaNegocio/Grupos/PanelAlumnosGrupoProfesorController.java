@@ -66,6 +66,7 @@ public class PanelAlumnosGrupoProfesorController implements Initializable {
             PanelAlumnoProfesorController controller = loader.getController();
             controller.setAlumno(alumno);
             controller.setIdProfesor(this.idProfesor);
+            controller.setIdGrupo(this.getGrupo().getId());
             controller.setLanzador(this.lanzador);
             this.panelAlumnos.getChildren().add(pane);
         } catch (IOException ex) {

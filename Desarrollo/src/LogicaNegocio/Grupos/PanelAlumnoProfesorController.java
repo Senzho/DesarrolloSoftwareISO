@@ -1,7 +1,9 @@
 package LogicaNegocio.Grupos;
 
+import InterfazGrafica.MessageFactory;
 import LogicaNegocio.Catalogos.Alumno;
 import LogicaNegocio.Catalogos.CopiarArchivo;
+import LogicaNegocio.Inscripciones.Inscripcion;
 import LogicaNegocio.Inscripciones.VentanaCambiarAlumnoGrupo;
 import LogicaNegocio.Lanzador;
 import LogicaNegocio.Pagos.PanelHistorialPagosAlumnoController;
@@ -10,6 +12,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -30,15 +34,19 @@ public class PanelAlumnoProfesorController implements Initializable {
     private ImageView imagen;
     @FXML
     private ImageView cambiarGrupo;
+    @FXML
+    private ImageView desinscribir;
     
     private Alumno alumno;
     private Lanzador lanzador;
     private int idProfesor;
+    private int idGrupo;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.cargarImagen();
         this.cambiarGrupo.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkChangeIcon.png")));
+        this.desinscribir.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkCrossIcon.png")));
     }
     
     public void setAlumno(Alumno alumno){
@@ -65,6 +73,9 @@ public class PanelAlumnoProfesorController implements Initializable {
     public void setIdProfesor(int id){
         this.idProfesor = id;
     }
+    public void setIdGrupo(int idGrupo){
+        this.idGrupo = idGrupo;
+    }
     
     public void cambiarGrupo_onClick(){
         new VentanaCambiarAlumnoGrupo(this.alumno, this.idProfesor);
@@ -78,5 +89,20 @@ public class PanelAlumnoProfesorController implements Initializable {
     }
     public void registrarPago_onClick(){
         new VentanaRegistrarPagoAlumno(this.idProfesor, this.alumno.getNombre());
+    }
+    public void desinscribir_onClick(){
+        Alert alerta = new Alert(AlertType.CONFIRMATION);
+        alerta.setTitle("Confirmación de acción");
+        alerta.setHeaderText("Cancelación de inscripción");
+        alerta.setContentText("¿Está seguro de cancelar la inscripción del alumno " + this.alumno.getNombre() + "?");
+        alerta.showAndWait();
+        if (alerta.getResult().getButtonData().isDefaultButton()){
+            Inscripcion inscripcion = new Inscripcion();
+            if (inscripcion.borrarRegistro(this.alumno.getIdAlumno(), this.idGrupo)){
+                MessageFactory.showMessage("Éxito", "Cancelación de inscripción", "La cancelación del alumno fue realizada", AlertType.INFORMATION);
+            }else{
+                MessageFactory.showMessage("Error", "Cancelación de inscripción", "La cancelación del alumno no fue realizada", AlertType.ERROR);
+            }
+        }
     }
 }

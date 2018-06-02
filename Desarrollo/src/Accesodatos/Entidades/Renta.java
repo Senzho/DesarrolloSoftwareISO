@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Desktop
+ * @author Victor Javier
  */
 @Entity
 @Table(name = "renta")
@@ -33,7 +33,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Renta.findAll", query = "SELECT r FROM Renta r")
     , @NamedQuery(name = "Renta.findByIdRenta", query = "SELECT r FROM Renta r WHERE r.idRenta = :idRenta")
     , @NamedQuery(name = "Renta.findByFecha", query = "SELECT r FROM Renta r WHERE r.fecha = :fecha")
-    , @NamedQuery(name = "Renta.findByMonto", query = "SELECT r FROM Renta r WHERE r.monto = :monto")
     , @NamedQuery(name = "Renta.findByMonto", query = "SELECT r FROM Renta r WHERE r.monto = :monto")
     , @NamedQuery(name = "Renta.findRentasByIdCliente", query = "SELECT r FROM Renta r WHERE r.idCliente.idCliente = :idCliente")})
 public class Renta implements Serializable {

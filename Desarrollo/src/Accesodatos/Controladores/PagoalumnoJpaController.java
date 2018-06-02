@@ -14,13 +14,14 @@ import javax.persistence.criteria.Root;
 import Accesodatos.Entidades.Alumno;
 import Accesodatos.Entidades.Pagoalumno;
 import Accesodatos.Entidades.Promocion;
+import Accesodatos.Entidades.Profesor;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author Desktop
+ * @author Victor Javier
  */
 public class PagoalumnoJpaController implements Serializable {
 
@@ -48,6 +49,11 @@ public class PagoalumnoJpaController implements Serializable {
                 idPromocion = em.getReference(idPromocion.getClass(), idPromocion.getIdPromocion());
                 pagoalumno.setIdPromocion(idPromocion);
             }
+            Profesor idProfesor = pagoalumno.getIdProfesor();
+            if (idProfesor != null) {
+                idProfesor = em.getReference(idProfesor.getClass(), idProfesor.getIdProfesor());
+                pagoalumno.setIdProfesor(idProfesor);
+            }
             em.persist(pagoalumno);
             if (idAlumno != null) {
                 idAlumno.getPagoalumnoCollection().add(pagoalumno);
@@ -56,6 +62,10 @@ public class PagoalumnoJpaController implements Serializable {
             if (idPromocion != null) {
                 idPromocion.getPagoalumnoCollection().add(pagoalumno);
                 idPromocion = em.merge(idPromocion);
+            }
+            if (idProfesor != null) {
+                idProfesor.getPagoalumnoCollection().add(pagoalumno);
+                idProfesor = em.merge(idProfesor);
             }
             em.getTransaction().commit();
         } finally {
@@ -75,6 +85,8 @@ public class PagoalumnoJpaController implements Serializable {
             Alumno idAlumnoNew = pagoalumno.getIdAlumno();
             Promocion idPromocionOld = persistentPagoalumno.getIdPromocion();
             Promocion idPromocionNew = pagoalumno.getIdPromocion();
+            Profesor idProfesorOld = persistentPagoalumno.getIdProfesor();
+            Profesor idProfesorNew = pagoalumno.getIdProfesor();
             if (idAlumnoNew != null) {
                 idAlumnoNew = em.getReference(idAlumnoNew.getClass(), idAlumnoNew.getIdAlumno());
                 pagoalumno.setIdAlumno(idAlumnoNew);
@@ -82,6 +94,10 @@ public class PagoalumnoJpaController implements Serializable {
             if (idPromocionNew != null) {
                 idPromocionNew = em.getReference(idPromocionNew.getClass(), idPromocionNew.getIdPromocion());
                 pagoalumno.setIdPromocion(idPromocionNew);
+            }
+            if (idProfesorNew != null) {
+                idProfesorNew = em.getReference(idProfesorNew.getClass(), idProfesorNew.getIdProfesor());
+                pagoalumno.setIdProfesor(idProfesorNew);
             }
             pagoalumno = em.merge(pagoalumno);
             if (idAlumnoOld != null && !idAlumnoOld.equals(idAlumnoNew)) {
@@ -99,6 +115,14 @@ public class PagoalumnoJpaController implements Serializable {
             if (idPromocionNew != null && !idPromocionNew.equals(idPromocionOld)) {
                 idPromocionNew.getPagoalumnoCollection().add(pagoalumno);
                 idPromocionNew = em.merge(idPromocionNew);
+            }
+            if (idProfesorOld != null && !idProfesorOld.equals(idProfesorNew)) {
+                idProfesorOld.getPagoalumnoCollection().remove(pagoalumno);
+                idProfesorOld = em.merge(idProfesorOld);
+            }
+            if (idProfesorNew != null && !idProfesorNew.equals(idProfesorOld)) {
+                idProfesorNew.getPagoalumnoCollection().add(pagoalumno);
+                idProfesorNew = em.merge(idProfesorNew);
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -138,6 +162,11 @@ public class PagoalumnoJpaController implements Serializable {
             if (idPromocion != null) {
                 idPromocion.getPagoalumnoCollection().remove(pagoalumno);
                 idPromocion = em.merge(idPromocion);
+            }
+            Profesor idProfesor = pagoalumno.getIdProfesor();
+            if (idProfesor != null) {
+                idProfesor.getPagoalumnoCollection().remove(pagoalumno);
+                idProfesor = em.merge(idProfesor);
             }
             em.remove(pagoalumno);
             em.getTransaction().commit();

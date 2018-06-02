@@ -1,11 +1,16 @@
 package LogicaNegocio.Grupos;
 
 import InterfazGrafica.Grupos.VentanaCRUGrupo;
+import InterfazGrafica.MessageFactory;
 import LogicaNegocio.Lanzador;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -58,6 +63,23 @@ public class PanelGrupoDirectorController extends Calendarizable implements Init
         new VentanaCRUGrupo(this.grupo);
     }
     public void darDeBaja_onClick(){
-        
+        Alert alerta = new Alert(AlertType.CONFIRMATION);
+        alerta.setTitle("Confirmación de acción");
+        alerta.setHeaderText("Eliminar grupo");
+        alerta.setContentText("¿Está seguro de eliminar el grupo " + this.grupo.getNombre() + "?");
+        alerta.showAndWait();
+        if (alerta.getResult().getButtonData().isDefaultButton()){
+            this.grupo.setEstado(0);
+            try {
+                if (this.grupo.editarGrupo(this.grupo.getHorario().getDias())){
+                    MessageFactory.showMessage("Éxito", "Eliminar grupo", "El grupo fue eliminado", AlertType.INFORMATION);
+                }else{
+                    this.grupo.setEstado(1);
+                    MessageFactory.showMessage("Error", "Eliminar grupo", "El grupo no fue eliminado", AlertType.ERROR);
+                }
+            } catch (HorarioException ex) {
+                Logger.getLogger(PanelGrupoDirectorController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 }

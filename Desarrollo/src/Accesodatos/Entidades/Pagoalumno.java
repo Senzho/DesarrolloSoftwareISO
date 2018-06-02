@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Desktop
+ * @author Victor Javier
  */
 @Entity
 @Table(name = "pagoalumno")
@@ -35,7 +35,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Pagoalumno.findByTipoPago", query = "SELECT p FROM Pagoalumno p WHERE p.tipoPago = :tipoPago")
     , @NamedQuery(name = "Pagoalumno.findByFecha", query = "SELECT p FROM Pagoalumno p WHERE p.fecha = :fecha")
     , @NamedQuery(name = "Pagoalumno.findByMonto", query = "SELECT p FROM Pagoalumno p WHERE p.monto = :monto")
-    , @NamedQuery(name = "Pagoalumno.findByIdProfesor", query = "SELECT P FROM Pagoalumno p WHERE p.idProfesor.idProfesor = :idProfesor")})
+    , @NamedQuery(name = "Pagoalumno.findByIdProfesor", query = "SELECT P FROM Pagoalumno p WHERE p.idProfesor.idProfesor = :idProfesor")
+})
 public class Pagoalumno implements Serializable {
 
     private static final long serialVersionUID = 1L;

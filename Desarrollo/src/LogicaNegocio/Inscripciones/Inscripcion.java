@@ -6,15 +6,17 @@ public class Inscripcion {
     private int idInscripcion;
     private int idGrupo;
     private int idAlumno;
+    private int estado;
     private final InscripcionDAOSql inscripcionDAO;
 
     public Inscripcion(){
         this.inscripcionDAO = new InscripcionDAOSql();
     }
-    public Inscripcion(int idInscripcion, int idGrupo, int idAlumno) {
+    public Inscripcion(int idInscripcion, int idGrupo, int idAlumno, int estado) {
         this.idInscripcion = idInscripcion;
         this.idGrupo = idGrupo;
         this.idAlumno = idAlumno;
+        this.estado = estado;
         this.inscripcionDAO = new InscripcionDAOSql();
     }
 
@@ -35,6 +37,12 @@ public class Inscripcion {
     }
     public void setIdAlumno(int idAlumno) {
         this.idAlumno = idAlumno;
+    }
+    public int getEstado(){
+        return this.estado;
+    }
+    public void setEstado(int estado){
+        this.estado = estado;
     }
     
     public boolean registrar(){

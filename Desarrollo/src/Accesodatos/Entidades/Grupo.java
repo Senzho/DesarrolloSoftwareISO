@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Desktop
+ * @author Victor Javier
  */
 @Entity
 @Table(name = "grupo")
@@ -34,9 +34,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Grupo.findByIdGrupo", query = "SELECT g FROM Grupo g WHERE g.idGrupo = :idGrupo")
     , @NamedQuery(name = "Grupo.findByDanza", query = "SELECT g FROM Grupo g WHERE g.danza = :danza")
     , @NamedQuery(name = "Grupo.findByNombre", query = "SELECT g FROM Grupo g WHERE g.nombre = :nombre")
-    , @NamedQuery(name = "Grupo.findByNombre", query = "SELECT g FROM Grupo g WHERE g.nombre = :nombre")
-    , @NamedQuery(name = "Grupo.findByAlumno", query = "SELECT g FROM Grupo g, Inscripcion i WHERE g.idGrupo = i.idGrupo.idGrupo and i.idAlumno.idAlumno = :idAlumno")
-})
+    , @NamedQuery(name = "Grupo.findByAlumno", query = "SELECT g FROM Grupo g, Inscripcion i WHERE g.idGrupo = i.idGrupo.idGrupo and i.idAlumno.idAlumno = :idAlumno and i.estado = 1 and g.estado = 1")
+    , @NamedQuery(name = "Grupo.findByEstado", query = "SELECT g FROM Grupo g WHERE g.estado = :estado")})
 public class Grupo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,6 +48,8 @@ public class Grupo implements Serializable {
     private String danza;
     @Column(name = "nombre")
     private String nombre;
+    @Column(name = "estado")
+    private Integer estado;
     @JoinColumn(name = "idProfesor", referencedColumnName = "idProfesor")
     @ManyToOne
     private Profesor idProfesor;
@@ -86,6 +87,14 @@ public class Grupo implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public Integer getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Integer estado) {
+        this.estado = estado;
     }
 
     public Profesor getIdProfesor() {

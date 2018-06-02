@@ -11,15 +11,17 @@ public class Grupo {
     private String danza;
     private Horario horario;
     private Profesor profesor;
+    private int estado;
     private GrupoDAOSql grupoDAO;
 
     public Grupo(){
         this.grupoDAO = new GrupoDAOSql();
     }
-    public Grupo(int id, String nombre, String danza) {
+    public Grupo(int id, String nombre, String danza, int estado) {
         this.id = id;
         this.nombre = nombre;
         this.danza = danza;
+        this.estado = estado;
         this.grupoDAO = new GrupoDAOSql();
     }
 
@@ -52,6 +54,12 @@ public class Grupo {
     }
     public void setProfesor(Profesor profesor){
         this.profesor = profesor;
+    }
+    public int getEstado(){
+        return this.estado;
+    }
+    public void setEstado(int estado){
+        this.estado = estado;
     }
     
     public boolean registrarGrupo() throws HorarioException{

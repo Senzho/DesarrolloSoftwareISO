@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Desktop
+ * @author Victor Javier
  */
 @Entity
 @Table(name = "alumno")
@@ -39,8 +39,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Alumno.findByCorreo", query = "SELECT a FROM Alumno a WHERE a.correo = :correo")
     , @NamedQuery(name = "Alumno.findByEstado", query = "SELECT a FROM Alumno a WHERE a.estado = :estado")
     , @NamedQuery(name = "Alumno.findByTelefono", query = "SELECT a FROM Alumno a WHERE a.telefono = :telefono")
-    , @NamedQuery(name = "Alumno.findByTelefono", query = "SELECT a FROM Alumno a WHERE a.telefono = :telefono")
-    , @NamedQuery(name = "Alumno.findFromGrupo", query = "SELECT a FROM Alumno a, Inscripcion i WHERE i.idGrupo.idGrupo = :idGrupo AND i.idAlumno.idAlumno = a.idAlumno")})
+    , @NamedQuery(name = "Alumno.findFromGrupo", query = "SELECT a FROM Alumno a, Inscripcion i WHERE i.idGrupo.idGrupo = :idGrupo AND i.idAlumno.idAlumno = a.idAlumno and i.estado = 1")
+})
 public class Alumno implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package LogicaNegocio.Inscripciones;
 
 import Accesodatos.Grupos.GrupoDAOSql;
@@ -23,13 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-/**
- * FXML Controller class
- *
- * @author Desktop
- */
 public class VentanaCambiarAlumnoGrupoController implements Initializable {
-
     @FXML
     private ComboBox comboGruposDisponibles;
     @FXML
@@ -38,16 +27,15 @@ public class VentanaCambiarAlumnoGrupoController implements Initializable {
     private Label txtNombre;
     @FXML
     private ImageView imagenUsuario;
+    
     private int idProfesor;
     private Alumno alumno;
+    private List<Grupo> listaGruposProfesor;
     private List<Grupo> listaGruposInscrito;
     private List<Grupo> listaGruposDisponibles;
     private GrupoDAOSql grupoDao;
     private InscripcionDAOSql inscripcionDao;
 
-    /**
-     * Initializes the controller class.
-     */
     public void setIdProfesor(int idProfesor) {
         this.idProfesor = idProfesor;
         cargarGruposDisponibles();
@@ -71,7 +59,7 @@ public class VentanaCambiarAlumnoGrupoController implements Initializable {
     public void cargarGruposDisponibles() {
         grupoDao = new GrupoDAOSql();
         listaGruposDisponibles = new ArrayList();
-        List<Grupo> gruposProfesor = grupoDao.obtenerGruposProfesor(idProfesor);
+        this.listaGruposProfesor = grupoDao.obtenerGruposProfesor(idProfesor);
         List<Grupo> listaGrupos = grupoDao.obtenerGruposAlumno(this.alumno.getIdAlumno());
         listaGruposInscrito = new ArrayList();
         if (!listaGrupos.isEmpty()) {
@@ -82,19 +70,23 @@ public class VentanaCambiarAlumnoGrupoController implements Initializable {
                 }
             }
         }
-        cargarComboGruposDisponibles(gruposProfesor);
+        cargarComboGruposDisponibles();
         this.cargarCombos();
     }
 
-    public void cargarComboGruposDisponibles(List<Grupo> gruposProfesor) {
+    public void cargarComboGruposDisponibles() {
         listaGruposDisponibles.clear();
-        for (int i = 0; i < gruposProfesor.size(); i++) {
-            String nombreDanza = gruposProfesor.get(i).getDanza();
-            for (int j = 0; j < listaGruposInscrito.size(); j++) {
-                String nombreInscripcion = listaGruposInscrito.get(j).getDanza();
-                if (!nombreDanza.equals(nombreInscripcion)) {
-                    listaGruposDisponibles.add(gruposProfesor.get(i));
+        for (int i = 0; i < this.listaGruposProfesor.size(); i++) {
+            Grupo grupoProfe = this.listaGruposProfesor.get(i);
+            boolean esta = false;
+            for (Grupo grupoAlu : this.listaGruposInscrito) {
+                if (grupoAlu.getId() == grupoProfe.getId()){
+                    esta = true;
+                    break;
                 }
+            }
+            if (!esta){
+                listaGruposDisponibles.add(grupoProfe);
             }
         }
     }
@@ -137,7 +129,7 @@ public class VentanaCambiarAlumnoGrupoController implements Initializable {
                     break;
                 }
             }
-            Inscripcion inscripcion = new Inscripcion(0, grupoInscripcion.getId(), this.alumno.getIdAlumno());
+            Inscripcion inscripcion = new Inscripcion(0, grupoInscripcion.getId(), this.alumno.getIdAlumno(), 1);
             boolean creado = inscripcionDao.registrar(inscripcion);
             if (creado) {
                 MessageFactory.showMessage("Registro exitoso", "Creacion de registro", "Regitro creado correctamente", Alert.AlertType.CONFIRMATION);

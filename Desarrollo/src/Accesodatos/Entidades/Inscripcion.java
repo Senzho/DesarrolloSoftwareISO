@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Desktop
+ * @author Victor Javier
  */
 @Entity
 @Table(name = "inscripcion")
@@ -29,9 +29,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Inscripcion.findAll", query = "SELECT i FROM Inscripcion i")
     , @NamedQuery(name = "Inscripcion.findByIdInscripcion", query = "SELECT i FROM Inscripcion i WHERE i.idInscripcion = :idInscripcion")
-    , @NamedQuery(name = "Inscripcion.findByIdInscripcion", query = "SELECT i FROM Inscripcion i WHERE i.idInscripcion = :idInscripcion")
     , @NamedQuery(name = "Inscripcion.findByIdAlumno", query = "SELECT i FROM Inscripcion i WHERE i.idGrupo.idGrupo = :idGrupo AND i.idAlumno.idAlumno = :idAlumno")
-})
+    , @NamedQuery(name = "Inscripcion.findByEstado", query = "SELECT i FROM Inscripcion i WHERE i.estado = :estado")})
 public class Inscripcion implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,6 +39,8 @@ public class Inscripcion implements Serializable {
     @Basic(optional = false)
     @Column(name = "idInscripcion")
     private Integer idInscripcion;
+    @Column(name = "estado")
+    private Integer estado;
     @JoinColumn(name = "idGrupo", referencedColumnName = "idGrupo")
     @ManyToOne
     private Grupo idGrupo;
@@ -60,6 +61,14 @@ public class Inscripcion implements Serializable {
 
     public void setIdInscripcion(Integer idInscripcion) {
         this.idInscripcion = idInscripcion;
+    }
+
+    public Integer getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Integer estado) {
+        this.estado = estado;
     }
 
     public Grupo getIdGrupo() {

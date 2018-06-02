@@ -25,6 +25,7 @@ public class GrupoDAOSql implements GrupoDAO{
         grupo.setDanza(grupoJpa.getDanza());
         grupo.setId(grupoJpa.getIdGrupo());
         grupo.setNombre(grupoJpa.getNombre());
+        grupo.setEstado(grupoJpa.getEstado());
         return grupo;
     }
     private Accesodatos.Entidades.Grupo obtenerEntidad(Grupo grupo){
@@ -32,6 +33,7 @@ public class GrupoDAOSql implements GrupoDAO{
         grupoJpa.setDanza(grupo.getDanza());
         grupoJpa.setIdGrupo(grupo.getId());
         grupoJpa.setNombre(grupo.getNombre());
+        grupoJpa.setEstado(grupo.getEstado());
         return grupoJpa;
     }
     private Dia horarioValido(List<Dia> dias){
@@ -109,6 +111,7 @@ public class GrupoDAOSql implements GrupoDAO{
                 if (profesorJpa != null){
                     grupoJpa.setIdProfesor(profesorJpa);
                     grupoJpa.setNombre(grupo.getNombre());
+                    grupoJpa.setEstado(grupo.getEstado());
                     grupoController.edit(grupoJpa);
                     DiaDAOSql diaDAO = new DiaDAOSql();
                     listaOriginal.forEach((diaOriginal) -> {
@@ -144,9 +147,11 @@ public class GrupoDAOSql implements GrupoDAO{
         ProfesorJpaController profesorController = new ProfesorJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
         for (Accesodatos.Entidades.Grupo grupoJpa : profesorController.findProfesor(idProfesor).getGrupoCollection()){
             Grupo grupo = this.obtenerEntidad(grupoJpa);
-            grupo.setProfesor(ProfesorDAOSql.obtenerEntidad(grupoJpa.getIdProfesor()));
-            grupo.setHorario(new Horario(grupo.getId()));
-            grupos.add(grupo);
+            if (grupo.getEstado() == 1){
+                grupo.setProfesor(ProfesorDAOSql.obtenerEntidad(grupoJpa.getIdProfesor()));
+                grupo.setHorario(new Horario(grupo.getId()));
+                grupos.add(grupo);
+            }  
         }
         return grupos;
     }
@@ -170,10 +175,12 @@ public class GrupoDAOSql implements GrupoDAO{
         GrupoJpaController controller = new GrupoJpaController(Persistence.createEntityManagerFactory("CentroDeControlAredPU"));
         List<Accesodatos.Entidades.Grupo> gruposJpa = controller.findGrupoEntities();
         gruposJpa.forEach((grupoJpa) -> {
-            Grupo grupo = this.obtenerEntidad(grupoJpa);
-            grupo.setProfesor(ProfesorDAOSql.obtenerEntidad(grupoJpa.getIdProfesor()));
-            grupo.setHorario(new Horario(grupo.getId()));
-            grupos.add(grupo);
+            if (grupoJpa.getEstado() == 1){
+                Grupo grupo = this.obtenerEntidad(grupoJpa);
+                grupo.setProfesor(ProfesorDAOSql.obtenerEntidad(grupoJpa.getIdProfesor()));
+                grupo.setHorario(new Horario(grupo.getId()));
+                grupos.add(grupo);
+            } 
         });
         return grupos;
     }

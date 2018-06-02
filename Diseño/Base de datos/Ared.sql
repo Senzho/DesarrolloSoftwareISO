@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
--- Host: localhost    Database: Ared
+-- Host: localhost    Database: ared
 -- ------------------------------------------------------
 -- Server version	5.7.17-log
 
@@ -61,7 +61,7 @@ CREATE TABLE `asistencia` (
   KEY `idAlumno` (`idAlumno`),
   CONSTRAINT `asistencia_ibfk_1` FOREIGN KEY (`idGrupo`) REFERENCES `grupo` (`idGrupo`),
   CONSTRAINT `asistencia_ibfk_2` FOREIGN KEY (`idAlumno`) REFERENCES `alumno` (`idAlumno`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,6 +70,7 @@ CREATE TABLE `asistencia` (
 
 LOCK TABLES `asistencia` WRITE;
 /*!40000 ALTER TABLE `asistencia` DISABLE KEYS */;
+INSERT INTO `asistencia` VALUES (1,'2018-05-23',24,9),(2,'2018-05-23',24,10),(3,'2018-05-24',24,9),(4,'2018-05-24',24,10),(5,'2018-05-26',25,11),(6,'2018-05-26',25,12),(7,'2018-05-26',22,8),(8,'2018-05-26',22,4),(9,'2018-05-26',22,3),(10,'2018-05-26',21,5),(11,'2018-05-26',23,8),(12,'2018-05-26',23,7),(13,'2018-05-27',23,7),(14,'2018-05-27',23,8),(15,'2018-05-28',22,3),(16,'2018-05-28',22,4),(17,'2018-06-01',22,9),(18,'2018-06-01',22,8),(19,'2018-06-01',22,3),(20,'2018-06-01',22,4),(21,'2018-06-01',23,7),(22,'2018-06-01',23,8);
 /*!40000 ALTER TABLE `asistencia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -88,7 +89,7 @@ CREATE TABLE `cliente` (
   `nombre` varchar(150) DEFAULT NULL,
   `direccion` text,
   PRIMARY KEY (`idCliente`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -97,7 +98,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES (1,'2018-03-29','edmasazu@gmail.com','2281917765','Edna María Sanchez Zurita','Av. Murillo Vidál #22. Col. Progreso. Xalapa, Ver.');
+INSERT INTO `cliente` VALUES (1,'2018-03-29','edmasazu@gmail.com','2281917765','Edna María Sanchez Zurita','Av. Murillo Vidál #22. Col. Progreso. Xalapa, Ver.'),(2,'2018-05-26','samalolo@gmail.com','2281654330','Sandra Mariana López López','Calle #3 Col. Emiliano Zapata, Xalapa, Veracruz.');
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -117,7 +118,7 @@ CREATE TABLE `dia` (
   `horaInicio` varchar(5) DEFAULT NULL,
   `horaFin` varchar(5) DEFAULT NULL,
   PRIMARY KEY (`idDia`)
-) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -126,7 +127,7 @@ CREATE TABLE `dia` (
 
 LOCK TABLES `dia` WRITE;
 /*!40000 ALTER TABLE `dia` DISABLE KEYS */;
-INSERT INTO `dia` VALUES (40,'X',1,21,'Lunes','09:00','11:00'),(41,'X',1,21,'Miercoles','11:30','14:30'),(42,'X',1,21,'Sabado','18:30','19:00'),(43,'X',1,21,'Domingo','09:00','09:30'),(44,'X',1,22,'Martes','20:00','21:30'),(45,'X',1,22,'Jueves','16:00','16:30'),(46,'X',1,22,'Sabado','09:00','12:00'),(47,'X',1,23,'Lunes','15:00','17:00'),(48,'X',1,23,'Martes','10:00','11:00'),(49,'X',1,23,'Miercoles','09:00','10:00'),(50,'X',1,23,'Jueves','12:30','15:00'),(51,'X',1,23,'Viernes','20:00','20:30'),(52,'X',1,23,'Sabado','12:30','13:30'),(53,'X',1,23,'Domingo','10:00','10:30'),(54,'X',1,24,'Miercoles','20:00','20:30'),(55,'X',1,24,'Jueves','09:00','10:30'),(56,'X',1,24,'Viernes','09:00','11:00'),(57,'X',1,25,'Lunes','17:30','19:30'),(58,'X',1,25,'Martes','11:30','12:30'),(59,'X',0,1,'Domingo','17:30','19:00');
+INSERT INTO `dia` VALUES (40,'X',1,21,'Lunes','09:00','11:00'),(41,'X',1,21,'Miercoles','11:30','14:30'),(42,'X',1,21,'Sabado','18:30','19:00'),(43,'X',1,21,'Domingo','09:00','09:30'),(44,'X',1,22,'Martes','20:00','21:30'),(45,'X',1,22,'Jueves','16:00','16:30'),(46,'X',1,22,'Sabado','09:00','12:00'),(47,'X',1,23,'Lunes','15:00','17:00'),(48,'X',1,23,'Martes','10:00','11:00'),(49,'X',1,23,'Miercoles','09:00','10:00'),(50,'X',1,23,'Jueves','12:30','15:00'),(51,'X',1,23,'Viernes','20:00','20:30'),(52,'X',1,23,'Sabado','12:30','13:30'),(53,'X',1,23,'Domingo','10:00','10:30'),(54,'X',1,24,'Miercoles','20:00','20:30'),(55,'X',1,24,'Jueves','09:00','10:30'),(56,'X',1,24,'Viernes','09:00','11:00'),(57,'X',1,25,'Lunes','17:30','19:30'),(58,'X',1,25,'Martes','11:30','12:30'),(59,'X',0,1,'Domingo','17:30','19:00'),(65,'X',0,2,'Sabado','19:00','21:30'),(66,'X',0,3,'Martes','09:30','10:00'),(67,'X',0,4,'Viernes','12:00','12:30');
 /*!40000 ALTER TABLE `dia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -199,6 +200,7 @@ CREATE TABLE `grupo` (
   `danza` varchar(50) DEFAULT NULL,
   `nombre` varchar(50) DEFAULT NULL,
   `idProfesor` int(11) DEFAULT NULL,
+  `estado` int(11) DEFAULT NULL,
   PRIMARY KEY (`idGrupo`),
   KEY `idProfesor` (`idProfesor`),
   CONSTRAINT `grupo_ibfk_1` FOREIGN KEY (`idProfesor`) REFERENCES `profesor` (`idProfesor`)
@@ -211,7 +213,7 @@ CREATE TABLE `grupo` (
 
 LOCK TABLES `grupo` WRITE;
 /*!40000 ALTER TABLE `grupo` DISABLE KEYS */;
-INSERT INTO `grupo` VALUES (21,'Hip Hop','HIPHOP_LDMJ',11),(22,'Techno','TECHNO_LDMJ',11),(23,'Ballet','BALLET_DIREC',10),(24,'Folklorica','FOLKLORICA_DIREC',10),(25,'Clasica','CLASICA_DIREC',10);
+INSERT INTO `grupo` VALUES (21,'Hip Hop','HIPHOP_LDMJ',11,1),(22,'Techno','TECHNO_LDMJ',11,1),(23,'Ballet','BALLET_DIREC',10,1),(24,'Folklorica','FOLKLORICA_DIREC',10,1),(25,'Clasica','CLASICA_DIREC',10,1);
 /*!40000 ALTER TABLE `grupo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -226,12 +228,13 @@ CREATE TABLE `inscripcion` (
   `idInscripcion` int(11) NOT NULL AUTO_INCREMENT,
   `idGrupo` int(11) DEFAULT NULL,
   `idAlumno` int(11) DEFAULT NULL,
+  `estado` int(11) DEFAULT NULL,
   PRIMARY KEY (`idInscripcion`),
   KEY `idGrupo` (`idGrupo`),
   KEY `idAlumno` (`idAlumno`),
   CONSTRAINT `inscripcion_ibfk_1` FOREIGN KEY (`idGrupo`) REFERENCES `grupo` (`idGrupo`),
   CONSTRAINT `inscripcion_ibfk_2` FOREIGN KEY (`idAlumno`) REFERENCES `alumno` (`idAlumno`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -240,7 +243,7 @@ CREATE TABLE `inscripcion` (
 
 LOCK TABLES `inscripcion` WRITE;
 /*!40000 ALTER TABLE `inscripcion` DISABLE KEYS */;
-INSERT INTO `inscripcion` VALUES (16,22,4),(17,21,5),(18,21,6),(19,23,7),(20,23,8),(21,24,9),(22,24,10),(23,25,11),(24,25,12),(25,22,8),(27,22,3);
+INSERT INTO `inscripcion` VALUES (16,22,4,1),(17,21,5,1),(18,21,6,1),(19,23,7,1),(20,23,8,1),(21,24,9,1),(22,24,10,1),(23,25,11,1),(24,25,12,1),(25,22,8,1),(27,22,3,1),(29,22,9,1),(30,25,8,1);
 /*!40000 ALTER TABLE `inscripcion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -415,7 +418,7 @@ CREATE TABLE `renta` (
   PRIMARY KEY (`idRenta`),
   KEY `idCliente` (`idCliente`),
   CONSTRAINT `renta_ibfk_1` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idCliente`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -424,7 +427,7 @@ CREATE TABLE `renta` (
 
 LOCK TABLES `renta` WRITE;
 /*!40000 ALTER TABLE `renta` DISABLE KEYS */;
-INSERT INTO `renta` VALUES (1,'2018-05-20',1,'2500');
+INSERT INTO `renta` VALUES (1,'2018-05-19',1,'2500'),(2,'2018-05-26',1,'650'),(3,'2018-06-05',2,'300'),(4,'2018-06-01',1,'300');
 /*!40000 ALTER TABLE `renta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -464,4 +467,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-22 18:22:28
+-- Dump completed on 2018-06-01 18:59:15

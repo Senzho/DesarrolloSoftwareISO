@@ -185,6 +185,7 @@ public class VentanaCRUGrupoController implements Initializable {
 
     public void crearGrupo() {
         this.grupo = new Grupo();
+        this.grupo.setEstado(1);
         this.grupo.setDanza(this.danza.getText().trim());
         this.grupo.setNombre(this.nombre.getText().trim());
         this.grupo.setId(0);

@@ -95,6 +95,7 @@ public class VentanaInscribirAlumnoController implements Initializable {
         this.inscripcion.setIdAlumno(this.getAlumnoSeleccionado());
         this.inscripcion.setIdGrupo(this.getGrupoSeleccionado());
         this.inscripcion.setIdInscripcion(0);
+        this.inscripcion.setEstado(1);
         if (this.inscripcion.registrar()){
             MessageFactory.showMessage("Exito", "Inscripción", "El alumno se inscribió exitosamente", Alert.AlertType.INFORMATION);
             this.stage.close();
