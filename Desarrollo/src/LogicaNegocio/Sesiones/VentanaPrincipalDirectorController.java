@@ -19,6 +19,7 @@ import LogicaNegocio.Grupos.PanelGruposProfesorController;
 import LogicaNegocio.Grupos.PanelSemanaController;
 import LogicaNegocio.Lanzador;
 import LogicaNegocio.Pagos.PanelProximosPagosAlumnoController;
+import LogicaNegocio.Pagos.PanelProximosPagosProfesorController;
 import LogicaNegocio.Pagos.VentanaRegistrarPagoAlumno;
 import LogicaNegocio.Pagos.VentanaRegistrarPagoProfesor;
 import java.net.URL;
@@ -81,6 +82,12 @@ public class VentanaPrincipalDirectorController implements Initializable {
         this.lanzador.lanzar("/InterfazGrafica/Egresos/PanelIngresosEgresos.fxml");
         PanelIngresosEgresosController controller =  lanzador.getCargador().getController();
         controller.setProfesor(profesor);
+    }
+    public void menuProximosPagosProfesor_onClick(){
+        this.lanzador.lanzar("/InterfazGrafica/Pagos/PanelProximosPagosProfesor.fxml");
+        PanelProximosPagosProfesorController controller =  lanzador.getCargador().getController();
+        controller.buscarProfesores();
+        controller.generarProximoPago();
     }
     public void menuProfesor_onclick(){
         this.lanzador.lanzar("/InterfazGrafica/Catalogos/PanelCatalogoProfesores.fxml");

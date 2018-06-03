@@ -243,7 +243,9 @@ public class VentanaCRUProfesorController implements Initializable {
                 MessageFactory.showMessage("Error", "Registro", "No se pudo guardar el profesor", Alert.AlertType.ERROR);
             } else {
                 try {
-                    CopiarArchivo.guardar("profesor", rutaImagen, profesor.getIdProfesor());
+                    if (rutaImagen != null) {
+                        CopiarArchivo.guardar("profesor", rutaImagen, profesor.getIdProfesor());
+                    }
                 } catch (IOException ex) {
                     Logger.getLogger(VentanaCRUProfesorController.class.getName()).log(Level.SEVERE, null, ex);
                 }

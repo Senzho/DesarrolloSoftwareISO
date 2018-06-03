@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="426.0" prefWidth="601.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="LogicaNegocio.Pagos.PanelProximosPagosProfesorController">
+   <children>
+      <VBox fx:id="panelPagos" layoutX="10.0" layoutY="10.0" prefHeight="43.0" prefWidth="269.0" spacing="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
+      <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="10.0" layoutY="72.0" prefHeight="346.0" prefWidth="576.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="72.0">
+         <content>
+            <VBox fx:id="panelPagos" prefHeight="343.0" prefWidth="577.0" spacing="5.0" />
+         </content>
+      </ScrollPane>
+      <Separator layoutX="10.0" layoutY="53.0" prefHeight="12.0" prefWidth="576.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="53.0" />
+      <Label layoutX="24.0" layoutY="24.0" text="Proximos pagos:" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="24.0">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
