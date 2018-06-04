@@ -463,6 +463,10 @@ LOCK TABLES `usuario` WRITE;
 INSERT INTO `usuario` VALUES (23,'direc_gaby','5b7b165ce98eceda3f4ca2740d061dca',0,10),(24,'profe_luis','502ff82f7f1f8218dd41201fe4353687',1,11),(25,'abcde@abcd.com','66a4cc20eb6fe3251a256f02b5623630',1,12);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
+CREATE USER 'aredespacio'@'localhost' IDENTIFIED BY 'aredespacio';
+GRANT ALL PRIVILEGES ON Ared.* TO 'aredespacio'@'localhost';
+FLUSH PRIVILEGES;
+
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
