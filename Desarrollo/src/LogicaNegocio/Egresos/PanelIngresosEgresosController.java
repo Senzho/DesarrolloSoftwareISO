@@ -108,18 +108,24 @@ public class PanelIngresosEgresosController implements Initializable {
 
     /*----------------------*/
     public void btnExportar_onClick() {
-        String rutaGuardar = "C:\\registros mensuales\\registros ingresos y egresos";
-        File recibos = new File(rutaGuardar);
-        File recibo = new File("C:\\registros mensuales");
-        if (!recibo.exists()) {
-            recibo.mkdir();
+        String nombreSistema = System.getProperty("os.name");
+        String separador = "";
+        String rutaPrincipal = "";
+        if(nombreSistema.contains("Linux")){
+            rutaPrincipal = System.getProperty("user.home");
+            separador = "/";
+        }else{
+            rutaPrincipal = "C:";
+            separador = "\\";
         }
+        String rutaGuardar =  rutaPrincipal+separador+"Ared"+separador+"Reportes";
+        File recibos = new File(rutaGuardar);
         if (!recibos.exists()) {
-            recibos.mkdir();
+            recibos.mkdirs();
         }
         try {
             Document doc = new Document(PageSize.A7, 36, 36, 10, 10);
-            FileOutputStream output = new FileOutputStream(rutaGuardar + "\\registro_ingresos_Egresos_"
+            FileOutputStream output = new FileOutputStream(rutaGuardar +separador+"registro_ingresos_Egresos_"
                     + this.comboMes.getSelectionModel().getSelectedItem().toString() + "_" + this.comboAño.getSelectionModel().getSelectedItem().toString() + ".pdf");
             PdfWriter.getInstance(doc, output);
             ReciboPago registroPago = new ReciboPago();
@@ -172,7 +178,7 @@ public class PanelIngresosEgresosController implements Initializable {
             doc.add(registroPago.getPiePagina(this.lblEgresosTotales.getText()));
             doc.add(registroPago.getPiePagina(this.lblGananciasNetas.getText()));
             doc.close();
-            MessageFactory.showMessage("Recibo creado", "El recibo se ha creado exitosamente", "", Alert.AlertType.CONFIRMATION);
+            MessageFactory.showMessage("Recibo creado", "El recibo se ha creado exitosamente", "Mas información en"+rutaGuardar, Alert.AlertType.CONFIRMATION);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(ReciboPago.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {

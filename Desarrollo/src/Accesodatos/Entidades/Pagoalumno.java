@@ -36,6 +36,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Pagoalumno.findByFecha", query = "SELECT p FROM Pagoalumno p WHERE p.fecha = :fecha")
     , @NamedQuery(name = "Pagoalumno.findByMonto", query = "SELECT p FROM Pagoalumno p WHERE p.monto = :monto")
     , @NamedQuery(name = "Pagoalumno.findPrimeraInscripcion", query = "SELECT p FROM Pagoalumno p WHERE p.idAlumno.idAlumno = :idAlumno AND p.idGrupo.idGrupo = :idGrupo and p.tipoPago = 0")
+    , @NamedQuery(name = "Pagoalumno.findByIdProfesor", query = "SELECT P FROM Pagoalumno p WHERE p.idProfesor.idProfesor = :idProfesor")
 })
 public class Pagoalumno implements Serializable {
 

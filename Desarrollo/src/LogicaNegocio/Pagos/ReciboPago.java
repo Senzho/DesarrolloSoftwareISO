@@ -40,6 +40,20 @@ public class ReciboPago {
     private Profesor profesor;
     private Cliente cliente;
     private Renta renta;
+    private String rutaPrincipal;
+    private String separador;
+    private String rutaArchivo;
+    
+    public ReciboPago(){
+        String nombreSistema = System.getProperty("os.name");
+        if(nombreSistema.contains("Linux")){
+            rutaPrincipal = System.getProperty("user.home");
+            separador = "/";
+        }else{
+            rutaPrincipal = "C:";
+            separador = "\\";
+        }
+    }
 
     public void setAlumno(Alumno alumno) {
         this.alumno = alumno;
@@ -66,19 +80,15 @@ public class ReciboPago {
 
     public boolean generarReciboPagoCliente() {//cliente y renta
         boolean guardado = false;
-        String rutaGuardar = "C:\\recibos\\clientes";
+        String rutaGuardar = this.rutaPrincipal+separador+"Ared"+separador+"Recibos"+separador+"Clientes"; //"C:\\recibos\\clientes";
+        rutaArchivo = rutaGuardar;
         File recibos = new File(rutaGuardar);
-        File recibo = null;
-        recibo = new File("C:\\recibos");
-        if (!recibo.exists()) {
-            recibo.mkdir();
-        }
         if(!recibos.exists()){
-            recibos.mkdir();
+            recibos.mkdirs();
         }
         try {
             Document doc = new Document(PageSize.A7, 36, 36, 10, 10);
-            FileOutputStream output = new FileOutputStream(rutaGuardar + "\\" + this.cliente.getNombre() + "_reciboPDF.pdf");
+            FileOutputStream output = new FileOutputStream(rutaGuardar + separador + this.cliente.getNombre() + "_reciboPDF.pdf");
             PdfWriter.getInstance(doc, output);
             doc.open();
             doc.add(this.getCabecera("Ared espacio"));
@@ -110,19 +120,15 @@ public class ReciboPago {
      */
     public boolean generarReciboPagoAlumno() {
         boolean guardado = false;
-        String rutaGuardar = "C:\\recibos\\alumnos";
+        String rutaGuardar = this.rutaPrincipal+separador+"Ared"+separador+"Recibos"+separador+"Alumnos"; //"C:\\recibos\\clientes";
+        rutaArchivo = rutaGuardar;
         File recibos = new File(rutaGuardar);
-        File recibo = null;
-        recibo = new File("C:\\recibos");
-        if (!recibo.exists()) {
-            recibo.mkdir();
-        }
         if(!recibos.exists()){
-            recibos.mkdir();
+            recibos.mkdirs();
         }
         try {
             Document doc = new Document(PageSize.A7, 36, 36, 10, 10);
-            FileOutputStream output = new FileOutputStream(rutaGuardar + "\\" + this.alumno.getNombre() + "_reciboPDF.pdf");
+            FileOutputStream output = new FileOutputStream(rutaGuardar + separador + this.alumno.getNombre() + "_reciboPDF.pdf");
             PdfWriter.getInstance(doc, output);
             doc.open();
             doc.add(this.getCabecera("Ared espacio"));
@@ -157,18 +163,15 @@ public class ReciboPago {
 
     public boolean generarReciboPagoProfesor() {
         boolean guardado = false;
-        String rutaGuardar = "C:\\recibos\\profesores";
+        String rutaGuardar = this.rutaPrincipal+separador+"Ared"+separador+"Recibos"+separador+"Profesores";
+        rutaArchivo = rutaGuardar;
         File recibos = new File(rutaGuardar);
-        File recibo = new File("C:\\recibos");
-        if (!recibo.exists()) {
-            recibo.mkdir();
-        }
         if(!recibos.exists()){
-            recibos.mkdir();
+            recibos.mkdirs();
         }
         try {
             Document doc = new Document(PageSize.A7, 36, 36, 10, 10);
-            FileOutputStream output = new FileOutputStream(rutaGuardar + "\\" + this.profesor.getNombre() + "_reciboPDF.pdf");
+            FileOutputStream output = new FileOutputStream(rutaGuardar + separador + this.profesor.getNombre() + "_reciboPDF.pdf");
             PdfWriter.getInstance(doc, output);
             doc.open();
             doc.add(this.getCabecera("Ared espacio"));
@@ -193,6 +196,9 @@ public class ReciboPago {
             Logger.getLogger(ReciboPago.class.getName()).log(Level.SEVERE, null, ex);
         }
         return guardado;
+    }
+    public String getRutaRegistro(){
+        return this.rutaArchivo;
     }
     public Paragraph getCabecera(String cabecera) {
         Paragraph p = new Paragraph();

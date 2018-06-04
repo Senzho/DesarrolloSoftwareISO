@@ -43,18 +43,28 @@ public class CopiarArchivo {
     public static Image obtenerFotoUsuario(String tipoUsuario, int idUsuario) {
         Image imagen = null;
         File directorio = null;
+        String nombreSistema = System.getProperty("os.name");
+        String separador = "";
+        String rutaPrincipal = "";
+        if(nombreSistema.contains("Linux")){
+            rutaPrincipal = System.getProperty("user.home");
+            separador = "/";
+        }else{
+            rutaPrincipal = "C:";
+            separador = "\\";
+        }
         if (tipoUsuario.equalsIgnoreCase("alumno")) {
-            directorio = new File("C:\\Ared\\Alumnos\\" + idUsuario + ".jpg");
+            directorio = new File(rutaPrincipal+separador+"Ared"+separador+"Fotos"+separador+"Alumnos"+separador+idUsuario+".jpg");//"C:\\Ared\\Alumnos\\" + idUsuario + ".jpg");
             if (directorio.exists()) {
                 imagen = new Image("file:" + directorio.getAbsolutePath());
             }
         } else if (tipoUsuario.equalsIgnoreCase("profesor")) {
-            directorio = new File("C:\\Ared\\Profesores\\" + idUsuario + ".jpg");
+            directorio = new File(rutaPrincipal+separador+"Ared"+separador+"Fotos"+separador+"Profesores"+separador+idUsuario+".jpg");//("C:\\Ared\\Profesores\\" + idUsuario + ".jpg");
             if (directorio.exists()) {
                 imagen = new Image("file:" + directorio.getAbsolutePath());
             }
         } else if (tipoUsuario.equalsIgnoreCase("cliente")) {
-            directorio = new File("C:\\Ared\\Clientes\\" + idUsuario + ".jpg");
+            directorio = new File(rutaPrincipal+separador+"Ared"+separador+"Fotos"+separador+"Clientes"+separador+idUsuario+".jpg");//("C:\\Ared\\Clientes\\" + idUsuario + ".jpg");
             if (directorio.exists()) {
                 imagen = new Image("file:" + directorio.getAbsolutePath());
             }
@@ -73,25 +83,37 @@ public class CopiarArchivo {
     public static boolean guardar(String tipoUsuario, String rutaOrigen, int idUsuario) throws IOException {
         boolean guardado = false;
         File directorio;
-        File fotos = new File("C:\\Ared");
+        String nombreSistema = System.getProperty("os.name");
+        String separador = "";
+        String rutaPrincipal = "";
+        if(nombreSistema.contains("Linux")){
+            rutaPrincipal = System.getProperty("user.home");
+            separador = "/";
+        }else{
+            rutaPrincipal = "C:";
+            separador = "\\";
+        }
+        String rutaGeneralFotos = rutaPrincipal+separador+"Ared"+separador+"Fotos";
+        
+        File fotos = new File(rutaGeneralFotos);
         if (!fotos.exists()) {
             fotos.mkdir();
         }
         if (tipoUsuario.equalsIgnoreCase("alumno")) {
-            directorio = new File("C:\\Ared\\Alumnos");
+            directorio = new File(rutaGeneralFotos+separador+"Alumnos");
             if (!directorio.exists()) {
                 directorio.mkdir();
             }
             guardado = copiar(rutaOrigen, directorio.getAbsolutePath(), idUsuario);
         } else if (tipoUsuario.equalsIgnoreCase("profesor")) {
-            directorio = new File("C:\\Ared\\Profesores");
+            directorio = new File(rutaGeneralFotos+separador+"Profesores");
             if (!directorio.exists()) {
                 directorio.mkdir();
             }
             guardado = copiar(rutaOrigen, directorio.getAbsolutePath(), idUsuario);
 
         } else if (tipoUsuario.equalsIgnoreCase("cliente")) {
-            directorio = new File("C:\\Ared\\Clientes");
+            directorio = new File(rutaGeneralFotos+separador+"Clientes");
             if (!directorio.exists()) {
                 directorio.mkdir();
             }
@@ -101,6 +123,16 @@ public class CopiarArchivo {
     }
 
     private static boolean copiar(String origen, String destino, int idUsuario) throws IOException {
+        String nombreSistema = System.getProperty("os.name");
+        String separador = "";
+        String rutaPrincipal = "";
+        if(nombreSistema.contains("Linux")){
+            rutaPrincipal = System.getProperty("user.home");
+            separador = "/";
+        }else{
+            rutaPrincipal = "C:";
+            separador = "\\";
+        }
         File archivoOrigen;
         File archivoDestino;
         FileInputStream entrada = null;
@@ -112,7 +144,7 @@ public class CopiarArchivo {
             if (copiado = archivoOrigen.exists()) {
                 if (copiado = archivoOrigen.canRead()) {
                     entrada = new FileInputStream(archivoOrigen);
-                    salida = new FileOutputStream(archivoDestino + "\\" + idUsuario + ".jpg");
+                    salida = new FileOutputStream(archivoDestino + separador + idUsuario + ".jpg");
                     int i;
                     while ((i = entrada.read()) != -1) {
                         salida.write(i);

@@ -68,7 +68,7 @@ public class VentanaReciboPagoController implements Initializable {
         recibo.setAlumno(alumno);
         recibo.setPagoAlumno(pagoAlumno);
         if(recibo.generarReciboPagoAlumno()){
-         MessageFactory.showMessage("Archivo creado", "Se ha guardado el archivo", "El archivo ha sido creado con exito", Alert.AlertType.INFORMATION);
+         MessageFactory.showMessage("Archivo creado","El archivo ha sido creado con exito", recibo.getRutaRegistro(),Alert.AlertType.INFORMATION);
          this.stage.close();
         }else{
             MessageFactory.showMessage("Error de registro", "Archivo no creado", "El archivo no ha podido guardarse", Alert.AlertType.INFORMATION);
