@@ -34,10 +34,10 @@ public class PanelProximosPagosProfesorController implements Initializable {
     
     public void buscarProfesores() {
         profesores = new ArrayList<>();
-        profesores = new Profesor().obtenerProfesores();
-        profesores.forEach((profesor) -> {
-            if (!profesor.isEstado()) {
-                profesores.remove(profesor);
+        List<Profesor> profesoresRegistro = new Profesor().obtenerProfesores();
+        profesoresRegistro.forEach((profesor) -> {
+            if (profesor.isEstado()) {
+                profesores.add(profesor);
             }
         });
     }

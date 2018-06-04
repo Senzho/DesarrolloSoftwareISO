@@ -18,6 +18,9 @@
 --
 -- Table structure for table `alumno`
 --
+drop database Ared;
+create database Ared;
+use Ared;
 
 DROP TABLE IF EXISTS `alumno`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
