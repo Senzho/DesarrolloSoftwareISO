@@ -57,7 +57,7 @@ public class PanelGrupoDirectorController extends Calendarizable implements Init
     public void verAlumnos_onClick(){
         this.lanzador.lanzar("/InterfazGrafica/Grupos/PanelAlumnosGrupoDirector.fxml");
         PanelAlumnosGrupoDirectorController controller = this.lanzador.getCargador().getController();
-        controller.iniciar(this.grupo);
+        controller.iniciar(this.grupo, this.lanzador);
     }
     public void editar_onClick(){
         new VentanaCRUGrupo(this.grupo);

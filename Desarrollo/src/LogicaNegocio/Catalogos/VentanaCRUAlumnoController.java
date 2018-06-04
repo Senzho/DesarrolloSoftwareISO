@@ -1,6 +1,8 @@
 package LogicaNegocio.Catalogos;
 
 import InterfazGrafica.MessageFactory;
+import LogicaNegocio.Lanzador;
+import LogicaNegocio.Paneles;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
@@ -38,6 +40,7 @@ public class VentanaCRUAlumnoController implements Initializable {
     private String rutaImagen;
 
     private Alumno alumno;
+    private Lanzador lanzador;
 
     private CatalogoEnum validarDatos() {
         CatalogoEnum validacion = CatalogoEnum.DATOS_VALIDOS;
@@ -113,8 +116,9 @@ public class VentanaCRUAlumnoController implements Initializable {
         }
     }
 
-    public void setAlumno(Alumno alumno) {
+    public void iniciar(Alumno alumno, Lanzador lanzador) {
         this.alumno = alumno;
+        this.lanzador = lanzador;
         if (alumno != null) {
             this.cargarAlumno();
             this.registrar.setText("Guardar");
@@ -168,8 +172,16 @@ public class VentanaCRUAlumnoController implements Initializable {
             boolean realizado = false;
             if (this.alumno != null) {
                 realizado = this.editarAlumno();
+                if (realizado){
+                    Object[] objetos = {this.alumno};
+                    this.lanzador.enviarEvento(Paneles.CATALOGO_ALUMNOS, "editado", objetos);
+                }
             } else {
                 realizado = this.registrarAlumno();
+                if (realizado){
+                    Object[] objetos = {this.alumno};
+                    this.lanzador.enviarEvento(Paneles.CATALOGO_ALUMNOS, "agregado", objetos);
+                }
             }
             if (!realizado) {
                 MessageFactory.showMessage("Error", "Registro", "No se pudo guardar el alumno", Alert.AlertType.ERROR);
@@ -178,7 +190,6 @@ public class VentanaCRUAlumnoController implements Initializable {
                     if (rutaImagen != null) {
                         CopiarArchivo.guardar("Alumno", rutaImagen, this.alumno.getIdAlumno());
                     }
-
                 } catch (IOException ex) {
                     Logger.getLogger(VentanaCRUAlumnoController.class.getName()).log(Level.SEVERE, null, ex);
                 }

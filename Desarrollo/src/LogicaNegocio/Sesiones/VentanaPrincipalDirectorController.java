@@ -6,6 +6,7 @@ import InterfazGrafica.Pagos.VentanaRegistrarPagoTemporal;
 import InterfazGrafica.Pagos.VentanaRegistrarRenta;
 import LogicaNegocio.Asistencia.PanelAsistenciaController;
 import LogicaNegocio.Asistencia.PanelRegistroAsistenciasController;
+import LogicaNegocio.Catalogos.PanelCatalogoAlumnosController;
 import LogicaNegocio.Catalogos.PanelCatalogoClientesController;
 import LogicaNegocio.Catalogos.PanelCatalogoProfesoresController;
 import LogicaNegocio.Catalogos.Profesor;
@@ -30,7 +31,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 
-public class VentanaPrincipalDirectorController implements Initializable {
+public class VentanaPrincipalDirectorController extends VentanaPrincipal implements Initializable {
     private Usuario usuario;
     private Profesor profesor;
     private Lanzador lanzador;
@@ -48,7 +49,7 @@ public class VentanaPrincipalDirectorController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {//1 activo 2 baja
-        this.lanzador = new Lanzador(this.panelPrincipal);
+        this.lanzador = new Lanzador(this.panelPrincipal, this);
         this.lanzador.lanzar("/InterfazGrafica/Grupos/PanelSemana.fxml");
         PanelSemanaController controller = this.lanzador.getCargador().getController();
         controller.iniciar(this.lanzador);
@@ -58,7 +59,7 @@ public class VentanaPrincipalDirectorController implements Initializable {
         new VentanaModificarCuenta(this.usuario, this.profesor);
     }
     public void menuRegistrarAlumno_onClick(){
-        new VentanaCRUAlumno();
+        new VentanaCRUAlumno(this.lanzador);
     }
     public void menuRegistrarProfesor_onClick(){
         new VentanaCRUProfesor();
@@ -96,7 +97,13 @@ public class VentanaPrincipalDirectorController implements Initializable {
         controller.cargarProfesores(new Profesor().obtenerProfesores());
     }
     public void menuAlumno_onClick(){
-        this.lanzador.lanzar("/InterfazGrafica/Catalogos/PanelCatalogoAlumnos.fxml");
+        PanelCatalogoAlumnosController controller = this.getCatalogoAlumnos();
+        if (controller != null){
+            this.panelPrincipal.setCenter(controller.getPane());
+        }else{
+            this.lanzador.lanzar("/InterfazGrafica/Catalogos/PanelCatalogoAlumnos.fxml");
+            this.getCatalogoAlumnos().iniciar(this.lanzador, this.lanzador.getPanelActual());
+        }  
     }
     public void menuCliente_onClick(){
         this.lanzador.lanzar("/InterfazGrafica/Catalogos/PanelCatalogoClientes.fxml");

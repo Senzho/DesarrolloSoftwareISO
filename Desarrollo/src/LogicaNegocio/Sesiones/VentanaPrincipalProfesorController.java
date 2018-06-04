@@ -16,7 +16,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 
-public class VentanaPrincipalProfesorController implements Initializable {
+public class VentanaPrincipalProfesorController extends VentanaPrincipal implements Initializable {
     private Usuario usuario;
     private Profesor profesor;
     private Lanzador lanzador;
@@ -41,7 +41,7 @@ public class VentanaPrincipalProfesorController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {//1 activo 2 baja
-        this.lanzador = new Lanzador(this.panelPrincipal);
+        this.lanzador = new Lanzador(this.panelPrincipal, this);
         
     }  
     

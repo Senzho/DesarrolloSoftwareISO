@@ -5,6 +5,7 @@ import Accesodatos.Grupos.GrupoDAOSql;
 import LogicaNegocio.Catalogos.Alumno;
 import LogicaNegocio.Catalogos.CopiarArchivo;
 import LogicaNegocio.Catalogos.PanelAlumnoDirectorController;
+import LogicaNegocio.Lanzador;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Collections;
@@ -33,6 +34,7 @@ public class PanelAlumnosGrupoDirectorController implements Initializable {
     private ImageView imagen;
     
     private List<Grupo> listaGrupos;
+    private Lanzador lanzador;
     
     private void cargarCombo(){
         this.listaGrupos.forEach((grupo) -> {
@@ -50,7 +52,7 @@ public class PanelAlumnosGrupoDirectorController implements Initializable {
                 FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/InterfazGrafica/Catalogos/PanelAlumnoDirector.fxml"));
                 AnchorPane pane = loader.load();
                 PanelAlumnoDirectorController controller = loader.getController();
-                controller.setAlumno(alumno);
+                controller.iniciar(alumno, this.lanzador);
                 this.panelAlumnos.getChildren().add(pane);
             } catch (IOException ex) {
                 Logger.getLogger(PanelAlumnosGrupoDirectorController.class.getName()).log(Level.SEVERE, null, ex);
@@ -81,7 +83,8 @@ public class PanelAlumnosGrupoDirectorController implements Initializable {
         
     }
     
-    public void iniciar(Grupo grupo){
+    public void iniciar(Grupo grupo, Lanzador lanzador){
+        this.lanzador = lanzador;
         this.listaGrupos = new GrupoDAOSql().obtenerGrupos();
         this.cargarCombo();
         this.comboGrupos.setValue(grupo.getNombre());

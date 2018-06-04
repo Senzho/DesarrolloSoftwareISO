@@ -1,6 +1,7 @@
 package LogicaNegocio.Catalogos;
 
 import InterfazGrafica.MessageFactory;
+import LogicaNegocio.Lanzador;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -9,6 +10,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 
 public class PanelAlumnoDirectorController implements Initializable {
 
@@ -26,6 +28,7 @@ public class PanelAlumnoDirectorController implements Initializable {
     private ImageView editar;
 
     private Alumno alumno;
+    private Lanzador lanzador;
 
     private void establecerIconos() {
         if (this.alumno.isEstado()) {
@@ -41,8 +44,9 @@ public class PanelAlumnoDirectorController implements Initializable {
 
     }
 
-    public void setAlumno(Alumno alumno) {
+    public void iniciar(Alumno alumno, Lanzador lanzador) {
         this.alumno = alumno;
+        this.lanzador = lanzador;
         this.cargarAlumno();
         this.establecerIconos();
         this.cargarImagen();
@@ -64,7 +68,7 @@ public class PanelAlumnoDirectorController implements Initializable {
     }
 
     public void editar_OnClick() {
-        new VentanaCRUAlumno(this.alumno);
+        new VentanaCRUAlumno(this.alumno, this.lanzador);
     }
 
     public void baja_OnClick() {
@@ -73,8 +77,10 @@ public class PanelAlumnoDirectorController implements Initializable {
             this.establecerIconos();
             String estado;
             if (this.alumno.isEstado()) {
+                this.baja.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkCrossIcon.png")));
                 estado = "activo";
             } else {
+                this.baja.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkPlusIcon.png")));
                 estado = "inactivo";
             }
             MessageFactory.showMessage("Éxito", "Registro", "El estado del alumno cambió a " + estado, Alert.AlertType.INFORMATION);

@@ -1,6 +1,7 @@
 package LogicaNegocio.Catalogos;
 
 import InterfazGrafica.MessageFactory;
+import LogicaNegocio.Lanzador;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Collections;
@@ -24,10 +25,20 @@ public class PanelCatalogoAlumnosController implements Initializable {
     private Button buscar;
     @FXML
     private VBox panelAlumnos;
+    
+    private List<Alumno> listaAlumnos;
+    private Lanzador lanzador;
+    private AnchorPane pane;
 
     public void initialize(URL url, ResourceBundle rb) {
-        this.cargarAlumnos(new Alumno().obtenerAlumnos());
-    }    
+        
+    }
+    public void iniciar(Lanzador lanzador, AnchorPane pane){
+        this.lanzador = lanzador;
+        this.pane = pane;
+        this.listaAlumnos = new Alumno().obtenerAlumnos();
+        this.cargarAlumnos(this.listaAlumnos);
+    }
     
     public void cargarAlumnos(List<Alumno> alumnos){
         this.panelAlumnos.getChildren().clear();
@@ -38,12 +49,30 @@ public class PanelCatalogoAlumnosController implements Initializable {
             try {
                 panel = loader.load();
                 PanelAlumnoDirectorController controller = loader.getController();
-                controller.setAlumno(alumnoObtenido);
+                controller.iniciar(alumnoObtenido, this.lanzador);
                 this.panelAlumnos.getChildren().add(panel);
             } catch (IOException ex) {
                 Logger.getLogger(PanelCatalogoAlumnosController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
+    }
+    public void alumnoAgregado(Alumno alumno){
+        this.listaAlumnos.add(alumno);
+        Collections.sort(this.listaAlumnos);
+        this.cargarAlumnos(this.listaAlumnos);
+    }
+    public void alumnoEditado(Alumno alumno){
+        for (int i = 0; i < this.listaAlumnos.size(); i ++) {
+            if (this.listaAlumnos.get(i).getIdAlumno() == alumno.getIdAlumno()){
+                this.listaAlumnos.set(i, alumno);
+                break;
+            }
+        }
+        Collections.sort(this.listaAlumnos);
+        this.cargarAlumnos(this.listaAlumnos);
+    }
+    public AnchorPane getPane(){
+        return this.pane;
     }
     
     public void buscar_OnClick(){
