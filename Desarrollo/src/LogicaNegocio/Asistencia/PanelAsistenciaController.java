@@ -35,6 +35,7 @@ public class PanelAsistenciaController implements Initializable {
     
     private List<Grupo> listaGrupos;
     private List<PanelAlumnoAsistenciaController> panelesAlumno;
+    private List<Alumno> listaAlumnos;
     private boolean todoMarcado;
     private Asistencia asistencia;
     
@@ -53,6 +54,7 @@ public class PanelAsistenciaController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         this.listaGrupos = new ArrayList();
         this.panelesAlumno = new ArrayList();
+        this.listaAlumnos = new ArrayList();
         this.fecha.setValue(LocalDate.now());
         this.todoMarcado = false;
         this.asistencia = new Asistencia();
@@ -74,26 +76,31 @@ public class PanelAsistenciaController implements Initializable {
         this.grupos.setValue(nombreGrupo);
         this.cargarAlumnos();
     }
-    public void cargarAlumnos(){
-        this.todoMarcado = false;
+    public void mostrarAlumnos(List<Alumno> alumnos){
         this.panelesAlumno.clear();
         this.panelAlumnos.getChildren().clear();
-        List<Alumno> alumnos = new AlumnoDAOSql().obtenerAlumnos(this.obtenerGrupo().getId());
         Collections.sort(alumnos);
         alumnos.forEach((alumno) -> {
-            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/InterfazGrafica/Asistencia/PanelAlumnoAsistencia.fxml"));
-            AnchorPane panel;
-            try {
-                panel = loader.load();
-                panel.setStyle("-fx-background-color: #D8D8D8;");
-                PanelAlumnoAsistenciaController controller = loader.getController();
-                controller.setAlumno(alumno);
-                this.panelesAlumno.add(controller);
-                this.panelAlumnos.getChildren().add(panel);
-            } catch (IOException ex) {
-                Logger.getLogger(PanelAsistenciaController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            if (alumno.isEstado()){
+                FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/InterfazGrafica/Asistencia/PanelAlumnoAsistencia.fxml"));
+                AnchorPane panel;
+                try {
+                    panel = loader.load();
+                    panel.setStyle("-fx-background-color: #D8D8D8;");
+                    PanelAlumnoAsistenciaController controller = loader.getController();
+                    controller.setAlumno(alumno);
+                    this.panelesAlumno.add(controller);
+                    this.panelAlumnos.getChildren().add(panel);
+                } catch (IOException ex) {
+                    Logger.getLogger(PanelAsistenciaController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }  
         });
+    }
+    public void cargarAlumnos(){
+        this.todoMarcado = false;
+        this.listaAlumnos = new AlumnoDAOSql().obtenerAlumnos(this.obtenerGrupo().getId());
+        this.mostrarAlumnos(this.listaAlumnos);
     }
     public void registrar(Grupo grupoSeleccionado){
         List<Alumno> alumnos = new ArrayList();
@@ -110,6 +117,15 @@ public class PanelAsistenciaController implements Initializable {
                 MessageFactory.showMessage("Éxito", "Registro", "La asistencia fue registrada con éxito", Alert.AlertType.INFORMATION);
             }else{
                 MessageFactory.showMessage("Error", "Registro", "La asistencia no fue registrada", Alert.AlertType.ERROR);
+            }
+        }
+    }
+    public void alumnoEditado(Alumno alumno){
+        for (int i = 0; i < this.listaAlumnos.size(); i ++){
+            if (this.listaAlumnos.get(i).getIdAlumno() == alumno.getIdAlumno()){
+                this.listaAlumnos.set(i, alumno);
+                this.mostrarAlumnos(listaAlumnos);
+                break;
             }
         }
     }

@@ -60,7 +60,7 @@ public class PanelGrupoDirectorController extends Calendarizable implements Init
         controller.iniciar(this.grupo, this.lanzador);
     }
     public void editar_onClick(){
-        new VentanaCRUGrupo(this.grupo);
+        new VentanaCRUGrupo(this.grupo, this.lanzador);
     }
     public void darDeBaja_onClick(){
         Alert alerta = new Alert(AlertType.CONFIRMATION);

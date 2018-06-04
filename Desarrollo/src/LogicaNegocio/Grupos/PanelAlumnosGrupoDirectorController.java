@@ -34,6 +34,7 @@ public class PanelAlumnosGrupoDirectorController implements Initializable {
     private ImageView imagen;
     
     private List<Grupo> listaGrupos;
+    private List<Alumno> listaAlumnos;
     private Lanzador lanzador;
     
     private void cargarCombo(){
@@ -41,22 +42,28 @@ public class PanelAlumnosGrupoDirectorController implements Initializable {
             this.comboGrupos.getItems().add(grupo.getNombre());
         });
     }
+    private void agregarAlumno (Alumno alumno){
+        try {
+            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/InterfazGrafica/Catalogos/PanelAlumnoDirector.fxml"));
+            AnchorPane pane = loader.load();
+            PanelAlumnoDirectorController controller = loader.getController();
+            controller.iniciar(alumno, this.lanzador);
+            this.panelAlumnos.getChildren().add(pane);
+        } catch (IOException ex) {
+            Logger.getLogger(PanelAlumnosGrupoDirectorController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     private void cargarGrupo(Grupo grupo){
         this.nombreProfesor.setText(grupo.getProfesor().getNombre());
         this.cargarImagen(grupo.getProfesor().getIdProfesor());
-        List<Alumno> alumnos = new AlumnoDAOSql().obtenerAlumnos(grupo.getId());
-        Collections.sort(alumnos);
+        this.listaAlumnos = new AlumnoDAOSql().obtenerAlumnos(grupo.getId());
+        Collections.sort(this.listaAlumnos);
+        this.cargarAlumnos(this.listaAlumnos);
+    }
+    private void cargarAlumnos(List<Alumno> alumnos){
         this.panelAlumnos.getChildren().clear();
         alumnos.forEach((alumno) -> {
-            try {
-                FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/InterfazGrafica/Catalogos/PanelAlumnoDirector.fxml"));
-                AnchorPane pane = loader.load();
-                PanelAlumnoDirectorController controller = loader.getController();
-                controller.iniciar(alumno, this.lanzador);
-                this.panelAlumnos.getChildren().add(pane);
-            } catch (IOException ex) {
-                Logger.getLogger(PanelAlumnosGrupoDirectorController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            this.agregarAlumno(alumno);
         });
     }
     private Grupo getGrupo(String nombre){
@@ -89,6 +96,20 @@ public class PanelAlumnosGrupoDirectorController implements Initializable {
         this.cargarCombo();
         this.comboGrupos.setValue(grupo.getNombre());
         this.cargarGrupo(grupo);
+    }
+    public void alumnoEditado(Alumno alumno){
+        for (int i = 0; i < this.listaAlumnos.size(); i ++){
+            if (this.listaAlumnos.get(i).getIdAlumno() == alumno.getIdAlumno()){
+                this.listaAlumnos.set(i, alumno);
+                Collections.sort(this.listaAlumnos);
+                this.cargarAlumnos(this.listaAlumnos);
+                break;
+            }
+        }    
+    }
+    public void grupoAgregado(Grupo grupo){
+        this.listaGrupos.add(grupo);
+        this.comboGrupos.getItems().add(grupo.getNombre());
     }
     
     public void comboGrupos_onAction(){

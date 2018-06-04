@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -80,7 +81,13 @@ public class PanelRegistroAsistenciasController implements Initializable {
         TableColumn<Alumno, String> nombreAlumnos = new TableColumn<>("Nombre");
         nombreAlumnos.setCellValueFactory(new PropertyValueFactory<Alumno, String>("nombre"));
         tablaAlumnos.getColumns().add(nombreAlumnos);
-        tablaAlumnos.setItems(FXCollections.observableArrayList(listaAlumnos));
+        List<Alumno> alumnos = new ArrayList();
+        this.listaAlumnos.forEach((alumno) -> {
+            if (alumno.isEstado()){
+                alumnos.add(alumno);
+            }
+        });
+        tablaAlumnos.setItems(FXCollections.observableArrayList(alumnos));
 
     }
 
@@ -130,9 +137,19 @@ public class PanelRegistroAsistenciasController implements Initializable {
         }
         return nombreDia;
     }
+    public void alumnoEditado(Alumno alumno){
+        for (int i = 0; i < this.listaAlumnos.size(); i ++){
+            if (this.listaAlumnos.get(i).getIdAlumno() == alumno.getIdAlumno()){
+                this.listaAlumnos.set(i, alumno);
+                this.inicializarTabla();
+                this.panelAsistencias.getChildren().clear();
+                break;
+            }
+        }
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
     }
-
 }

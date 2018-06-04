@@ -4,6 +4,8 @@ import Accesodatos.Catalogos.ProfesorDAOSql;
 import Accesodatos.Grupos.GrupoDAOSql;
 import InterfazGrafica.MessageFactory;
 import LogicaNegocio.Catalogos.Profesor;
+import LogicaNegocio.Lanzador;
+import LogicaNegocio.Paneles;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -24,7 +26,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 
 public class VentanaCRUGrupoController implements Initializable {
-
     @FXML
     private TextField nombre;
     @FXML
@@ -43,15 +44,20 @@ public class VentanaCRUGrupoController implements Initializable {
     private List<Profesor> listaProfesores;
     private GrupoDAOSql grupoDAO;
     private List<Dia> listaOriginal;
+    private Lanzador lanzador;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+    }
+
+    public void iniciar(Lanzador lanzador){
+        this.lanzador = lanzador;
         this.grupoDAO = new GrupoDAOSql();
         this.dias = new ArrayList();
         this.agregarDia.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkPlusIcon.png")));
         this.cargarProfesores();
     }
-
     public void cargarProfesores() {
         this.listaProfesores = new ArrayList();
         ProfesorDAOSql profesorDAO = new ProfesorDAOSql();
@@ -196,6 +202,8 @@ public class VentanaCRUGrupoController implements Initializable {
         this.grupo.setHorario(horario);
         try {
             if (this.grupo.registrarGrupo()) {
+                Object[] objetos = {this.grupo};
+                this.lanzador.enviarEvento(Paneles.GRUPOS_Y_RENTAS, "agregado", objetos);
                 MessageFactory.showMessage("Éxito", "Registro", "El grupo fue registrado exitosamente", Alert.AlertType.INFORMATION);
             } else {
                 this.grupo = null;
@@ -216,6 +224,8 @@ public class VentanaCRUGrupoController implements Initializable {
         try{
             if (this.grupo.editarGrupo(this.listaOriginal)){
                 this.listaOriginal = this.grupo.getHorario().getDias();
+                Object[] objetos = {this.grupo};
+                this.lanzador.enviarEvento(Paneles.GRUPOS_Y_RENTAS, "editado", objetos);
                 MessageFactory.showMessage("Éxito", "Actualización", "El grupo fue actualizado exitosamente", Alert.AlertType.INFORMATION);
             }else{
                 MessageFactory.showMessage("Error", "Actualización", "El grupo no pudo ser actualizado", Alert.AlertType.ERROR);

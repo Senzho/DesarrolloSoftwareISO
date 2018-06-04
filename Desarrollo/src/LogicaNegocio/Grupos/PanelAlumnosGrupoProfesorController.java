@@ -29,6 +29,7 @@ public class PanelAlumnosGrupoProfesorController implements Initializable {
     private Button registrarAsistencia;
     
     private List<Grupo> grupos;
+    private List<Alumno> listaAlumnos;
     private Lanzador lanzador;
     private int idProfesor;
     
@@ -46,17 +47,20 @@ public class PanelAlumnosGrupoProfesorController implements Initializable {
     }
     public void setIdGrupo(int idGrupo){
         this.comboGrupos.setValue(this.getGrupo(idGrupo).getNombre());
-        this.cargarAlumnos(idGrupo);
+        this.cargarAlumnosGrupo(idGrupo);
     }
-    public void cargarAlumnos(int idGrupo){
+    public void cargarAlumnos(List<Alumno> alumnos){
         this.panelAlumnos.getChildren().clear();
-        List<Alumno> alumnos = new AlumnoDAOSql().obtenerAlumnos(idGrupo);
-        Collections.sort(alumnos);
         alumnos.forEach((alumno) -> {
             if(alumno.isEstado()){
                 this.agregarAlumno(alumno);
             }
         });
+    }
+    public void cargarAlumnosGrupo(int idGrupo){
+        this.listaAlumnos = new AlumnoDAOSql().obtenerAlumnos(idGrupo);
+        Collections.sort(this.listaAlumnos);
+        this.cargarAlumnos(this.listaAlumnos);
     }
     public void agregarAlumno(Alumno alumno){
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/InterfazGrafica/Grupos/PanelAlumnoProfesor.fxml"));
@@ -96,9 +100,25 @@ public class PanelAlumnosGrupoProfesorController implements Initializable {
     public void setLanzador(Lanzador lanzador){
         this.lanzador = lanzador;
     }
+    public void alumnoEditado(Alumno alumno){
+        for (int i = 0; i < this.listaAlumnos.size(); i ++){
+            if (this.listaAlumnos.get(i).getIdAlumno() == alumno.getIdAlumno()){
+                this.listaAlumnos.set(i, alumno);
+                Collections.sort(this.listaAlumnos);
+                this.cargarAlumnos(this.listaAlumnos);
+                break;
+            }
+        }
+    }
+    public void grupoAgregado(Grupo grupo){
+        if (grupo.getProfesor().getIdProfesor() == this.idProfesor){
+            this.grupos.add(grupo);
+            this.comboGrupos.getItems().add(grupo.getNombre());
+        }
+    }
     
     public void comboGrupos_onAction(){
-        this.cargarAlumnos(this.getGrupo().getId());
+        this.cargarAlumnosGrupo(this.getGrupo().getId());
     }
     public void registrarAsistencia_onClick(){
         this.lanzador.lanzar("/InterfazGrafica/Asistencia/PanelAsistencia.fxml");

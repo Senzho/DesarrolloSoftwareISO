@@ -50,9 +50,7 @@ public class VentanaPrincipalDirectorController extends VentanaPrincipal impleme
     @Override
     public void initialize(URL url, ResourceBundle rb) {//1 activo 2 baja
         this.lanzador = new Lanzador(this.panelPrincipal, this);
-        this.lanzador.lanzar("/InterfazGrafica/Grupos/PanelSemana.fxml");
-        PanelSemanaController controller = this.lanzador.getCargador().getController();
-        controller.iniciar(this.lanzador);
+        this.menuVerGruposRentas_onClick();
     }    
     
     public void imageView_onClick(){
@@ -117,7 +115,7 @@ public class VentanaPrincipalDirectorController extends VentanaPrincipal impleme
         controller.setIdProfesor(this.profesor.getIdProfesor());
     }
     public void menuCrearGrupo_onClick(){
-        new VentanaCRUGrupo();
+        new VentanaCRUGrupo(this.lanzador);
     }
     public void menuConsultarEgresos_onClick(){
         this.lanzador.lanzar("/InterfazGrafica/Egresos/PanelConsultarPromocionesEgresos.fxml");
@@ -136,9 +134,13 @@ public class VentanaPrincipalDirectorController extends VentanaPrincipal impleme
         controller.setProfesor(this.profesor);
     }
     public void menuVerGruposRentas_onClick(){
-        this.lanzador.lanzar("/InterfazGrafica/Grupos/PanelSemana.fxml");
-        PanelSemanaController controller = this.lanzador.getCargador().getController();
-        controller.iniciar(this.lanzador);
+        PanelSemanaController controller = this.getGruposRentas();
+        if (controller != null){
+            this.panelPrincipal.setCenter(controller.getPane());
+        }else{
+            this.lanzador.lanzar("/InterfazGrafica/Grupos/PanelSemana.fxml");
+            this.getGruposRentas().iniciar(this.lanzador, this.lanzador.getPanelActual());
+        }
     }
     public void menuNuevaRenta_onClick(){
         new VentanaRegistrarRenta();

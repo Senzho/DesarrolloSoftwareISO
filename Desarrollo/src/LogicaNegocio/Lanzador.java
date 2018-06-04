@@ -1,11 +1,18 @@
 package LogicaNegocio;
 
+import LogicaNegocio.Asistencia.PanelAsistenciaController;
+import LogicaNegocio.Asistencia.PanelRegistroAsistenciasController;
 import LogicaNegocio.Catalogos.Alumno;
 import LogicaNegocio.Catalogos.PanelCatalogoAlumnosController;
+import LogicaNegocio.Grupos.Grupo;
+import LogicaNegocio.Grupos.PanelAlumnosGrupoDirectorController;
+import LogicaNegocio.Grupos.PanelAlumnosGrupoProfesorController;
+import LogicaNegocio.Grupos.PanelSemanaController;
 import LogicaNegocio.Sesiones.VentanaPrincipal;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -17,12 +24,62 @@ public class Lanzador {
     private AnchorPane panelActual;
     
     private void catalogoAlumnos(String evento, Object[] objetos){
-        PanelCatalogoAlumnosController controller = this.ventanaPrincipal.getCatalogoAlumnos();
-        if (controller != null){
+        PanelCatalogoAlumnosController catalogoController = this.ventanaPrincipal.getCatalogoAlumnos();
+        if (catalogoController != null){
             if (evento.equals("editado")){
-                controller.alumnoEditado((Alumno) objetos[0]);
+                catalogoController.alumnoEditado((Alumno) objetos[0]);
             }else if (evento.equals("agregado")){
-                controller.alumnoAgregado((Alumno) objetos[0]);
+                catalogoController.alumnoAgregado((Alumno) objetos[0]);
+            }
+        }
+        PanelAlumnosGrupoDirectorController alumnosGrupoController = this.ventanaPrincipal.getAlumnosGrupoDirector();
+        if (alumnosGrupoController != null){
+            if (evento.equals("editado")){
+                alumnosGrupoController.alumnoEditado((Alumno) objetos[0]);
+            }
+        }
+        PanelAlumnosGrupoProfesorController alumnosProfesorController = this.ventanaPrincipal.getAlumnosGrupoProfesor();
+        if (alumnosProfesorController != null){
+            if (evento.equals("editado")){
+                alumnosProfesorController.alumnoEditado((Alumno) objetos[0]);
+            }
+        }
+        PanelAsistenciaController asistenciaController = this.ventanaPrincipal.getRegistrarAsistencia();
+        if (asistenciaController != null){
+            if (evento.equals("editado")){
+                asistenciaController.alumnoEditado((Alumno) objetos[0]);
+            }
+        }
+        PanelRegistroAsistenciasController asistenciasController = this.ventanaPrincipal.getHistorialAsistencia();
+        if (asistenciasController != null){
+            if (evento.equals("editado")){
+                asistenciasController.alumnoEditado((Alumno) objetos[0]);
+            }
+        }
+    }
+    private void gruposRentas(String evento, Object[] objetos){
+        PanelSemanaController semanaController = this.ventanaPrincipal.getGruposRentas();
+        if (semanaController != null){
+            if (evento.equals("agregado")){
+                semanaController.grupoAgregado((Grupo) objetos[0]);
+            }else if (evento.equals("editado")){
+                semanaController.grupoEditado((Grupo) objetos[0]);
+            }
+        }
+        PanelAlumnosGrupoDirectorController alumnosController = this.ventanaPrincipal.getAlumnosGrupoDirector();
+        if (alumnosController != null){
+            if (evento.equals("agregado")){
+                alumnosController.grupoAgregado((Grupo) objetos[0]);
+            }else if (evento.equals("editado")){
+                
+            }
+        }
+        PanelAlumnosGrupoProfesorController alumnosProfesorController = this.ventanaPrincipal.getAlumnosGrupoProfesor();
+        if (alumnosController != null){
+            if (evento.equals("agregado")){
+                alumnosProfesorController.grupoAgregado((Grupo) objetos[0]);
+            }else if (evento.equals("editado")){
+                
             }
         }
     }
@@ -53,45 +110,55 @@ public class Lanzador {
     public AnchorPane getPanelActual(){
         return this.panelActual;
     }
+    public VentanaPrincipal getVentanaPrincipal(){
+        return this.ventanaPrincipal;
+    }
+    public void establecerPrincipal(AnchorPane pane){
+        this.panelActual = pane;
+        this.panel.setCenter(pane);
+    }
     public void enviarEvento(Paneles panel, String evento, Object[] objetos){
-        switch(panel){
-            case REGISTRAR_ASISTENCIA:
-                break;
-            case HISTORIAL_ASISTENCIA:
-                break;
-            case PROXIMOS_PAGOS_PROFESOR:
-                break;
-            case PROXIMOS_PAGOS_ALUMNO:
-                break;
-            case MIS_GRUPOS:
-                break;
-            case ALUMNOS_GRUPO_PROFESOR:
-                break;
-            case ALUMNOS_GRUPO_DIRECTOR:
-                break;
-            case PAGOS_ALUMNO:
-                break;
-            case PAGOS_PROFESOR:
-                break;
-            case PAGOS_CLIENTE:
-                break;
-            case PAGOS_TEMPORALES:
-                break;
-            case GRUPOS_Y_RENTAS:
-                break;
-            case RENTAS:
-                break;
-            case CATALOGO_ALUMNOS:
-                this.catalogoAlumnos(evento, objetos);
-                break;
-            case CATALOGO_PROFESORES:
-                break;
-            case CATALOGO_CLIENTES:
-                break;
-            case EGRESOS:
-                break;
-            case REPORTE:
-                break;
-        }
+        Platform.runLater(() -> {
+            switch(panel){
+                case REGISTRAR_ASISTENCIA:
+                    break;
+                case HISTORIAL_ASISTENCIA:
+                    break;
+                case PROXIMOS_PAGOS_PROFESOR:
+                    break;
+                case PROXIMOS_PAGOS_ALUMNO:
+                    break;
+                case MIS_GRUPOS:
+                    break;
+                case ALUMNOS_GRUPO_PROFESOR:
+                    break;
+                case ALUMNOS_GRUPO_DIRECTOR:
+                    break;
+                case PAGOS_ALUMNO:
+                    break;
+                case PAGOS_PROFESOR:
+                    break;
+                case PAGOS_CLIENTE:
+                    break;
+                case PAGOS_TEMPORALES:
+                    break;
+                case GRUPOS_Y_RENTAS:
+                    this.gruposRentas(evento, objetos);
+                    break;
+                case RENTAS:
+                    break;
+                case CATALOGO_ALUMNOS:
+                    this.catalogoAlumnos(evento, objetos);
+                    break;
+                case CATALOGO_PROFESORES:
+                    break;
+                case CATALOGO_CLIENTES:
+                    break;
+                case EGRESOS:
+                    break;
+                case REPORTE:
+                    break;
+            }
+        });
     }
 }

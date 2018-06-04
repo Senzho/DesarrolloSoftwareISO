@@ -50,6 +50,7 @@ public class PanelSemanaController implements Initializable {
     private List<Calendarizable> panelesViernes;
     private List<Calendarizable> panelesSabado;
     private List<Calendarizable> panelesDomingo;
+    private AnchorPane pane;
     
     private PanelGrupoDirectorController getControllerGrupo(String horaInicio, String horaFin, Grupo grupo){
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/InterfazGrafica/Grupos/PanelGrupoDirector.fxml"));
@@ -74,6 +75,22 @@ public class PanelSemanaController implements Initializable {
             Logger.getLogger(PanelSemanaController.class.getName()).log(Level.SEVERE, null, ex);
         }
         return controller;
+    }
+    private void limpiar(){
+        this.listaDomingo.getChildren().clear();
+        this.listaJueves.getChildren().clear();
+        this.listaLunes.getChildren().clear();
+        this.listaMartes.getChildren().clear();
+        this.listaMiercoles.getChildren().clear();
+        this.listaSabado.getChildren().clear();
+        this.listaViernes.getChildren().clear();
+        this.panelesDomingo.clear();
+        this.panelesJueves.clear();
+        this.panelesLunes.clear();
+        this.panelesMartes.clear();
+        this.panelesMiercoles.clear();
+        this.panelesSabado.clear();
+        this.panelesViernes.clear();
     }
     private void agregarControladorRenta(PanelRentaController controller, int dia){
         switch(dia){
@@ -112,8 +129,13 @@ public class PanelSemanaController implements Initializable {
         this.panelesSabado = new ArrayList();
         this.panelesDomingo = new ArrayList();
     }
-    public void iniciar(Lanzador lanzador){
+    public void iniciar(Lanzador lanzador, AnchorPane pane){
         this.lanzador = lanzador;
+        this.pane = pane;
+        this.cargarTodo();
+    }
+    public void cargarTodo(){
+        this.limpiar();
         this.cargarGrupos();
         this.cargarRentas();
         this.cargarPaneles();
@@ -196,13 +218,28 @@ public class PanelSemanaController implements Initializable {
             this.listaDomingo.getChildren().add(0, controller.getPane());
         });
     }
-    
+    public void grupoAgregado(Grupo grupo){
+        this.grupos.add(grupo);
+        this.cargarTodo();
+    }
+    public void grupoEditado(Grupo grupo){
+        for (int i = 0; i < this.grupos.size(); i ++){
+            if (this.grupos.get(i).getId() == grupo.getId()){
+                this.grupos.set(i, grupo);
+                this.cargarTodo();
+                break;
+            }
+        }
+    }
+    public AnchorPane getPane(){
+        return this.pane;
+    }
     
     public void nuevaRenta_onClick(){
         new VentanaRegistrarRenta();
     }
     public void nuevoGrupo_onClick(){
-        new VentanaCRUGrupo();
+        new VentanaCRUGrupo(this.lanzador);
     }
     public void botonConsultarRentas_onClick(){
         this.lanzador.lanzar("/InterfazGrafica/Pagos/PanelConsultarRentas.fxml");
