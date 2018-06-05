@@ -3,6 +3,7 @@ package LogicaNegocio.Pagos;
 import InterfazGrafica.MessageFactory;
 import LogicaNegocio.Catalogos.CopiarArchivo;
 import LogicaNegocio.Catalogos.Profesor;
+import LogicaNegocio.Lanzador;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
@@ -33,14 +34,16 @@ public class PanelHistorialPagoProfesoresController implements Initializable {
     
     private Profesor profesor;
     private PagoProfesor pagoProfesor;
+    private Lanzador lanzador;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.pagoProfesor = new PagoProfesor();
     }
     
-    public void setProfesor(Profesor profesor){
+    public void iniciar(Profesor profesor, Lanzador lanzador){
         this.profesor = profesor;
+        this.lanzador = lanzador;
         this.nombre.setText(profesor.getNombre());
         this.cargarImagen();
         this.cargarPagos();

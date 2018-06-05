@@ -1,6 +1,8 @@
 package LogicaNegocio.Catalogos;
 
 import InterfazGrafica.MessageFactory;
+import LogicaNegocio.Lanzador;
+import LogicaNegocio.Paneles;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
@@ -33,6 +35,7 @@ public class VentanaCRUClienteController implements Initializable {
 
     private Cliente cliente;
     private String rutaImagen;
+    private Lanzador lanzador;
 
     private CatalogoEnum validarDatos() {
         CatalogoEnum validacion = CatalogoEnum.DATOS_VALIDOS;
@@ -98,8 +101,9 @@ public class VentanaCRUClienteController implements Initializable {
         this.cargarImagen();
     }
 
-    public void setCliente(Cliente cliente) {
+    public void iniciar(Cliente cliente, Lanzador lanzador ){
         this.cliente = cliente;
+        this.lanzador = lanzador;
         if (cliente != null) {
             this.cargarCliente();
             this.registrar.setText("Guardar");
@@ -145,6 +149,8 @@ public class VentanaCRUClienteController implements Initializable {
         this.cliente.setCorreo(this.correo.getText().trim());
         this.cliente.setDireccion(this.domicilio.getText().trim());
         if (this.cliente.editarCliente()) {
+            Object[] objetos = {this.cliente};
+            this.lanzador.enviarEvento(Paneles.CATALOGO_CLIENTES, "agregado", objetos);
             realizado = true;
         }
         return realizado;

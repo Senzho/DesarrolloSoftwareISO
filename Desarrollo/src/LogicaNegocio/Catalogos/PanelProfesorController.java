@@ -42,17 +42,14 @@ public class PanelProfesorController implements Initializable {
         this.editar.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkPencilIcon.png")));
     }
 
-    public void setLanzador(Lanzador lanzador) {
-        this.lanzador = lanzador;
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
     }
 
-    public void setProfesor(Profesor profesor) {
+    public void iniciar(Profesor profesor, Lanzador lanzador){
         this.profesor = profesor;
+        this.lanzador = lanzador;
         this.cargarProfesor();
         this.establecerIconos();
         this.cargarImagen();
@@ -90,12 +87,12 @@ public class PanelProfesorController implements Initializable {
     }
 
     public void editar_OnClick() {
-        new VentanaCRUProfesor(this.profesor);
+        new VentanaCRUProfesor(this.profesor, this.lanzador);
     }
 
     public void pagos_OnClick() {
         lanzador.lanzar("/InterfazGrafica/Pagos/PanelHistorialPagoProfesores.fxml");
         PanelHistorialPagoProfesoresController controller = lanzador.getCargador().getController();
-        controller.setProfesor(this.profesor);
+        controller.iniciar(this.profesor, this.lanzador);
     }
 }

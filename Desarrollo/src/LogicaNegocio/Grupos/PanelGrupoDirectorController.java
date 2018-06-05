@@ -49,9 +49,15 @@ public class PanelGrupoDirectorController extends Calendarizable implements Init
         this.horaFin = horaFin;
         this.grupo = grupo;
         super.setValor(Horas.getSegundos(this.horaInicio));
+        this.recargar();
+        this.horas.setText(this.horaInicio + " - " + this.horaFin);
+    }
+    public Grupo getGrupo(){
+        return this.grupo;
+    }
+    public void recargar(){
         this.nombreGrupo.setText(this.grupo.getNombre());
         this.nombreProfesor.setText(this.grupo.getProfesor().getNombre());
-        this.horas.setText(this.horaInicio + " - " + this.horaFin);
     }
     
     public void verAlumnos_onClick(){

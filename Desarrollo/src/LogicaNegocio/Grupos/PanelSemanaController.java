@@ -4,6 +4,7 @@ import Accesodatos.Grupos.GrupoDAOSql;
 import Accesodatos.Pagos.RentaDAOSql;
 import InterfazGrafica.Grupos.VentanaCRUGrupo;
 import InterfazGrafica.Pagos.VentanaRegistrarRenta;
+import LogicaNegocio.Catalogos.Profesor;
 import LogicaNegocio.Egresos.Dates;
 import LogicaNegocio.Lanzador;
 import LogicaNegocio.Pagos.PanelRentaController;
@@ -11,7 +12,6 @@ import LogicaNegocio.Pagos.Renta;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -230,6 +230,28 @@ public class PanelSemanaController implements Initializable {
                 break;
             }
         }
+    }
+    public void profesorEditado(Profesor profesor){
+        List<List<Calendarizable>> lista = new ArrayList();
+        lista.add(this.panelesDomingo);
+        lista.add(this.panelesJueves);
+        lista.add(this.panelesLunes);
+        lista.add(this.panelesMartes);
+        lista.add(this.panelesMiercoles);
+        lista.add(this.panelesSabado);
+        lista.add(this.panelesViernes);
+        lista.forEach((listaCal) -> {
+            listaCal.forEach((calendarizable) -> {
+                if (calendarizable instanceof PanelGrupoDirectorController){
+                    PanelGrupoDirectorController controller = (PanelGrupoDirectorController) calendarizable;
+                    Grupo grupo = controller.getGrupo();
+                    if (grupo.getProfesor().getIdProfesor() == profesor.getIdProfesor()){
+                        grupo.setProfesor(profesor);
+                        controller.recargar();
+                    }
+                }
+            });
+        });
     }
     public AnchorPane getPane(){
         return this.pane;

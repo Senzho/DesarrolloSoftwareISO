@@ -25,14 +25,20 @@ public class PanelCatalogoProfesoresController implements Initializable {
     private Button buscar;
     @FXML
     private VBox panelProfesores;
+    
     private Lanzador lanzador;
+    private AnchorPane pane;
+    private List<Profesor> listaProfesores;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
        
     }
-    public void setLanzador(Lanzador lanzador){
-        this.lanzador = lanzador; 
+    public void inicar(Lanzador lanzador, AnchorPane pane){
+        this.lanzador = lanzador;
+        this.pane = pane;
+        this.listaProfesores = new Profesor().obtenerProfesores();
+        this.cargarProfesores(this.listaProfesores);
     }
     
     public void cargarProfesores(List<Profesor> profesores){
@@ -45,13 +51,30 @@ public class PanelCatalogoProfesoresController implements Initializable {
                 panel = loader.load();
                 panel.setStyle("-fx-background-color: #D8D8D8;");
                 PanelProfesorController controller = loader.getController();
-                controller.setProfesor(profesorObtenido);
-                controller.setLanzador(this.lanzador);
+                controller.iniciar(profesorObtenido, this.lanzador);
                 this.panelProfesores.getChildren().add(panel);
             } catch (IOException ex) {
                 Logger.getLogger(PanelCatalogoAlumnosController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
+    }
+    public AnchorPane getPane(){
+        return this.pane;
+    }
+    public void profesorAgregado(Profesor profesor){
+        this.listaProfesores.add(profesor);
+        Collections.sort(this.listaProfesores);
+        this.cargarProfesores(this.listaProfesores);
+    }
+    public void profesorEditado(Profesor profesor){
+        for (int i = 0; i < this.listaProfesores.size(); i ++){
+            if (this.listaProfesores.get(i).getIdProfesor() == profesor.getIdProfesor()){
+                this.listaProfesores.set(i, profesor);
+                Collections.sort(this.listaProfesores);
+                this.cargarProfesores(this.listaProfesores);
+                break;
+            }
+        }
     }
     
     public void buscar_OnClick(){

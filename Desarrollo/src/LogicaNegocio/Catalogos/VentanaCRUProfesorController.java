@@ -2,6 +2,8 @@ package LogicaNegocio.Catalogos;
 
 import InterfazGrafica.MessageFactory;
 import LogicaNegocio.Egresos.Dates;
+import LogicaNegocio.Lanzador;
+import LogicaNegocio.Paneles;
 import LogicaNegocio.Sesiones.Hasher;
 import LogicaNegocio.Sesiones.Usuario;
 import java.io.IOException;
@@ -53,6 +55,7 @@ public class VentanaCRUProfesorController implements Initializable {
 
     private Profesor profesor;
     private String rutaImagen;
+    private Lanzador lanzador;
 
     private static final String TIPO_PAGO_MENSUAL = "Mensual";
     private static final String TIPO_PAGO_QUINCENAL = "Quincenal";
@@ -162,8 +165,9 @@ public class VentanaCRUProfesorController implements Initializable {
         this.fechaInicio.setValue(LocalDate.of(Dates.getYear(fechaInicioPago), Dates.getMonth(fechaInicioPago), Dates.getDay(fechaInicioPago)));
     }
 
-    public void setProfesor(Profesor profesor) {
+    public void iniciar(Profesor profesor, Lanzador lanzador){
         this.profesor = profesor;
+        this.lanzador = lanzador;
         if (profesor != null) {
             this.cargarProfesor();
             this.registrar.setText("Guardar");
@@ -200,6 +204,8 @@ public class VentanaCRUProfesorController implements Initializable {
         this.profesor.setTipoPago(this.tipoPago.getValue().equals(VentanaCRUProfesorController.TIPO_PAGO_MENSUAL));
         this.profesor.setFechaInicio(Dates.toDate(this.fechaInicio.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE)));
         if (this.profesor.registrarProfesor()) {
+            Object[] objetos = {this.profesor};
+            this.lanzador.enviarEvento(Paneles.CATALOGO_PROFESORES, "agregado", objetos);
             realizado = true;
             this.registrar.setText("Guardar");
         }
@@ -217,6 +223,8 @@ public class VentanaCRUProfesorController implements Initializable {
         this.profesor.setTipoPago(this.tipoPago.getValue().equals(VentanaCRUProfesorController.TIPO_PAGO_MENSUAL));
         this.profesor.setFechaInicio(Dates.toDate(this.fechaInicio.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE)));
         if (this.profesor.editarProfesor()) {
+            Object[] objetos = {this.profesor};
+            this.lanzador.enviarEvento(Paneles.CATALOGO_PROFESORES, "editado", objetos);
             realizado = true;
         }
         return realizado;

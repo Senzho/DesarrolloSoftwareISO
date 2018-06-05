@@ -4,10 +4,16 @@ import LogicaNegocio.Asistencia.PanelAsistenciaController;
 import LogicaNegocio.Asistencia.PanelRegistroAsistenciasController;
 import LogicaNegocio.Catalogos.Alumno;
 import LogicaNegocio.Catalogos.PanelCatalogoAlumnosController;
+import LogicaNegocio.Catalogos.PanelCatalogoProfesoresController;
+import LogicaNegocio.Catalogos.Profesor;
+import LogicaNegocio.Egresos.PanelConsultarPromocionesEgresosController;
 import LogicaNegocio.Grupos.Grupo;
 import LogicaNegocio.Grupos.PanelAlumnosGrupoDirectorController;
 import LogicaNegocio.Grupos.PanelAlumnosGrupoProfesorController;
+import LogicaNegocio.Grupos.PanelGruposProfesorController;
 import LogicaNegocio.Grupos.PanelSemanaController;
+import LogicaNegocio.Pagos.PagoProfesor;
+import LogicaNegocio.Pagos.PanelHistorialPagoProfesoresController;
 import LogicaNegocio.Sesiones.VentanaPrincipal;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -75,11 +81,49 @@ public class Lanzador {
             }
         }
         PanelAlumnosGrupoProfesorController alumnosProfesorController = this.ventanaPrincipal.getAlumnosGrupoProfesor();
-        if (alumnosController != null){
+        if (alumnosProfesorController != null){
             if (evento.equals("agregado")){
                 alumnosProfesorController.grupoAgregado((Grupo) objetos[0]);
             }else if (evento.equals("editado")){
                 
+            }
+        }
+        PanelGruposProfesorController gruposProfesor = this.ventanaPrincipal.getMisGrupos();
+        if (gruposProfesor != null){
+            if (evento.equals("agregado")){
+                gruposProfesor.grupoAgregado((Grupo) objetos[0]);
+            }else if (evento.equals("editado")){
+                gruposProfesor.grupoEditado((Grupo) objetos[0]);
+            }
+        }
+    }
+    private void catalogoProfesores(String evento, Object[] objetos){
+        PanelCatalogoProfesoresController controller = this.ventanaPrincipal.getCatalogoProfesores();
+        if (controller != null){
+            if (evento.equals("agregado")){
+                controller.profesorAgregado((Profesor) objetos[0]);
+            }else if (evento.equals("editado")){
+                controller.profesorEditado((Profesor) objetos[0]);
+            }
+        }
+        PanelSemanaController semanaController = this.ventanaPrincipal.getGruposRentas();
+        if (semanaController != null){
+            if (evento.equals("editado")){
+                semanaController.profesorEditado((Profesor) objetos[0]);
+            }
+        }
+        PanelAlumnosGrupoDirectorController alumnosController = this.ventanaPrincipal.getAlumnosGrupoDirector();
+        if (alumnosController != null){
+            if (evento.equals("editado")){
+                alumnosController.profesorEditado((Profesor) objetos[0]);
+            }
+        }
+    }
+    private void pagosProfesor(String evento, Object[] objetos){
+        PanelHistorialPagoProfesoresController controller = this.ventanaPrincipal.getPagosProfesor();
+        if (controller != null){
+            if (evento.equals("registrado")){
+                controller.agregarPago((PagoProfesor) objetos[0]);
             }
         }
     }
@@ -137,6 +181,7 @@ public class Lanzador {
                 case PAGOS_ALUMNO:
                     break;
                 case PAGOS_PROFESOR:
+                    this.pagosProfesor(evento, objetos);
                     break;
                 case PAGOS_CLIENTE:
                     break;
@@ -151,6 +196,7 @@ public class Lanzador {
                     this.catalogoAlumnos(evento, objetos);
                     break;
                 case CATALOGO_PROFESORES:
+                    this.catalogoProfesores(evento, objetos);
                     break;
                 case CATALOGO_CLIENTES:
                     break;

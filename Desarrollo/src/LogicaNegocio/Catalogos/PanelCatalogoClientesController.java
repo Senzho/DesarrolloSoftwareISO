@@ -25,15 +25,20 @@ public class PanelCatalogoClientesController implements Initializable {
     private Button buscar;
     @FXML
     private VBox panelClientes;
+    
     private Lanzador lanzador;
+    private AnchorPane pane;
+    private List<Cliente> clientes;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
     }
-    public void setLanzador(Lanzador lanzador){
+    public void iniciar(Lanzador lanzador, AnchorPane pane){
         this.lanzador = lanzador;
-        this.cargarClientes(new Cliente().obtenerClientes());
+        this.pane = pane;
+        this.clientes = new Cliente().obtenerClientes();
+        this.cargarClientes(this.clientes);
     }
     public void cargarClientes(List<Cliente> clientes){
         this.panelClientes.getChildren().clear();
@@ -52,6 +57,22 @@ public class PanelCatalogoClientesController implements Initializable {
                 Logger.getLogger(PanelCatalogoClientesController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
+    }
+    public AnchorPane getPane(){
+        return this.pane;
+    }
+    public void clienteAgregado(Cliente cliente){
+        this.clientes.add(cliente);
+        this.cargarClientes(this.clientes);
+    }
+    public void clienteEditado(Cliente cliente){
+        for (int i = 0; i < this.clientes.size(); i ++){
+            if (this.clientes.get(i).getIdCliente() == cliente.getIdCliente()){
+                this.clientes.set(i, cliente);
+                this.cargarClientes(this.clientes);
+                break;
+            }
+        }
     }
     
     public void buscar_OnClick(){

@@ -2,6 +2,8 @@ package LogicaNegocio.Pagos;
 
 import InterfazGrafica.MessageFactory;
 import LogicaNegocio.Catalogos.Profesor;
+import LogicaNegocio.Lanzador;
+import LogicaNegocio.Paneles;
 import java.net.URL;
 import java.util.Date;
 import java.util.List;
@@ -24,19 +26,22 @@ public class VentanaRegistrarPagoProfesorController implements Initializable {
     private Stage stage;
     private List<Profesor> listaProfesores;
     private PagoProfesor pagoProfesor;
+    private Lanzador lanzador;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+    }
+    
+    public void iniciar(Stage stage, Lanzador lanzador){
+        this.stage = stage;
+        this.lanzador = lanzador;
         ObservableList<String> nombresProfesores = FXCollections.observableArrayList();
         this.listaProfesores = new Profesor().obtenerProfesores();
         this.listaProfesores.forEach((profesor) -> {
             nombresProfesores.add(profesor.getNombre());
         });
         this.pofesores.setItems(nombresProfesores);
-    }
-    
-    public void setStage(Stage stage){
-        this.stage = stage;
     }
     public Profesor getProfesorSeleccionado(){
         Profesor profesor = null;
@@ -57,6 +62,8 @@ public class VentanaRegistrarPagoProfesorController implements Initializable {
         this.pagoProfesor.setMonto(profesor.getMonto());
         this.pagoProfesor.setTipoPago(profesor.isTipoPago());
         if (this.pagoProfesor.registrarPago(profesor.getIdProfesor())){
+            Object[] objetos = {this.pagoProfesor};
+            this.lanzador.enviarEvento(Paneles.PAGOS_PROFESOR, "registrado", objetos);
             MessageFactory.showMessage("Registro", "Éxito", "El pago fue registrado con éxito", Alert.AlertType.INFORMATION);
             this.stage.close();
         }else{

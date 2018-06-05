@@ -5,6 +5,7 @@ import Accesodatos.Grupos.GrupoDAOSql;
 import LogicaNegocio.Catalogos.Alumno;
 import LogicaNegocio.Catalogos.CopiarArchivo;
 import LogicaNegocio.Catalogos.PanelAlumnoDirectorController;
+import LogicaNegocio.Catalogos.Profesor;
 import LogicaNegocio.Lanzador;
 import java.io.IOException;
 import java.net.URL;
@@ -110,6 +111,17 @@ public class PanelAlumnosGrupoDirectorController implements Initializable {
     public void grupoAgregado(Grupo grupo){
         this.listaGrupos.add(grupo);
         this.comboGrupos.getItems().add(grupo.getNombre());
+    }
+    public void profesorEditado(Profesor profesor){
+        this.listaGrupos.forEach((grupo) -> {
+            if (grupo.getProfesor().getIdProfesor() == profesor.getIdProfesor()){
+                grupo.setProfesor(profesor);
+                if (this.getGrupo(this.comboGrupos.getValue().toString()).getId() == grupo.getId()){
+                    this.nombreProfesor.setText(profesor.getNombre());
+                    this.cargarImagen(profesor.getIdProfesor());
+                }
+            }
+        });
     }
     
     public void comboGrupos_onAction(){

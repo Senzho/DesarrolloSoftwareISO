@@ -35,8 +35,7 @@ public class VentanaPrincipalProfesorController extends VentanaPrincipal impleme
         this.profesor = profesor;
         this.lanzador.lanzar("/InterfazGrafica/Grupos/PanelGruposProfesor.fxml");
         PanelGruposProfesorController controller = this.lanzador.getCargador().getController();
-        controller.setLanzador(this.lanzador);
-        controller.setIdProfesor(this.profesor.getIdProfesor());
+        controller.iniciar(this.profesor.getIdProfesor(), this.lanzador, this.lanzador.getPanelActual());
     }
     
     @Override
@@ -51,8 +50,7 @@ public class VentanaPrincipalProfesorController extends VentanaPrincipal impleme
     public void menuMisGrupos_onClick(){
         this.lanzador.lanzar("/InterfazGrafica/Grupos/PanelGruposProfesor.fxml");
         PanelGruposProfesorController controller = this.lanzador.getCargador().getController();
-        controller.setLanzador(lanzador);
-        controller.setIdProfesor(this.profesor.getIdProfesor());
+        controller.iniciar(this.profesor.getIdProfesor(), this.lanzador, this.lanzador.getPanelActual());
     }
     public void menuRegistrarPago_onClick(){
         new VentanaRegistrarPagoAlumno(this.profesor.getIdProfesor());

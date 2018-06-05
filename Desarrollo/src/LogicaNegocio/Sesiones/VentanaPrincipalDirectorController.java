@@ -60,10 +60,10 @@ public class VentanaPrincipalDirectorController extends VentanaPrincipal impleme
         new VentanaCRUAlumno(this.lanzador);
     }
     public void menuRegistrarProfesor_onClick(){
-        new VentanaCRUProfesor();
+        new VentanaCRUProfesor(this.lanzador);
     }
     public void menuRegistrarCliente_onClick(){
-        new VentanaCRUCliente();
+        new VentanaCRUCliente(this.lanzador);
     }
     public void menuPromocionFacebook_onClick(){
         new VentanaCRUGastoPromocional();
@@ -72,7 +72,7 @@ public class VentanaPrincipalDirectorController extends VentanaPrincipal impleme
         new VentanaCRUEgreso();
     }
     public void menuRegistroPagoProfesor_onClick(){
-        new VentanaRegistrarPagoProfesor();
+        new VentanaRegistrarPagoProfesor(this.lanzador);
     }
     public void menuRegistroPagoAlumno_onClick(){
         new VentanaRegistrarPagoAlumno(this.profesor.getIdProfesor());
@@ -89,10 +89,13 @@ public class VentanaPrincipalDirectorController extends VentanaPrincipal impleme
         controller.generarProximoPago();
     }
     public void menuProfesor_onclick(){
-        this.lanzador.lanzar("/InterfazGrafica/Catalogos/PanelCatalogoProfesores.fxml");
-        PanelCatalogoProfesoresController controller =  lanzador.getCargador().getController();
-        controller.setLanzador(lanzador);
-        controller.cargarProfesores(new Profesor().obtenerProfesores());
+        PanelCatalogoProfesoresController controller = this.getCatalogoProfesores();
+        if (controller != null){
+            this.panelPrincipal.setCenter(controller.getPane());
+        }else{
+            this.lanzador.lanzar("/InterfazGrafica/Catalogos/PanelCatalogoProfesores.fxml");
+            this.getCatalogoProfesores().inicar(this.lanzador, this.lanzador.getPanelActual());
+        }
     }
     public void menuAlumno_onClick(){
         PanelCatalogoAlumnosController controller = this.getCatalogoAlumnos();
@@ -104,15 +107,23 @@ public class VentanaPrincipalDirectorController extends VentanaPrincipal impleme
         }  
     }
     public void menuCliente_onClick(){
-        this.lanzador.lanzar("/InterfazGrafica/Catalogos/PanelCatalogoClientes.fxml");
-        PanelCatalogoClientesController controller  = lanzador.getCargador().getController();
-        controller.setLanzador(lanzador);
+        PanelCatalogoClientesController controller  = this.getCatalogoClientes();
+        if (controller != null){
+            this.panelPrincipal.setCenter(controller.getPane());
+        }else{
+            this.lanzador.lanzar("/InterfazGrafica/Catalogos/PanelCatalogoClientes.fxml");
+            this.getCatalogoClientes().iniciar(this.lanzador, this.lanzador.getPanelActual());
+        }
     }
     public void menuMisGrupos_onClick(){
-        this.lanzador.lanzar("/InterfazGrafica/Grupos/PanelGruposProfesor.fxml");
-        PanelGruposProfesorController controller = this.lanzador.getCargador().getController();
-        controller.setLanzador(lanzador);
-        controller.setIdProfesor(this.profesor.getIdProfesor());
+        PanelGruposProfesorController controller = this.getMisGrupos();
+        if (controller != null){
+            this.panelPrincipal.setCenter(controller.getPane());
+        }else{
+            this.lanzador.lanzar("/InterfazGrafica/Grupos/PanelGruposProfesor.fxml");
+            controller = this.getMisGrupos();
+            controller.iniciar(this.profesor.getIdProfesor(), this.lanzador, this.lanzador.getPanelActual());
+        }
     }
     public void menuCrearGrupo_onClick(){
         new VentanaCRUGrupo(this.lanzador);
@@ -135,7 +146,7 @@ public class VentanaPrincipalDirectorController extends VentanaPrincipal impleme
     }
     public void menuVerGruposRentas_onClick(){
         PanelSemanaController controller = this.getGruposRentas();
-        if (controller != null){
+        if (this.getGruposRentas() != null){
             this.panelPrincipal.setCenter(controller.getPane());
         }else{
             this.lanzador.lanzar("/InterfazGrafica/Grupos/PanelSemana.fxml");

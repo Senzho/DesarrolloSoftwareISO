@@ -48,7 +48,7 @@ public class PanelClienteController implements Initializable {
     }
     
     public void editar_OnClick(){
-        new VentanaCRUCliente(this.cliente);
+        new VentanaCRUCliente(this.cliente, this.lanzador);
     }
     public void cargarImagen() {
         this.imagen.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkPersonIcon.png")));
