@@ -5,19 +5,22 @@
  */
 package centrodecontrolared;
 
+import LogicaNegocio.Catalogos.VentanaCRUProfesor;
+import LogicaNegocio.Sesiones.Usuario;
 import LogicaNegocio.Sesiones.VentanaInicioSesion;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-/**
- *
- * @author marioolopez
- */
 public class CentroDeControlAred extends Application {
 
+    @Override
     public void start(Stage primaryStage) throws IOException {
-        new VentanaInicioSesion();
+        if (new Usuario().obtenerNumeroUsuario() > 0){
+            new VentanaInicioSesion();
+        }else{
+            new VentanaCRUProfesor(null);
+        }
     }
 
     public static void main(String[] args) {

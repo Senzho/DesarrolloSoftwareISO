@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Desktop
+ * @author Victor Javier
  */
 @Entity
 @Table(name = "usuario")
@@ -32,6 +32,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Usuario.findByTipoUsuario", query = "SELECT u FROM Usuario u WHERE u.tipoUsuario = :tipoUsuario")
     , @NamedQuery(name = "Usuario.findByIdTipoUsuario", query = "SELECT u FROM Usuario u WHERE u.idTipoUsuario = :idTipoUsuario")
     , @NamedQuery(name = "Usuario.FindUserLogin", query ="SELECT u FROM Usuario u where u.nombre = :nombre and u.contrasena = :contrasena")
+    , @NamedQuery(name = "Usuario.findCuenta", query = "SELECT COUNT(u) FROM Usuario u")
 })
 public class Usuario implements Serializable {
 

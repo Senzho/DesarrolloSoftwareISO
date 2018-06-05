@@ -30,17 +30,15 @@ public class VentanaInicioSesionController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        this.txtUsuario.setStyle("-fx-accent: #FA58F4");
-        this.imagenAred.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/AredImagen.png")));
+        
     }
 
     public void setStage(Stage stage) {
         this.stage = stage;
+        this.txtUsuario.setStyle("-fx-accent: #FA58F4");
+        this.imagenAred.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/AredImagen.png")));
     }
-
-    public void btnIniciarSesion_onClick() {
-        String nombreUsuario = this.txtUsuario.getText().trim();
-        String contraseña = Hasher.hash(this.txtContraseña.getText().trim());
+    public void iniciarSesion(String nombreUsuario, String contraseña){
         this.usuario = new Usuario().buscarUsuarioSesion(nombreUsuario, contraseña);
         if (usuario != null) {
             this.profesor = new Usuario().obtenerProfesor(this.usuario.getIdTipoUsuario());
@@ -56,4 +54,15 @@ public class VentanaInicioSesionController implements Initializable {
         }
     }
 
+    public void btnIniciarSesion_onClick() {
+        String nombreUsuario = this.txtUsuario.getText().trim();
+        String contrasena = this.txtContraseña.getText().trim();
+        if (nombreUsuario.length() == 0){
+            MessageFactory.showMessage("Información", "Datos", "Ingresa tu nombre de usuario", AlertType.INFORMATION);
+        }else if (contrasena.length() == 0){
+            MessageFactory.showMessage("Información", "Datos", "Ingresa tu contraseña", AlertType.INFORMATION);
+        }else{
+            this.iniciarSesion(nombreUsuario, Hasher.hash(contrasena));
+        }
+    }
 }

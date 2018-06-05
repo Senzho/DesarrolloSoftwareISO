@@ -36,7 +36,7 @@ public class VentanaCRUProfesor extends Application{
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/InterfazGrafica/Catalogos/VentanaCRUProfesor.fxml"));
         AnchorPane root = loader.load();
         VentanaCRUProfesorController controller = loader.getController();
-        controller.iniciar(this.profesor, this.lanzador);
+        controller.iniciar(this.profesor, this.lanzador, primaryStage);
         Scene scene = new Scene(root, 500, 500);
         primaryStage.setTitle("Profesor");
         primaryStage.setScene(scene);

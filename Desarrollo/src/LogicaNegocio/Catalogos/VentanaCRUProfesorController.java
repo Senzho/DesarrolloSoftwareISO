@@ -6,6 +6,7 @@ import LogicaNegocio.Lanzador;
 import LogicaNegocio.Paneles;
 import LogicaNegocio.Sesiones.Hasher;
 import LogicaNegocio.Sesiones.Usuario;
+import LogicaNegocio.Sesiones.VentanaPrincipalDirector;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -27,6 +28,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 public class VentanaCRUProfesorController implements Initializable {
 
@@ -56,6 +58,8 @@ public class VentanaCRUProfesorController implements Initializable {
     private Profesor profesor;
     private String rutaImagen;
     private Lanzador lanzador;
+    private boolean primerUsuario;
+    private Stage stage;
 
     private static final String TIPO_PAGO_MENSUAL = "Mensual";
     private static final String TIPO_PAGO_QUINCENAL = "Quincenal";
@@ -165,9 +169,15 @@ public class VentanaCRUProfesorController implements Initializable {
         this.fechaInicio.setValue(LocalDate.of(Dates.getYear(fechaInicioPago), Dates.getMonth(fechaInicioPago), Dates.getDay(fechaInicioPago)));
     }
 
-    public void iniciar(Profesor profesor, Lanzador lanzador){
+    public void iniciar(Profesor profesor, Lanzador lanzador, Stage stage){
         this.profesor = profesor;
         this.lanzador = lanzador;
+        this.stage = stage;
+        if (lanzador == null){
+            this.primerUsuario = true;
+        }else{
+            this.primerUsuario = false;
+        }
         if (profesor != null) {
             this.cargarProfesor();
             this.registrar.setText("Guardar");
@@ -204,8 +214,10 @@ public class VentanaCRUProfesorController implements Initializable {
         this.profesor.setTipoPago(this.tipoPago.getValue().equals(VentanaCRUProfesorController.TIPO_PAGO_MENSUAL));
         this.profesor.setFechaInicio(Dates.toDate(this.fechaInicio.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE)));
         if (this.profesor.registrarProfesor()) {
-            Object[] objetos = {this.profesor};
-            this.lanzador.enviarEvento(Paneles.CATALOGO_PROFESORES, "agregado", objetos);
+            if (this.lanzador != null){
+                Object[] objetos = {this.profesor};
+                this.lanzador.enviarEvento(Paneles.CATALOGO_PROFESORES, "agregado", objetos);
+            }
             realizado = true;
             this.registrar.setText("Guardar");
         }
@@ -223,8 +235,10 @@ public class VentanaCRUProfesorController implements Initializable {
         this.profesor.setTipoPago(this.tipoPago.getValue().equals(VentanaCRUProfesorController.TIPO_PAGO_MENSUAL));
         this.profesor.setFechaInicio(Dates.toDate(this.fechaInicio.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE)));
         if (this.profesor.editarProfesor()) {
-            Object[] objetos = {this.profesor};
-            this.lanzador.enviarEvento(Paneles.CATALOGO_PROFESORES, "editado", objetos);
+            if (this.lanzador != null){
+                Object[] objetos = {this.profesor};
+                this.lanzador.enviarEvento(Paneles.CATALOGO_PROFESORES, "editado", objetos);
+            }   
             realizado = true;
         }
         return realizado;
@@ -240,9 +254,16 @@ public class VentanaCRUProfesorController implements Initializable {
             } else {
                 if (this.registrarProfesor()) {
                     String contraseña = Hasher.hash(OperacionesString.sinAcentosYMayusculas(this.profesor.getNombre()));
-                    String usuario = OperacionesString.obtenerNombreUsuario(this.profesor.getCorreo());
-                    if (!new Usuario(1, contraseña, this.profesor.getIdProfesor(), usuario, 1).crearUsuario()) {
+                    String nombreUsuario = OperacionesString.obtenerNombreUsuario(this.profesor.getCorreo());
+                    Usuario usuario = new Usuario(1, contraseña, this.profesor.getIdProfesor(), nombreUsuario, this.primerUsuario?0:1);
+                    if (!usuario.crearUsuario()) {
                         mensajeUsuario = ". No se pudo crear un usuario para el profesor, deberá crearse manualmente";
+                    }else{
+                        if (this.primerUsuario){
+                            MessageFactory.showMessage("Infromación", "Registro", "Bienvenido(a) deirector(a), por default su usuario y contraseña es: " + nombreUsuario + ", " + OperacionesString.sinAcentosYMayusculas(this.profesor.getNombre()), Alert.AlertType.INFORMATION);
+                            this.stage.close();
+                            new VentanaPrincipalDirector(usuario, this.profesor);
+                        } 
                     }
                     realizado = true;
                 }

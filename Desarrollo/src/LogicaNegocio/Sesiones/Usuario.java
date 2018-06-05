@@ -75,21 +75,19 @@ public class Usuario {
     public Usuario buscarUsuarioSesion(String nombreUsuario, String contraseña) {
         return this.usuarioDAO.buscarUsuarioSesion(nombreUsuario,contraseña);
     }
-
     public boolean buscarUsuario(String nombreUsuario) {
         return this.usuarioDAO.buscarUsuario(nombreUsuario);
     }
-
     public boolean crearUsuario() {
         return usuarioDAO.crearUsuario(this);
     }
-
     public boolean editarUsuario() {
         return usuarioDAO.editarUsuario(this);
     }
-
     public Profesor obtenerProfesor(int idProfesor) {
         return usuarioDAO.obtenerProfesor(idProfesor);
     }
-    
+    public int obtenerNumeroUsuario(){
+        return this.usuarioDAO.obtenerNumeroUsuarios();
+    }
 }

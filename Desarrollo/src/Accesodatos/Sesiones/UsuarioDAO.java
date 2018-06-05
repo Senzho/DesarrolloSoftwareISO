@@ -9,4 +9,5 @@ public interface UsuarioDAO {
     public boolean crearUsuario(Usuario usuario);
     public boolean editarUsuario(Usuario usuario);
     public Profesor obtenerProfesor(int idProfesor);
+    public int obtenerNumeroUsuarios();
 }

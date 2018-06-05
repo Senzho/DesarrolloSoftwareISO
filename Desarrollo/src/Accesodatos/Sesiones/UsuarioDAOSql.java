@@ -109,5 +109,16 @@ public class UsuarioDAOSql implements UsuarioDAO {
         }
         return profesor;
     }
-
+    @Override
+    public int obtenerNumeroUsuarios(){
+        int numero;
+        EntityManager entityManager = Persistence.createEntityManagerFactory("CentroDeControlAredPU").createEntityManager();
+        try{
+            long res = (long) entityManager.createNamedQuery("Usuario.findCuenta").getSingleResult();
+            numero = Integer.valueOf(String.valueOf(res));
+        }catch(NumberFormatException excepcion){
+            numero = 0;
+        }
+        return numero;
+    }
 }

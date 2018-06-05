@@ -62,7 +62,7 @@ public class VentanaModificarCuentaController implements Initializable {
     }
 
     public void btnGuardar_onClick() {
-        if (this.validarCampos()) {
+        if (!this.validarCampos()) {
             MessageFactory.showMessage("Información", "Datos invalidos", "Faltan datos del usuario", AlertType.INFORMATION);
         } else {
             if (!txtContraseña.getText().trim().equals(txtRepetirContraseña.getText().trim())) {

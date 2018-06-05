@@ -60,14 +60,14 @@ public class PanelRentaController extends Calendarizable implements Initializabl
         }
     }
     public void eliminarRenta_onClick(){
-       if(Dates.getDiference(new Date(),this.renta.getFecha()) > 0){
-	        if (this.renta.eliminarRenta(renta.getIdRenta())){
-	            MessageFactory.showMessage("Registro eliminado", "Renta eliminada", "El registro se ha eliminado exitosamente", Alert.AlertType.INFORMATION);
-	        }else{
-	            MessageFactory.showMessage("Error de eliminación", "Renta no eliminada", "El registro no ha sido eliminado", Alert.AlertType.ERROR);
-	        }
-	    }else{
-	    	MessageFactory.showMessage("Error de eliminación", "Renta no eliminada", "La fecha de la renta es anterior al dia actual", Alert.AlertType.ERROR);
-	    }
+        if(Dates.getDiference(new Date(),this.renta.getFecha()) > 0){
+            if (this.renta.eliminarRenta(renta.getIdRenta())){
+                MessageFactory.showMessage("Registro eliminado", "Renta eliminada", "El registro se ha eliminado exitosamente", Alert.AlertType.INFORMATION);
+            }else{
+                MessageFactory.showMessage("Error de eliminación", "Renta no eliminada", "El registro no ha sido eliminado", Alert.AlertType.ERROR);
+            }
+        }else{
+            MessageFactory.showMessage("Error de eliminación", "Renta no eliminada", "La fecha de la renta es anterior al dia actual", Alert.AlertType.ERROR);
+        }
     }
 }
