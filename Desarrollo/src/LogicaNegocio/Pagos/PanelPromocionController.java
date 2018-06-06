@@ -18,13 +18,12 @@ import javafx.scene.image.ImageView;
  *
  * @author Desktop
  */
-public class PanelPromocionController implements Initializable {
+public class PanelPromocionController implements Initializable, PromocionListener {
     @FXML
     private Label lblDescripcion;
     @FXML
     private ImageView imagenEditar;
-    @FXML
-    private ImageView imagenVer;
+    
     private Promocion promocion;
     private VentanaConsultarPromocionesController controller; 
     private int idProfesor;
@@ -51,14 +50,21 @@ public class PanelPromocionController implements Initializable {
         // TODO
     }    
     public void cargarImagenes(){
-    this.imagenEditar.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkPencilIcon.png")));
-    this.imagenVer.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkPlusIcon.png")));
-    
+        this.imagenEditar.setImage(new Image(this.getClass().getResourceAsStream("/RecursosGraficos/darkPencilIcon.png")));
     }
     public void setPromocion(){
         controller.setPromocion(this.promocion);
     }
     public void imagenEditar_onClick(){
-        new VentanaCRUPromocion(this.idProfesor,this.promocion);
+        new VentanaCRUPromocion(this.idProfesor,this.promocion, this);
+    }
+
+    @Override
+    public void promocionAgregada(Promocion promocion) {
+        
+    }
+    @Override
+    public void promocionEditada(Promocion promocion) {
+        this.setPromocion(promocion);
     }
 }

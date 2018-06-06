@@ -69,11 +69,11 @@ public class PanelRegistroAsistenciasController implements Initializable {
         for (Grupo grupo1 : listaGruposProfesor) {
             if (grupo1.getNombre().equals(nombreGrupo)) {
                 grupo = grupo1;
+                listaAlumnos = new Alumno().obtenerAlumnos(grupo.getId());
+                inicializarTabla();
                 break;
             }
-        }
-        listaAlumnos = new Alumno().obtenerAlumnos(grupo.getId());
-        inicializarTabla();
+        }     
     }
 
     public void inicializarTabla() {
@@ -92,23 +92,27 @@ public class PanelRegistroAsistenciasController implements Initializable {
     }
 
     public void btnVerAsistencias_onClick() {
-        panelAsistencias.getChildren().clear();
-        Alumno alumno = (Alumno) tablaAlumnos.getSelectionModel().getSelectedItem();
-        List<Date> fechasAsistencia = new Asistencia().obtenerAsistencias(grupo.getId(), alumno.getIdAlumno());
-        for (Date fecha : fechasAsistencia) {
-            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/InterfazGrafica/Asistencia/panelAsistenciaAlumno.fxml"));
-            AnchorPane panel;
-            try {
-                panel = loader.load();
-                panel.setStyle("-fx-background-color: #DAD9D5;");
-                PanelAsistenciaAlumnoController controller = loader.getController();
-                int dia = LocalDate.of(Dates.getYear(fecha), Dates.getMonth(fecha), Dates.getDay(fecha)).getDayOfWeek().getValue();
-                controller.setDatos(this.obtenerDia(dia), Dates.getSentence(fecha));
-                this.panelAsistencias.getChildren().add(panel);
-            } catch (IOException ex) {
-                Logger.getLogger(PanelRegistroAsistenciasController.class.getName()).log(Level.SEVERE, null, ex);
+        if (this.grupo != null){
+            panelAsistencias.getChildren().clear();
+            Alumno alumno = (Alumno) tablaAlumnos.getSelectionModel().getSelectedItem();
+            if (alumno != null){
+                List<Date> fechasAsistencia = new Asistencia().obtenerAsistencias(grupo.getId(), alumno.getIdAlumno());
+                for (Date fecha : fechasAsistencia) {
+                    FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/InterfazGrafica/Asistencia/panelAsistenciaAlumno.fxml"));
+                    AnchorPane panel;
+                    try {
+                        panel = loader.load();
+                        panel.setStyle("-fx-background-color: #DAD9D5;");
+                        PanelAsistenciaAlumnoController controller = loader.getController();
+                        int dia = LocalDate.of(Dates.getYear(fecha), Dates.getMonth(fecha), Dates.getDay(fecha)).getDayOfWeek().getValue();
+                        controller.setDatos(this.obtenerDia(dia), Dates.getSentence(fecha));
+                        this.panelAsistencias.getChildren().add(panel);
+                    } catch (IOException ex) {
+                        Logger.getLogger(PanelRegistroAsistenciasController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
             }
-        }
+        }  
     }
     public String obtenerDia(int numeroDia){
         String nombreDia = "";

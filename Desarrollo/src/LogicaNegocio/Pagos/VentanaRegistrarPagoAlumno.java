@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package LogicaNegocio.Pagos;
 
+import LogicaNegocio.Lanzador;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
@@ -13,25 +9,24 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-/**
- *
- * @author Desktop
- */
 public class VentanaRegistrarPagoAlumno extends Application {
     private int idProfesor;
     private String nombreAlumno;
+    private Lanzador lanzador;
    
-    public VentanaRegistrarPagoAlumno(int idProfesor){
+    public VentanaRegistrarPagoAlumno(int idProfesor, Lanzador lanzador){
         this.idProfesor = idProfesor;
+        this.lanzador = lanzador;
         try {
             start(new Stage());
         } catch (Exception ex) {
             Logger.getLogger(VentanaRegistrarPagoAlumno.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public VentanaRegistrarPagoAlumno(int idProfesor, String nombreAlumno){
+    public VentanaRegistrarPagoAlumno(int idProfesor, String nombreAlumno, Lanzador lanzador){
         this.idProfesor = idProfesor;
         this.nombreAlumno = nombreAlumno;
+        this.lanzador = lanzador;
         try {
             start(new Stage());
         } catch (Exception ex) {
@@ -45,7 +40,7 @@ public class VentanaRegistrarPagoAlumno extends Application {
         AnchorPane root = loader.load();//ancho largo
         VentanaRegistrarPagoAlumnoController controller = loader.getController();
         controller.setIdProfesor(this.idProfesor);
-        controller.inicializarCombo();
+        controller.iniciar(this.lanzador);
         if (this.nombreAlumno != null){
             controller.setAlumnoSeleccionado(this.nombreAlumno);
         }

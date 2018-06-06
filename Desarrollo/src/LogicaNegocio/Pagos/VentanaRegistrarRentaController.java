@@ -7,6 +7,8 @@ import LogicaNegocio.Catalogos.OperacionesString;
 import LogicaNegocio.Egresos.Dates;
 import LogicaNegocio.Grupos.Dia;
 import LogicaNegocio.Grupos.HorarioException;
+import LogicaNegocio.Lanzador;
+import LogicaNegocio.Paneles;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -42,6 +44,7 @@ public class VentanaRegistrarRentaController implements Initializable {
     private List<Cliente> listaClientes;
     private Stage stage;
     private Renta renta;
+    private Lanzador lanzador;
     
     private Cliente obtenerCliente(){
         Cliente cliente = null;
@@ -70,7 +73,8 @@ public class VentanaRegistrarRentaController implements Initializable {
         this.fecha.setValue(LocalDate.now());
     }
     
-    public void inicializar(Stage stage){
+    public void inicializar(Stage stage, Lanzador lanzador){
+        this.lanzador = lanzador;
         if (this.cargarClientes()){
             this.stage = stage;
             this.cargarSalones();
@@ -138,6 +142,8 @@ public class VentanaRegistrarRentaController implements Initializable {
                 this.renta.setDia(dia);
                 try {
                     if (this.renta.rentar()){
+                        Object[] objetos = {this.renta};
+                        this.lanzador.enviarEvento(Paneles.RENTAS, "agregada", objetos);
                         MessageFactory.showMessage("Exito", "Renta", "La renta fue registrada con éxito", Alert.AlertType.INFORMATION);
                     }else{
                         MessageFactory.showMessage("Error", "Renta", "La renta no fue registrada", Alert.AlertType.ERROR);
@@ -155,6 +161,10 @@ public class VentanaRegistrarRentaController implements Initializable {
     }
     
     public void rentar_onClick(){
-        this.rentar();
+        if (this.listaClientes.isEmpty()){
+            MessageFactory.showMessage("Error", "Clientes", "No existen clientes registrados", Alert.AlertType.INFORMATION);
+        }else{
+            this.rentar();
+        }
     }
 }

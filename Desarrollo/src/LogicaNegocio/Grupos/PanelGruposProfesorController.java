@@ -75,4 +75,15 @@ public class PanelGruposProfesorController implements Initializable {
             }
         }
     }
+    public void grupoBaja(Grupo grupo){
+        if (grupo.getProfesor().getIdProfesor() == this.idProfesor){
+            for (Grupo grupoLista : this.listaGrupos){
+                if (grupoLista.getId() == grupo.getId()){
+                    this.listaGrupos.remove(grupoLista);
+                    this.mostrarGrupos();
+                    break;
+                }
+            }
+        }
+    }
 }

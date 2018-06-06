@@ -88,7 +88,7 @@ public class PanelAlumnoProfesorController implements Initializable {
         controller.inicializarPanelPagos();
     }
     public void registrarPago_onClick(){
-        new VentanaRegistrarPagoAlumno(this.idProfesor, this.alumno.getNombre());
+        new VentanaRegistrarPagoAlumno(this.idProfesor, this.alumno.getNombre(), this.lanzador);
     }
     public void desinscribir_onClick(){
         Alert alerta = new Alert(AlertType.CONFIRMATION);

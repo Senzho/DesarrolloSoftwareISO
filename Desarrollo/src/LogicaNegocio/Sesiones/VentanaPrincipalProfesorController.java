@@ -53,7 +53,7 @@ public class VentanaPrincipalProfesorController extends VentanaPrincipal impleme
         controller.iniciar(this.profesor.getIdProfesor(), this.lanzador, this.lanzador.getPanelActual());
     }
     public void menuRegistrarPago_onClick(){
-        new VentanaRegistrarPagoAlumno(this.profesor.getIdProfesor());
+        new VentanaRegistrarPagoAlumno(this.profesor.getIdProfesor(), this.lanzador);
     }
     public void menuInscripcion_onClick(){
         new VentanaInscribirAlumno(this.profesor.getIdProfesor());

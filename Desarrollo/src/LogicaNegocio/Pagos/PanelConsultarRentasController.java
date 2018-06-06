@@ -3,6 +3,7 @@ package LogicaNegocio.Pagos;
 import InterfazGrafica.MessageFactory;
 import InterfazGrafica.Pagos.VentanaRegistrarRenta;
 import LogicaNegocio.Catalogos.Cliente;
+import LogicaNegocio.Lanzador;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -25,11 +26,14 @@ public class PanelConsultarRentasController implements Initializable {
     
     private List<Cliente> listaClientes;
     private List<Renta> listaRentas;
+    private Lanzador lanzador;
+    private AnchorPane pane;
     
     private void cargarClientes(){
         if (this.listaClientes.isEmpty()){
             MessageFactory.showMessage("Advertencia", "Clientes", "No hay clientes registrados", Alert.AlertType.WARNING);
         }else{
+            this.comboClientes.getItems().clear();
             this.listaClientes.forEach((cliente) -> {
                 this.comboClientes.getItems().add(cliente.getNombre());
             });
@@ -41,7 +45,7 @@ public class PanelConsultarRentasController implements Initializable {
         try {
             pane = loader.load();
             PanelRentaController controller = loader.getController();
-            controller.iniciar(renta, pane);
+            controller.iniciar(renta, pane, this.lanzador);
             controller.habilitarFecha(true);
         } catch (IOException ex) {
             Logger.getLogger(PanelConsultarRentasController.class.getName()).log(Level.SEVERE, null, ex);
@@ -76,6 +80,11 @@ public class PanelConsultarRentasController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+    }
+    public void iniciar(Lanzador lanzador, AnchorPane pane){
+        this.pane = pane;
+        this.lanzador = lanzador;
         this.listaClientes = new Cliente().obtenerClientes();
         this.listaRentas = new Renta().obtenerRentas();
         this.cargarClientes();
@@ -83,6 +92,40 @@ public class PanelConsultarRentasController implements Initializable {
             MessageFactory.showMessage("Advertencia", "Rentas", "No hay rentas registradas", Alert.AlertType.WARNING);
         }else{
             this.cargarRentasTodas();
+        }
+    }
+    public AnchorPane getPane(){
+        return this.pane;
+    }
+    public void rentaAgregada(Renta renta){
+        this.listaRentas.add(renta);
+        this.cargarRentasTodas();
+    }
+    public void rentaEditada(Renta renta){
+        for (int i = 0; i < this.listaRentas.size(); i ++){
+            if (this.listaRentas.get(i).getIdRenta() == renta.getIdRenta()){
+                this.listaRentas.set(i, renta);
+                this.cargarRentasTodas();
+                break;
+            }
+        }
+    }
+    public void rentaBaja(Renta renta){
+        for (Renta rentaLista : this.listaRentas){
+            if (rentaLista.getIdRenta() == renta.getIdRenta()){
+                this.listaRentas.remove(rentaLista);
+                this.cargarRentasTodas();
+                break;
+            }
+        }
+    }
+    public void clienteEditado(Cliente cliente){
+        for (int i = 0; i < this.listaRentas.size(); i ++){
+            if (this.listaRentas.get(i).getCliente().getIdCliente() == cliente.getIdCliente()){
+                this.listaRentas.get(i).setCliente(cliente);
+                this.cargarClientes();
+                this.cargarRentasTodas();
+            }
         }
     }
     
@@ -97,6 +140,6 @@ public class PanelConsultarRentasController implements Initializable {
         this.cargarRentasTodas();
     }
     public void botonNuevaRenta_onClick(){
-        new VentanaRegistrarRenta();
+        new VentanaRegistrarRenta(this.lanzador);
     }
 }

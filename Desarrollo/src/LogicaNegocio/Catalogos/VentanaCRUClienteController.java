@@ -136,6 +136,8 @@ public class VentanaCRUClienteController implements Initializable {
         this.cliente.setDireccion(this.domicilio.getText().trim());
         this.cliente.setFecha(new Date());
         if (this.cliente.registrarCliente()) {
+            Object[] objetos = {this.cliente};
+            this.lanzador.enviarEvento(Paneles.CATALOGO_CLIENTES, "agregado", objetos);
             realizado = true;
             this.registrar.setText("Guardar");
         }
@@ -150,7 +152,7 @@ public class VentanaCRUClienteController implements Initializable {
         this.cliente.setDireccion(this.domicilio.getText().trim());
         if (this.cliente.editarCliente()) {
             Object[] objetos = {this.cliente};
-            this.lanzador.enviarEvento(Paneles.CATALOGO_CLIENTES, "agregado", objetos);
+            this.lanzador.enviarEvento(Paneles.CATALOGO_CLIENTES, "editado", objetos);
             realizado = true;
         }
         return realizado;

@@ -1,14 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package LogicaNegocio.Pagos;
 
 import InterfazGrafica.MessageFactory;
 import LogicaNegocio.Catalogos.Alumno;
 import LogicaNegocio.Catalogos.OperacionesString;
 import LogicaNegocio.Grupos.Grupo;
+import LogicaNegocio.Lanzador;
+import LogicaNegocio.Paneles;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,13 +23,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-/**
- * FXML Controller class
- *
- * @author Desktop
- */
 public class VentanaRegistrarPagoAlumnoController implements Initializable {
-
     @FXML
     private ComboBox comboAlumno;
     @FXML
@@ -58,6 +49,7 @@ public class VentanaRegistrarPagoAlumnoController implements Initializable {
     private List<Grupo> listaGrupos;
     private Promocion promocion;
     private ToggleGroup grupo;
+    private Lanzador lanzador;
     
     private Alumno obtenerAlumnoSeleccionado(){
         Alumno alumno = null;
@@ -86,6 +78,10 @@ public class VentanaRegistrarPagoAlumnoController implements Initializable {
         imagenCancelar.setVisible(false);
     }
 
+    public void iniciar(Lanzador lanzador){
+        this.lanzador = lanzador;
+        this.inicializarCombo();;
+    }
     public void inicializarCombo() {
         radioMensualidad.setSelected(true);
         this.grupo = new ToggleGroup();
@@ -100,6 +96,7 @@ public class VentanaRegistrarPagoAlumnoController implements Initializable {
                     alumnos.add(alumno);
                     comboAlumno.getItems().add(alumno.getNombre());
                     comboAlumno.setValue(alumno.getNombre());
+                    this.inicializarComboGrupos();
                 }  
             }
         }
@@ -147,6 +144,8 @@ public class VentanaRegistrarPagoAlumnoController implements Initializable {
                     registrado = pagoAlumno.registrarPago(alumno.getIdAlumno(), 0);
                 }
                 if (registrado) {
+                    Object[] objetos = {this.pagoAlumno};
+                    this.lanzador.enviarEvento(Paneles.PAGOS_ALUMNO, "registrado", objetos);
                     MessageFactory.showMessage("Confirmación", "Datos regstrados", "Datos registrados correctamente", Alert.AlertType.INFORMATION);
                 } else {
                     MessageFactory.showMessage("Información", "Datos no almacenados", "Los datos no pudieron almacenarse", Alert.AlertType.ERROR);

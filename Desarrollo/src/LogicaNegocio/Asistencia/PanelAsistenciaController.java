@@ -110,7 +110,7 @@ public class PanelAsistenciaController implements Initializable {
             }
         });
         if (alumnos.isEmpty()){
-            MessageFactory.showMessage("Error", "Alumnos", "No marcaste ningún alumno", Alert.AlertType.NONE);
+            MessageFactory.showMessage("Error", "Alumnos", "No marcaste ningún alumno", Alert.AlertType.ERROR);
         }else{
             this.asistencia.setAlumnos(alumnos);
             if (grupoSeleccionado.registrarAsistencia(this.asistencia)){
@@ -143,13 +143,15 @@ public class PanelAsistenciaController implements Initializable {
     }
     public void guardar_onClick(){
         Grupo grupoSeleccionado = this.obtenerGrupo();
-        this.asistencia.setFecha(Dates.toDate(this.fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE)));
-        this.asistencia.setIdAsistencia(0);
-        this.asistencia.setIdGrupo(grupoSeleccionado.getId());
-        if (this.asistencia.asistenciaRegistrada()){
-            MessageFactory.showMessage("Información", "Fecha", "La asistencia para la fecha seleccionada ya fue registrada", Alert.AlertType.INFORMATION);
-        }else{
-            this.registrar(grupoSeleccionado);
-        }
+        if (grupoSeleccionado != null){
+            this.asistencia.setFecha(Dates.toDate(this.fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE)));
+            this.asistencia.setIdAsistencia(0);
+            this.asistencia.setIdGrupo(grupoSeleccionado.getId());
+            if (this.asistencia.asistenciaRegistrada()){
+                MessageFactory.showMessage("Información", "Fecha", "La asistencia para la fecha seleccionada ya fue registrada", Alert.AlertType.INFORMATION);
+            }else{
+                this.registrar(grupoSeleccionado);
+            }
+        }   
     }
 }

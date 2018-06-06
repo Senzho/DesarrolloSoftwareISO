@@ -4,6 +4,7 @@ import InterfazGrafica.MessageFactory;
 import LogicaNegocio.Catalogos.OperacionesString;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -24,12 +25,16 @@ public class VentanaCRUPromocionController implements Initializable {
     private int idProfesor;
     private Promocion promocion;
     private Stage stage;
+    private PromocionListener listener;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
     }
-
+    
+    public void setPromocionListener(PromocionListener listener){
+        this.listener = listener;
+    }
     public void setStage(Stage stage) {
         this.stage = stage;
     }
@@ -55,10 +60,13 @@ public class VentanaCRUPromocionController implements Initializable {
     public void btnRegistrar_onClick() {
         if (promocion == null) {
             if (this.validarCampos()) {
-                Promocion promocionRegistro = new Promocion(txtDescripcion.getText().trim(), 0, idProfesor,
+                this.promocion = new Promocion(txtDescripcion.getText().trim(), 0, idProfesor,
                         txtNombre.getText().trim(), Integer.parseInt(txtPorcentaje.getText().trim()));
-                boolean registrar = promocionRegistro.registrarPromocion();
+                boolean registrar = this.promocion.registrarPromocion();
                 if (registrar) {
+                    Platform.runLater(() -> {
+                        this.listener.promocionAgregada(this.promocion);
+                    });
                     MessageFactory.showMessage("Registro exitoso", "Registro realizado", "Promocion creada correctamente", Alert.AlertType.CONFIRMATION);
                 } else {
                     MessageFactory.showMessage("Información", "No se pudo crear el registro", "La promoció no pudo ser almacenada", Alert.AlertType.ERROR);
@@ -77,6 +85,9 @@ public class VentanaCRUPromocionController implements Initializable {
             promocion.setPorcentaje(Integer.parseInt(txtPorcentaje.getText().trim()));
             boolean editar = promocion.editarPromocion();
             if (editar) {
+                Platform.runLater(() -> {
+                    this.listener.promocionEditada(this.promocion);
+                });
                 MessageFactory.showMessage("Edición exitosa", "Registro realizado", "Promocion editar correctamente", Alert.AlertType.CONFIRMATION);
             } else {
                 MessageFactory.showMessage("Información", "No se pudo editar el registro", "La promoció no pudo ser editada", Alert.AlertType.ERROR);

@@ -3,6 +3,7 @@ package LogicaNegocio.Grupos;
 import InterfazGrafica.Grupos.VentanaCRUGrupo;
 import InterfazGrafica.MessageFactory;
 import LogicaNegocio.Lanzador;
+import LogicaNegocio.Paneles;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -78,6 +79,8 @@ public class PanelGrupoDirectorController extends Calendarizable implements Init
             this.grupo.setEstado(0);
             try {
                 if (this.grupo.editarGrupo(this.grupo.getHorario().getDias())){
+                    Object[] objetos = {this.grupo};
+                    this.lanzador.enviarEvento(Paneles.GRUPOS_Y_RENTAS, "baja", objetos);
                     MessageFactory.showMessage("Éxito", "Eliminar grupo", "El grupo fue eliminado", AlertType.INFORMATION);
                 }else{
                     this.grupo.setEstado(1);

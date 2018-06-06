@@ -1,11 +1,12 @@
 package LogicaNegocio.Pagos;
 
-import Accesodatos.Catalogos.ClienteDAOSql;
 import InterfazGrafica.MessageFactory;
 import InterfazGrafica.Pagos.VentanaEditarRenta;
 import LogicaNegocio.Egresos.Dates;
 import LogicaNegocio.Grupos.Calendarizable;
 import LogicaNegocio.Grupos.Horas;
+import LogicaNegocio.Lanzador;
+import LogicaNegocio.Paneles;
 import java.net.URL;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -30,6 +31,7 @@ public class PanelRentaController extends Calendarizable implements Initializabl
     private ImageView eliminar;
     
     private Renta renta;
+    private Lanzador lanzador;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -37,10 +39,15 @@ public class PanelRentaController extends Calendarizable implements Initializabl
         this.eliminar.setImage(new Image("/RecursosGraficos/darkCrossIcon.png"));
     }
     
-    public void iniciar(Renta renta, AnchorPane pane){
+    public void iniciar(Renta renta, AnchorPane pane, Lanzador lanzador){
         this.renta = renta;
+        this.lanzador = lanzador;
         this.setPane(pane);
         this.setValor(Horas.getSegundos(this.renta.getDia().getHoraInicio()));
+        this.horas.setText(this.renta.getDia().getHoraInicio() + " - " + this.renta.getDia().getHoraFin());
+        this.nombreCliente.setText(this.renta.getCliente().getNombre());
+    }
+    public void recargar(){
         this.horas.setText(this.renta.getDia().getHoraInicio() + " - " + this.renta.getDia().getHoraFin());
         this.nombreCliente.setText(this.renta.getCliente().getNombre());
     }
@@ -51,17 +58,22 @@ public class PanelRentaController extends Calendarizable implements Initializabl
             this.fecha.setText("");
         }
     }
+    public Renta getRenta(){
+        return this.renta;
+    }
     
     public void editar_onClick(){
         if (Dates.getDiference(new Date(), this.renta.getFecha()) == -1){
             MessageFactory.showMessage("Fecha", "Renta de espacio", "No se puede modificar la renta, la fecha ha pasado", Alert.AlertType.INFORMATION);
         }else{
-            new VentanaEditarRenta(this.renta);
+            new VentanaEditarRenta(this.renta, this.lanzador);
         }
     }
     public void eliminarRenta_onClick(){
         if(Dates.getDiference(new Date(),this.renta.getFecha()) > 0){
             if (this.renta.eliminarRenta(renta.getIdRenta())){
+                Object[] objetos = {this.renta};
+                this.lanzador.enviarEvento(Paneles.RENTAS, "baja", objetos);
                 MessageFactory.showMessage("Registro eliminado", "Renta eliminada", "El registro se ha eliminado exitosamente", Alert.AlertType.INFORMATION);
             }else{
                 MessageFactory.showMessage("Error de eliminación", "Renta no eliminada", "El registro no ha sido eliminado", Alert.AlertType.ERROR);

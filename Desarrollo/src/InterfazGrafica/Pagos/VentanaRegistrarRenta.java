@@ -1,5 +1,6 @@
 package InterfazGrafica.Pagos;
 
+import LogicaNegocio.Lanzador;
 import LogicaNegocio.Pagos.VentanaRegistrarRentaController;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -10,8 +11,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class VentanaRegistrarRenta extends Application{
-    public VentanaRegistrarRenta(){
+    private Lanzador lanzador;
+    
+    public VentanaRegistrarRenta(Lanzador lanzador){
         try {
+            this.lanzador = lanzador;
             this.start(new Stage());
         } catch (Exception ex) {
             Logger.getLogger(VentanaRegistrarRenta.class.getName()).log(Level.SEVERE, null, ex);
@@ -23,7 +27,7 @@ public class VentanaRegistrarRenta extends Application{
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/InterfazGrafica/Pagos/VentanaRegistrarRenta.fxml"));
         AnchorPane root = loader.load();
         VentanaRegistrarRentaController controller = loader.getController();
-        controller.inicializar(primaryStage);
+        controller.inicializar(primaryStage, this.lanzador);
         Scene scene = new Scene(root, 450, 200);
         primaryStage.setTitle("Renta");
         primaryStage.setScene(scene);

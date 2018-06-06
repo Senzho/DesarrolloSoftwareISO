@@ -3,17 +3,22 @@ package LogicaNegocio;
 import LogicaNegocio.Asistencia.PanelAsistenciaController;
 import LogicaNegocio.Asistencia.PanelRegistroAsistenciasController;
 import LogicaNegocio.Catalogos.Alumno;
+import LogicaNegocio.Catalogos.Cliente;
 import LogicaNegocio.Catalogos.PanelCatalogoAlumnosController;
+import LogicaNegocio.Catalogos.PanelCatalogoClientesController;
 import LogicaNegocio.Catalogos.PanelCatalogoProfesoresController;
 import LogicaNegocio.Catalogos.Profesor;
-import LogicaNegocio.Egresos.PanelConsultarPromocionesEgresosController;
 import LogicaNegocio.Grupos.Grupo;
 import LogicaNegocio.Grupos.PanelAlumnosGrupoDirectorController;
 import LogicaNegocio.Grupos.PanelAlumnosGrupoProfesorController;
 import LogicaNegocio.Grupos.PanelGruposProfesorController;
 import LogicaNegocio.Grupos.PanelSemanaController;
+import LogicaNegocio.Pagos.PagoAlumno;
 import LogicaNegocio.Pagos.PagoProfesor;
+import LogicaNegocio.Pagos.PanelConsultarRentasController;
 import LogicaNegocio.Pagos.PanelHistorialPagoProfesoresController;
+import LogicaNegocio.Pagos.PanelHistorialPagosAlumnoController;
+import LogicaNegocio.Pagos.Renta;
 import LogicaNegocio.Sesiones.VentanaPrincipal;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -70,22 +75,20 @@ public class Lanzador {
                 semanaController.grupoAgregado((Grupo) objetos[0]);
             }else if (evento.equals("editado")){
                 semanaController.grupoEditado((Grupo) objetos[0]);
+            }else if (evento.equals("baja")){
+                semanaController.grupoBaja((Grupo) objetos[0]);
             }
         }
         PanelAlumnosGrupoDirectorController alumnosController = this.ventanaPrincipal.getAlumnosGrupoDirector();
         if (alumnosController != null){
             if (evento.equals("agregado")){
                 alumnosController.grupoAgregado((Grupo) objetos[0]);
-            }else if (evento.equals("editado")){
-                
             }
         }
         PanelAlumnosGrupoProfesorController alumnosProfesorController = this.ventanaPrincipal.getAlumnosGrupoProfesor();
         if (alumnosProfesorController != null){
             if (evento.equals("agregado")){
                 alumnosProfesorController.grupoAgregado((Grupo) objetos[0]);
-            }else if (evento.equals("editado")){
-                
             }
         }
         PanelGruposProfesorController gruposProfesor = this.ventanaPrincipal.getMisGrupos();
@@ -94,6 +97,8 @@ public class Lanzador {
                 gruposProfesor.grupoAgregado((Grupo) objetos[0]);
             }else if (evento.equals("editado")){
                 gruposProfesor.grupoEditado((Grupo) objetos[0]);
+            }else if (evento.equals("baja")){
+                gruposProfesor.grupoBaja((Grupo) objetos[0]);
             }
         }
     }
@@ -124,6 +129,58 @@ public class Lanzador {
         if (controller != null){
             if (evento.equals("registrado")){
                 controller.agregarPago((PagoProfesor) objetos[0]);
+            }
+        }
+    }
+    public void rentas(String evento, Object[] objetos){
+        PanelSemanaController semanaController = this.ventanaPrincipal.getGruposRentas();
+        if (semanaController != null){
+            if (evento.equals("agregada")){
+                semanaController.agregarRenta((Renta) objetos[0]);
+            } else if (evento.equals("editada")){
+                semanaController.editarRenta((Renta) objetos[0]);
+            } else if (evento.equals("baja")){
+                semanaController.rentaBaja((Renta) objetos[0]);
+            }
+        }
+        PanelConsultarRentasController rentasController = this.ventanaPrincipal.getRentas();
+        if (rentasController != null){
+            if (evento.equals("agregada")){
+                rentasController.rentaAgregada((Renta) objetos[0]);
+            } else if (evento.equals("editada")){
+                rentasController.rentaEditada((Renta) objetos[0]);
+            } else if (evento.equals("baja")){
+                rentasController.rentaBaja((Renta) objetos[0]);
+            }
+        }
+    }
+    private void catalogoClientes(String evento, Object[] objetos){
+        PanelCatalogoClientesController clientesController = this.ventanaPrincipal.getCatalogoClientes();
+        if (clientesController != null){
+            if (evento.equals("agregado")){
+                clientesController.clienteAgregado((Cliente) objetos[0]);
+            }if (evento.equals("editado")){
+                clientesController.clienteEditado((Cliente) objetos[0]);
+            }
+        }
+        PanelSemanaController semanaController = this.ventanaPrincipal.getGruposRentas();
+        if (semanaController != null){
+            if (evento.equals("editado")){
+                semanaController.clienteEditado((Cliente) objetos[0]);
+            }
+        }
+        PanelConsultarRentasController rentasController = this.ventanaPrincipal.getRentas();
+        if (rentasController != null){
+            if (evento.equals("editado")){
+                rentasController.clienteEditado((Cliente) objetos[0]);
+            }
+        }
+    }
+    private void pagosAlumno(String evento, Object[] objetos){
+        PanelHistorialPagosAlumnoController historial = this.ventanaPrincipal.getPagosAlumno();
+        if (historial != null){
+            if (evento.equals("registrado")){
+                historial.pagoRegistrado((PagoAlumno) objetos[0]);
             }
         }
     }
@@ -179,6 +236,7 @@ public class Lanzador {
                 case ALUMNOS_GRUPO_DIRECTOR:
                     break;
                 case PAGOS_ALUMNO:
+                    this.pagosAlumno(evento, objetos);
                     break;
                 case PAGOS_PROFESOR:
                     this.pagosProfesor(evento, objetos);
@@ -191,6 +249,7 @@ public class Lanzador {
                     this.gruposRentas(evento, objetos);
                     break;
                 case RENTAS:
+                    this.rentas(evento, objetos);
                     break;
                 case CATALOGO_ALUMNOS:
                     this.catalogoAlumnos(evento, objetos);
@@ -199,6 +258,7 @@ public class Lanzador {
                     this.catalogoProfesores(evento, objetos);
                     break;
                 case CATALOGO_CLIENTES:
+                    this.catalogoClientes(evento, objetos);
                     break;
                 case EGRESOS:
                     break;

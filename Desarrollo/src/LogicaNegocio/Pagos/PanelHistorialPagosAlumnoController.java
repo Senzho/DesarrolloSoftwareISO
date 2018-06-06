@@ -2,8 +2,10 @@ package LogicaNegocio.Pagos;
 
 import LogicaNegocio.Catalogos.Alumno;
 import LogicaNegocio.Catalogos.CopiarArchivo;
+import LogicaNegocio.Lanzador;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -32,6 +34,7 @@ public class PanelHistorialPagosAlumnoController implements Initializable {
     
     private List<PagoAlumno> pagos;
     private int idProfesor;
+    private Lanzador lanzador;
     
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -39,9 +42,13 @@ public class PanelHistorialPagosAlumnoController implements Initializable {
     public void setIdProfesor(int idProfesor){
         this.idProfesor = idProfesor;
     }
+    public void setLanzador(Lanzador lanzador){
+        this.lanzador = lanzador;
+    }
 
     public void setAlumno(Alumno alumno) {
         this.alumno = alumno;
+        this.pagos = new PagoAlumno().obtenerPagos(alumno.getIdAlumno(), this.idProfesor);
         Image imagenAlumno = CopiarArchivo.obtenerFotoUsuario("alumno", alumno.getIdAlumno());
         if (imagenAlumno != null) {
             this.imagenAlumno.setImage(imagenAlumno);
@@ -69,8 +76,9 @@ public class PanelHistorialPagosAlumnoController implements Initializable {
                 Logger.getLogger(PanelPromocionController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
-        
+    }
+    public void pagoRegistrado(PagoAlumno pagoAlumno){
+        this.inicializarPanelPagos();
     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -78,6 +86,6 @@ public class PanelHistorialPagosAlumnoController implements Initializable {
     }
     
     public void registrarPago_onClick(){
-        new VentanaRegistrarPagoAlumno(this.idProfesor, this.alumno.getNombre());
+        new VentanaRegistrarPagoAlumno(this.idProfesor, this.alumno.getNombre(), this.lanzador);
     }
 }

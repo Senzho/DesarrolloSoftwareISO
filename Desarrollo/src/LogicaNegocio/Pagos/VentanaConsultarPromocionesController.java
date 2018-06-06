@@ -1,11 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package LogicaNegocio.Pagos;
 
-import InterfazGrafica.MessageFactory;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -15,25 +9,23 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class VentanaConsultarPromocionesController implements Initializable {
+public class VentanaConsultarPromocionesController implements Initializable, PromocionListener {
     @FXML
     private VBox srollPromociones;
     @FXML
     private Button btnCrearPromocion;
+    
     private int idProfesor;
     private Stage stage;
     private Promocion promocion;
     private List<Promocion> promociones;
     private VentanaRegistrarPagoAlumnoController controller;
-    /**
-     * Initializes the controller class.
-     */
+    
     public void setVentanaRegistrarPagoAlumnoController(VentanaRegistrarPagoAlumnoController controller){
         this.controller = controller;
     }
@@ -49,11 +41,8 @@ public class VentanaConsultarPromocionesController implements Initializable {
         this.controller.setPromocion(promocion);
         this.stage.close();
     }
-    public void inicializarPanelPromociones(){
-       promociones = new Promocion().obtenerPromociones(idProfesor);
-        this.srollPromociones.getChildren().clear();
-        promociones.forEach((promocion) -> {
-            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/InterfazGrafica/Pagos/PanelPromocion.fxml"));
+    public void agregarPromocion(Promocion promocion){
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/InterfazGrafica/Pagos/PanelPromocion.fxml"));
             AnchorPane panel;
             try {
                 panel = loader.load();
@@ -66,6 +55,12 @@ public class VentanaConsultarPromocionesController implements Initializable {
             } catch (IOException ex) {
                 Logger.getLogger(PanelPromocionController.class.getName()).log(Level.SEVERE, null, ex);
             }
+    }
+    public void inicializarPanelPromociones(){
+        promociones = new Promocion().obtenerPromociones(idProfesor);
+        this.srollPromociones.getChildren().clear();
+        promociones.forEach((promocion) -> {
+            this.agregarPromocion(promocion);
         });
     }
     @Override
@@ -73,6 +68,15 @@ public class VentanaConsultarPromocionesController implements Initializable {
        
     }    
     public void btnCrearPromocion_onClick(){
-        new VentanaCRUPromocion(this.idProfesor);
+        new VentanaCRUPromocion(this.idProfesor, this);
+    }
+
+    @Override
+    public void promocionAgregada(Promocion promocion) {
+        this.agregarPromocion(promocion);
+    }
+    @Override
+    public void promocionEditada(Promocion promocion) {
+        
     }
 }

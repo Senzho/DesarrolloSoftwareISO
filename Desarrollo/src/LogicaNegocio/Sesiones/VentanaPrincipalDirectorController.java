@@ -19,6 +19,7 @@ import LogicaNegocio.Egresos.VentanaCRUGastoPromocional;
 import LogicaNegocio.Grupos.PanelGruposProfesorController;
 import LogicaNegocio.Grupos.PanelSemanaController;
 import LogicaNegocio.Lanzador;
+import LogicaNegocio.Pagos.PanelConsultarRentasController;
 import LogicaNegocio.Pagos.PanelProximosPagosAlumnoController;
 import LogicaNegocio.Pagos.PanelProximosPagosProfesorController;
 import LogicaNegocio.Pagos.VentanaRegistrarPagoAlumno;
@@ -75,7 +76,7 @@ public class VentanaPrincipalDirectorController extends VentanaPrincipal impleme
         new VentanaRegistrarPagoProfesor(this.lanzador);
     }
     public void menuRegistroPagoAlumno_onClick(){
-        new VentanaRegistrarPagoAlumno(this.profesor.getIdProfesor());
+        new VentanaRegistrarPagoAlumno(this.profesor.getIdProfesor(), this.lanzador);
     }
     public void menuReporteMensual_onClick(){
         this.lanzador.lanzar("/InterfazGrafica/Egresos/PanelIngresosEgresos.fxml");
@@ -154,7 +155,7 @@ public class VentanaPrincipalDirectorController extends VentanaPrincipal impleme
         }
     }
     public void menuNuevaRenta_onClick(){
-        new VentanaRegistrarRenta();
+        new VentanaRegistrarRenta(this.lanzador);
     }
     public void menuPagosTemp_onClick(){
         this.lanzador.lanzar("/InterfazGrafica/Pagos/PanelPagosTemporales.fxml");
@@ -163,7 +164,13 @@ public class VentanaPrincipalDirectorController extends VentanaPrincipal impleme
         new VentanaRegistrarPagoTemporal();
     }
     public void menuRentas_onClick(){
-        this.lanzador.lanzar("/InterfazGrafica/Pagos/PanelConsultarRentas.fxml");
+        PanelConsultarRentasController controller = this.getRentas();
+        if (controller != null){
+            this.panelPrincipal.setCenter(controller.getPane());
+        }else{
+            this.lanzador.lanzar("/InterfazGrafica/Pagos/PanelConsultarRentas.fxml");
+            this.getRentas().iniciar(this.lanzador, this.lanzador.getPanelActual());
+        }
     }
     public void menuProximosAlumno_onClick(){
         this.lanzador.lanzar("/InterfazGrafica/Pagos/PanelProximosPagosAlumno.fxml");

@@ -1,12 +1,12 @@
 package LogicaNegocio.Grupos;
 
-import Accesodatos.Grupos.GrupoDAOSql;
-import Accesodatos.Pagos.RentaDAOSql;
 import InterfazGrafica.Grupos.VentanaCRUGrupo;
 import InterfazGrafica.Pagos.VentanaRegistrarRenta;
+import LogicaNegocio.Catalogos.Cliente;
 import LogicaNegocio.Catalogos.Profesor;
 import LogicaNegocio.Egresos.Dates;
 import LogicaNegocio.Lanzador;
+import LogicaNegocio.Pagos.PanelConsultarRentasController;
 import LogicaNegocio.Pagos.PanelRentaController;
 import LogicaNegocio.Pagos.Renta;
 import java.io.IOException;
@@ -42,6 +42,7 @@ public class PanelSemanaController implements Initializable {
     private VBox listaSabado;
     
     private List<Grupo> grupos;
+    private List<Renta> rentas;
     private Lanzador lanzador;
     private List<Calendarizable> panelesLunes;
     private List<Calendarizable> panelesMartes;
@@ -70,7 +71,7 @@ public class PanelSemanaController implements Initializable {
         try {
             AnchorPane pane = loader.load();
             controller = loader.getController();
-            controller.iniciar(renta, pane);
+            controller.iniciar(renta, pane, this.lanzador);
         } catch (IOException ex) {
             Logger.getLogger(PanelSemanaController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -120,7 +121,8 @@ public class PanelSemanaController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        this.grupos = new GrupoDAOSql().obtenerGrupos();
+        this.grupos = new Grupo().obtenerGrupos();
+        this.rentas = new Renta().obtenerRentas();
         this.panelesLunes = new ArrayList();
         this.panelesMartes = new ArrayList();
         this.panelesMiercoles = new ArrayList();
@@ -173,9 +175,8 @@ public class PanelSemanaController implements Initializable {
         });
     }
     public void cargarRentas(){
-        List<Renta> rentas = new RentaDAOSql().obtenerRentas();
         Date fechaActual = new Date();
-        rentas.forEach((renta) -> {
+        this.rentas.forEach((renta) -> {
             int dia = LocalDate.of(Dates.getYear(fechaActual), Dates.getMonth(fechaActual), Dates.getDay(fechaActual)).getDayOfWeek().getValue();
             int dif = Dates.getDiference(fechaActual, renta.getFecha());
             PanelRentaController controller = this.getControllerRenta(renta);
@@ -231,6 +232,15 @@ public class PanelSemanaController implements Initializable {
             }
         }
     }
+    public void grupoBaja(Grupo grupo){
+        for (Grupo grupoLista : this.grupos){
+            if (grupoLista.getId() == grupo.getId()){
+                this.grupos.remove(grupoLista);
+                this.cargarTodo();
+                break;
+            }
+        }
+    }
     public void profesorEditado(Profesor profesor){
         List<List<Calendarizable>> lista = new ArrayList();
         lista.add(this.panelesDomingo);
@@ -253,17 +263,67 @@ public class PanelSemanaController implements Initializable {
             });
         });
     }
+    public void agregarRenta(Renta renta){
+        this.rentas.add(renta);
+        this.cargarTodo();
+    }
+    public void editarRenta(Renta renta){
+        for (int i = 0; i < this.rentas.size(); i ++){
+            if (this.rentas.get(i).getIdRenta() == renta.getIdRenta()){
+                this.rentas.set(i, renta);
+                this.cargarTodo();
+                break;
+            }
+        }
+    }
+    public void rentaBaja(Renta renta){
+        for(Renta rentaLista : this.rentas){
+            if (renta.getIdRenta() == rentaLista.getIdRenta()){
+                this.rentas.remove(rentaLista);
+                this.cargarTodo();
+                break;
+            }
+        }
+    }
+    public void clienteEditado(Cliente cliente){
+        List<List<Calendarizable>> lista = new ArrayList();
+        lista.add(this.panelesDomingo);
+        lista.add(this.panelesJueves);
+        lista.add(this.panelesLunes);
+        lista.add(this.panelesMartes);
+        lista.add(this.panelesMiercoles);
+        lista.add(this.panelesSabado);
+        lista.add(this.panelesViernes);
+        lista.forEach((listaCal) -> {
+            listaCal.forEach((calendarizable) -> {
+                if (calendarizable instanceof PanelRentaController){
+                    PanelRentaController controller = (PanelRentaController) calendarizable;
+                    Renta renta = controller.getRenta();
+                    if (renta.getCliente().getIdCliente() == cliente.getIdCliente()){
+                        renta.setCliente(cliente);
+                        controller.recargar();
+                    }
+                }
+            });
+        });
+    }
     public AnchorPane getPane(){
         return this.pane;
     }
     
     public void nuevaRenta_onClick(){
-        new VentanaRegistrarRenta();
+        new VentanaRegistrarRenta(this.lanzador);
     }
     public void nuevoGrupo_onClick(){
         new VentanaCRUGrupo(this.lanzador);
     }
     public void botonConsultarRentas_onClick(){
-        this.lanzador.lanzar("/InterfazGrafica/Pagos/PanelConsultarRentas.fxml");
+        PanelConsultarRentasController controller = this.lanzador.getVentanaPrincipal().getRentas();
+        if(controller != null){
+            this.lanzador.establecerPrincipal(controller.getPane());
+        }else{
+            this.lanzador.lanzar("/InterfazGrafica/Pagos/PanelConsultarRentas.fxml");
+            this.lanzador.getVentanaPrincipal().getRentas().iniciar(this.lanzador, this.lanzador.getPanelActual());
+        }
     }
 }

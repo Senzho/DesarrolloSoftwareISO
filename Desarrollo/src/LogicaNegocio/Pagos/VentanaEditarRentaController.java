@@ -1,12 +1,13 @@
 package LogicaNegocio.Pagos;
 
 import InterfazGrafica.MessageFactory;
-import LogicaNegocio.Catalogos.Cliente;
 import LogicaNegocio.Catalogos.CopiarArchivo;
 import LogicaNegocio.Catalogos.OperacionesString;
 import LogicaNegocio.Egresos.Dates;
 import LogicaNegocio.Grupos.Dia;
 import LogicaNegocio.Grupos.HorarioException;
+import LogicaNegocio.Lanzador;
+import LogicaNegocio.Paneles;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -40,6 +41,7 @@ public class VentanaEditarRentaController implements Initializable {
     private TextField monto;
     
     private Renta renta;
+    private Lanzador lanzador;
     
     private void caragarImagen(){
         Image imagenCliente = CopiarArchivo.obtenerFotoUsuario("cliente", this.renta.getCliente().getIdCliente());
@@ -89,8 +91,9 @@ public class VentanaEditarRentaController implements Initializable {
         this.cargarSalones();
     }
     
-    public void setRenta(Renta renta){
+    public void iniciar(Renta renta, Lanzador lanzador){
         this.renta = renta;
+        this.lanzador = lanzador;
         this.caragarImagen();
         this.cargarRenta();
     }
@@ -119,6 +122,8 @@ public class VentanaEditarRentaController implements Initializable {
                 dia.setSalon(this.salon.getValue().toString());
                 try {
                     if (this.renta.editarRenta()){
+                        Object[] objetos = {this.renta};
+                        this.lanzador.enviarEvento(Paneles.RENTAS, "editada", objetos);
                         MessageFactory.showMessage("Exito", "Renta", "La renta fue editada con éxito", Alert.AlertType.INFORMATION);
                     }else{
                         MessageFactory.showMessage("Error", "Renta", "La renta no fue editada", Alert.AlertType.ERROR);
