@@ -97,25 +97,25 @@ public class CopiarArchivo {
         
         File fotos = new File(rutaGeneralFotos);
         if (!fotos.exists()) {
-            fotos.mkdir();
+            fotos.mkdirs();
         }
         if (tipoUsuario.equalsIgnoreCase("alumno")) {
             directorio = new File(rutaGeneralFotos+separador+"Alumnos");
             if (!directorio.exists()) {
-                directorio.mkdir();
+                directorio.mkdirs();
             }
             guardado = copiar(rutaOrigen, directorio.getAbsolutePath(), idUsuario);
         } else if (tipoUsuario.equalsIgnoreCase("profesor")) {
             directorio = new File(rutaGeneralFotos+separador+"Profesores");
             if (!directorio.exists()) {
-                directorio.mkdir();
+                directorio.mkdirs();
             }
             guardado = copiar(rutaOrigen, directorio.getAbsolutePath(), idUsuario);
 
         } else if (tipoUsuario.equalsIgnoreCase("cliente")) {
             directorio = new File(rutaGeneralFotos+separador+"Clientes");
             if (!directorio.exists()) {
-                directorio.mkdir();
+                directorio.mkdirs();
             }
             guardado = copiar(rutaOrigen, directorio.getAbsolutePath(), idUsuario);
         }
