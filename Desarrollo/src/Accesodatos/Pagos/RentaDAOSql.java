@@ -4,6 +4,7 @@ import Accesodatos.Catalogos.ClienteDAOSql;
 import Accesodatos.Controladores.ClienteJpaController;
 import Accesodatos.Controladores.DiaJpaController;
 import Accesodatos.Controladores.RentaJpaController;
+import Accesodatos.Controladores.exceptions.NonexistentEntityException;
 import Accesodatos.Grupos.DiaDAOSql;
 import Accesodatos.Grupos.GrupoDAOSql;
 import LogicaNegocio.Catalogos.OperacionesString;
@@ -27,14 +28,14 @@ public class RentaDAOSql implements RentaDAO {
         Dia diaError = null;
         List<Dia> diasBase = new ArrayList();
         new GrupoDAOSql().obtenerGrupos().forEach((grupo) -> {
-            if (grupo.getEstado() == 1){
+            if (grupo.getEstado() == 1) {
                 grupo.getHorario().getDias().forEach((diaBase) -> {
                     diasBase.add(diaBase);
                 });
             }
         });
         for (Dia diaBase : diasBase) {
-            if (!(dia.isTipo() == (diaBase.isTipo()) && dia.getIdTipo() == diaBase.getIdTipo())){
+            if (!(dia.isTipo() == (diaBase.isTipo()) && dia.getIdTipo() == diaBase.getIdTipo())) {
                 if (diaBase.getDia().equals(dia.getDia())) {
                     if (diaBase.getSalon().equals(dia.getSalon())) {
                         int miliIniJpa = Horas.getSegundos(diaBase.getHoraInicio());
@@ -47,7 +48,7 @@ public class RentaDAOSql implements RentaDAO {
                         }
                     }
                 }
-            }  
+            }
         }
         return diaError;
     }
@@ -59,7 +60,7 @@ public class RentaDAOSql implements RentaDAO {
     @Override
     public boolean registrarRenta(Renta renta) throws HorarioException {
         boolean registrada = false;
-        if (OperacionesString.montoValido(renta.getMonto())){
+        if (OperacionesString.montoValido(renta.getMonto())) {
             EntityManagerFactory entityManager = Persistence.createEntityManagerFactory("CentroDeControlAredPU");
             RentaJpaController rentaController = new RentaJpaController(entityManager);
             ClienteJpaController clienteController = new ClienteJpaController(entityManager);
@@ -82,14 +83,14 @@ public class RentaDAOSql implements RentaDAO {
             } else {
                 throw new HorarioException(renta.getDia());
             }
-        }  
+        }
         return registrada;
     }
 
     @Override
     public boolean editarRenta(Renta renta) throws HorarioException {
         boolean editada = false;
-        if (OperacionesString.montoValido(renta.getMonto())){
+        if (OperacionesString.montoValido(renta.getMonto())) {
             if (this.diaValido(renta.getDia()) == null) {
                 EntityManagerFactory entityManager = Persistence.createEntityManagerFactory("CentroDeControlAredPU");
                 RentaJpaController rentaController = new RentaJpaController(entityManager);
@@ -149,5 +150,19 @@ public class RentaDAOSql implements RentaDAO {
             }
         }
         return rentas;
+    }
+
+    @Override
+    public boolean eliminarRenta(int idRenta) {
+        boolean eliminado = false;
+        EntityManagerFactory entityManager = Persistence.createEntityManagerFactory("CentroDeControlAredPU");
+        RentaJpaController rentaController = new RentaJpaController(entityManager);
+        try {
+            rentaController.destroy(idRenta);
+            eliminado = true;
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(RentaDAOSql.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return eliminado;
     }
 }

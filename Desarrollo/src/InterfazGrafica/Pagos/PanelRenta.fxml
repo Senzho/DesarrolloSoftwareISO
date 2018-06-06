@@ -20,7 +20,7 @@
             <Font name="Arial" size="16.0" />
          </font>
       </Label>
-      <ImageView fx:id="eliminar" fitHeight="30.0" fitWidth="30.0" layoutX="172.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" />
+      <ImageView fx:id="eliminar" fitHeight="30.0" fitWidth="30.0" layoutX="172.0" layoutY="70.0" onMouseClicked ="#eliminarRenta_onClick" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" />
       <ImageView fx:id="editar" fitHeight="30.0" fitWidth="30.0" layoutX="151.0" layoutY="75.0" onMouseClicked="#editar_onClick" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="35.0" />
       <Label fx:id="fecha" layoutX="156.0" layoutY="22.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="22.0">
          <font>

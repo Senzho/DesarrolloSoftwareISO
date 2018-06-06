@@ -71,4 +71,7 @@ public class Renta {
     public List<Renta> obtenerRentas(int idCliente){
         return this.rentaDAO.obtenerRentas(idCliente);
     }
+    public boolean eliminarRenta(int idRenta){
+        return this.rentaDAO.eliminarRenta(idRenta);
+    }
 }
