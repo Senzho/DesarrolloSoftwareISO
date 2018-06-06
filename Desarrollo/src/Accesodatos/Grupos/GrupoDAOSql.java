@@ -6,14 +6,18 @@ import Accesodatos.Controladores.AsistenciaJpaController;
 import Accesodatos.Controladores.DiaJpaController;
 import Accesodatos.Controladores.GrupoJpaController;
 import Accesodatos.Controladores.ProfesorJpaController;
+import Accesodatos.Pagos.RentaDAOSql;
 import LogicaNegocio.Asistencia.Asistencia;
 import LogicaNegocio.Catalogos.Alumno;
+import LogicaNegocio.Egresos.Dates;
 import LogicaNegocio.Grupos.Dia;
 import LogicaNegocio.Grupos.Grupo;
 import LogicaNegocio.Grupos.Horario;
 import LogicaNegocio.Grupos.HorarioException;
 import LogicaNegocio.Grupos.Horas;
+import LogicaNegocio.Pagos.Renta;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
@@ -44,6 +48,11 @@ public class GrupoDAOSql implements GrupoDAO{
                 diasBase.add(dia);
             });
         });
+        for (Renta renta : new RentaDAOSql().obtenerRentas()) {
+            if (Dates.getDiference(new Date(), renta.getFecha()) > 0){
+                diasBase.add(renta.getDia());
+            }
+        }
         fors:
         for (Dia dia : dias){
             for (Dia diaBase : diasBase){

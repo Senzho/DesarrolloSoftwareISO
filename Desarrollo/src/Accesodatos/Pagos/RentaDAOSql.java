@@ -2,18 +2,18 @@ package Accesodatos.Pagos;
 
 import Accesodatos.Catalogos.ClienteDAOSql;
 import Accesodatos.Controladores.ClienteJpaController;
-import Accesodatos.Controladores.DiaJpaController;
 import Accesodatos.Controladores.RentaJpaController;
 import Accesodatos.Controladores.exceptions.NonexistentEntityException;
 import Accesodatos.Grupos.DiaDAOSql;
 import Accesodatos.Grupos.GrupoDAOSql;
 import LogicaNegocio.Catalogos.OperacionesString;
+import LogicaNegocio.Egresos.Dates;
 import LogicaNegocio.Grupos.Dia;
-import LogicaNegocio.Grupos.Grupo;
 import LogicaNegocio.Grupos.HorarioException;
 import LogicaNegocio.Grupos.Horas;
 import LogicaNegocio.Pagos.Renta;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,7 +23,6 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 public class RentaDAOSql implements RentaDAO {
-
     private Dia diaValido(Dia dia) {
         Dia diaError = null;
         List<Dia> diasBase = new ArrayList();
@@ -34,6 +33,11 @@ public class RentaDAOSql implements RentaDAO {
                 });
             }
         });
+        for (Renta renta : new RentaDAOSql().obtenerRentas()) {
+            if (Dates.getDiference(new Date(), renta.getFecha()) > 0){
+                diasBase.add(renta.getDia());
+            }
+        }
         for (Dia diaBase : diasBase) {
             if (!(dia.isTipo() == (diaBase.isTipo()) && dia.getIdTipo() == diaBase.getIdTipo())) {
                 if (diaBase.getDia().equals(dia.getDia())) {
